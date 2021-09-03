@@ -19,11 +19,11 @@ void load(std::string_view path);
 void load_string(std::string_view string);
 void override_user_token(std::string_view token);
 
-std::string password();
-std::string username();
-std::string user_token();
-std::string access_token();
-std::string log_path();
+const std::string& password();
+const std::string& username();
+const std::string& user_token();
+const std::string& access_token();
+const std::string& log_path();
 size_t num_workers();
 
 }// namespace vk::config

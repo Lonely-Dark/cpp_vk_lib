@@ -16,7 +16,7 @@ static std::string format(std::string_view data, Args&&... args)
     static constexpr size_t average_word_size = 7;
     std::string formatted;
     formatted.reserve(data.size() + (average_word_size * sizeof...(args)));
-    auto pack_one = [](auto&& argument) {
+    [[maybe_unused]] auto pack_one = [](auto&& argument) {
         if constexpr (std::is_integral_v<std::decay_t<decltype(argument)>>) {
             return std::to_string(argument);
         } else {

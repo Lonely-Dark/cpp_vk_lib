@@ -7,6 +7,11 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ../)
 set(EXECUTABLE_OUTPUT_PATH ../)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../)
 
+set(EXECUTABLE_OUTPUT_PATH ../build)
+
+add_compile_options(-Wall -Wextra -Werror -Wunused -Wwrite-strings -Wimplicit-fallthrough -pedantic)
+add_compile_options(-fPIC -O3)
+
 function (add_vk_example bin_name path)
     if (CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
         add_compile_options(-Wno-deprecated -Wno-deprecated-declarations)

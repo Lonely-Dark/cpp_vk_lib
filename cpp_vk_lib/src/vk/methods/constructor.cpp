@@ -40,7 +40,7 @@ std::string group_api::execute(
     const std::string& access_token,
     const std::string& user_token)
 {
-    VK_UNUSED(user_token);
+    (void)user_token;
     params.insert(
         {{"access_token", access_token}, {"v", api_constants::api_version}});
     return call(output_needeed, method, std::move(params));
@@ -53,7 +53,7 @@ std::string user_api::execute(
     const std::string& access_token,
     const std::string& user_token)
 {
-    VK_UNUSED(access_token);
+    (void)access_token;
     params.insert(
         {{"access_token", user_token}, {"v", api_constants::api_version}});
     return call(output_needeed, method, std::move(params));
@@ -66,8 +66,8 @@ std::string do_not_use_api_link::execute(
     const std::string& access_token,
     const std::string& user_token)
 {
-    VK_UNUSED(user_token);
-    VK_UNUSED(access_token);
+    (void)user_token;
+    (void)access_token;
     auto response(
         runtime::network::request(output_needeed, method, std::move(params)));
     if (response.error()) {

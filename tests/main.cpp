@@ -13,6 +13,8 @@
 #include "cpp_vk_lib/runtime/setup_logger.hpp"
 #include "cpp_vk_lib/vk/config/config.hpp"
 
+bool cpp_vk_lib_curl_verbose = false;
+
 int main(int argc, char* argv[])
 {
     runtime::network::init_shared_curl();

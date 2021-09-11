@@ -5,46 +5,116 @@
 #include <curl/curl.h>
 
 bool cpp_vk_lib_curl_verbose;
-
-static pthread_mutex_t share_datalock[CURL_LOCK_DATA_LAST];
+static pthread_mutex_t share_data_lock[CURL_LOCK_DATA_LAST];
 static CURLSH* shared_handle = curl_share_init();
 
-static std::string escape(std::string_view url)
-{
-    char* encoded = curl_easy_escape(NULL, url.data(), url.length());
-    std::string res{encoded};
-    curl_free(encoded);
-    return res;
-}
-
-static void lock_cb(
+static void libcurl_lock_cb(
     CURL* handle,
     curl_lock_data data,
     curl_lock_access access,
-    void* userptr)
+    void* stream) noexcept
 {
-    (void)access; /* unused */
-    (void)userptr; /* unused */
-    (void)handle; /* unused */
-    pthread_mutex_lock(&share_datalock[data]);
+    (void)handle;
+    (void)access;
+    (void)stream;
+    pthread_mutex_lock(&share_data_lock[data]);
 }
 
-static void unlock_cb(CURL* handle, curl_lock_data data, void* userptr)
+static void
+    libcurl_unlock_cb(CURL* handle, curl_lock_data data, void* stream) noexcept
 {
-    (void)userptr; /* unused */
-    (void)handle; /* unused */
-    pthread_mutex_unlock(&share_datalock[data]);
+    (void)handle;
+    (void)stream;
+    pthread_mutex_unlock(&share_data_lock[data]);
+}
+
+static size_t libcurl_omit_string_cb(
+    char* contents,
+    size_t size,
+    size_t nmemb,
+    void* stream) noexcept
+{
+    (void)contents;
+    (void)stream;
+    return size * nmemb;
+}
+
+static size_t libcurl_string_write_cb(
+    char* contents,
+    size_t size,
+    size_t nmemb,
+    void* stream)
+{
+    static_cast<std::string*>(stream)->append(contents, size * nmemb);
+    return size * nmemb;
+}
+
+static size_t libcurl_buffer_write_cb(
+    char* contents,
+    size_t size,
+    size_t nmemb,
+    void* stream)
+{
+    auto vector = static_cast<std::vector<uint8_t>*>(stream);
+    std::copy(contents, contents + (size * nmemb), std::back_inserter(*vector));
+    return size * nmemb;
+}
+
+static size_t libcurl_file_write_cb(
+    char* contents,
+    size_t size,
+    size_t nmemb,
+    void* stream) noexcept
+{
+    return fwrite(contents, size, nmemb, static_cast<FILE*>(stream));
+}
+
+static size_t libcurl_string_header_cb(
+    char* contents,
+    size_t size,
+    size_t nmemb,
+    void* stream)
+{
+    if (!stream) {
+        return size * nmemb;
+    }
+    size_t bytes = 0;
+    sscanf(contents, "content-length: %zu\n", &bytes);
+    if (bytes > 0) {
+        static_cast<std::string*>(stream)->reserve(bytes);
+    }
+    return size * nmemb;
+}
+
+static size_t libcurl_buffer_header_cb(
+    char* contents,
+    size_t size,
+    size_t nmemb,
+    void* stream)
+{
+    if (!stream) {
+        return size * nmemb;
+    }
+    size_t bytes = 0;
+    sscanf(contents, "content-length: %zu\n", &bytes);
+    if (bytes > 0) {
+        static_cast<std::vector<uint8_t>*>(stream)->reserve(bytes);
+        spdlog::trace(
+            "libcurl buffer header callback called, reserve {} bytes for buffer",
+            bytes);
+    }
+    return size * nmemb;
 }
 
 void runtime::network::init_shared_curl()
 {
-    for (int i = 0; i < CURL_LOCK_DATA_LAST; i++)
-        pthread_mutex_init(&share_datalock[i], NULL);
+    for (int i = 0; i < CURL_LOCK_DATA_LAST; i++) {
+        pthread_mutex_init(&share_data_lock[i], NULL);
+    }
 
     shared_handle = curl_share_init();
-    curl_share_setopt(shared_handle, CURLSHOPT_LOCKFUNC, lock_cb);
-    curl_share_setopt(shared_handle, CURLSHOPT_UNLOCKFUNC, unlock_cb);
-
+    curl_share_setopt(shared_handle, CURLSHOPT_LOCKFUNC, libcurl_lock_cb);
+    curl_share_setopt(shared_handle, CURLSHOPT_UNLOCKFUNC, libcurl_unlock_cb);
     curl_share_setopt(shared_handle, CURLSHOPT_UNSHARE, CURL_LOCK_DATA_COOKIE);
     curl_share_setopt(shared_handle, CURLSHOPT_SHARE, CURL_LOCK_DATA_DNS);
     curl_share_setopt(shared_handle, CURLSHOPT_SHARE, CURL_LOCK_DATA_CONNECT);
@@ -52,72 +122,6 @@ void runtime::network::init_shared_curl()
         shared_handle,
         CURLSHOPT_SHARE,
         CURL_LOCK_DATA_SSL_SESSION);
-}
-
-static size_t
-    omit_data_callback(char* contents, size_t size, size_t nmemb, void* userp)
-{
-    (void)contents;
-    (void)userp;
-    return size * nmemb;
-}
-
-static size_t
-    string_callback(char* contents, size_t size, size_t nmemb, void* userp)
-{
-    static_cast<std::string*>(userp)->append(contents, size * nmemb);
-    return size * nmemb;
-}
-
-static size_t
-    file_callback(char* contents, size_t size, size_t nmemb, void* stream)
-{
-    return fwrite(contents, size, nmemb, static_cast<FILE*>(stream));
-}
-
-static size_t
-    buffer_callback(char* contents, size_t size, size_t nmemb, void* userp)
-{
-    auto vector = static_cast<std::vector<uint8_t>*>(userp);
-    std::copy(contents, contents + (size * nmemb), std::back_inserter(*vector));
-    return size * nmemb;
-}
-
-static size_t string_header_callback(
-    char* contents,
-    size_t size,
-    size_t nmemb,
-    void* userp)
-{
-    if (!userp) {
-        return size * nmemb;
-    }
-    size_t bytes = 0;
-    sscanf(contents, "content-length: %zu\n", &bytes);
-    if (bytes > 0) {
-        static_cast<std::string*>(userp)->reserve(bytes);
-    }
-    return size * nmemb;
-}
-
-static size_t buffer_header_callback(
-    char* contents,
-    size_t size,
-    size_t nmemb,
-    void* userp)
-{
-    if (!userp) {
-        return size * nmemb;
-    }
-    size_t bytes = 0;
-    sscanf(contents, "content-length: %zu\n", &bytes);
-    if (bytes > 0) {
-        static_cast<std::vector<uint8_t>*>(userp)->reserve(bytes);
-        spdlog::trace(
-            "libcurl buffer header callback called, reserve {} bytes for buffer",
-            bytes);
-    }
-    return size * nmemb;
 }
 
 static std::string
@@ -129,6 +133,13 @@ static std::string
     std::string result;
     result.reserve(host.size() + estimated_params_length);
     result += host;
+
+    auto escape = [](std::string_view url) {
+        char* encoded = curl_easy_escape(nullptr, url.data(), url.length());
+        std::string res(encoded);
+        curl_free(encoded);
+        return res;
+    };
 
     for (const auto& [key, value] : body) {
         result += key;
@@ -144,11 +155,97 @@ static std::string
     return result;
 }
 
-static void set_optional_verbose(CURL* curl) noexcept
+static void libcurl_set_optional_verbose(CURL* curl) noexcept
 {
     if (cpp_vk_lib_curl_verbose) {
         curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
     }
+}
+
+static std::unique_ptr<CURL, curl_free_callback>
+    libcurl_create_handle(std::string_view url) noexcept
+{
+    std::unique_ptr<CURL, curl_free_callback> curl_handle{
+        curl_easy_init(),
+        curl_easy_cleanup};
+    CURL* handle = curl_handle.get();
+    if (!handle) {
+        spdlog::error("curl_easy_init() failed");
+        exit(-1);
+    }
+    curl_easy_setopt(handle, CURLOPT_URL, url.data());
+    curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, 1L);
+    curl_easy_setopt(handle, CURLOPT_TIMEOUT, 600L);
+    curl_easy_setopt(handle, CURLOPT_USERAGENT, "cpp_vk_lib libcurl-agent/1.1");
+    curl_easy_setopt(handle, CURLOPT_SHARE, shared_handle);
+    return curl_handle;
+}
+
+static runtime::result<std::string, size_t>
+    libcurl_to_string_recv(CURL* handle, bool output_needed)
+{
+    std::string output;
+    if (output_needed) {
+        output.reserve(1024);
+        curl_easy_setopt(handle, CURLOPT_WRITEDATA, &output);
+        curl_easy_setopt(
+            handle,
+            CURLOPT_WRITEFUNCTION,
+            libcurl_string_write_cb);
+        curl_easy_setopt(handle, CURLOPT_HEADERDATA, &output);
+        curl_easy_setopt(
+            handle,
+            CURLOPT_HEADERFUNCTION,
+            libcurl_string_header_cb);
+    } else {
+        curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, libcurl_omit_string_cb);
+    }
+    libcurl_set_optional_verbose(handle);
+    if (CURLcode res = curl_easy_perform(handle); res != CURLE_OK) {
+        spdlog::error(
+            "curl_easy_perform() failed: {}",
+            curl_easy_strerror(res));
+        return runtime::result<std::string, size_t>(std::string(), -1);
+    }
+    output.shrink_to_fit();
+    return output;
+}
+
+static size_t libcurl_to_buffer_recv(
+    void* buffer,
+    std::string_view server,
+    curl_write_callback write_cb,
+    curl_write_callback header_cb = nullptr)
+{
+    auto handle_ptr = libcurl_create_handle(server);
+    CURL* handle = handle_ptr.get();
+    curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, write_cb);
+    curl_easy_setopt(handle, CURLOPT_WRITEDATA, buffer);
+    if (header_cb) {
+        curl_easy_setopt(handle, CURLOPT_HEADERDATA, buffer);
+        curl_easy_setopt(handle, CURLOPT_HEADERFUNCTION, header_cb);
+    }
+    libcurl_set_optional_verbose(handle);
+    if (CURLcode res = curl_easy_perform(handle); res != CURLE_OK) {
+        spdlog::error(
+            "curl_easy_perform() failed: {}",
+            curl_easy_strerror(res));
+        return -1;
+    }
+    return 0;
+}
+
+static runtime::result<std::string, size_t> libcurl_from_buffer_send(
+    bool output_needed,
+    struct curl_httppost* formpost,
+    std::string_view server)
+{
+    auto handle_ptr = libcurl_create_handle(server);
+    CURL* handle = handle_ptr.get();
+    curl_easy_setopt(handle, CURLOPT_HTTPPOST, formpost);
+    auto result = libcurl_to_string_recv(handle, output_needed);
+    curl_formfree(formpost);
+    return result;
 }
 
 namespace runtime {
@@ -159,38 +256,10 @@ result<std::string, size_t> network::request(
     std::map<std::string, std::string>&& target)
 {
     const std::string url = create_url(host, std::move(target));
-    std::unique_ptr<CURL, curl_free_callback> curl_handle{
-        curl_easy_init(),
-        curl_easy_cleanup};
-    CURL* curl = curl_handle.get();
-    if (!curl) {
-        spdlog::error("curl_easy_init() failed");
-        return result<std::string, size_t>(std::string(), -1);
-    }
     spdlog::trace("libcurl GET {}", url);
-    std::string output;
-    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-    curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
-    curl_easy_setopt(curl, CURLOPT_TIMEOUT, 600L);
-    curl_easy_setopt(curl, CURLOPT_SHARE, shared_handle);
-    if (output_needed) {
-        output.reserve(1024);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &output);
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, string_callback);
-        curl_easy_setopt(curl, CURLOPT_HEADERDATA, &output);
-        curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, string_header_callback);
-    } else {
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, omit_data_callback);
-    }
-    set_optional_verbose(curl);
-    if (CURLcode res = curl_easy_perform(curl); res != CURLE_OK) {
-        spdlog::error(
-            "curl_easy_perform() failed: {}",
-            curl_easy_strerror(res));
-        return result<std::string, size_t>(std::string(), -1);
-    }
-    output.shrink_to_fit();
-    return output;
+    auto handle_ptr = libcurl_create_handle(url);
+    CURL* handle = handle_ptr.get();
+    return libcurl_to_string_recv(handle, output_needed);
 }
 
 result<std::string, size_t> network::request_data(
@@ -198,76 +267,12 @@ result<std::string, size_t> network::request_data(
     std::string_view host,
     std::string_view data)
 {
-    std::unique_ptr<CURL, curl_free_callback> curl_handle{
-        curl_easy_init(),
-        curl_easy_cleanup};
-    CURL* curl = curl_handle.get();
-    if (!curl) {
-        spdlog::error("curl_easy_init() failed");
-        return result<std::string, size_t>(std::string(), -1);
-    }
-
+    auto handle_ptr = libcurl_create_handle(host);
+    CURL* handle = handle_ptr.get();
     spdlog::trace("libcurl GET DATA {} {}", host, data);
-    std::string output;
-    curl_easy_setopt(curl, CURLOPT_URL, host.data());
-    curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, data.size());
-    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data.data());
-    curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
-    curl_easy_setopt(curl, CURLOPT_TIMEOUT, 600L);
-    curl_easy_setopt(curl, CURLOPT_SHARE, shared_handle);
-    if (output_needed) {
-        output.reserve(1024);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &output);
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, string_callback);
-        curl_easy_setopt(curl, CURLOPT_HEADERDATA, &output);
-        curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, string_header_callback);
-    } else {
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, omit_data_callback);
-    }
-    set_optional_verbose(curl);
-    if (CURLcode res = curl_easy_perform(curl); res != CURLE_OK) {
-        spdlog::error(
-            "curl_easy_perform() failed: {}",
-            curl_easy_strerror(res));
-        return result<std::string, size_t>(std::string(), -1);
-    }
-    output.shrink_to_fit();
-    return output;
-}
-
-static size_t curl_download_impl(
-    void* buffer,
-    std::string_view server,
-    curl_write_callback write_cb,
-    curl_write_callback header_cb =
-        nullptr) noexcept(noexcept(write_cb) && noexcept(header_cb))
-{
-    std::unique_ptr<CURL, curl_free_callback> curl_handle{
-        curl_easy_init(),
-        curl_easy_cleanup};
-    CURL* curl = curl_handle.get();
-    if (!curl) {
-        spdlog::error("curl_easy_init() failed");
-        return -1;
-    }
-    curl_easy_setopt(curl, CURLOPT_URL, server.data());
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_cb);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, buffer);
-    curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
-    curl_easy_setopt(curl, CURLOPT_TIMEOUT, 600L);
-    curl_easy_setopt(curl, CURLOPT_SHARE, shared_handle);
-    if (header_cb) {
-        curl_easy_setopt(curl, CURLOPT_HEADERDATA, buffer);
-        curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, header_cb);
-    }
-    set_optional_verbose(curl);
-    if (CURLcode res = curl_easy_perform(curl); res != CURLE_OK) {
-        spdlog::error(
-            "curl_easy_perform() failed: {}",
-            curl_easy_strerror(res));
-        return -1;
-    }
-    return 0;
+    curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, data.size());
+    curl_easy_setopt(handle, CURLOPT_POSTFIELDS, data.data());
+    return libcurl_to_string_recv(handle, output_needed);
 }
 
 size_t network::download(std::string_view filename, std::string_view server)
@@ -278,7 +283,7 @@ size_t network::download(std::string_view filename, std::string_view server)
         spdlog::error("libcurl: failed to open file {}", filename);
         return -1;
     }
-    size_t res = curl_download_impl(fp, server, file_callback);
+    size_t res = libcurl_to_buffer_recv(fp, server, libcurl_file_write_cb);
     fclose(fp);
     return res;
 }
@@ -288,55 +293,14 @@ size_t network::download(std::vector<uint8_t>& buffer, std::string_view server)
     spdlog::trace("libcurl download to buffer, src: {}", server);
     buffer.clear();
 
-    size_t res = curl_download_impl(
+    size_t res = libcurl_to_buffer_recv(
         &buffer,
         server,
-        buffer_callback,
-        buffer_header_callback);
+        libcurl_buffer_write_cb,
+        libcurl_buffer_header_cb);
 
     buffer.shrink_to_fit();
     return res;
-}
-
-result<std::string, size_t> curl_upload_impl(
-    bool output_needed,
-    struct curl_httppost* formpost,
-    std::string_view server) noexcept(noexcept(string_callback))
-{
-    std::unique_ptr<CURL, curl_free_callback> curl_handle{
-        curl_easy_init(),
-        curl_easy_cleanup};
-    CURL* curl = curl_handle.get();
-    if (!curl) {
-        spdlog::error("curl_easy_init() failed");
-        curl_formfree(formpost);
-        return result<std::string, size_t>(std::string(), -1);
-    }
-    std::string output;
-    curl_easy_setopt(curl, CURLOPT_URL, server.data());
-    curl_easy_setopt(curl, CURLOPT_HTTPPOST, formpost);
-    curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
-    curl_easy_setopt(curl, CURLOPT_SHARE, shared_handle);
-    if (output_needed) {
-        output.reserve(1024);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &output);
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, string_callback);
-        curl_easy_setopt(curl, CURLOPT_HEADERDATA, &output);
-        curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, string_header_callback);
-    } else {
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, omit_data_callback);
-    }
-    set_optional_verbose(curl);
-    if (CURLcode res = curl_easy_perform(curl); res != CURLE_OK) {
-        spdlog::error(
-            "curl_easy_perform() failed: {}",
-            curl_easy_strerror(res));
-        curl_formfree(formpost);
-        return result<std::string, size_t>(std::string(), -1);
-    }
-    curl_formfree(formpost);
-    output.shrink_to_fit();
-    return output;
 }
 
 result<std::string, size_t> network::upload(
@@ -359,7 +323,7 @@ result<std::string, size_t> network::upload(
         CURLFORM_CONTENTTYPE, content_type.data(),
         CURLFORM_END);
     // clang-format on
-    return curl_upload_impl(output_needed, formpost, server);
+    return libcurl_from_buffer_send(output_needed, formpost, server);
 }
 
 result<std::string, size_t> network::upload(
@@ -388,7 +352,7 @@ result<std::string, size_t> network::upload(
         CURLFORM_CONTENTTYPE,    content_type.data(),
         CURLFORM_END);
     // clang-format on
-    auto result = curl_upload_impl(output_needed, formpost, server);
+    auto result = libcurl_from_buffer_send(output_needed, formpost, server);
     if (!result.error()) {
         spdlog::trace(
             "libcurl successfully uploaded {} bytes to {}",

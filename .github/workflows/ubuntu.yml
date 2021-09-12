@@ -24,6 +24,3 @@ jobs:
 
     - name: run tests
       run: cd build && ./build/tests
-
-    - name: run benchmarks
-      run: cd build && ./build/curl_benchmark

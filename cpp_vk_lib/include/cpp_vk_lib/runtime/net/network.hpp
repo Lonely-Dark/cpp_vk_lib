@@ -16,8 +16,6 @@ namespace runtime::network {
 
 static constexpr bool require_data = true;
 static constexpr bool omit_data = false;
-
-void init_shared_curl();
 /*!
  * \brief Perform HTTP POST request
  *

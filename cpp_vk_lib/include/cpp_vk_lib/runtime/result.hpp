@@ -4,6 +4,7 @@
 #include <cstddef>
 #include <string>
 #include <utility>
+#include <stdexcept>
 
 namespace runtime {
 
@@ -40,13 +41,18 @@ struct result : protected std::pair<First, Second>
         }
     }
 
-    Second error() const noexcept
+    const Second& error() const noexcept
     {
         return this->second;
     }
-
-    First value() const noexcept
+    /*!
+     * We cannot retrieve value if we have error.
+     */
+    const First& value() const
     {
+        if (error()) {
+            throw std::runtime_error("failed to get value(): error exists");
+        }
         return this->first;
     }
 };

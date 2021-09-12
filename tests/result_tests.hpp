@@ -46,6 +46,8 @@ TEST(result, tie_no_error)
 TEST(result, template_deduction)
 {
     runtime::result auto_filled(100, 200);
-    ASSERT_EQ(auto_filled.value(), 100);
+    try {
+        auto_filled.value();
+    } catch (std::runtime_error& e) {}
     ASSERT_EQ(auto_filled.error(), 200);
 }

@@ -9,6 +9,31 @@
 #include <future>
 #include <filesystem>
 
+TEST(curl, POST_multithreaded)
+{
+    std::vector<std::pair<std::thread, std::future<std::string>>> threads;
+    for (size_t i = 0; i < std::thread::hardware_concurrency(); ++i) {
+        std::promise<std::string> promise;
+        std::future <std::string> future = promise.get_future();
+        std::thread thread([promise = std::move(promise)]() mutable {
+          const auto received = runtime::network::request(runtime::network::require_data, "https://www.example.com");
+          if (received.error()) {
+              FAIL() << "error while HTTP GET";
+          }
+          promise.set_value(received.value());
+        });
+        threads.emplace_back(std::move(thread), std::move(future));
+    }
+    std::vector<std::string> responses;
+    for (auto& el : threads) {
+        auto thread = std::move(el.first);
+        auto future = std::move(el.second);
+        responses.emplace_back(future.get());
+        thread.join();
+    }
+    ASSERT_EQ(std::adjacent_find(responses.begin(), responses.end(), std::not_equal_to<>()), responses.end());
+}
+
 TEST(curl, POST_require_data)
 {
     const auto received = runtime::network::request(runtime::network::require_data, "https://www.google.com");
@@ -46,31 +71,6 @@ TEST(curl, GET_require_data_speed_test)
     for (size_t i = 0; i < 5; ++i) {
         runtime::network::request(runtime::network::require_data, url);
     }
-}
-
-TEST(curl, POST_multithreaded)
-{
-    std::vector<std::pair<std::thread, std::future<std::string>>> threads;
-    for (size_t i = 0; i < std::thread::hardware_concurrency(); ++i) {
-        std::promise<std::string> promise;
-        std::future <std::string> future = promise.get_future();
-        std::thread thread([promise = std::move(promise)]() mutable {
-            const auto received = runtime::network::request(runtime::network::require_data, "https://www.example.com");
-            if (received.error()) {
-                FAIL() << "error while HTTP GET";
-            }
-            promise.set_value(received.value());
-        });
-        threads.push_back(std::make_pair(std::move(thread), std::move(future)));
-    }
-    std::vector<std::string> responses;
-    for (auto& el : threads) {
-        auto thread = std::move(el.first);
-        auto future = std::move(el.second);
-        responses.emplace_back(future.get());
-        thread.join();
-    }
-    ASSERT_EQ(std::adjacent_find(responses.begin(), responses.end(), std::not_equal_to<>()), responses.end());
 }
 
 static std::string get_cat_url()

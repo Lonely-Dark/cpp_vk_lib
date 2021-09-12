@@ -3,10 +3,12 @@
 #include "spdlog/spdlog.h"
 
 #include <curl/curl.h>
+#include <thread>
 
 bool cpp_vk_lib_curl_verbose;
 static pthread_mutex_t share_data_lock[CURL_LOCK_DATA_LAST];
 static CURLSH* shared_handle = curl_share_init();
+static std::unordered_map<std::thread::id, CURL*> curl_handles;
 
 static void libcurl_lock_cb(
     CURL* handle,
@@ -106,10 +108,23 @@ static size_t libcurl_buffer_header_cb(
     return size * nmemb;
 }
 
-void runtime::network::init_shared_curl()
-{
-    for (int i = 0; i < CURL_LOCK_DATA_LAST; i++) {
-        pthread_mutex_init(&share_data_lock[i], NULL);
+[[maybe_unused]] static int atexit_handler = []() noexcept {
+    spdlog::trace("initializing libcurl cleanup handlers");
+    std::atexit([]{
+      for (const auto& [thread_id, handle] : curl_handles) {
+          if (handle) {
+              curl_easy_cleanup(handle);
+          }
+      }
+      curl_share_cleanup(shared_handle);
+    });
+    return 0;
+}();
+
+[[maybe_unused]] static int shared_curl_handler = []() noexcept {
+    spdlog::trace("initializing libcurl shared handle");
+    for (auto& i : share_data_lock) {
+        pthread_mutex_init(&i, nullptr);
     }
 
     shared_handle = curl_share_init();
@@ -122,7 +137,8 @@ void runtime::network::init_shared_curl()
         shared_handle,
         CURLSHOPT_SHARE,
         CURL_LOCK_DATA_SSL_SESSION);
-}
+    return 0;
+}();
 
 static std::string
     create_url(std::string_view host, std::map<std::string, std::string>&& body)
@@ -155,20 +171,24 @@ static std::string
     return result;
 }
 
-static void libcurl_set_optional_verbose(CURL* curl) noexcept
+static void libcurl_set_optional_verbose(CURL* handle) noexcept
 {
     if (cpp_vk_lib_curl_verbose) {
-        curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
+        curl_easy_setopt(handle, CURLOPT_VERBOSE, 1L);
     }
 }
 
-static std::unique_ptr<CURL, curl_free_callback>
-    libcurl_create_handle(std::string_view url) noexcept
+static CURL* libcurl_create_handle(std::string_view url) noexcept
 {
-    std::unique_ptr<CURL, curl_free_callback> curl_handle{
-        curl_easy_init(),
-        curl_easy_cleanup};
-    CURL* handle = curl_handle.get();
+    auto current_thread_handle = []() noexcept {
+        const std::thread::id thread_id = std::this_thread::get_id();
+        if (curl_handles.find(thread_id) == curl_handles.end()) {
+            curl_handles[thread_id] = curl_easy_init();
+        }
+        return curl_handles[thread_id];
+    };
+
+    CURL* handle = current_thread_handle();
     if (!handle) {
         spdlog::error("curl_easy_init() failed");
         exit(-1);
@@ -178,35 +198,33 @@ static std::unique_ptr<CURL, curl_free_callback>
     curl_easy_setopt(handle, CURLOPT_TIMEOUT, 600L);
     curl_easy_setopt(handle, CURLOPT_USERAGENT, "cpp_vk_lib libcurl-agent/1.1");
     curl_easy_setopt(handle, CURLOPT_SHARE, shared_handle);
-    return curl_handle;
+    libcurl_set_optional_verbose(handle);
+    return handle;
 }
 
 static runtime::result<std::string, size_t>
     libcurl_to_string_recv(CURL* handle, bool output_needed)
 {
     std::string output;
+    // clang-format off
     if (output_needed) {
         output.reserve(1024);
         curl_easy_setopt(handle, CURLOPT_WRITEDATA, &output);
-        curl_easy_setopt(
-            handle,
-            CURLOPT_WRITEFUNCTION,
-            libcurl_string_write_cb);
+        curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, libcurl_string_write_cb);
         curl_easy_setopt(handle, CURLOPT_HEADERDATA, &output);
-        curl_easy_setopt(
-            handle,
-            CURLOPT_HEADERFUNCTION,
-            libcurl_string_header_cb);
+        curl_easy_setopt(handle, CURLOPT_HEADERFUNCTION, libcurl_string_header_cb);
     } else {
         curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, libcurl_omit_string_cb);
     }
-    libcurl_set_optional_verbose(handle);
-    if (CURLcode res = curl_easy_perform(handle); res != CURLE_OK) {
+    // clang-format on
+    if (const CURLcode res = curl_easy_perform(handle); res != CURLE_OK) {
         spdlog::error(
             "curl_easy_perform() failed: {}",
             curl_easy_strerror(res));
-        return runtime::result<std::string, size_t>(std::string(), -1);
+        curl_easy_reset(handle);
+        return {"", -1UL};
     }
+    curl_easy_reset(handle);
     output.shrink_to_fit();
     return output;
 }
@@ -215,23 +233,23 @@ static size_t libcurl_to_buffer_recv(
     void* buffer,
     std::string_view server,
     curl_write_callback write_cb,
-    curl_write_callback header_cb = nullptr)
+    curl_write_callback header_cb = nullptr) noexcept
 {
-    auto handle_ptr = libcurl_create_handle(server);
-    CURL* handle = handle_ptr.get();
+    CURL* handle = libcurl_create_handle(server);
     curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, write_cb);
     curl_easy_setopt(handle, CURLOPT_WRITEDATA, buffer);
     if (header_cb) {
         curl_easy_setopt(handle, CURLOPT_HEADERDATA, buffer);
         curl_easy_setopt(handle, CURLOPT_HEADERFUNCTION, header_cb);
     }
-    libcurl_set_optional_verbose(handle);
-    if (CURLcode res = curl_easy_perform(handle); res != CURLE_OK) {
+    if (const CURLcode res = curl_easy_perform(handle); res != CURLE_OK) {
         spdlog::error(
             "curl_easy_perform() failed: {}",
             curl_easy_strerror(res));
+        curl_easy_reset(handle);
         return -1;
     }
+    curl_easy_reset(handle);
     return 0;
 }
 
@@ -240,8 +258,7 @@ static runtime::result<std::string, size_t> libcurl_from_buffer_send(
     struct curl_httppost* formpost,
     std::string_view server)
 {
-    auto handle_ptr = libcurl_create_handle(server);
-    CURL* handle = handle_ptr.get();
+    CURL* handle = libcurl_create_handle(server);
     curl_easy_setopt(handle, CURLOPT_HTTPPOST, formpost);
     auto result = libcurl_to_string_recv(handle, output_needed);
     curl_formfree(formpost);
@@ -257,9 +274,9 @@ result<std::string, size_t> network::request(
 {
     const std::string url = create_url(host, std::move(target));
     spdlog::trace("libcurl GET {}", url);
-    auto handle_ptr = libcurl_create_handle(url);
-    CURL* handle = handle_ptr.get();
-    return libcurl_to_string_recv(handle, output_needed);
+    CURL* handle = libcurl_create_handle(url);
+    auto result = libcurl_to_string_recv(handle, output_needed);
+    return result;
 }
 
 result<std::string, size_t> network::request_data(
@@ -267,9 +284,8 @@ result<std::string, size_t> network::request_data(
     std::string_view host,
     std::string_view data)
 {
-    auto handle_ptr = libcurl_create_handle(host);
-    CURL* handle = handle_ptr.get();
     spdlog::trace("libcurl GET DATA {} {}", host, data);
+    CURL* handle = libcurl_create_handle(host);
     curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, data.size());
     curl_easy_setopt(handle, CURLOPT_POSTFIELDS, data.data());
     return libcurl_to_string_recv(handle, output_needed);

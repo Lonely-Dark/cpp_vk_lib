@@ -10,10 +10,6 @@
  * **bool cpp_vk_lib_curl_verbose**
  * - Enable or disable detailed cURL logging
  *
- * ### Initial functions:
- * **runtime::network::init_shared_curl()**
- * - Create cURL shared context, used internally by library
- *
  * Please, check the
  * [README.md](https://github.com/threadpoolexecutor/cpp_vk_lib).
  */

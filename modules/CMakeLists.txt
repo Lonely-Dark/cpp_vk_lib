@@ -16,11 +16,15 @@ endfunction(initialize_submodule)
 
 initialize_submodule(modules/simdjson)
 initialize_submodule(modules/spdlog)
-initialize_submodule(modules/googletest)
 initialize_submodule(modules/asio)
+
+if (IS_TOP_PROJECT)
+  message(STATUS "Run from top project so initialize gtest...")
+  initialize_submodule(modules/googletest)
+  set(BUILD_GMOCK OFF CACHE BOOL "Do not build gmock")
+  add_subdirectory(googletest)
+  
+endif()
 
 add_subdirectory(simdjson EXCLUDE_FROM_ALL)
 add_subdirectory(spdlog)
-
-set(BUILD_GMOCK OFF CACHE BOOL "Do not build gmock")
-add_subdirectory(googletest)

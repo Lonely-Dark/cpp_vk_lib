@@ -1,15 +1,14 @@
 {
 	"api": {
-		"access_token": "access_token",
-		"user_token": "user_token"
+		"access_token": "",
+		"user_token": ""
 	},
 	"oauth": {
-		"login": "login@gmail.com",
-		"password": "password"
+		"login": "fill in if you are going to use OAuth",
+		"password": "fill in if you are going to use OAuth"
 	},
 	"environment": {
 		"num_workers": 8,
-		"error_log_path": "/tmp/errors.log",
-		"event_log_path": "/tmp/events.log"
+		"log_path": "/path/to/logs"
 	}
 }

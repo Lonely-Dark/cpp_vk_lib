@@ -23,6 +23,8 @@ common::common(std::string_view ts, simdjson::dom::object event)
         underlying_event_type_ = event::type::wall_reply_new;
     } else if (type == "wall_repost") {
         underlying_event_type_ = event::type::wall_repost;
+    } else if (type == "message_typing_state") {
+        // ignore
     } else {
         const std::string errmsg = "unknown event type: " + std::string(type);
         throw exception::runtime_error(-1, errmsg.c_str());

@@ -57,6 +57,8 @@ std::vector<event::common> long_poll::listen(int8_t timeout)
         .perform_request();
     // clang-format on
 
+    spdlog::info("response: {}", response);
+
     const simdjson::dom::object parsed_response = parser_->parse(response);
 
     if (parsed_response.begin().key() == "failed") {
@@ -71,9 +73,18 @@ std::vector<event::common> long_poll::listen(int8_t timeout)
     std::string ts(parsed_response["ts"]);
 
     for (auto update : parsed_response["updates"]) {
+        if (std::string_view(update["type"]) == "message_typing_state") {
+          continue;
+        }
+        simdjson::dom::object object = update["object"];
+        simdjson::dom::object message;
+        if (auto error = object["message"].get(message); error) {
+            if (object["from_id"].get_int64() == group_id_ * -1) {
+                continue;
+            }
+        }
         event_list.emplace_back(ts, update);
     }
-
     poll_payload_.ts = std::move(ts);
 
     return event_list;

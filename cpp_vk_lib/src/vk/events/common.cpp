@@ -23,8 +23,8 @@ common::common(std::string_view ts, simdjson::dom::object event)
         underlying_event_type_ = event::type::wall_reply_new;
     } else if (type == "wall_repost") {
         underlying_event_type_ = event::type::wall_repost;
-    } else if (type == "message_typing_state") {
-        // ignore
+    } else if (type == "message_reply") {
+      underlying_event_type_ = event::type::message_new;
     } else {
         const std::string errmsg = "unknown event type: " + std::string(type);
         throw exception::runtime_error(-1, errmsg.c_str());
@@ -41,34 +41,25 @@ bool common::on_type(event::type type) const noexcept
     return underlying_event_type_ == type;
 }
 
-common::operator message_new() const
-{
-    return message_new(std::move(get_event()["object"]["message"]));
-}
-
-common::operator wall_post_new() const
-{
-    return wall_post_new(std::move(get_event()["object"]));
-}
-
-common::operator wall_reply_new() const
-{
-    return wall_reply_new(std::move(get_event()["object"]));
-}
-
 message_new common::get_message_new() const
 {
-    return this->operator message_new();
+    simdjson::dom::object object = get_event()["object"];
+    simdjson::dom::object message;
+    if (auto error = object["message"].get(message); !error) {
+        return message_new(message);
+    } else {
+        return message_new(object);
+    }
 }
 
 wall_post_new common::get_wall_post_new() const
 {
-    return this->operator wall_post_new();
+    return wall_post_new(std::move(get_event()["object"]));
 }
 
 wall_reply_new common::get_wall_reply_new() const
 {
-    return this->operator wall_reply_new();
+    return wall_reply_new(std::move(get_event()["object"]));
 }
 
 event::type common::type() const noexcept

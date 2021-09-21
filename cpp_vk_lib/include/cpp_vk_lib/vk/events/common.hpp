@@ -34,9 +34,9 @@ public:
 
     bool on_type(event::type) const noexcept;
 
-    explicit operator message_new() const;
-    explicit operator wall_post_new() const;
-    explicit operator wall_reply_new() const;
+//    explicit operator message_new() const;
+//    explicit operator wall_post_new() const;
+//    explicit operator wall_reply_new() const;
 
     message_new get_message_new() const;
     wall_post_new get_wall_post_new() const;

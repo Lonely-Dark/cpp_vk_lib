@@ -18,8 +18,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_THREAD_PREFER_PTHREAD ON)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 
-message(STATUS ${CMAKE_CXX_COMPILER})
-
 set(BUILD_SHARED_LIBS ON CACHE BOOL "Link simdjson as shared library")
 set(CPP_VK_LIB_STATIC_BUILD OFF CACHE BOOL "Link cpp_vk_lib as shared library by default")
 

@@ -110,13 +110,13 @@ static size_t libcurl_buffer_header_cb(
 
 [[maybe_unused]] static int atexit_handler = []() noexcept {
     spdlog::trace("initializing libcurl cleanup handlers");
-    std::atexit([]{
-      for (const auto& [thread_id, handle] : curl_handles) {
-          if (handle) {
-              curl_easy_cleanup(handle);
-          }
-      }
-      curl_share_cleanup(shared_handle);
+    std::atexit([] {
+        for (const auto& [thread_id, handle] : curl_handles) {
+            if (handle) {
+                curl_easy_cleanup(handle);
+            }
+        }
+        curl_share_cleanup(shared_handle);
     });
     return 0;
 }();

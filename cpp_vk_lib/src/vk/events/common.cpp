@@ -24,7 +24,7 @@ common::common(std::string_view ts, simdjson::dom::object event)
     } else if (type == "wall_repost") {
         underlying_event_type_ = event::type::wall_repost;
     } else if (type == "message_reply") {
-      underlying_event_type_ = event::type::message_new;
+        underlying_event_type_ = event::type::message_new;
     } else {
         const std::string errmsg = "unknown event type: " + std::string(type);
         throw exception::runtime_error(-1, errmsg.c_str());

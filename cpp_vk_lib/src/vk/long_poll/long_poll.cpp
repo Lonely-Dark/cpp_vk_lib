@@ -74,7 +74,7 @@ std::vector<event::common> long_poll::listen(int8_t timeout)
 
     for (auto update : parsed_response["updates"]) {
         if (std::string_view(update["type"]) == "message_typing_state") {
-          continue;
+            continue;
         }
         simdjson::dom::object object = update["object"];
         simdjson::dom::object message;

@@ -3,7 +3,6 @@
 #include "cpp_vk_lib/vk/config/config.hpp"
 #include "cpp_vk_lib/vk/methods/constructor.hpp"
 #include "cpp_vk_lib/vk/events/wall_post_new.hpp"
-#include "cpp_vk_lib/vk/methods/basic.hpp"
 
 #include "simdjson.h"
 #include "spdlog/spdlog.h"
@@ -26,7 +25,7 @@ int main(int argc, char* argv[])
     runtime::setup_signal_handlers();
     runtime::setup_logger(spdlog::level::level_enum::trace);
 
-    const std::string server = vk::method::group_constructor()
+    const std::string server = vk::method::user_constructor()
         .method("docs.getMessagesUploadServer")
         .param("peer_id", peer_id)
         .param("type", "audio_message")
@@ -42,7 +41,7 @@ int main(int argc, char* argv[])
     if (file.empty()) {
         return 1;
     }
-    const std::string docs_save_response = vk::method::group_constructor()
+    const std::string docs_save_response = vk::method::user_constructor()
         .method("docs.save")
         .param("file", file)
         .param("title", "voice")
@@ -57,6 +56,12 @@ int main(int argc, char* argv[])
             audio_message["link_mp3"].get_string());
     std::vector<vk::attachment::attachment_ptr_t> atts;
     atts.emplace_back(std::move(doc));
-    vk::method::messages::send(std::stol(peer_id), "", std::move(atts));
+    vk::method::user_constructor()
+        .method("messages.send")
+        .param("peer_id", std::to_string(2000000000L + std::stol(peer_id)))
+        .param("message", "")
+        .param("random_id", "0")
+        .param("attachments", atts[0]->value())
+        .perform_request();
     return 0;
 }

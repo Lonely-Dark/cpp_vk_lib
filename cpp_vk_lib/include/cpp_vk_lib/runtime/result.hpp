@@ -2,9 +2,9 @@
 #define RUNTIME_RESULT_HPP
 
 #include <cstddef>
+#include <stdexcept>
 #include <string>
 #include <utility>
-#include <stdexcept>
 
 namespace runtime {
 

@@ -11,11 +11,7 @@ base::base(std::string_view type, int32_t owner_id, int32_t id)
 
 std::string base::value() const
 {
-    return runtime::string_utils::format(
-        "{}{}_{}",
-        attachment_type_,
-        owner_id_,
-        id_);
+    return runtime::string_utils::format("{}{}_{}", attachment_type_, owner_id_, id_);
 }
 
 const std::string& base::type() const noexcept

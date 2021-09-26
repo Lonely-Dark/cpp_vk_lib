@@ -39,8 +39,7 @@ private:
     bool has_attachments_ = false;
 };
 
-std::ostream&
-    operator<<(std::ostream& ostream, const vk::event::wall_reply_new& reply);
+std::ostream& operator<<(std::ostream& ostream, const vk::event::wall_reply_new& reply);
 
 }// namespace vk::event
 

@@ -59,20 +59,16 @@ bool wall_reply_new::has_attachments() const noexcept
     return has_attachments_;
 }
 
-std::vector<vk::attachment::attachment_ptr_t>
-    wall_reply_new::attachments() const
+std::vector<vk::attachment::attachment_ptr_t> wall_reply_new::attachments() const
 {
     if (has_attachments_) {
         return event::get_attachments(get_event()["attachments"].get_array());
     } else {
-        throw exception::access_error(
-            -1,
-            "Attempting accessing empty attachment list");
+        throw exception::access_error(-1, "Attempting accessing empty attachment list");
     }
 }
 
-std::ostream&
-    operator<<(std::ostream& ostream, const vk::event::wall_reply_new& reply)
+std::ostream& operator<<(std::ostream& ostream, const vk::event::wall_reply_new& reply)
 {
     ostream << "wall_reply_new:" << std::endl;
 
@@ -81,8 +77,7 @@ std::ostream&
     ostream << std::setw(30) << "post_id: " << reply.post_id() << std::endl;
     ostream << std::setw(30) << "owner_id: " << reply.owner_id() << std::endl;
     ostream << std::setw(30) << "text: " << reply.text() << std::endl;
-    ostream << std::setw(30) << "has_attachments? " << reply.has_attachments()
-            << std::endl;
+    ostream << std::setw(30) << "has_attachments? " << reply.has_attachments() << std::endl;
 
     if (reply.has_attachments()) {
         for (auto& attachment : reply.attachments()) {

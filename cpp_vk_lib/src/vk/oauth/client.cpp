@@ -39,9 +39,7 @@ client::client(
 
 client::~client() = default;
 
-static bool error_returned(
-    const simdjson::dom::object& response,
-    std::string_view error_desc)
+static bool error_returned(const simdjson::dom::object& response, std::string_view error_desc)
 {
     return response.begin().key() == "error" &&
            response["error"].get_string().take_value() == error_desc;
@@ -59,15 +57,11 @@ void client::pull()
         .param("password", password_.data());
 
     simdjson::dom::parser parser;
-    const simdjson::dom::object response =
-        parser.parse(constructor.perform_request());
+    const simdjson::dom::object response = parser.parse(constructor.perform_request());
 
-    if (error_returned(response, "invalid_client") ||
-        error_returned(response, "invalid_request") ||
+    if (error_returned(response, "invalid_client") || error_returned(response, "invalid_request") ||
         error_returned(response, "invalid_grant")) {
-        throw exception::access_error(
-            -1,
-            response["error_description"].get_c_str().take_value());
+        throw exception::access_error(-1, response["error_description"].get_c_str().take_value());
     }
 
     pulled_token_ = response["access_token"].get_c_str().take_value();

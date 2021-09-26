@@ -1,7 +1,7 @@
 #include "cpp_vk_lib/vk/methods/message_constructor.hpp"
 
-static std::string serialize_attachments(
-    const std::vector<vk::attachment::attachment_ptr_t>& attachments)
+static std::string
+    serialize_attachments(const std::vector<vk::attachment::attachment_ptr_t>& attachments)
 {
     std::string result;
     result.reserve(attachments.size() * 20);
@@ -29,15 +29,14 @@ message_constructor::message_constructor(bool disable_mentions_flag)
     }
 }
 
-message_constructor&
-    message_constructor::param(std::string_view lhs, std::string_view rhs)
+message_constructor& message_constructor::param(std::string_view lhs, std::string_view rhs)
 {
     constructor_.param(lhs, rhs);
     return *this;
 }
 
-message_constructor& message_constructor::attachments(
-    std::vector<vk::attachment::attachment_ptr_t>&& attachments)
+message_constructor&
+    message_constructor::attachments(std::vector<vk::attachment::attachment_ptr_t>&& attachments)
 {
     param("attachment", serialize_attachments(attachments).data());
     return *this;

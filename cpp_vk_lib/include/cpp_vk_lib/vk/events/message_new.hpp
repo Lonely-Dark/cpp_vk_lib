@@ -53,8 +53,7 @@ public:
     bool has_fwd_messages() const noexcept;
     bool has_action() const noexcept;
 
-    friend std::ostream&
-        operator<<(std::ostream& ostream, const message_new& event);
+    friend std::ostream& operator<<(std::ostream& ostream, const message_new& event);
 
 private:
     void try_get_actions();
@@ -68,8 +67,7 @@ private:
     bool has_attachments_ = false;
 };
 
-std::ostream&
-    operator<<(std::ostream& ostream, const vk::event::message_new& event);
+std::ostream& operator<<(std::ostream& ostream, const vk::event::message_new& event);
 
 }// namespace vk::event
 

@@ -9,24 +9,15 @@
 
 static std::string append_url(std::string_view method)
 {
-    return runtime::string_utils::format(
-        "https://api.vk.com/method/{}?",
-        method);
+    return runtime::string_utils::format("https://api.vk.com/method/{}?", method);
 }
 
-static std::string call(
-    bool output_needeed,
-    std::string_view method,
-    std::map<std::string, std::string>&& params)
+static std::string
+    call(bool output_needeed, std::string_view method, std::map<std::string, std::string>&& params)
 {
-    auto response(runtime::network::request(
-        output_needeed,
-        append_url(method),
-        std::move(params)));
+    auto response(runtime::network::request(output_needeed, append_url(method), std::move(params)));
     if (response.error()) {
-        throw vk::exception::runtime_error(
-            response.error(),
-            "Failed to execute HTTP GET");
+        throw vk::exception::runtime_error(response.error(), "Failed to execute HTTP GET");
     }
     return response.value();
 }
@@ -41,8 +32,7 @@ std::string group_api::execute(
     const std::string& user_token)
 {
     (void)user_token;
-    params.insert(
-        {{"access_token", access_token}, {"v", api_constants::api_version}});
+    params.insert({{"access_token", access_token}, {"v", api_constants::api_version}});
     return call(output_needeed, method, std::move(params));
 }
 
@@ -54,8 +44,7 @@ std::string user_api::execute(
     const std::string& user_token)
 {
     (void)access_token;
-    params.insert(
-        {{"access_token", user_token}, {"v", api_constants::api_version}});
+    params.insert({{"access_token", user_token}, {"v", api_constants::api_version}});
     return call(output_needeed, method, std::move(params));
 }
 
@@ -68,12 +57,9 @@ std::string do_not_use_api_link::execute(
 {
     (void)user_token;
     (void)access_token;
-    auto response(
-        runtime::network::request(output_needeed, method, std::move(params)));
+    auto response(runtime::network::request(output_needeed, method, std::move(params)));
     if (response.error()) {
-        throw vk::exception::runtime_error(
-            response.error(),
-            "Failed to execute HTTP GET");
+        throw vk::exception::runtime_error(response.error(), "Failed to execute HTTP GET");
     }
     return response.value();
 }
@@ -95,25 +81,23 @@ constructor<ExecutionPolicy>::constructor(std::string_view user_token)
 {}
 
 template <typename ExecutionPolicy>
-constructor<ExecutionPolicy>&
-    constructor<ExecutionPolicy>::method(std::string_view method)
+constructor<ExecutionPolicy>& constructor<ExecutionPolicy>::method(std::string_view method)
 {
     method_.assign(method.data(), method.size());
     return *this;
 }
 
 template <typename ExecutionPolicy>
-constructor<ExecutionPolicy>& constructor<ExecutionPolicy>::param(
-    std::string_view key,
-    std::string_view value)
+constructor<ExecutionPolicy>&
+    constructor<ExecutionPolicy>::param(std::string_view key, std::string_view value)
 {
     params_.emplace(key, value);
     return *this;
 }
 
 template <typename ExecutionPolicy>
-constructor<ExecutionPolicy>& constructor<ExecutionPolicy>::append_map(
-    std::map<std::string, std::string>&& additional_params)
+constructor<ExecutionPolicy>&
+    constructor<ExecutionPolicy>::append_map(std::map<std::string, std::string>&& additional_params)
 {
     params_.merge(std::move(additional_params));
     return *this;

@@ -76,10 +76,8 @@ result<std::string, size_t> upload(
  * \param[in] URL payload, e.g JSON
  * \return response output
  */
-result<std::string, size_t> request_data(
-    bool output_needed,
-    std::string_view host,
-    std::string_view data);
+result<std::string, size_t>
+    request_data(bool output_needed, std::string_view host, std::string_view data);
 
 }// namespace runtime::network
 

@@ -74,8 +74,7 @@ void message_new::try_get_actions()
     }
 
     if (action_name == "chat_title_update") {
-        action_ =
-            action::chat_title_update{action["text"].get_c_str().take_value()};
+        action_ = action::chat_title_update{action["text"].get_c_str().take_value()};
     }
 }
 
@@ -173,9 +172,7 @@ std::vector<attachment::attachment_ptr_t> message_new::attachments() const
     if (has_attachments_) {
         return event::get_attachments(get_event()["attachments"].get_array());
     } else {
-        throw exception::access_error(
-            -1,
-            "attempting accessing empty attachment list");
+        throw exception::access_error(-1, "attempting accessing empty attachment list");
     }
 }
 
@@ -184,25 +181,20 @@ std::vector<std::unique_ptr<message_new>> message_new::fwd_messages() const
     if (has_attachments_) {
         std::vector<std::unique_ptr<message_new>> fwd_messages;
 
-        for (simdjson::dom::element fwd_message :
-             get_event()["fwd_messages"].get_array()) {
-            fwd_messages.emplace_back(
-                std::make_unique<message_new>(fwd_message));
+        for (simdjson::dom::element fwd_message : get_event()["fwd_messages"].get_array()) {
+            fwd_messages.emplace_back(std::make_unique<message_new>(fwd_message));
         }
 
         return fwd_messages;
     } else {
-        throw exception::access_error(
-            -1,
-            "attempting accessing empty forward messages list");
+        throw exception::access_error(-1, "attempting accessing empty forward messages list");
     }
 }
 
 std::shared_ptr<message_new> message_new::reply() const
 {
     if (has_reply_) {
-        return std::make_unique<message_new>(
-            get_event()["reply_message"].get_object());
+        return std::make_unique<message_new>(get_event()["reply_message"].get_object());
     } else {
         throw exception::access_error(-1, "attempting accessing empty reply");
     }
@@ -213,29 +205,25 @@ void dispatch_events(std::ostream& ostream, const message_new& event)
     if (event.has_action()) {
         if (event.on_action("chat_invite_user")) {
             ostream << std::setw(40) << "chat_invite_user action: ";
-            ostream << std::any_cast<action::chat_invite_user>(event.action())
-                           .member_id;
+            ostream << std::any_cast<action::chat_invite_user>(event.action()).member_id;
             ostream << std::endl;
         }
 
         if (event.on_action("chat_kick_user")) {
             ostream << std::setw(40) << "chat_kick_user action: ";
-            ostream << std::any_cast<action::chat_kick_user>(event.action())
-                           .member_id;
+            ostream << std::any_cast<action::chat_kick_user>(event.action()).member_id;
             ostream << std::endl;
         }
 
         if (event.on_action("chat_pin_message")) {
             ostream << std::setw(40) << "chat_pin_message action: ";
-            ostream << std::any_cast<action::chat_pin_message>(event.action())
-                           .member_id;
+            ostream << std::any_cast<action::chat_pin_message>(event.action()).member_id;
             ostream << std::endl;
         }
 
         if (event.on_action("chat_unpin_message")) {
             ostream << std::setw(40) << "chat_unpin_message action: ";
-            ostream << std::any_cast<action::chat_unpin_message>(event.action())
-                           .member_id;
+            ostream << std::any_cast<action::chat_unpin_message>(event.action()).member_id;
             ostream << std::endl;
         }
 
@@ -247,8 +235,7 @@ void dispatch_events(std::ostream& ostream, const message_new& event)
 
         if (event.on_action("chat_title_update")) {
             ostream << std::setw(30) << "chat_title_update action:  ";
-            ostream << std::any_cast<action::chat_title_update>(event.action())
-                           .text;
+            ostream << std::any_cast<action::chat_title_update>(event.action()).text;
             ostream << std::endl;
         }
     }
@@ -258,21 +245,17 @@ std::ostream& operator<<(std::ostream& ostream, const message_new& event)
 {
     ostream << "message_new:" << std::endl;
 
-    ostream << std::setw(30)
-            << "conversation_message_id: " << event.conversation_message_id()
+    ostream << std::setw(30) << "conversation_message_id: " << event.conversation_message_id()
             << std::endl;
     ostream << std::setw(30) << "peer_id: " << event.peer_id() << std::endl;
     ostream << std::setw(30) << "from_id: " << event.from_id() << std::endl;
     ostream << std::setw(30) << "text: " << event.text() << std::endl;
-    ostream << std::setw(30) << "has_action: " << event.has_action()
-            << std::endl;
+    ostream << std::setw(30) << "has_action: " << event.has_action() << std::endl;
     ostream << std::setw(30) << "has_reply: " << event.has_reply() << std::endl;
-    ostream << std::setw(30) << "has_fwd_messages: " << event.has_fwd_messages()
-            << std::endl;
+    ostream << std::setw(30) << "has_fwd_messages: " << event.has_fwd_messages() << std::endl;
 
     if (event.has_reply()) {
-        ostream << std::endl
-                << std::setw(30) << "reply: " << *event.reply() << std::endl;
+        ostream << std::endl << std::setw(30) << "reply: " << *event.reply() << std::endl;
     }
 
     dispatch_events(ostream, event);

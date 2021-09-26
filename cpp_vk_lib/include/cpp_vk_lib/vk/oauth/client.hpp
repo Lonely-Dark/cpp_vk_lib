@@ -37,10 +37,7 @@ enum class target_client : uint8_t
 class client
 {
 public:
-    client(
-        std::string_view username,
-        std::string_view password,
-        target_client client_type);
+    client(std::string_view username, std::string_view password, target_client client_type);
 
     ~client();
     /*!

@@ -23,8 +23,7 @@ protected:
      * \param[in] arg error reason itself
      * \return formatted string
      */
-    static std::string
-        create(size_t id, const char* exception_name, const char* arg);
+    static std::string create(size_t id, const char* exception_name, const char* arg);
 
 private:
     std::runtime_error error_;

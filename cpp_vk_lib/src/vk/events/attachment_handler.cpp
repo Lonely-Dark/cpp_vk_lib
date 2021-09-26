@@ -2,24 +2,21 @@
 
 #include "simdjson.h"
 
-static std::unique_ptr<vk::attachment::photo>
-    get_photo(const simdjson::dom::element& attachment)
+static std::unique_ptr<vk::attachment::photo> get_photo(const simdjson::dom::element& attachment)
 {
     return std::make_unique<vk::attachment::photo>(
         attachment["photo"]["owner_id"].get_int64(),
         attachment["photo"]["id"].get_int64());
 }
 
-static std::unique_ptr<vk::attachment::video>
-    get_video(const simdjson::dom::element& attachment)
+static std::unique_ptr<vk::attachment::video> get_video(const simdjson::dom::element& attachment)
 {
     return std::make_unique<vk::attachment::video>(
         attachment["video"]["owner_id"].get_int64(),
         attachment["video"]["id"].get_int64());
 }
 
-static std::unique_ptr<vk::attachment::document>
-    get_doc(const simdjson::dom::element& attachment)
+static std::unique_ptr<vk::attachment::document> get_doc(const simdjson::dom::element& attachment)
 {
     return std::make_unique<vk::attachment::document>(
         attachment["doc"]["owner_id"].get_int64(),
@@ -27,8 +24,7 @@ static std::unique_ptr<vk::attachment::document>
         attachment["doc"]["url"].get_string());
 }
 
-static std::unique_ptr<vk::attachment::audio>
-    get_audio(const simdjson::dom::element& attachment)
+static std::unique_ptr<vk::attachment::audio> get_audio(const simdjson::dom::element& attachment)
 {
     return std::make_unique<vk::attachment::audio>(
         attachment["audio"]["owner_id"].get_int64(),
@@ -45,8 +41,7 @@ static std::unique_ptr<vk::attachment::audio_message>
         attachment["audio_message"]["link_mp3"].get_string());
 }
 
-static std::unique_ptr<vk::attachment::wall>
-    get_wall(const simdjson::dom::element& attachment)
+static std::unique_ptr<vk::attachment::wall> get_wall(const simdjson::dom::element& attachment)
 {
     return std::make_unique<vk::attachment::wall>(
         attachment["wall"]["from_id"].get_int64(),

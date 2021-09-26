@@ -15,8 +15,7 @@ namespace vk::event {
  *
  * \return Array of valid attachment pointers
  */
-std::vector<attachment::attachment_ptr_t>
-    get_attachments(const simdjson::dom::array& attachments);
+std::vector<attachment::attachment_ptr_t> get_attachments(const simdjson::dom::array& attachments);
 
 }// namespace vk::event
 

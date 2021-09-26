@@ -23,8 +23,7 @@ static _Unwind_Reason_Code
     unwind_callback(struct _Unwind_Context* context, void* arg)
 {
     backtrace_state* state = static_cast<backtrace_state*>(arg);
-    uintptr_t pc = _Unwind_GetIP(context);
-    if (pc) {
+    if (uintptr_t pc = _Unwind_GetIP(context)) {
         if (state->current == state->end) {
             return _URC_END_OF_STACK;
         } else {
@@ -52,8 +51,7 @@ static void android_stacktrace_dump_implementation()
     for (size_t i = 0; i < stacktrace_size; ++i) {
         const void* address = buffer[i];
         const char* symbol = "";
-        Dl_info info;
-        if (dladdr(address, &info) && info.dli_sname) {
+        if (Dl_info info; dladdr(address, &info) && info.dli_sname) {
             symbol = info.dli_sname;
         }
         ostream << "  " << std::setw(2) << ": " << address << " " << symbol
@@ -64,21 +62,20 @@ static void android_stacktrace_dump_implementation()
 #elif defined(__FreeBSD__) || defined(__linux__) || defined(__APPLE__)
 static void unix_stacktrace_dump_implementation()
 {
-    const size_t max_stacktrace_records = 25;
-    void* buffer[max_stacktrace_records];
+    void* buffer[/*max_records=*/25];
     int addresses_got = backtrace(buffer, sizeof(buffer) / sizeof(void*));
     if (addresses_got == 0) {
         spdlog::critical("  empty stack trace, exiting...");
         return;
     }
-    char** symbol_list = backtrace_symbols(buffer, addresses_got);
-    size_t maxframes = 256;
-    char* funcname = static_cast<char*>(malloc(maxframes));
+    char** stack_dump = backtrace_symbols(buffer, addresses_got);
+    char* demangled_name = static_cast<char*>(malloc(/*__size=*/256));
     for (int i = 1; i < addresses_got; ++i) {
-        char *begin_name = 0, *begin_offset = 0, *end_offset = 0;
-        for (char* symbol = symbol_list[i]; *symbol; ++symbol) {
+        char *mangled_name = nullptr, *begin_offset = nullptr,
+             *end_offset = nullptr;
+        for (char* symbol = stack_dump[i]; *symbol; ++symbol) {
             if (*symbol == '(') {
-                begin_name = symbol;
+                mangled_name = symbol;
             } else if (*symbol == '+') {
                 begin_offset = symbol;
             } else if (*symbol == ')' && begin_offset) {
@@ -86,34 +83,38 @@ static void unix_stacktrace_dump_implementation()
                 break;
             }
         }
-        if (begin_name && begin_offset && end_offset &&
-            begin_name < begin_offset) {
-            *begin_name++ = '\0';
+        if (mangled_name && begin_offset && end_offset &&
+            mangled_name < begin_offset) {
+            *mangled_name++ = '\0';
             *begin_offset++ = '\0';
             *end_offset = '\0';
             int status = 0;
-            char* demangled =
-                abi::__cxa_demangle(begin_name, funcname, &maxframes, &status);
+            size_t max_length = 256;
+            char* demangled = abi::__cxa_demangle(
+                mangled_name,
+                demangled_name,
+                &max_length,
+                &status);
             if (status == 0) {
-                funcname = demangled;
+                demangled_name = demangled;
                 spdlog::critical(
                     "  {}: {}+{}",
-                    symbol_list[i],
-                    funcname,
+                    stack_dump[i],
+                    demangled_name,
                     begin_offset);
             } else {
                 spdlog::critical(
                     "  {}: {}()+{}",
-                    symbol_list[i],
-                    begin_name,
+                    stack_dump[i],
+                    mangled_name,
                     begin_offset);
             }
         } else {
-            spdlog::critical("  {}", symbol_list[i]);
+            spdlog::critical("  {}", stack_dump[i]);
         }
     }
-    free(funcname);
-    free(symbol_list);
+    free(demangled_name);
+    free(stack_dump);
 }
 #else
 static void unknown_platform_stacktrace_dump_implementation()

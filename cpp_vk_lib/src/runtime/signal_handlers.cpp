@@ -18,7 +18,7 @@ void runtime::setup_signal_handlers()
     }
 #endif
 
-#if defined (__linux__) && !defined(__APPLE__) && !defined(__FreeBSD__)
+#if defined(__linux__) && !defined(__APPLE__) && !defined(__FreeBSD__)
     critical_signals.push_back(SIGPOLL);
 #endif
 

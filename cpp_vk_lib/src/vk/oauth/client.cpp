@@ -21,18 +21,21 @@ client::client(
     , pulled_user_id_(0)
 {
     switch (client_type_) {
-        case target_client::android:
-            target_client_id_ = api_constants::android_app_client_id;
-            target_client_secret_ = api_constants::android_app_client_secret;
-            break;
-        case target_client::iphone:
-            target_client_id_ = api_constants::iphone_app_client_id;
-            target_client_secret_ = api_constants::iphone_app_client_secret;
-            break;
-        case target_client::windows:
-            target_client_id_ = api_constants::windows_app_client_id;
-            target_client_secret_ = api_constants::windows_app_client_secret;
-            break;
+        case target_client::android: {
+          target_client_id_ = api_constants::android_app_client_id;
+          target_client_secret_ = api_constants::android_app_client_secret;
+          break;
+        }
+        case target_client::iphone: {
+          target_client_id_ = api_constants::iphone_app_client_id;
+          target_client_secret_ = api_constants::iphone_app_client_secret;
+          break;
+        }
+        case target_client::windows: {
+          target_client_id_ = api_constants::windows_app_client_id;
+          target_client_secret_ = api_constants::windows_app_client_secret;
+          break;
+        }
     }
     pull();
 }

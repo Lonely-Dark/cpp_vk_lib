@@ -9,14 +9,11 @@
 namespace runtime::string_utils {
 
 template <typename T, typename Container, typename Delimiter>
-static std::string
-    create_joined_string(Container&& elements, Delimiter&& delimiter)
+static std::string create_joined_string(Container&& elements, Delimiter&& delimiter)
 {
     std::string output;
     if constexpr (
-        !std::is_same_v<
-            std::decay_t<Container>,
-            std::forward_list<std::decay_t<T>>> &&
+        !std::is_same_v<std::decay_t<Container>, std::forward_list<std::decay_t<T>>> &&
         !std::is_same_v<std::decay_t<Container>, std::list<std::decay_t<T>>>) {
         static const size_t average_word_length = 20;
         output.reserve(elements.size() * average_word_length);
@@ -41,17 +38,13 @@ static std::string
 template <typename T, typename Container>
 std::string join(Container&& elements, char delimiter)
 {
-    return create_joined_string<T>(
-        std::forward<Container>(elements),
-        delimiter);
+    return create_joined_string<T>(std::forward<Container>(elements), delimiter);
 }
 
 template <typename T, typename Container>
 std::string join(Container&& elements, std::string_view delimiter)
 {
-    return create_joined_string<T>(
-        std::forward<Container>(elements),
-        delimiter);
+    return create_joined_string<T>(std::forward<Container>(elements), delimiter);
 }
 
 template <typename T>

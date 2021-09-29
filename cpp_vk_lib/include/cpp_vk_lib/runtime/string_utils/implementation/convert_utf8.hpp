@@ -8,13 +8,11 @@ template <typename ExecutionPolicy>
 static std::string utf8_create(std::string_view data, ExecutionPolicy converter)
 {
     std::wstring wide_string =
-        std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(
-            data.data());
+        std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(data.data());
     for (auto& c : wide_string) {
         c = converter(c);
     }
-    return std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(
-        wide_string);
+    return std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(wide_string);
 }
 
 namespace runtime::string_utils::internal {

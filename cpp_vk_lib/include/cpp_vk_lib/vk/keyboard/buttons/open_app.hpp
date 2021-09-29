@@ -8,11 +8,7 @@ namespace vk::keyboard::button {
 class open_app
 {
 public:
-    open_app(
-        int64_t app_id,
-        int64_t owner_id,
-        std::string_view hash,
-        std::string_view label)
+    open_app(int64_t app_id, int64_t owner_id, std::string_view hash, std::string_view label)
         : app_id_(app_id)
         , owner_id_(owner_id)
         , hash_(hash)

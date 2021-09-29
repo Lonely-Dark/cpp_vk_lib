@@ -76,12 +76,9 @@ void layout::serialize()
                 }
             });
         serialized_rows.push_back(
-            '[' +
-            runtime::string_utils::join<std::string>(serialized_buttons, ',') +
-            ']');
+            '[' + runtime::string_utils::join<std::string>(serialized_buttons, ',') + ']');
     }
-    serialized_ +=
-        runtime::string_utils::join<std::string>(serialized_rows, ',');
+    serialized_ += runtime::string_utils::join<std::string>(serialized_rows, ',');
     serialized_.append("]}");
     serialized_.shrink_to_fit();
 }

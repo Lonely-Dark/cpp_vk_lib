@@ -22,60 +22,41 @@ static void libcurl_lock_cb(
     pthread_mutex_lock(&share_data_lock[data]);
 }
 
-static void
-    libcurl_unlock_cb(CURL* handle, curl_lock_data data, void* stream) noexcept
+static void libcurl_unlock_cb(CURL* handle, curl_lock_data data, void* stream) noexcept
 {
     (void)handle;
     (void)stream;
     pthread_mutex_unlock(&share_data_lock[data]);
 }
 
-static size_t libcurl_omit_string_cb(
-    char* contents,
-    size_t size,
-    size_t nmemb,
-    void* stream) noexcept
+static size_t
+    libcurl_omit_string_cb(char* contents, size_t size, size_t nmemb, void* stream) noexcept
 {
     (void)contents;
     (void)stream;
     return size * nmemb;
 }
 
-static size_t libcurl_string_write_cb(
-    char* contents,
-    size_t size,
-    size_t nmemb,
-    void* stream)
+static size_t libcurl_string_write_cb(char* contents, size_t size, size_t nmemb, void* stream)
 {
     static_cast<std::string*>(stream)->append(contents, size * nmemb);
     return size * nmemb;
 }
 
-static size_t libcurl_buffer_write_cb(
-    char* contents,
-    size_t size,
-    size_t nmemb,
-    void* stream)
+static size_t libcurl_buffer_write_cb(char* contents, size_t size, size_t nmemb, void* stream)
 {
     auto vector = static_cast<std::vector<uint8_t>*>(stream);
     std::copy(contents, contents + (size * nmemb), std::back_inserter(*vector));
     return size * nmemb;
 }
 
-static size_t libcurl_file_write_cb(
-    char* contents,
-    size_t size,
-    size_t nmemb,
-    void* stream) noexcept
+static size_t
+    libcurl_file_write_cb(char* contents, size_t size, size_t nmemb, void* stream) noexcept
 {
     return fwrite(contents, size, nmemb, static_cast<FILE*>(stream));
 }
 
-static size_t libcurl_string_header_cb(
-    char* contents,
-    size_t size,
-    size_t nmemb,
-    void* stream)
+static size_t libcurl_string_header_cb(char* contents, size_t size, size_t nmemb, void* stream)
 {
     if (!stream) {
         return size * nmemb;
@@ -88,11 +69,7 @@ static size_t libcurl_string_header_cb(
     return size * nmemb;
 }
 
-static size_t libcurl_buffer_header_cb(
-    char* contents,
-    size_t size,
-    size_t nmemb,
-    void* stream)
+static size_t libcurl_buffer_header_cb(char* contents, size_t size, size_t nmemb, void* stream)
 {
     if (!stream) {
         return size * nmemb;
@@ -101,9 +78,7 @@ static size_t libcurl_buffer_header_cb(
     sscanf(contents, "content-length: %zu\n", &bytes);
     if (bytes > 0) {
         static_cast<std::vector<uint8_t>*>(stream)->reserve(bytes);
-        spdlog::trace(
-            "libcurl buffer header callback called, reserve {} bytes for buffer",
-            bytes);
+        spdlog::trace("libcurl buffer header callback called, reserve {} bytes for buffer", bytes);
     }
     return size * nmemb;
 }
@@ -133,19 +108,14 @@ static size_t libcurl_buffer_header_cb(
     curl_share_setopt(shared_handle, CURLSHOPT_UNSHARE, CURL_LOCK_DATA_COOKIE);
     curl_share_setopt(shared_handle, CURLSHOPT_SHARE, CURL_LOCK_DATA_DNS);
     curl_share_setopt(shared_handle, CURLSHOPT_SHARE, CURL_LOCK_DATA_CONNECT);
-    curl_share_setopt(
-        shared_handle,
-        CURLSHOPT_SHARE,
-        CURL_LOCK_DATA_SSL_SESSION);
+    curl_share_setopt(shared_handle, CURLSHOPT_SHARE, CURL_LOCK_DATA_SSL_SESSION);
     return 0;
 }();
 
-static std::string
-    create_url(std::string_view host, std::map<std::string, std::string>&& body)
+static std::string create_url(std::string_view host, std::map<std::string, std::string>&& body)
 {
     static constexpr size_t average_word_length = 20;
-    const size_t estimated_params_length =
-        average_word_length * body.size() * 2;
+    const size_t estimated_params_length = average_word_length * body.size() * 2;
     std::string result;
     result.reserve(host.size() + estimated_params_length);
     result += host;
@@ -202,8 +172,7 @@ static CURL* libcurl_create_handle(std::string_view url) noexcept
     return handle;
 }
 
-static runtime::result<std::string, size_t>
-    libcurl_to_string_recv(CURL* handle, bool output_needed)
+static runtime::result<std::string, size_t> libcurl_to_string_recv(CURL* handle, bool output_needed)
 {
     std::string output;
     // clang-format off
@@ -218,9 +187,7 @@ static runtime::result<std::string, size_t>
     }
     // clang-format on
     if (const CURLcode res = curl_easy_perform(handle); res != CURLE_OK) {
-        spdlog::error(
-            "curl_easy_perform() failed: {}",
-            curl_easy_strerror(res));
+        spdlog::error("curl_easy_perform() failed: {}", curl_easy_strerror(res));
         curl_easy_reset(handle);
         return {"", -1UL};
     }
@@ -243,9 +210,7 @@ static size_t libcurl_to_buffer_recv(
         curl_easy_setopt(handle, CURLOPT_HEADERFUNCTION, header_cb);
     }
     if (const CURLcode res = curl_easy_perform(handle); res != CURLE_OK) {
-        spdlog::error(
-            "curl_easy_perform() failed: {}",
-            curl_easy_strerror(res));
+        spdlog::error("curl_easy_perform() failed: {}", curl_easy_strerror(res));
         curl_easy_reset(handle);
         return -1;
     }
@@ -279,10 +244,8 @@ result<std::string, size_t> network::request(
     return result;
 }
 
-result<std::string, size_t> network::request_data(
-    bool output_needed,
-    std::string_view host,
-    std::string_view data)
+result<std::string, size_t>
+    network::request_data(bool output_needed, std::string_view host, std::string_view data)
 {
     spdlog::trace("libcurl GET DATA {} {}", host, data);
     CURL* handle = libcurl_create_handle(host);
@@ -309,11 +272,8 @@ size_t network::download(std::vector<uint8_t>& buffer, std::string_view server)
     spdlog::trace("libcurl download to buffer, src: {}", server);
     buffer.clear();
 
-    size_t res = libcurl_to_buffer_recv(
-        &buffer,
-        server,
-        libcurl_buffer_write_cb,
-        libcurl_buffer_header_cb);
+    size_t res =
+        libcurl_to_buffer_recv(&buffer, server, libcurl_buffer_write_cb, libcurl_buffer_header_cb);
 
     buffer.shrink_to_fit();
     return res;
@@ -351,10 +311,7 @@ result<std::string, size_t> network::upload(
 {
     spdlog::trace("libcurl upload Content-Type: {}", content_type);
     spdlog::trace("libcurl upload field: {}", field_name);
-    spdlog::trace(
-        "libcurl upload buffer: size: {}, dest: {}",
-        buffer.size(),
-        server);
+    spdlog::trace("libcurl upload buffer: size: {}, dest: {}", buffer.size(), server);
     struct curl_httppost* formpost = nullptr;
     struct curl_httppost* lastptr = nullptr;
     // clang-format off
@@ -370,10 +327,7 @@ result<std::string, size_t> network::upload(
     // clang-format on
     auto result = libcurl_from_buffer_send(output_needed, formpost, server);
     if (!result.error()) {
-        spdlog::trace(
-            "libcurl successfully uploaded {} bytes to {}",
-            buffer.size(),
-            server);
+        spdlog::trace("libcurl successfully uploaded {} bytes to {}", buffer.size(), server);
     }
     return result;
 }

@@ -13,14 +13,9 @@ const char* common_exception::what() const noexcept
     return error_.what();
 }
 
-std::string
-    common_exception::create(size_t id, const char* error_name, const char* arg)
+std::string common_exception::create(size_t id, const char* error_name, const char* arg)
 {
-    return runtime::string_utils::format(
-        "[vk.exception.{}.{}]: {}",
-        error_name,
-        id,
-        arg);
+    return runtime::string_utils::format("[vk.exception.{}.{}]: {}", error_name, id, arg);
 }
 
 upload_error::upload_error(size_t id, const char* what_arg)
@@ -31,9 +26,7 @@ access_error::access_error(size_t id, const char* what_arg)
     : common_exception(create(id, "access_error", what_arg))
 {}
 
-invalid_parameter_error::invalid_parameter_error(
-    size_t id,
-    const char* what_arg)
+invalid_parameter_error::invalid_parameter_error(size_t id, const char* what_arg)
     : common_exception(create(id, "invalid_parameter_error", what_arg))
 {}
 

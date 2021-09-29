@@ -68,15 +68,13 @@ int64_t groups::get_by_id(error_code& errc)
 {
     spdlog::trace("call groups::get_by_id");
 
-    const std::string response =
-        group_constructor().method("groups.getById").perform_request();
+    const std::string response = group_constructor().method("groups.getById").perform_request();
 
     simdjson::dom::parser parser;
     const simdjson::dom::object parsed = parser.parse(response);
 
     if (parsed.begin().key() == "error") {
-        errc.assign(exception::translate_error(
-            parsed["error"]["error_code"].get_int64()));
+        errc.assign(exception::translate_error(parsed["error"]["error_code"].get_int64()));
         return -1;
     }
 

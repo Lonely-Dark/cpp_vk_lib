@@ -29,8 +29,7 @@ long_poll::~long_poll() = default;
 long_poll::poll_payload long_poll::server() const
 {
     const std::string data = method::groups::get_long_poll_server(group_id_);
-    const simdjson::dom::object server_object =
-        parser_->parse(data)["response"];
+    const simdjson::dom::object server_object = parser_->parse(data)["response"];
 
     return {
         std::string(server_object["key"]),

@@ -40,14 +40,12 @@ public:
         return src_.substr(first_, src_.size() - first_);
     }
 
-    friend constexpr bool
-        operator!=(const split_iterator& iterator, end_split_iterator) noexcept
+    friend constexpr bool operator!=(const split_iterator& iterator, end_split_iterator) noexcept
     {
         return !iterator.finished_;
     }
 
-    friend constexpr bool
-        operator!=(end_split_iterator, const split_iterator& iterator) noexcept
+    friend constexpr bool operator!=(end_split_iterator, const split_iterator& iterator) noexcept
     {
         return !iterator.finished_;
     }

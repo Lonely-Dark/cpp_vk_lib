@@ -23,9 +23,7 @@ struct result : protected std::pair<First, Second>
     {}
 
     result(First&& value, Second&& error) noexcept
-        : std::pair<First, Second>(
-              std::forward<First>(value),
-              std::forward<Second>(error))
+        : std::pair<First, Second>(std::forward<First>(value), std::forward<Second>(error))
     {}
 
     void set_error(Second&& error) noexcept

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>cpp_vk_lib: vk::exception::common_exception Class Reference</title>
+<title>cpp_vk_lib: vk::error::common_exception Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,7 +63,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>vk</b></li><li class="navelem"><b>exception</b></li><li class="navelem"><a class="el" href="classvk_1_1exception_1_1common__exception.html">common_exception</a></li>  </ul>
+<li class="navelem"><b>vk</b></li><li class="navelem"><b>error</b></li><li class="navelem"><a class="el" href="classvk_1_1exception_1_1common__exception.html">common_exception</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -73,14 +73,14 @@ $(function() {
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classvk_1_1exception_1_1common__exception-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">vk::exception::common_exception Class Reference</div></div>
+  <div class="headertitle"><div class="title">vk::error::common_exception Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>General exception of VK method classes.  
+<p>General error of VK method classes.
  <a href="classvk_1_1exception_1_1common__exception.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="exception_8hpp_source.html">exception.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="exception_8hpp_source.html">error.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -106,7 +106,7 @@ std::runtime_error&#160;</td><td class="memItemRight" valign="bottom"><b>error_<
 <tr class="separator:a5d4ac43a11a88a43930fc6fefa278121"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >General exception of VK method classes. </p>
+<div class="textblock"><p >General error of VK method classes. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="af360aa6a69f495448882a6a6f53b713a" name="af360aa6a69f495448882a6a6f53b713a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af360aa6a69f495448882a6a6f53b713a">&#9670;&nbsp;</a></span>create()</h2>
@@ -118,7 +118,7 @@ std::runtime_error&#160;</td><td class="memItemRight" valign="bottom"><b>error_<
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string vk::exception::common_exception::create </td>
+          <td class="memname">std::string vk::error::common_exception::create </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>id</em>, </td>
@@ -150,7 +150,7 @@ std::runtime_error&#160;</td><td class="memItemRight" valign="bottom"><b>error_<
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">id</td><td>should represent VK error code </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">exception_name</td><td>used in exception formatting </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">exception_name</td><td>used in error formatting </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">arg</td><td>error reason itself </td></tr>
   </table>
   </dd>

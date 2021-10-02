@@ -88,7 +88,7 @@ $(function() {
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keywordtype">void</span> send(</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    int64_t peer_id,</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    std::string_view text,</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    std::vector&lt;attachment::attachment_ptr_t&gt;&amp;&amp; list,</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">const</span> std::vector&lt;attachment::attachment_ptr_t&gt;&amp; list,</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">bool</span> mentions_flag = <span class="keyword">false</span>);</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keywordtype">void</span> send(</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    int64_t peer_id,</div>

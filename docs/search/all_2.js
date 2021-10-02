@@ -9,9 +9,9 @@ var searchData=
   ['clear_6',['clear',['../classvk_1_1error__code.html#a208459babc53bfadd79db16b6dcfb8c1',1,'vk::error_code']]],
   ['client_7',['client',['../classvk_1_1oauth_1_1client.html',1,'vk::oauth']]],
   ['common_8',['common',['../classvk_1_1event_1_1common.html',1,'vk::event']]],
-  ['common_5fexception_9',['common_exception',['../classvk_1_1exception_1_1common__exception.html',1,'vk::exception']]],
+  ['common_5fexception_9',['common_exception',['../classvk_1_1error_1_1common__exception.html',1,'vk::error']]],
   ['constructor_10',['constructor',['../classvk_1_1method_1_1constructor.html#a11da862a01e2a3d3764db8a81b49caa4',1,'vk::method::constructor::constructor()'],['../classvk_1_1method_1_1constructor.html#aa26191ccc36721b6f57c87344fa66f2d',1,'vk::method::constructor::constructor(std::string_view user_token)'],['../classvk_1_1method_1_1constructor.html',1,'vk::method::constructor&lt; ExecutionPolicy &gt;']]],
   ['constructor_3c_20policy_3a_3agroup_5fapi_20_3e_11',['constructor&lt; policy::group_api &gt;',['../classvk_1_1method_1_1constructor.html',1,'vk::method']]],
   ['cpp_5fvk_5flib_12',['cpp_vk_lib',['../index.html',1,'']]],
-  ['create_13',['create',['../classvk_1_1exception_1_1common__exception.html#af360aa6a69f495448882a6a6f53b713a',1,'vk::exception::common_exception']]]
+  ['create_13',['create',['../classvk_1_1error_1_1common__exception.html#ae78a4be18d9d9a05d3c3853e89264a13',1,'vk::error::common_exception']]]
 ];

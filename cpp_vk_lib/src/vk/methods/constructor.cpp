@@ -1,6 +1,5 @@
 #include "cpp_vk_lib/vk/methods/constructor.hpp"
 
-#include "cpp_vk_lib/runtime/misc/cppdefs.hpp"
 #include "cpp_vk_lib/runtime/net/network.hpp"
 #include "cpp_vk_lib/runtime/string_utils/string_utils.hpp"
 #include "cpp_vk_lib/vk/api_constants.hpp"
@@ -13,19 +12,49 @@ static std::string append_url(std::string_view method)
 }
 
 static std::string
-    call(bool output_needeed, std::string_view method, std::map<std::string, std::string>&& params)
+    call(bool output_needed, std::string_view method, std::map<std::string, std::string>&& params)
 {
-    auto response(runtime::network::request(output_needeed, append_url(method), std::move(params)));
+    auto response(runtime::network::request(output_needed, append_url(method), std::move(params)));
     if (response.error()) {
-        throw vk::exception::runtime_error(response.error(), "Failed to execute HTTP GET");
+        throw vk::error::runtime_error(response.error(), "Failed to execute HTTP GET");
     }
     return response.value();
 }
 
 namespace vk::method::policy {
 
+struct group_api
+{
+    static std::string execute(
+        bool output_needed,
+        std::map<std::string, std::string>&& params,
+        const std::string& method,
+        const std::string& access_token,
+        const std::string& user_token);
+};
+
+struct user_api
+{
+    static std::string execute(
+        bool output_needed,
+        std::map<std::string, std::string>&& params,
+        const std::string& method,
+        const std::string& access_token,
+        const std::string& user_token);
+};
+
+struct do_not_use_api_link
+{
+    static std::string execute(
+        bool output_needed,
+        std::map<std::string, std::string>&& params,
+        const std::string& method,
+        const std::string& access_token,
+        const std::string& user_token);
+};
+
 std::string group_api::execute(
-    bool output_needeed,
+    bool output_needed,
     std::map<std::string, std::string>&& params,
     const std::string& method,
     const std::string& access_token,
@@ -33,11 +62,11 @@ std::string group_api::execute(
 {
     (void)user_token;
     params.insert({{"access_token", access_token}, {"v", api_constants::api_version}});
-    return call(output_needeed, method, std::move(params));
+    return call(output_needed, method, std::move(params));
 }
 
 std::string user_api::execute(
-    bool output_needeed,
+    bool output_needed,
     std::map<std::string, std::string>&& params,
     const std::string& method,
     const std::string& access_token,
@@ -45,11 +74,11 @@ std::string user_api::execute(
 {
     (void)access_token;
     params.insert({{"access_token", user_token}, {"v", api_constants::api_version}});
-    return call(output_needeed, method, std::move(params));
+    return call(output_needed, method, std::move(params));
 }
 
 std::string do_not_use_api_link::execute(
-    bool output_needeed,
+    bool output_needed,
     std::map<std::string, std::string>&& params,
     const std::string& method,
     const std::string& access_token,
@@ -57,9 +86,9 @@ std::string do_not_use_api_link::execute(
 {
     (void)user_token;
     (void)access_token;
-    auto response(runtime::network::request(output_needeed, method, std::move(params)));
+    auto response(runtime::network::request(output_needed, method, std::move(params)));
     if (response.error()) {
-        throw vk::exception::runtime_error(response.error(), "Failed to execute HTTP GET");
+        throw vk::error::runtime_error(response.error(), "Failed to execute HTTP GET");
     }
     return response.value();
 }

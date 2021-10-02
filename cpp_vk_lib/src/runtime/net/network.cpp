@@ -112,7 +112,8 @@ static size_t libcurl_buffer_header_cb(char* contents, size_t size, size_t nmemb
     return 0;
 }();
 
-static std::string create_url(std::string_view host, std::map<std::string, std::string>&& body)
+template <typename Body>
+static std::string create_url(std::string_view host, Body&& body)
 {
     static constexpr size_t average_word_length = 20;
     const size_t estimated_params_length = average_word_length * body.size() * 2;
@@ -231,6 +232,18 @@ static runtime::result<std::string, size_t> libcurl_from_buffer_send(
 }
 
 namespace runtime {
+
+result<std::string, size_t> network::request(
+    bool output_needed,
+    std::string_view host,
+    const std::map<std::string, std::string>& target)
+{
+    const std::string url = create_url(host, target);
+    spdlog::trace("libcurl GET {}", url);
+    CURL* handle = libcurl_create_handle(url);
+    auto result = libcurl_to_string_recv(handle, output_needed);
+    return result;
+}
 
 result<std::string, size_t> network::request(
     bool output_needed,

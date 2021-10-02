@@ -27,6 +27,18 @@ static constexpr bool omit_data = false;
 result<std::string, size_t> request(
     bool output_needed,
     std::string_view host,
+    const std::map<std::string, std::string>& target);
+/*!
+ * \brief Perform HTTP POST request
+ *
+ * \param[in] host part of URL
+ * \param[in] target list of arguments
+ *            e.g {{"a", "1"}, {"b", "2"}} => a=1&b=2
+ * \return response output
+ */
+result<std::string, size_t> request(
+    bool output_needed,
+    std::string_view host,
     std::map<std::string, std::string>&& target = {});
 /*!
  * \brief Download from server to filename

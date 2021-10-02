@@ -4,12 +4,12 @@
 #include <cstddef>
 #include <unordered_map>
 
-namespace vk::exception {
+namespace vk::error {
 /*!
  * \return Detailed VK error description by its code
  */
-const char* translate_error(size_t error_code);
+const char* translate_to_string(size_t error_code);
 
-}// namespace vk::exception
+}// namespace vk::error
 
 #endif// VK_ERROR_TRANSLATE_ERROR_HPP

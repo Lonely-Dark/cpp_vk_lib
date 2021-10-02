@@ -2,7 +2,7 @@
 
 #include "cpp_vk_lib/runtime/string_utils/string_utils.hpp"
 
-namespace vk::exception {
+namespace vk::error {
 
 common_exception::common_exception(std::string_view what_arg)
     : error_(what_arg.data())
@@ -34,4 +34,4 @@ runtime_error::runtime_error(size_t id, const char* what_arg)
     : common_exception(create(id, "runtime_error", what_arg))
 {}
 
-}// namespace vk::exception
+}// namespace vk::error

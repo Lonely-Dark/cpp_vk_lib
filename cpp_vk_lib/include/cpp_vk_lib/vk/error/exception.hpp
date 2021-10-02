@@ -5,7 +5,7 @@
 #include <string>
 #include <string_view>
 
-namespace vk::exception {
+namespace vk::error {
 
 /*!
  * \brief General exception of VK method classes.
@@ -62,6 +62,6 @@ public:
     {}
 };
 
-}// namespace vk::exception
+}// namespace vk::error
 
 #endif// VK_ERROR_EXCEPTION_HPP

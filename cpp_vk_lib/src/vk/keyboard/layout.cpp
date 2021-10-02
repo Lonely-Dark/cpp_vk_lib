@@ -44,7 +44,7 @@ static std::string create_button(const std::any& button)
     if (auto result = create_impl<button::location>(button); !result.error()) {
         return result.value();
     }
-    throw exception::runtime_error(-1, "cannot create button: bad cast");
+    throw error::runtime_error(-1, "cannot create button: bad cast");
 }
 
 void layout::serialize()

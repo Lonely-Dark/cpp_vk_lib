@@ -87,7 +87,7 @@ std::vector<vk::attachment::attachment_ptr_t> wall_post_new::attachments() const
     if (has_attachments_) {
         return event::get_attachments(get_event()["attachments"]);
     } else {
-        throw exception::access_error(-1, "Attempting accessing empty attachment list.");
+        throw error::access_error(-1, "Attempting accessing empty attachment list.");
     }
 }
 
@@ -109,7 +109,7 @@ std::shared_ptr<wall_repost> wall_post_new::repost() const
 
         return repost;
     } else {
-        throw exception::access_error(-1, "Attempting accessing empty repost");
+        throw error::access_error(-1, "Attempting accessing empty repost");
     }
 }
 

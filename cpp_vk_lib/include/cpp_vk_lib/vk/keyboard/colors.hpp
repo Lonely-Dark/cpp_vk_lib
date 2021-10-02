@@ -23,12 +23,14 @@ enum class color : unsigned char
 
 constexpr const char* get_color(color c) noexcept
 {
+    // clang-format off
     switch (c) {
         case color::red: { return colors::red; }
         case color::green: { return colors::green; }
         case color::blue: { return colors::blue; }
         default: { return colors::white; }
     }
+    // clang-format on
 }
 
 }// namespace vk::keyboard

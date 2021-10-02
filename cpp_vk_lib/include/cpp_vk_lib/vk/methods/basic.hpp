@@ -16,7 +16,7 @@ void send(int64_t peer_id, std::string_view text, bool mentions_flag = false);
 void send(
     int64_t peer_id,
     std::string_view text,
-    std::vector<attachment::attachment_ptr_t>&& list,
+    const std::vector<attachment::attachment_ptr_t>& list,
     bool mentions_flag = false);
 void send(
     int64_t peer_id,

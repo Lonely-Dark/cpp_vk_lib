@@ -29,6 +29,11 @@ public:
      * Serialize and append attachment list to:
      * - attachments=(serialized output)
      */
+    message_constructor& attachments(const std::vector<attachment::attachment_ptr_t>& attachments);
+    /*!
+     * Serialize and append attachment list to:
+     * - attachments=(serialized output)
+     */
     message_constructor& attachments(std::vector<attachment::attachment_ptr_t>&& attachments);
     /*!
      * constructor<policy::group_api> proxy.

@@ -7,39 +7,15 @@ namespace vk::method::policy {
 /*!
  * \brief Policy that uses group_token. user_token ignored.
  */
-struct group_api
-{
-    static std::string execute(
-        bool output_needeed,
-        std::map<std::string, std::string>&& params,
-        const std::string& method,
-        const std::string& access_token,
-        const std::string& user_token);
-};
+struct group_api;
 /*!
  * \brief Policy that uses user_token. group_token ignored.
  */
-struct user_api
-{
-    static std::string execute(
-        bool output_needeed,
-        std::map<std::string, std::string>&& params,
-        const std::string& method,
-        const std::string& access_token,
-        const std::string& user_token);
-};
+struct user_api;
 /*!
  * \brief Raw policy. All tokens are ignored.
  */
-struct do_not_use_api_link
-{
-    static std::string execute(
-        bool output_needeed,
-        std::map<std::string, std::string>&& params,
-        const std::string& method,
-        const std::string& access_token,
-        const std::string& user_token);
-};
+struct do_not_use_api_link;
 
 }// namespace vk::method::policy
 

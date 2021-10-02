@@ -15,9 +15,8 @@ void messages::send(int64_t peer_id, std::string_view text, bool mentions_flag)
         text,
         mentions_flag);
 
-    message_constructor constructor(mentions_flag);
-
-    constructor.param("peer_id", std::to_string(peer_id))
+    message_constructor(mentions_flag)
+        .param("peer_id", std::to_string(peer_id))
         .param("message", text)
         .request_without_output();
 }
@@ -25,7 +24,7 @@ void messages::send(int64_t peer_id, std::string_view text, bool mentions_flag)
 void messages::send(
     int64_t peer_id,
     std::string_view text,
-    std::vector<attachment::attachment_ptr_t>&& list,
+    const std::vector<attachment::attachment_ptr_t>& list,
     bool mentions_flag)
 {
     spdlog::trace(
@@ -35,11 +34,10 @@ void messages::send(
         list.size(),
         mentions_flag);
 
-    message_constructor constructor(mentions_flag);
-
-    constructor.param("peer_id", std::to_string(peer_id))
+    message_constructor(mentions_flag)
+        .param("peer_id", std::to_string(peer_id))
         .param("message", text)
-        .attachments(std::move(list))
+        .attachments(list)
         .request_without_output();
 }
 
@@ -56,9 +54,8 @@ void messages::send(
         keyboard_layout,
         mentions_flag);
 
-    message_constructor constructor(mentions_flag);
-
-    constructor.param("peer_id", std::to_string(peer_id))
+    message_constructor(mentions_flag)
+        .param("peer_id", std::to_string(peer_id))
         .param("message", text)
         .param("keyboard", keyboard_layout)
         .request_without_output();
@@ -74,7 +71,7 @@ int64_t groups::get_by_id(error_code& errc)
     const simdjson::dom::object parsed = parser.parse(response);
 
     if (parsed.begin().key() == "error") {
-        errc.assign(exception::translate_error(parsed["error"]["error_code"].get_int64()));
+        errc.assign(error::translate_to_string(parsed["error"]["error_code"].get_int64()));
         return -1;
     }
 

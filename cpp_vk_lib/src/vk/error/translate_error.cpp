@@ -2,7 +2,7 @@
 
 #include <unordered_map>
 
-namespace vk::exception {
+namespace vk::error {
 
 namespace {
 
@@ -97,11 +97,11 @@ static const std::unordered_map<size_t, error> errors = {
     {3610, {"User is deactivated", error_type::access_error}},
     {3611, {"Service is deactivated for user", error_type::access_error}}};
 
-}// namespace vk::exception
+}// namespace vk::error
 
 namespace vk {
 
-const char* exception::translate_error(size_t error_code)
+const char* error::translate_to_string(size_t error_code)
 {
     return errors.at(error_code).message;
 }

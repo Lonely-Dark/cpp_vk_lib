@@ -22,19 +22,19 @@ client::client(
 {
     switch (client_type_) {
         case target_client::android: {
-          target_client_id_ = api_constants::android_app_client_id;
-          target_client_secret_ = api_constants::android_app_client_secret;
-          break;
+            target_client_id_ = api_constants::android_app_client_id;
+            target_client_secret_ = api_constants::android_app_client_secret;
+            break;
         }
         case target_client::iphone: {
-          target_client_id_ = api_constants::iphone_app_client_id;
-          target_client_secret_ = api_constants::iphone_app_client_secret;
-          break;
+            target_client_id_ = api_constants::iphone_app_client_id;
+            target_client_secret_ = api_constants::iphone_app_client_secret;
+            break;
         }
         case target_client::windows: {
-          target_client_id_ = api_constants::windows_app_client_id;
-          target_client_secret_ = api_constants::windows_app_client_secret;
-          break;
+            target_client_id_ = api_constants::windows_app_client_id;
+            target_client_secret_ = api_constants::windows_app_client_secret;
+            break;
         }
     }
     pull();
@@ -64,7 +64,7 @@ void client::pull()
 
     if (error_returned(response, "invalid_client") || error_returned(response, "invalid_request") ||
         error_returned(response, "invalid_grant")) {
-        throw exception::access_error(-1, response["error_description"].get_c_str().take_value());
+        throw error::access_error(-1, response["error_description"].get_c_str().take_value());
     }
 
     pulled_token_ = response["access_token"].get_c_str().take_value();

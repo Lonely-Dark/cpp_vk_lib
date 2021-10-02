@@ -163,7 +163,7 @@ std::any message_new::action() const
     if (has_action_) {
         return action_;
     } else {
-        throw exception::access_error(-1, "attempting accessing empty action");
+        throw error::access_error(-1, "attempting accessing empty action");
     }
 }
 
@@ -172,7 +172,7 @@ std::vector<attachment::attachment_ptr_t> message_new::attachments() const
     if (has_attachments_) {
         return event::get_attachments(get_event()["attachments"].get_array());
     } else {
-        throw exception::access_error(-1, "attempting accessing empty attachment list");
+        throw error::access_error(-1, "attempting accessing empty attachment list");
     }
 }
 
@@ -187,7 +187,7 @@ std::vector<std::unique_ptr<message_new>> message_new::fwd_messages() const
 
         return fwd_messages;
     } else {
-        throw exception::access_error(-1, "attempting accessing empty forward messages list");
+        throw error::access_error(-1, "attempting accessing empty forward messages list");
     }
 }
 
@@ -196,7 +196,7 @@ std::shared_ptr<message_new> message_new::reply() const
     if (has_reply_) {
         return std::make_unique<message_new>(get_event()["reply_message"].get_object());
     } else {
-        throw exception::access_error(-1, "attempting accessing empty reply");
+        throw error::access_error(-1, "attempting accessing empty reply");
     }
 }
 

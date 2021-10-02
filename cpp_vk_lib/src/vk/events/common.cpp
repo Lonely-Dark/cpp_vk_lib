@@ -27,7 +27,7 @@ common::common(std::string_view ts, simdjson::dom::object event)
         underlying_event_type_ = event::type::message_new;
     } else {
         const std::string errmsg = "unknown event type: " + std::string(type);
-        throw exception::runtime_error(-1, errmsg.c_str());
+        throw error::runtime_error(-1, errmsg.c_str());
     }
 }
 

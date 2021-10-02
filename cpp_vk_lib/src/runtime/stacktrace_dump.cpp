@@ -65,7 +65,7 @@ static void android_stacktrace_dump_implementation()
 #elif defined(__FreeBSD__) || defined(__linux__) || defined(__APPLE__)
 static void unix_stacktrace_dump_implementation()
 {
-  // clang-format off
+    // clang-format off
   void* buffer[/*max_records=*/25];
   int addresses_got = backtrace(buffer, sizeof(buffer) / sizeof(void*));
   if (addresses_got == 0) {

@@ -19,7 +19,7 @@ long_poll::long_poll(asio::io_context& io_context)
 {
     group_id_ = method::groups::get_by_id(errc_);
     if (errc_) {
-        throw exception::access_error(-1, "error retrieve group id");
+        throw error::access_error(-1, "error retrieve group id");
     }
     spdlog::info("long poll group: {}", group_id_);
 }

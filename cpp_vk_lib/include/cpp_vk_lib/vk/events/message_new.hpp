@@ -28,7 +28,7 @@ public:
     /*!
      * \throws vk::exception::access_error if reply pointer is not set
      */
-    std::shared_ptr<message_new> reply() const;
+    std::unique_ptr<message_new> reply() const;
     /*!
      * \throws vk::exception::access_error if forward messages vector is empty
      */
@@ -59,7 +59,7 @@ private:
     void try_get_actions();
     simdjson::dom::object& get_event() const;
 
-    std::shared_ptr<simdjson::dom::object> event_json_;
+    std::unique_ptr<simdjson::dom::object> event_json_;
     std::any action_;
     bool has_action_ = false;
     bool has_reply_ = false;

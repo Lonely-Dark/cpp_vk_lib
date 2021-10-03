@@ -33,7 +33,7 @@ public:
     /*!
      * \throws vk::exception::access_error if repost doesn't exist
      */
-    std::shared_ptr<wall_repost> repost() const;
+    std::unique_ptr<wall_repost> repost() const;
     /*!
      * throws vk::exception::access_error if no attachments were provided
      */
@@ -42,9 +42,9 @@ public:
     friend std::ostream& operator<<(std::ostream&, const wall_post_new&);
 
 private:
-    simdjson::dom::object& get_event() const;
+    const simdjson::dom::object& get_event() const;
 
-    std::shared_ptr<simdjson::dom::object> event_json_;
+    std::unique_ptr<simdjson::dom::object> event_json_;
     bool has_attachments_ = false;
     bool has_repost_ = false;
 };

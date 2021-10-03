@@ -9,7 +9,7 @@ namespace vk::event {
 wall_reply_new::~wall_reply_new() = default;
 
 wall_reply_new::wall_reply_new(simdjson::dom::object event)
-    : event_json_(std::make_shared<simdjson::dom::object>(event))
+    : event_json_(std::make_unique<simdjson::dom::object>(event))
 {
     if (get_event()["attachments"].is_array() &&
         get_event()["attachments"].get_array().size() > 0) {
@@ -24,7 +24,7 @@ wall_reply_new::wall_reply_new(simdjson::dom::object event)
     }
 }
 
-simdjson::dom::object& wall_reply_new::get_event() const
+const simdjson::dom::object& wall_reply_new::get_event() const
 {
     return *event_json_;
 }

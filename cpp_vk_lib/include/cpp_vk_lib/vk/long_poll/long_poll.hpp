@@ -50,7 +50,7 @@ public:
     template <typename Executor>
     void on_event(event::type, Executor);
     /*!
-     * Execute all existing tasks.
+     * Start infinite event loop after setup events event handlers using long_poll::on_event.
      *
      * After all tasks are completed, the queue returns to its original state.
      */

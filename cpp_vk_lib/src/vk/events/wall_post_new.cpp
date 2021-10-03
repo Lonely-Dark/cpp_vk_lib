@@ -9,7 +9,7 @@ namespace vk::event {
 wall_post_new::~wall_post_new() = default;
 
 wall_post_new::wall_post_new(simdjson::dom::object event)
-    : event_json_(std::make_shared<simdjson::dom::object>(event))
+    : event_json_(std::make_unique<simdjson::dom::object>(event))
 {
     if (get_event()["attachments"].is_array()) {
         has_attachments_ = true;
@@ -77,7 +77,7 @@ bool wall_post_new::has_repost() const noexcept
     return has_repost_;
 }
 
-simdjson::dom::object& wall_post_new::get_event() const
+const simdjson::dom::object& wall_post_new::get_event() const
 {
     return *event_json_;
 }
@@ -91,12 +91,12 @@ std::vector<vk::attachment::attachment_ptr_t> wall_post_new::attachments() const
     }
 }
 
-std::shared_ptr<wall_repost> wall_post_new::repost() const
+std::unique_ptr<wall_repost> wall_post_new::repost() const
 {
     simdjson::dom::object repost_json = get_event()["copy_history"].get_array().at(0).get_object();
 
     if (has_repost_) {
-        std::shared_ptr<wall_repost> repost = std::make_shared<wall_repost>(
+        std::unique_ptr<wall_repost> repost = std::make_unique<wall_repost>(
             repost_json["id"],
             repost_json["from_id"],
             repost_json["owner_id"],

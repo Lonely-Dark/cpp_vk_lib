@@ -12,10 +12,10 @@ common::~common() = default;
 common::common(std::string_view ts, simdjson::dom::object event)
     : ts_(ts)
     , underlying_event_type_()
-    , event_(std::make_shared<simdjson::dom::object>(event))
+    , event_json_(std::make_unique<simdjson::dom::object>(event))
 {
-    std::string_view type((*event_)["type"]);
-    if (type == "message_new") {
+    std::string_view type(get_event()["type"]);
+    if (type == "message_new" || type == "message_reply") {
         underlying_event_type_ = event::type::message_new;
     } else if (type == "wall_post_new") {
         underlying_event_type_ = event::type::wall_post_new;
@@ -23,17 +23,15 @@ common::common(std::string_view ts, simdjson::dom::object event)
         underlying_event_type_ = event::type::wall_reply_new;
     } else if (type == "wall_repost") {
         underlying_event_type_ = event::type::wall_repost;
-    } else if (type == "message_reply") {
-        underlying_event_type_ = event::type::message_new;
     } else {
         const std::string errmsg = "unknown event type: " + std::string(type);
         throw error::runtime_error(-1, errmsg.c_str());
     }
 }
 
-simdjson::dom::object& common::get_event() const noexcept
+const simdjson::dom::object& common::get_event() const noexcept
 {
-    return *event_;
+    return *event_json_;
 }
 
 bool common::on_type(event::type type) const noexcept
@@ -67,12 +65,12 @@ event::type common::type() const noexcept
     return underlying_event_type_;
 }
 
-std::string common::ts() const noexcept
+const std::string& common::ts() const noexcept
 {
     return ts_;
 }
 
-std::string common::dump() const noexcept
+std::string common::dump() const
 {
     return simdjson::to_string(get_event());
 }

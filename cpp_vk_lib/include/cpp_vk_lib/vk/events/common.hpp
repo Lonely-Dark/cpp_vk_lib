@@ -20,34 +20,31 @@ namespace vk::event {
 /*!
  * Temporary update container used to store any event represented
  * in raw JSON. Use the appropriate functions to get needed event
- * types
+ * types.
  */
 class common
 {
 public:
     common(std::string_view ts, simdjson::dom::object event);
+    common(common&&) = default;
     ~common();
 
     event::type type() const noexcept;
-    std::string ts() const noexcept;
-    std::string dump() const noexcept;
+    const std::string& ts() const noexcept;
+    std::string dump() const;
 
     bool on_type(event::type) const noexcept;
-
-    //    explicit operator message_new() const;
-    //    explicit operator wall_post_new() const;
-    //    explicit operator wall_reply_new() const;
 
     message_new get_message_new() const;
     wall_post_new get_wall_post_new() const;
     wall_reply_new get_wall_reply_new() const;
 
 private:
-    simdjson::dom::object& get_event() const noexcept;
+    const simdjson::dom::object& get_event() const noexcept;
 
     std::string ts_;
     event::type underlying_event_type_;
-    std::shared_ptr<simdjson::dom::object> event_;
+    std::unique_ptr<simdjson::dom::object> event_json_;
 };
 
 }// namespace vk::event

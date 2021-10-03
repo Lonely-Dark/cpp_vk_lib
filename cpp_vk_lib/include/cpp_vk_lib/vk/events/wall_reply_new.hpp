@@ -33,9 +33,9 @@ public:
     std::vector<attachment::attachment_ptr_t> attachments() const;
 
 private:
-    simdjson::dom::object& get_event() const;
+    const simdjson::dom::object& get_event() const;
 
-    std::shared_ptr<simdjson::dom::object> event_json_;
+    std::unique_ptr<simdjson::dom::object> event_json_;
     bool has_attachments_ = false;
 };
 

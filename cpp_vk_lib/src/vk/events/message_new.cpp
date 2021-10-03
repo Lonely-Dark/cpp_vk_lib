@@ -12,7 +12,7 @@ namespace vk::event {
 message_new::~message_new() = default;
 
 message_new::message_new(simdjson::dom::object event)
-    : event_json_(std::make_shared<simdjson::dom::object>(event))
+    : event_json_(std::make_unique<simdjson::dom::object>(event))
     , action_()
 {
     if (get_event()["reply_message"].is_object()) {
@@ -191,7 +191,7 @@ std::vector<std::unique_ptr<message_new>> message_new::fwd_messages() const
     }
 }
 
-std::shared_ptr<message_new> message_new::reply() const
+std::unique_ptr<message_new> message_new::reply() const
 {
     if (has_reply_) {
         return std::make_unique<message_new>(get_event()["reply_message"].get_object());

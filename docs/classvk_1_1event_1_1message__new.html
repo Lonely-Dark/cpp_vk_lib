@@ -84,8 +84,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab11fbb9f3d29750c21f0053c16214738"><td class="memItemLeft" align="right" valign="top"><a id="ab11fbb9f3d29750c21f0053c16214738" name="ab11fbb9f3d29750c21f0053c16214738"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>message_new</b> (simdjson::dom::object event)</td></tr>
 <tr class="separator:ab11fbb9f3d29750c21f0053c16214738"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf74ae64132eb2599578a97dcd12353e"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classvk_1_1event_1_1message__new.html">message_new</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1event_1_1message__new.html#adf74ae64132eb2599578a97dcd12353e">reply</a> () const</td></tr>
-<tr class="separator:adf74ae64132eb2599578a97dcd12353e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a615c3be78b6414e6b70f8d7d52e43369"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classvk_1_1event_1_1message__new.html">message_new</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1event_1_1message__new.html#a615c3be78b6414e6b70f8d7d52e43369">reply</a> () const</td></tr>
+<tr class="separator:a615c3be78b6414e6b70f8d7d52e43369"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5bba5cd48552ff332bcfccff0822b26"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::unique_ptr&lt; <a class="el" href="classvk_1_1event_1_1message__new.html">message_new</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1event_1_1message__new.html#ac5bba5cd48552ff332bcfccff0822b26">fwd_messages</a> () const</td></tr>
 <tr class="separator:ac5bba5cd48552ff332bcfccff0822b26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ca8fb7f5733cbafe2e08a294c50c52e"><td class="memItemLeft" align="right" valign="top">std::any&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1event_1_1message__new.html#a1ca8fb7f5733cbafe2e08a294c50c52e">action</a> () const</td></tr>
@@ -128,9 +128,9 @@ simdjson::dom::object &amp;&#160;</td><td class="memItemRight" valign="bottom"><
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a79e60fe257c9c0687408684587c75f2f"><td class="memItemLeft" align="right" valign="top"><a id="a79e60fe257c9c0687408684587c75f2f" name="a79e60fe257c9c0687408684587c75f2f"></a>
-std::shared_ptr&lt; simdjson::dom::object &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>event_json_</b></td></tr>
-<tr class="separator:a79e60fe257c9c0687408684587c75f2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d7f1a5e7b2f92df7be9de7e5bc3f1d9"><td class="memItemLeft" align="right" valign="top"><a id="a2d7f1a5e7b2f92df7be9de7e5bc3f1d9" name="a2d7f1a5e7b2f92df7be9de7e5bc3f1d9"></a>
+std::unique_ptr&lt; simdjson::dom::object &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>event_json_</b></td></tr>
+<tr class="separator:a2d7f1a5e7b2f92df7be9de7e5bc3f1d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade7d2c0be5607170d56bef86460c55a8"><td class="memItemLeft" align="right" valign="top"><a id="ade7d2c0be5607170d56bef86460c55a8" name="ade7d2c0be5607170d56bef86460c55a8"></a>
 std::any&#160;</td><td class="memItemRight" valign="bottom"><b>action_</b></td></tr>
 <tr class="separator:ade7d2c0be5607170d56bef86460c55a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -226,14 +226,14 @@ std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operato
 
 </div>
 </div>
-<a id="adf74ae64132eb2599578a97dcd12353e" name="adf74ae64132eb2599578a97dcd12353e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf74ae64132eb2599578a97dcd12353e">&#9670;&nbsp;</a></span>reply()</h2>
+<a id="a615c3be78b6414e6b70f8d7d52e43369" name="a615c3be78b6414e6b70f8d7d52e43369"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a615c3be78b6414e6b70f8d7d52e43369">&#9670;&nbsp;</a></span>reply()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt; <a class="el" href="classvk_1_1event_1_1message__new.html">message_new</a> &gt; vk::event::message_new::reply </td>
+          <td class="memname">std::unique_ptr&lt; <a class="el" href="classvk_1_1event_1_1message__new.html">message_new</a> &gt; vk::event::message_new::reply </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>

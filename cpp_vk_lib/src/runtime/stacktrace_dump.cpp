@@ -66,48 +66,48 @@ static void android_stacktrace_dump_implementation()
 static void unix_stacktrace_dump_implementation()
 {
     // clang-format off
-  void* buffer[/*max_records=*/25];
-  int addresses_got = backtrace(buffer, sizeof(buffer) / sizeof(void*));
-  if (addresses_got == 0) {
-      spdlog::critical("  empty stack trace, exiting...");
-      return;
-  }
-  char** stack_dump = backtrace_symbols(buffer, addresses_got);
-  char* demangled_name = static_cast<char*>(malloc(256));
-  for (int i = 0; i < addresses_got; ++i) {
-    char *mangled_name { nullptr },
-         *begin_offset { nullptr },
-         *end_offset { nullptr };
-    for (char* symbol = stack_dump[i]; *symbol; ++symbol) {
-        int need_exit = 0;
-        switch (*symbol) {
-            case '(': { mangled_name = symbol; break; }
-            case '+': { begin_offset = symbol; break; }
-            case ')': { end_offset = symbol; need_exit = 1; break; }
-            default: { break; }
-        }
-        if (need_exit == 1) { break; }
+    void* buffer[/*max_records=*/25];
+    int addresses_got = backtrace(buffer, sizeof(buffer) / sizeof(void*));
+    if (addresses_got == 0) {
+        spdlog::critical("  empty stack trace, exiting...");
+        return;
     }
-    if (mangled_name && begin_offset && end_offset && mangled_name < begin_offset) {
-        *(mangled_name++) = '\0';
-        *(begin_offset++) = '\0';
-        *end_offset = '\0';
-        int status = 0;
-        size_t max_length = 256;
-        char* demangled = abi::__cxa_demangle(mangled_name, demangled_name, &max_length, &status);
-        if (status == 0) {
-            demangled_name = demangled;
-            spdlog::critical("  {}: {}+{}", stack_dump[i], demangled_name, begin_offset);
-        } else {
-            spdlog::critical("  {}: {}()+{}", stack_dump[i], mangled_name, begin_offset);
-        }
-    } else {
-        spdlog::critical("  {}", stack_dump[i]);
+    char** stack_dump = backtrace_symbols(buffer, addresses_got);
+    char* demangled_name = static_cast<char*>(malloc(256));
+    for (int i = 0; i < addresses_got; ++i) {
+      char *mangled_name { nullptr },
+           *begin_offset { nullptr },
+           *end_offset { nullptr };
+      for (char* symbol = stack_dump[i]; *symbol; ++symbol) {
+          int need_exit = 0;
+          switch (*symbol) {
+              case '(': { mangled_name = symbol; break; }
+              case '+': { begin_offset = symbol; break; }
+              case ')': { end_offset = symbol; need_exit = 1; break; }
+              default: { break; }
+          }
+          if (need_exit == 1) { break; }
+      }
+      if (mangled_name && begin_offset && end_offset && mangled_name < begin_offset) {
+          *(mangled_name++) = '\0';
+          *(begin_offset++) = '\0';
+          *end_offset = '\0';
+          int status = 0;
+          size_t max_length = 256;
+          char* demangled = abi::__cxa_demangle(mangled_name, demangled_name, &max_length, &status);
+          if (status == 0) {
+              demangled_name = demangled;
+              spdlog::critical("  {}: {}+{}", stack_dump[i], demangled_name, begin_offset);
+          } else {
+              spdlog::critical("  {}: {}()+{}", stack_dump[i], mangled_name, begin_offset);
+          }
+      } else {
+          spdlog::critical("  {}", stack_dump[i]);
+      }
     }
-  }
-  free(demangled_name);
-  free(stack_dump);
-  // clang-format off
+    free(demangled_name);
+    free(stack_dump);
+    // clang-format off
 }
 #else
 static void unknown_platform_stacktrace_dump_implementation()

@@ -46,23 +46,6 @@ TEST(string_utils, ascii_to_upper)
     ASSERT_EQ(util::ascii_to_upper("{!}"), "{!}");
 }
 
-TEST(string_utils, format)
-{
-    ASSERT_EQ(util::format("text"), "text");
-    ASSERT_EQ(util::format("text: {}", 1), "text: 1");
-    ASSERT_EQ(util::format("text: {}", 1ULL), "text: 1");
-    ASSERT_EQ(util::format("text: {}", "1"), "text: 1");
-
-    ASSERT_EQ(util::format("arg1: {}, arg2: {}, arg3: {}", "1", "2", "3"), "arg1: 1, arg2: 2, arg3: 3");
-    ASSERT_EQ(util::format("arg1: {}, arg2: {}, arg3: {}", 1, 2, 3), "arg1: 1, arg2: 2, arg3: 3");
-    ASSERT_EQ(util::format("arg1: {}, arg2: {}, arg3: {}", 1ULL, 2ULL, 3ULL), "arg1: 1, arg2: 2, arg3: 3");
-
-    const std::string_view text = "1";
-
-    ASSERT_EQ(util::format("text: {}", text), "text: 1");
-    ASSERT_EQ(util::format("arg1: {}, arg2: {}, arg3: {}", text, text, text), "arg1: 1, arg2: 1, arg3: 1");
-}
-
 TEST(string_utils, join_by_string)
 {
     ASSERT_EQ(util::join({1, 2, 3}, "__"), "1__2__3");
@@ -239,7 +222,7 @@ TEST(string_utils, format_speed_test)
 {
     std::cout << "             format 60 MiB of data" << std::endl;
     for (size_t i = 0; i < 5'000'000; ++i) {
-        util::format("params={}{}{}{}{}", "a", "b", "c", "d", "e");
+        fmt::format("params={}{}{}{}{}", "a", "b", "c", "d", "e");
     }
 }
 

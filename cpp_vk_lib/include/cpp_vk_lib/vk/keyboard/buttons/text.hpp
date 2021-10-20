@@ -1,8 +1,9 @@
 #ifndef VK_KEYBOARD_BUTTONS_TEXT_HPP
 #define VK_KEYBOARD_BUTTONS_TEXT_HPP
 
-#include "cpp_vk_lib/runtime/string_utils/string_utils.hpp"
 #include "cpp_vk_lib/vk/keyboard/colors.hpp"
+#include "fmt/format.h"
+#include "fmt/ostream.h"
 
 namespace vk::keyboard::button {
 
@@ -17,8 +18,8 @@ public:
     std::string serialize() const
     {
         const char* color = keyboard::get_color(selected_color_);
-        return runtime::string_utils::format(
-            R"__({"action":{"type":"text","payload":"{\"button\":\"1\"}","label":"{}"},"color":"{}"})__",
+        return fmt::format(
+            R"__({{"action":{{"type":"text","payload":"{{\"button\":\"1\"}}","label":"{}"}},"color":"{}"}})__",
             payload_data_,
             color);
     }

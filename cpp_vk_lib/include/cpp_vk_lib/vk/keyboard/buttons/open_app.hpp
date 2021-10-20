@@ -1,7 +1,7 @@
 ﻿#ifndef VK_KEYBOARD_BUTTONS_OPEN_APP_HPP
 #define VK_KEYBOARD_BUTTONS_OPEN_APP_HPP
 
-#include "cpp_vk_lib/runtime/string_utils/string_utils.hpp"
+#include "fmt/format.h"
 
 namespace vk::keyboard::button {
 
@@ -17,8 +17,8 @@ public:
 
     std::string serialize() const
     {
-        return runtime::string_utils::format(
-            R"__({"action":{"type":"open_app","app_id":{},"owner_id":{},"hash":"{}","label":"{}"}})__",
+        return fmt::format(
+            R"__({{"action":{{"type":"open_app","app_id":{},"owner_id":{},"hash":"{}","label":"{}"}}}})__",
             app_id_,
             owner_id_,
             hash_,

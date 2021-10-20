@@ -1,7 +1,7 @@
 #ifndef VK_KEYBOARD_BUTTONS_VK_PAY_HPP
 #define VK_KEYBOARD_BUTTONS_VK_PAY_HPP
 
-#include "cpp_vk_lib/runtime/string_utils/string_utils.hpp"
+#include "fmt/format.h"
 
 namespace vk::keyboard::button {
 
@@ -14,8 +14,8 @@ public:
 
     std::string serialize() const
     {
-        return runtime::string_utils::format(
-            R"__({"action":{"type":"vkpay","hash":"{}"}})__",
+        return fmt::format(
+            R"__({{"action":{{"type":"vkpay","hash":"{}"}}}})__",
             hash_);
     }
 

@@ -1,6 +1,6 @@
 #include "cpp_vk_lib/vk/error/exception.hpp"
 
-#include "cpp_vk_lib/runtime/string_utils/string_utils.hpp"
+#include "fmt/format.h"
 
 namespace vk::error {
 
@@ -15,7 +15,7 @@ const char* common_exception::what() const noexcept
 
 std::string common_exception::create(size_t id, const char* error_name, const char* arg)
 {
-    return runtime::string_utils::format("[vk.exception.{}.{}]: {}", error_name, id, arg);
+    return fmt::format("[vk.exception.{}.{}]: {}", error_name, id, arg);
 }
 
 upload_error::upload_error(size_t id, const char* what_arg)

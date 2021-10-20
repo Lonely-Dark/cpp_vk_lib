@@ -1,7 +1,7 @@
 #ifndef VK_KEYBOARD_BUTTONS_LOCATION_HPP
 #define VK_KEYBOARD_BUTTONS_LOCATION_HPP
 
-#include <string>
+#include "fmt/format.h"
 
 namespace vk::keyboard::button {
 
@@ -10,7 +10,8 @@ class location
 public:
     std::string serialize() const noexcept
     {
-        return R"__({"action":{"type":"location","payload":"{\"button\":\"1\"}"}})__";
+        /// Escape '{' and '}' like other button payloads.
+        return fmt::format(R"__({{"action":{{"type":"location","payload":"{{\"button\":\"1\"}}"}}}})__");
     }
 };
 

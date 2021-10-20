@@ -1,14 +1,15 @@
 #include "cpp_vk_lib/vk/methods/constructor.hpp"
 
 #include "cpp_vk_lib/runtime/net/network.hpp"
-#include "cpp_vk_lib/runtime/string_utils/string_utils.hpp"
 #include "cpp_vk_lib/vk/api_constants.hpp"
 #include "cpp_vk_lib/vk/config/config.hpp"
 #include "cpp_vk_lib/vk/error/exception.hpp"
 
+#include "fmt/format.h"
+
 static std::string append_url(std::string_view method)
 {
-    return runtime::string_utils::format("https://api.vk.com/method/{}?", method);
+    return fmt::format("https://api.vk.com/method/{}?", method);
 }
 
 static std::string

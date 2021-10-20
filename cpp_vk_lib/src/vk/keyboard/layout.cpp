@@ -1,7 +1,9 @@
 #include "cpp_vk_lib/vk/keyboard/layout.hpp"
 
+#include "cpp_vk_lib/runtime/string_utils/implementation/join.hpp"
 #include "cpp_vk_lib/runtime/result.hpp"
 #include "cpp_vk_lib/vk/error/exception.hpp"
+
 #include "spdlog/spdlog.h"
 
 #include <algorithm>
@@ -24,8 +26,8 @@ static VK_REALLY_INLINE runtime::result<std::string, int>
     create_impl(const std::any& button) noexcept
 {
     try {
-        return std::any_cast<T>(button).serialize();
-    } catch (std::bad_any_cast&) {
+        return std::any_cast<std::decay_t<T>>(button).serialize();
+    } catch (...) {
         return runtime::result(std::string(), -1);
     }
 }

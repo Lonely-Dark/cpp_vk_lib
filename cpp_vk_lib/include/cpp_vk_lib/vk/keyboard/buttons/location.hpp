@@ -11,7 +11,8 @@ public:
     std::string serialize() const noexcept
     {
         /// Escape '{' and '}' like other button payloads.
-        return fmt::format(R"__({{"action":{{"type":"location","payload":"{{\"button\":\"1\"}}"}}}})__");
+        return fmt::format(
+            R"__({{"action":{{"type":"location","payload":"{{\"button\":\"1\"}}"}}}})__");
     }
 };
 

@@ -14,9 +14,7 @@ public:
 
     std::string serialize() const
     {
-        return fmt::format(
-            R"__({{"action":{{"type":"vkpay","hash":"{}"}}}})__",
-            hash_);
+        return fmt::format(R"__({{"action":{{"type":"vkpay","hash":"{}"}}}})__", hash_);
     }
 
 private:

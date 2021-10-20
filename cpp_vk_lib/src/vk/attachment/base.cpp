@@ -1,5 +1,4 @@
 #include "cpp_vk_lib/vk/attachment/attachment.hpp"
-
 #include "spdlog/fmt/fmt.h"
 
 namespace vk::attachment {

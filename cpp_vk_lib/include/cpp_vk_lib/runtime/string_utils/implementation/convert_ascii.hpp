@@ -3,35 +3,34 @@
 
 #include <codecvt>
 #include <locale>
+#include <numeric>
 
 namespace runtime::string_utils {
 
 inline std::string ascii_to_lower(std::string_view data)
 {
-    std::string converted;
-    converted.reserve(data.length());
-    for (char c : data) {
-        if (c <= 'Z' && c >= 'A') {
-            converted.push_back(char(c - ('Z' - 'z')));
-        } else {
-            converted.push_back(c);
-        }
-    }
-    return converted;
+    // clang-format off
+    return std::accumulate(data.begin(), data.end(), std::string(),
+        [length = data.length()](std::string& string, char c) {
+            if (string.empty()) {
+                string.reserve(length);
+            }
+            return string += static_cast<char>(std::tolower(c));
+        });
+    // clang-format on
 }
 
 inline std::string ascii_to_upper(std::string_view data)
 {
-    std::string converted;
-    converted.reserve(data.length());
-    for (char c : data) {
-        if (c <= 'z' && c >= 'a') {
-            converted.push_back(char(c + ('Z' - 'z')));
-        } else {
-            converted.push_back(c);
-        }
-    }
-    return converted;
+    // clang-format off
+    return std::accumulate( data.begin(), data.end(), std::string(),
+        [length = data.length()](std::string& string, char c) {
+            if (string.empty()) {
+                string.reserve(length);
+            }
+            return string += static_cast<char>(std::toupper(c));
+        });
+    // clang-format on
 }
 
 }// namespace runtime::string_utils

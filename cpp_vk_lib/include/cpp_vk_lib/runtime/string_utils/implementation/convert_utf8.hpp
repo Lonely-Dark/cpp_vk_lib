@@ -16,7 +16,7 @@ static std::string utf8_create(std::string_view data, ExecutionPolicy converter)
 }
 
 namespace runtime::string_utils::internal {
-static const std::locale utf8("en_US.UTF-8");
+static const std::locale utf_8_locale("en_US.UTF-8");
 }
 
 namespace runtime::string_utils {
@@ -24,14 +24,14 @@ namespace runtime::string_utils {
 inline std::string utf8_to_upper(std::string_view data)
 {
     return utf8_create(data, [](auto& c) {
-        return std::toupper(c, internal::utf8);
+        return std::toupper(c, internal::utf_8_locale);
     });
 }
 
 inline std::string utf8_to_lower(std::string_view data)
 {
     return utf8_create(data, [](auto& c) {
-        return std::tolower(c, internal::utf8);
+        return std::tolower(c, internal::utf_8_locale);
     });
 }
 

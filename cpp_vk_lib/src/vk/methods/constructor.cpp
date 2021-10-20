@@ -5,7 +5,7 @@
 #include "cpp_vk_lib/vk/config/config.hpp"
 #include "cpp_vk_lib/vk/error/exception.hpp"
 
-#include "fmt/format.h"
+#include "spdlog/fmt/fmt.h"
 
 static std::string append_url(std::string_view method)
 {

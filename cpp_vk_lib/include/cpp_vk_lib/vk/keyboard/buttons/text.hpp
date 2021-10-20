@@ -2,8 +2,8 @@
 #define VK_KEYBOARD_BUTTONS_TEXT_HPP
 
 #include "cpp_vk_lib/vk/keyboard/colors.hpp"
-#include "fmt/format.h"
-#include "fmt/ostream.h"
+#include "spdlog/fmt/fmt.h"
+#include "spdlog/fmt/ostr.h"
 
 namespace vk::keyboard::button {
 

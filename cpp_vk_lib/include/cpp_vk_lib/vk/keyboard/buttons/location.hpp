@@ -1,7 +1,7 @@
 #ifndef VK_KEYBOARD_BUTTONS_LOCATION_HPP
 #define VK_KEYBOARD_BUTTONS_LOCATION_HPP
 
-#include "fmt/format.h"
+#include "spdlog/fmt/fmt.h"
 
 namespace vk::keyboard::button {
 

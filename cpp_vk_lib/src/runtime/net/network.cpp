@@ -115,7 +115,7 @@ static size_t libcurl_buffer_header_cb(char* contents, size_t size, size_t nmemb
 template <typename Body>
 static std::string create_url(std::string_view host, Body&& body)
 {
-    static constexpr size_t average_word_length = 20;
+    static size_t average_word_length = 20;
     const size_t estimated_params_length = average_word_length * body.size() * 2;
     std::string result;
     result.reserve(host.size() + estimated_params_length);

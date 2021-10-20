@@ -8,15 +8,15 @@
 
 namespace runtime {
 
-/*!
- * Error object (Second) must have implicit or explicit operator bool().
- */
 template <typename First, typename Second>
 struct result : protected std::pair<First, Second>
 {
     result() noexcept
         : result(First{}, Second{})
-    {}
+    {
+        static_assert(std::is_convertible_v<Second, bool>);
+        static_assert(std::is_copy_constructible_v<First> || std::is_move_constructible_v<First>);
+    }
 
     result(First&& value) noexcept
         : result(std::forward<First>(value), Second{})

@@ -49,9 +49,9 @@ std::vector<event::common> long_poll::listen(int8_t timeout)
     // clang-format off
     const std::string response = method::raw_constructor()
         .method(poll_payload_.server + "?")
-        .param("act", "a_check")
-        .param("key", poll_payload_.key)
-        .param("ts", poll_payload_.ts)
+        .param("act",  "a_check")
+        .param("key",  poll_payload_.key)
+        .param("ts",   poll_payload_.ts)
         .param("wait", std::to_string(timeout))
         .perform_request();
     // clang-format on

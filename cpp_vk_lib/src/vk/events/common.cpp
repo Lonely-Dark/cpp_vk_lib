@@ -52,12 +52,12 @@ message_new common::get_message_new() const
 
 wall_post_new common::get_wall_post_new() const
 {
-    return wall_post_new(std::move(get_event()["object"]));
+    return wall_post_new(get_event()["object"]);
 }
 
 wall_reply_new common::get_wall_reply_new() const
 {
-    return wall_reply_new(std::move(get_event()["object"]));
+    return wall_reply_new(get_event()["object"]);
 }
 
 event::type common::type() const noexcept

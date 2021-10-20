@@ -200,7 +200,7 @@ std::unique_ptr<message_new> message_new::reply() const
     }
 }
 
-void dispatch_events(std::ostream& ostream, const message_new& event)
+static void dispatch_events(std::ostream& ostream, const message_new& event)
 {
     if (event.has_action()) {
         if (event.on_action("chat_invite_user")) {

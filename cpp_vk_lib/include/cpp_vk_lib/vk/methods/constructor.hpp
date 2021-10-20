@@ -71,8 +71,8 @@ public:
 private:
     std::string user_token_;
     std::string access_token_;
-    std::string method_{};
-    std::map<std::string, std::string> params_{};
+    std::string method_;
+    std::map<std::string, std::string> params_;
 };
 
 using user_constructor = constructor<policy::user_api>;

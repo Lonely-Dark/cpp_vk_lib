@@ -6,19 +6,12 @@
 #include <numeric>
 #include <string>
 
-namespace runtime::string_utils {
+namespace runtime::string_utils::implementation {
 
 template <typename T, typename Container, typename Delimiter>
-static std::string create_joined_string(Container&& elements, Delimiter&& delimiter)
+void join_impl(std::string& output, Container&& container, Delimiter&& delimiter)
 {
-    std::string output;
-    if constexpr (
-        !std::is_same_v<std::decay_t<Container>, std::forward_list<std::decay_t<T>>> &&
-        !std::is_same_v<std::decay_t<Container>, std::list<std::decay_t<T>>>) {
-        static const size_t average_word_length = 20;
-        output.reserve(elements.size() * average_word_length);
-    }
-    for (const auto& element : elements) {
+    for (const auto& element : container) {
         if constexpr (std::is_integral_v<T>) {
             output += std::to_string(element);
         } else {
@@ -32,31 +25,59 @@ static std::string create_joined_string(Container&& elements, Delimiter&& delimi
         output.resize(output.size() - delimiter.size());
     }
     output.shrink_to_fit();
+}
+
+template <typename Container, typename Delimiter>
+static std::string join(Container&& container, Delimiter&& delimiter)
+{
+    using T = std::decay_t<decltype(*std::begin(std::declval<Container>()))>;
+    std::string output;
+    if constexpr (
+        !std::is_same_v<std::decay_t<Container>, std::forward_list<T>> &&
+        !std::is_same_v<std::decay_t<Container>, std::list<T>>) {
+        static const size_t average_word_length = 20;
+        output.reserve(container.size() * average_word_length);
+    }
+    join_impl<T>(output, container, delimiter);
     return output;
 }
 
-template <typename T, typename Container>
-std::string join(Container&& elements, char delimiter)
+template <typename T, size_t Size, typename Delimiter>
+static std::string join(T (&container)[Size], Delimiter&& delimiter)
 {
-    return create_joined_string<T>(std::forward<Container>(elements), delimiter);
+    std::string output;
+    static const size_t average_word_length = 20;
+    output.reserve(Size * average_word_length);
+    join_impl<T>(output, container, delimiter);
+    return output;
 }
 
-template <typename T, typename Container>
-std::string join(Container&& elements, std::string_view delimiter)
+}// namespace runtime::string_utils::implementation
+
+namespace runtime::string_utils {
+
+template <typename Container>
+std::string join(Container&& container, char delimiter)
 {
-    return create_joined_string<T>(std::forward<Container>(elements), delimiter);
+    return implementation::join(std::forward<Container>(container), delimiter);
+}
+
+template <typename Container>
+std::string join(Container&& container, std::string_view delimiter)
+{
+    return implementation::join(std::forward<Container>(container), delimiter);
 }
 
 template <typename T>
-std::string join(std::initializer_list<T> elements, char delimiter)
+std::string join(std::initializer_list<T> container, char delimiter)
 {
-    return create_joined_string<T>(elements, delimiter);
+    return implementation::join(container, delimiter);
 }
 
 template <typename T>
-std::string join(std::initializer_list<T> elements, std::string_view delimiter)
+std::string join(std::initializer_list<T> container, std::string_view delimiter)
 {
-    return create_joined_string<T>(elements, delimiter);
+    return implementation::join(container, delimiter);
 }
 
 }// namespace runtime::string_utils

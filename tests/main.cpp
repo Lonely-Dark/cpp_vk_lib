@@ -1,6 +1,9 @@
 #include "api_tests.hpp"
 #include "attachment_tests.hpp"
 #include "config_tests.hpp"
+#include "cpp_vk_lib/runtime/setup_logger.hpp"
+#include "cpp_vk_lib/runtime/signal_handlers.hpp"
+#include "cpp_vk_lib/vk/config/config.hpp"
 #include "curl_tests.hpp"
 #include "error_code_tests.hpp"
 #include "event_tests.hpp"
@@ -8,10 +11,6 @@
 #include "keyboard_tests.hpp"
 #include "result_tests.hpp"
 #include "string_util_tests.hpp"
-
-#include "cpp_vk_lib/runtime/signal_handlers.hpp"
-#include "cpp_vk_lib/runtime/setup_logger.hpp"
-#include "cpp_vk_lib/vk/config/config.hpp"
 
 bool cpp_vk_lib_curl_verbose = false;
 

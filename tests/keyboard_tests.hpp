@@ -10,11 +10,15 @@ TEST(keyboard, location_button)
     l.add_row({keyboard::button::location()});
     l.serialize();
 
-    #ifndef  _WIN32
-        ASSERT_EQ(l.get(), R"({"buttons":[[{"action":{"type":"location","payload":"{\"button\":\"1\"}"}}]]})");
-    #else
-        ASSERT_EQ(l.get(), "{\"buttons\":[[{\"action\":{\"type\":\"location\",\"payload\":\"{\\\"button\\\":\\\"1\\\"}\"}}]]}");
-    #endif
+#ifndef _WIN32
+    ASSERT_EQ(
+        l.get(),
+        R"({"buttons":[[{"action":{"type":"location","payload":"{\"button\":\"1\"}"}}]]})");
+#else
+    ASSERT_EQ(
+        l.get(),
+        "{\"buttons\":[[{\"action\":{\"type\":\"location\",\"payload\":\"{\\\"button\\\":\\\"1\\\"}\"}}]]}");
+#endif
 }
 
 TEST(keyboard, open_app_layout)
@@ -31,18 +35,20 @@ TEST(keyboard, open_app_layout)
 TEST(keyboard, text_layout)
 {
     keyboard::layout l(keyboard::flag::one_time);
-    l.add_row({keyboard::button::text(keyboard::color::blue, "1"), keyboard::button::text(keyboard::color::blue, "2")});
+    l.add_row(
+        {keyboard::button::text(keyboard::color::blue, "1"),
+         keyboard::button::text(keyboard::color::blue, "2")});
     l.serialize();
 
-    #ifndef  _WIN32
+#ifndef _WIN32
     ASSERT_EQ(
         l.get(),
         R"({"one_time":true,"buttons":[[{"action":{"type":"text","payload":"{\"button\":\"1\"}","label":"1"},"color":"primary"},{"action":{"type":"text","payload":"{\"button\":\"1\"}","label":"2"},"color":"primary"}]]})");
-    #else
-        ASSERT_EQ(
+#else
+    ASSERT_EQ(
         l.get(),
         "{\"one_time\":true,\"buttons\":[[{\"action\":{\"type\":\"text\",\"payload\":\"{\\\"button\\\":\\\"1\\\"}\",\"label\":\"1\"},\"color\":\"primary\"},{\"action\":{\"type\":\"text\",\"payload\":\"{\\\"button\\\":\\\"1\\\"}\",\"label\":\"2\"},\"color\":\"primary\"}]]}");
-    #endif
+#endif
 }
 
 TEST(keyboard, vk_pay_button)
@@ -51,12 +57,14 @@ TEST(keyboard, vk_pay_button)
     l.add_row({keyboard::button::vk_pay("hash")});
     l.serialize();
 
-    ASSERT_EQ(l.get(), R"({"one_time":true,"buttons":[[{"action":{"type":"vkpay","hash":"hash"}}]]})");
+    ASSERT_EQ(
+        l.get(),
+        R"({"one_time":true,"buttons":[[{"action":{"type":"vkpay","hash":"hash"}}]]})");
 }
 
 TEST(keyboard, bad_cast)
 {
     keyboard::layout l(keyboard::flag::one_time);
     l.add_row({1, 2, 3});
-    ASSERT_ANY_THROW(l.serialize()); ///< Non-button types provided
+    ASSERT_ANY_THROW(l.serialize());///< Non-button types provided
 }

@@ -76,10 +76,9 @@ void layout::serialize()
                     return create_button(button);
                 }
             });
-        serialized_rows.push_back(
-            '[' + runtime::string_utils::join<std::string>(serialized_buttons, ',') + ']');
+        serialized_rows.push_back('[' + runtime::string_utils::join(serialized_buttons, ',') + ']');
     }
-    serialized_ += runtime::string_utils::join<std::string>(serialized_rows, ',');
+    serialized_ += runtime::string_utils::join(serialized_rows, ',');
     serialized_.append("]}");
     serialized_.shrink_to_fit();
 }

@@ -32,6 +32,6 @@ TEST(config, field_access)
     ASSERT_EQ(vk::config::password(), "password");
 
     ASSERT_EQ(vk::config::num_workers(), 8);
-    
+
     ASSERT_EQ(vk::config::log_path(), "/tmp/bot.log");
 }

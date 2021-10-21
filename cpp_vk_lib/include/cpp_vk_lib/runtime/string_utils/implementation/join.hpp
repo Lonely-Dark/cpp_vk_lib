@@ -28,7 +28,7 @@ void join_impl(std::string& output, Container&& container, Delimiter&& delimiter
 }
 
 template <typename Container, typename Delimiter>
-static std::string join(Container&& container, Delimiter&& delimiter)
+std::string join(Container&& container, Delimiter&& delimiter)
 {
     using T = std::decay_t<decltype(*std::begin(std::declval<Container>()))>;
     std::string output;
@@ -43,7 +43,7 @@ static std::string join(Container&& container, Delimiter&& delimiter)
 }
 
 template <typename T, size_t Size, typename Delimiter>
-static std::string join(T (&container)[Size], Delimiter&& delimiter)
+std::string join(T (&container)[Size], Delimiter&& delimiter)
 {
     std::string output;
     static const size_t average_word_length = 20;

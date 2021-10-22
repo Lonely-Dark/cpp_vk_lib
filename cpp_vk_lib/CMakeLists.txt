@@ -1,5 +1,5 @@
-add_compile_options(-Wall -Wextra -Werror -Wunused -Wwrite-strings -Wimplicit-fallthrough -pedantic)
-add_compile_options(-fPIC -O3)
+add_compile_options(-Wall -Wextra -Werror -Wunused -Wwrite-strings -Wimplicit-fallthrough -Wpedantic)
+add_compile_options(-fPIC -flto -O3 -ffast-math)
 
 if (CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
     add_compile_options(-Wno-deprecated -Wno-deprecated-declarations)

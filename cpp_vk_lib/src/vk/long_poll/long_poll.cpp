@@ -56,8 +56,6 @@ std::vector<event::common> long_poll::listen(int8_t timeout)
         .perform_request();
     // clang-format on
 
-    spdlog::info("response: {}", response);
-
     const simdjson::dom::object parsed_response = parser_->parse(response);
 
     if (parsed_response.begin().key() == "failed") {

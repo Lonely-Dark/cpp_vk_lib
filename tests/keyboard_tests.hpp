@@ -10,15 +10,9 @@ TEST(keyboard, location_button)
     l.add_row({keyboard::button::location()});
     l.serialize();
 
-#ifndef _WIN32
     ASSERT_EQ(
         l.get(),
         R"({"buttons":[[{"action":{"type":"location","payload":"{\"button\":\"1\"}"}}]]})");
-#else
-    ASSERT_EQ(
-        l.get(),
-        "{\"buttons\":[[{\"action\":{\"type\":\"location\",\"payload\":\"{\\\"button\\\":\\\"1\\\"}\"}}]]}");
-#endif
 }
 
 TEST(keyboard, open_app_layout)
@@ -40,15 +34,9 @@ TEST(keyboard, text_layout)
          keyboard::button::text(keyboard::color::blue, "2")});
     l.serialize();
 
-#ifndef _WIN32
     ASSERT_EQ(
         l.get(),
         R"({"one_time":true,"buttons":[[{"action":{"type":"text","payload":"{\"button\":\"1\"}","label":"1"},"color":"primary"},{"action":{"type":"text","payload":"{\"button\":\"1\"}","label":"2"},"color":"primary"}]]})");
-#else
-    ASSERT_EQ(
-        l.get(),
-        "{\"one_time\":true,\"buttons\":[[{\"action\":{\"type\":\"text\",\"payload\":\"{\\\"button\\\":\\\"1\\\"}\",\"label\":\"1\"},\"color\":\"primary\"},{\"action\":{\"type\":\"text\",\"payload\":\"{\\\"button\\\":\\\"1\\\"}\",\"label\":\"2\"},\"color\":\"primary\"}]]}");
-#endif
 }
 
 TEST(keyboard, vk_pay_button)

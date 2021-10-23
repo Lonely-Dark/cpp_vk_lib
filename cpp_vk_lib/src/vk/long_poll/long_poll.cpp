@@ -44,7 +44,7 @@ std::vector<event::common> long_poll::listen(int8_t timeout)
         started_ = true;
     }
 
-    spdlog::info("long poll: ts {}, timeout {}", poll_payload_.ts, timeout);
+    spdlog::trace("long poll: ts {}, timeout {}", poll_payload_.ts, timeout);
 
     // clang-format off
     const std::string response = method::raw_constructor()

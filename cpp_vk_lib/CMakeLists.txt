@@ -9,8 +9,8 @@ if (CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
 endif()
 
 set(CPP_VK_LIB_SOURCE
-    ../cpp_vk_lib/src/vk/implementation.cpp
-    ../cpp_vk_lib/src/runtime/implementation.cpp)
+    src/vk/implementation.cpp
+    src/runtime/implementation.cpp)
 
 if (CPP_VK_LIB_STATIC_BUILD)
     add_library(cpp_vk_lib STATIC ${CPP_VK_LIB_SOURCE})

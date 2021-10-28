@@ -38,8 +38,6 @@ class client
 {
 public:
     client(std::string_view username, std::string_view password, target_client client_type);
-
-    ~client();
     /*!
      * Try get user data.
      *

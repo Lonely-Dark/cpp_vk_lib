@@ -62,7 +62,7 @@ public:
      */
     std::string perform_request();
     /*!
-     * Execute HTTP POST request and return output.
+     * Execute HTTP POST request without returning anything.
      *
      * \note all params will be destroyed after request.
      */

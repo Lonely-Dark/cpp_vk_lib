@@ -13,5 +13,5 @@ var searchData=
   ['constructor_10',['constructor',['../classvk_1_1method_1_1constructor.html#a11da862a01e2a3d3764db8a81b49caa4',1,'vk::method::constructor::constructor()'],['../classvk_1_1method_1_1constructor.html#aa26191ccc36721b6f57c87344fa66f2d',1,'vk::method::constructor::constructor(std::string_view user_token)'],['../classvk_1_1method_1_1constructor.html',1,'vk::method::constructor&lt; ExecutionPolicy &gt;']]],
   ['constructor_3c_20policy_3a_3agroup_5fapi_20_3e_11',['constructor&lt; policy::group_api &gt;',['../classvk_1_1method_1_1constructor.html',1,'vk::method']]],
   ['cpp_5fvk_5flib_12',['cpp_vk_lib',['../index.html',1,'']]],
-  ['create_13',['create',['../classvk_1_1error_1_1common__exception.html#ae78a4be18d9d9a05d3c3853e89264a13',1,'vk::error::common_exception']]]
+  ['create_13',['create',['../classvk_1_1error_1_1common__exception.html#a2a9a386e768f6d87364a51b46c93f615',1,'vk::error::common_exception']]]
 ];

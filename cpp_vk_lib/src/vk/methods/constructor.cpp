@@ -14,7 +14,8 @@ static std::string append_url(std::string_view method)
 static std::string
     call(bool output_needed, std::string_view method, std::map<std::string, std::string>&& params)
 {
-    auto response(runtime::network::request(output_needed, append_url(method), std::move(params)));
+    runtime::result<std::string, size_t> response =
+        runtime::network::request(output_needed, append_url(method), std::move(params));
     if (response.error()) {
         throw vk::error::runtime_error(response.error(), "Failed to execute HTTP GET");
     }

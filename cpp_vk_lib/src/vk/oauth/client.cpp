@@ -40,8 +40,6 @@ client::client(
     pull();
 }
 
-client::~client() = default;
-
 static bool error_returned(const simdjson::dom::object& response, std::string_view error_desc)
 {
     return response.begin().key() == "error" &&

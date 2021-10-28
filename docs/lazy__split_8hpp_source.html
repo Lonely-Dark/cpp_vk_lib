@@ -83,13 +83,13 @@ $(function() {
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="structruntime_1_1string__utils_1_1end__split__iterator.html">   11</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structruntime_1_1string__utils_1_1end__split__iterator.html">end_split_iterator</a></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>{};</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> StringType&gt;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> String&gt;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classruntime_1_1string__utils_1_1split__iterator.html">   15</a></span><span class="keyword">class </span><a class="code hl_class" href="classruntime_1_1string__utils_1_1split__iterator.html">split_iterator</a></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_class" href="classruntime_1_1string__utils_1_1split__iterator.html">split_iterator</a>(StringType source, StringType delimiter)</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        : src_(std::forward&lt;StringType&gt;(source))</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        , delimiter_(std::forward&lt;StringType&gt;(delimiter))</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_class" href="classruntime_1_1string__utils_1_1split__iterator.html">split_iterator</a>(String source, String delimiter)</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        : src_(std::forward&lt;String&gt;(source))</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        , delimiter_(std::forward&lt;String&gt;(delimiter))</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        , first_(0)</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        , last_(src_.find(delimiter))</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    {}</div>
@@ -101,9 +101,9 @@ $(function() {
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    }</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    StringType operator*() <span class="keyword">const</span> <span class="keyword">noexcept</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    String operator*() <span class="keyword">const</span> <span class="keyword">noexcept</span></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    {</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keywordflow">if</span> (last_ != StringType::npos) {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keywordflow">if</span> (last_ != String::npos) {</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            <span class="keywordflow">return</span> src_.substr(first_, last_ - first_);</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        }</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
@@ -123,25 +123,25 @@ $(function() {
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    }</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    StringType src_;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    StringType delimiter_;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    String src_;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    String delimiter_;</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">size_t</span> first_;</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">size_t</span> last_;</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keyword">mutable</span> <span class="keywordtype">bool</span> finished_ = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>};</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> StringType&gt;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> String&gt;</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classruntime_1_1string__utils_1_1split__range.html">   62</a></span><span class="keyword">class </span><a class="code hl_class" href="classruntime_1_1string__utils_1_1split__range.html">split_range</a></div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>{</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <a class="code hl_class" href="classruntime_1_1string__utils_1_1split__range.html">split_range</a>(StringType source, StringType delim) noexcept</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        : src_(std::forward&lt;StringType&gt;(source))</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        , delimiter_(std::forward&lt;StringType&gt;(delim))</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <a class="code hl_class" href="classruntime_1_1string__utils_1_1split__range.html">split_range</a>(String source, String delim) noexcept</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        : src_(std::forward&lt;String&gt;(source))</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        , delimiter_(std::forward&lt;String&gt;(delim))</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    {}</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keyword">auto</span> begin() <span class="keyword">const</span> <span class="keyword">noexcept</span></div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    {</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classruntime_1_1string__utils_1_1split__iterator.html">split_iterator&lt;StringType&gt;</a>{src_, delimiter_};</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classruntime_1_1string__utils_1_1split__iterator.html">split_iterator&lt;String&gt;</a>{src_, delimiter_};</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    }</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keyword">auto</span> end() <span class="keyword">const</span> <span class="keyword">noexcept</span></div>
@@ -150,8 +150,8 @@ $(function() {
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    }</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    StringType src_;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    StringType delimiter_;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    String src_;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    String delimiter_;</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>};</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="keyword">inline</span> <span class="keyword">auto</span> lazy_split(std::string_view data, std::string_view delimiter)</div>

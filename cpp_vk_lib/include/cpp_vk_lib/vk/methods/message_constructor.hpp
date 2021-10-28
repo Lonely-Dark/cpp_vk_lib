@@ -20,7 +20,7 @@ public:
      * - random_id=0
      * - disable_mentions=0 or 1, depends on disable_mentions_flag
      */
-    message_constructor(bool disable_mentions_flag);
+    explicit message_constructor(bool disable_mentions_flag);
     /*!
      * constructor<policy::group_api> proxy.
      */

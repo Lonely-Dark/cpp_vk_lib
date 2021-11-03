@@ -25,8 +25,7 @@ High performance VK API library
 * Based on Boost Asio network module
 
 ## Our team
-* **[epoll-reactor](https://github.com/threadpoolexecutor)** - author
-* **[Sanceilaks](https://github.com/Sanceilaks)** - build under Windows
+* **[epoll-reactor](https://github.com/epoll-reactor)** - author
 * **[LvalueReference](https://github.com/LvalueReference)** - library logo :)
 * **[edgjj](https://github.com/edgjj)** - cURL download/upload using in-memory buffers
 

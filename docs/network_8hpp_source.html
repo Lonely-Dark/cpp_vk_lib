@@ -86,34 +86,23 @@ $(function() {
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> require_data = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> omit_data = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>result&lt;std::string, size_t&gt; request(</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">bool</span> output_needed,</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    std::string_view host,</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">const</span> std::map&lt;std::string, std::string&gt;&amp; target);</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>result&lt;std::string, size_t&gt; request(</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">bool</span> output_needed,</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    std::string_view host,</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    std::map&lt;std::string, std::string&gt;&amp;&amp; target = {});</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keywordtype">size_t</span> download(std::string_view filename, std::string_view server);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="keywordtype">size_t</span> download(std::vector&lt;uint8_t&gt;&amp; buffer, std::string_view server);</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>result&lt;std::string, size_t&gt; upload(</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordtype">bool</span> output_needed,</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    std::string_view field_name,</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    std::string_view filename,</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    std::string_view server,</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    std::string_view content_type = <span class="stringliteral">&quot;application/octet-stream&quot;</span>);</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>result&lt;std::string, size_t&gt; upload(</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordtype">bool</span> output_needed,</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keyword">const</span> std::vector&lt;uint8_t&gt;&amp; buffer,</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    std::string_view field_name,</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    std::string_view server,</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    std::string_view content_type = <span class="stringliteral">&quot;application/octet-stream&quot;</span>);</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>result&lt;std::string, size_t&gt;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    request_data(<span class="keywordtype">bool</span> output_needed, std::string_view host, std::string_view data);</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>}<span class="comment">// namespace runtime::network</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#endif</span><span class="comment">// RUNTIME_NET_NETWORK_HPP</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>result&lt;std::string, size_t&gt;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    request(<span class="keywordtype">bool</span> output_needed, std::string_view host, <span class="keyword">const</span> std::map&lt;std::string, std::string&gt;&amp; target);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>result&lt;std::string, size_t&gt;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    request(<span class="keywordtype">bool</span> output_needed, std::string_view host, std::map&lt;std::string, std::string&gt;&amp;&amp; target = {});</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keywordtype">size_t</span> download(std::string_view filename, std::string_view server);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="keywordtype">size_t</span> download(std::vector&lt;uint8_t&gt;&amp; buffer, std::string_view server);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>result&lt;std::string, size_t&gt; upload(</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordtype">bool</span> output_needed, std::string_view field_name, std::string_view filename, std::string_view server,</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    std::string_view content_type = <span class="stringliteral">&quot;application/octet-stream&quot;</span>);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>result&lt;std::string, size_t&gt; upload(</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordtype">bool</span> output_needed, <span class="keyword">const</span> std::vector&lt;uint8_t&gt;&amp; buffer, std::string_view field_name, std::string_view server,</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    std::string_view content_type = <span class="stringliteral">&quot;application/octet-stream&quot;</span>);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>result&lt;std::string, size_t&gt; request_data(<span class="keywordtype">bool</span> output_needed, std::string_view host, std::string_view data);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>}<span class="comment">// namespace runtime::network</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="preprocessor">#endif</span><span class="comment">// RUNTIME_NET_NETWORK_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -31,9 +31,7 @@ public:
 
     String operator*() const noexcept
     {
-        if (last_ != String::npos) {
-            return src_.substr(first_, last_ - first_);
-        }
+        if (last_ != String::npos) { return src_.substr(first_, last_ - first_); }
 
         finished_ = true;
 

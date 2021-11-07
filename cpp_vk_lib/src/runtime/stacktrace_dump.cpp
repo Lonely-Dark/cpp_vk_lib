@@ -49,9 +49,7 @@ static void android_stacktrace_dump_implementation()
     for (size_t i = 0; i < stacktrace_size; ++i) {
         const void* address = buffer[i];
         const char* symbol = "";
-        if (Dl_info info; dladdr(address, &info) && info.dli_sname) {
-            symbol = info.dli_sname;
-        }
+        if (Dl_info info; dladdr(address, &info) && info.dli_sname) { symbol = info.dli_sname; }
         int status = 0;
         size_t max_length = 256;
         char* demangled_name = static_cast<char*>(malloc(/*__size=*/256));

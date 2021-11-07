@@ -11,8 +11,7 @@ wall_reply_new::~wall_reply_new() = default;
 wall_reply_new::wall_reply_new(simdjson::dom::object event)
     : event_json_(std::make_unique<simdjson::dom::object>(event))
 {
-    if (get_event()["attachments"].is_array() &&
-        get_event()["attachments"].get_array().size() > 0) {
+    if (get_event()["attachments"].is_array() && get_event()["attachments"].get_array().size() > 0) {
         has_attachments_ = true;
     }
 
@@ -61,9 +60,7 @@ bool wall_reply_new::has_attachments() const noexcept
 
 std::vector<vk::attachment::attachment_ptr_t> wall_reply_new::attachments() const
 {
-    if (has_attachments_) {
-        return event::get_attachments(get_event()["attachments"].get_array());
-    }
+    if (has_attachments_) { return event::get_attachments(get_event()["attachments"].get_array()); }
     throw error::access_error(-1, "Attempting accessing empty attachment list");
 }
 

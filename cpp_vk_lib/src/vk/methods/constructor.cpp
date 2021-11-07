@@ -11,14 +11,11 @@ static std::string append_url(std::string_view method)
     return fmt::format("https://api.vk.com/method/{}?", method);
 }
 
-static std::string
-    call(bool output_needed, std::string_view method, std::map<std::string, std::string>&& params)
+static std::string call(bool output_needed, std::string_view method, std::map<std::string, std::string>&& params)
 {
     runtime::result<std::string, size_t> response =
         runtime::network::request(output_needed, append_url(method), std::move(params));
-    if (response.error()) {
-        throw vk::error::runtime_error(response.error(), "Failed to execute HTTP GET");
-    }
+    if (response.error()) { throw vk::error::runtime_error(response.error(), "Failed to execute HTTP GET"); }
     return response.value();
 }
 
@@ -27,39 +24,27 @@ namespace vk::method::policy {
 struct group_api
 {
     static std::string execute(
-        bool output_needed,
-        std::map<std::string, std::string>&& params,
-        const std::string& method,
-        const std::string& access_token,
-        const std::string& user_token);
+        bool output_needed, std::map<std::string, std::string>&& params, const std::string& method,
+        const std::string& access_token, const std::string& user_token);
 };
 
 struct user_api
 {
     static std::string execute(
-        bool output_needed,
-        std::map<std::string, std::string>&& params,
-        const std::string& method,
-        const std::string& access_token,
-        const std::string& user_token);
+        bool output_needed, std::map<std::string, std::string>&& params, const std::string& method,
+        const std::string& access_token, const std::string& user_token);
 };
 
 struct do_not_use_api_link
 {
     static std::string execute(
-        bool output_needed,
-        std::map<std::string, std::string>&& params,
-        const std::string& method,
-        const std::string& access_token,
-        const std::string& user_token);
+        bool output_needed, std::map<std::string, std::string>&& params, const std::string& method,
+        const std::string& access_token, const std::string& user_token);
 };
 
 std::string group_api::execute(
-    bool output_needed,
-    std::map<std::string, std::string>&& params,
-    const std::string& method,
-    const std::string& access_token,
-    const std::string& user_token)
+    bool output_needed, std::map<std::string, std::string>&& params, const std::string& method,
+    const std::string& access_token, const std::string& user_token)
 {
     (void)user_token;
     params.insert({{"access_token", access_token}, {"v", api_constants::api_version}});
@@ -67,11 +52,8 @@ std::string group_api::execute(
 }
 
 std::string user_api::execute(
-    bool output_needed,
-    std::map<std::string, std::string>&& params,
-    const std::string& method,
-    const std::string& access_token,
-    const std::string& user_token)
+    bool output_needed, std::map<std::string, std::string>&& params, const std::string& method,
+    const std::string& access_token, const std::string& user_token)
 {
     (void)access_token;
     params.insert({{"access_token", user_token}, {"v", api_constants::api_version}});
@@ -79,18 +61,13 @@ std::string user_api::execute(
 }
 
 std::string do_not_use_api_link::execute(
-    bool output_needed,
-    std::map<std::string, std::string>&& params,
-    const std::string& method,
-    const std::string& access_token,
-    const std::string& user_token)
+    bool output_needed, std::map<std::string, std::string>&& params, const std::string& method,
+    const std::string& access_token, const std::string& user_token)
 {
     (void)user_token;
     (void)access_token;
     auto response(runtime::network::request(output_needed, method, std::move(params)));
-    if (response.error()) {
-        throw vk::error::runtime_error(response.error(), "Failed to execute HTTP GET");
-    }
+    if (response.error()) { throw vk::error::runtime_error(response.error(), "Failed to execute HTTP GET"); }
     return response.value();
 }
 
@@ -118,8 +95,7 @@ constructor<ExecutionPolicy>& constructor<ExecutionPolicy>::method(std::string_v
 }
 
 template <typename ExecutionPolicy>
-constructor<ExecutionPolicy>&
-    constructor<ExecutionPolicy>::param(std::string_view key, std::string_view value)
+constructor<ExecutionPolicy>& constructor<ExecutionPolicy>::param(std::string_view key, std::string_view value)
 {
     params_.emplace(key, value);
     return *this;
@@ -147,16 +123,11 @@ std::string constructor<ExecutionPolicy>::perform_request()
 template <typename ExecutionPolicy>
 void constructor<ExecutionPolicy>::request_without_output()
 {
-    ExecutionPolicy::execute(
-        runtime::network::omit_data,
-        std::move(params_),
-        method_,
-        access_token_,
-        user_token_);
+    ExecutionPolicy::execute(runtime::network::omit_data, std::move(params_), method_, access_token_, user_token_);
 }
 
-}// namespace vk::method
+template class constructor<policy::user_api>;
+template class constructor<policy::group_api>;
+template class constructor<policy::do_not_use_api_link>;
 
-template class vk::method::constructor<vk::method::policy::user_api>;
-template class vk::method::constructor<vk::method::policy::group_api>;
-template class vk::method::constructor<vk::method::policy::do_not_use_api_link>;
+}// namespace vk::method

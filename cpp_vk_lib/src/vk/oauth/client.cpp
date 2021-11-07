@@ -8,10 +8,7 @@
 
 namespace vk::oauth {
 
-client::client(
-    std::string_view username,
-    std::string_view password,
-    vk::oauth::target_client client_type)
+client::client(std::string_view username, std::string_view password, vk::oauth::target_client client_type)
     : client_type_(client_type)
     , username_(username)
     , password_(password)
@@ -42,14 +39,12 @@ client::client(
 
 static bool error_returned(const simdjson::dom::object& response, std::string_view error_desc)
 {
-    return response.begin().key() == "error" &&
-           response["error"].get_string().take_value() == error_desc;
+    return response.begin().key() == "error" && response["error"].get_string().take_value() == error_desc;
 }
 
 void client::pull()
 {
     method::raw_constructor constructor;
-
     constructor.method(std::string(api_constants::oauth_link) + "token?")
         .param("grant_type", "password")
         .param("client_id", std::to_string(target_client_id_))

@@ -31,8 +31,7 @@ static std::unique_ptr<vk::attachment::audio> get_audio(const simdjson::dom::ele
         attachment["audio"]["id"].get_int64());
 }
 
-static std::unique_ptr<vk::attachment::audio_message>
-    get_audio_message(const simdjson::dom::element& attachment)
+static std::unique_ptr<vk::attachment::audio_message> get_audio_message(const simdjson::dom::element& attachment)
 {
     return std::make_unique<vk::attachment::audio_message>(
         attachment["audio_message"]["owner_id"].get_int64(),
@@ -50,8 +49,7 @@ static std::unique_ptr<vk::attachment::wall> get_wall(const simdjson::dom::eleme
 
 namespace vk {
 
-std::vector<attachment::attachment_ptr_t>
-    event::get_attachments(const simdjson::dom::array& attachments)
+std::vector<attachment::attachment_ptr_t> event::get_attachments(const simdjson::dom::array& attachments)
 {
     std::vector<attachment::attachment_ptr_t> attachment_list;
 

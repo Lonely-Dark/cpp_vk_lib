@@ -240,12 +240,9 @@ static void create_basic_event_speed_test(const char* event, size_t length)
     simdjson::dom::parser parser;
     const simdjson::dom::element event_object = parser.parse(event, length);
     auto start = std::chrono::high_resolution_clock::now();
-    for (size_t i = 0; i < iterations; ++i) {
-        Event e{event_object};
-    }
+    for (size_t i = 0; i < iterations; ++i) { Event e{event_object}; }
     auto time_spent = std::chrono::high_resolution_clock::now() - start;
-    const float seconds_elapsed =
-        std::chrono::duration_cast<std::chrono::duration<float>>(time_spent).count();
+    const float seconds_elapsed = std::chrono::duration_cast<std::chrono::duration<float>>(time_spent).count();
     const float mib = (iterations) / 1024.0 / 1024.0;
     spdlog::info("total payload size: {} MiB", mib);
     spdlog::info("created {} event objects in {} seconds ", iterations, seconds_elapsed);
@@ -258,9 +255,7 @@ TEST(event, message_new_speed_test)
 
 TEST(event, wall_reply_new_speed_test)
 {
-    create_basic_event_speed_test<vk::event::wall_reply_new>(
-        wall_reply_new,
-        strlen(wall_reply_new));
+    create_basic_event_speed_test<vk::event::wall_reply_new>(wall_reply_new, strlen(wall_reply_new));
 }
 
 TEST(event, wall_post_new_speed_test)

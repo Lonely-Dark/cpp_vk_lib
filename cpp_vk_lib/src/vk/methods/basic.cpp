@@ -9,11 +9,7 @@ namespace vk::method {
 
 void messages::send(int64_t peer_id, std::string_view text, bool mentions_flag)
 {
-    spdlog::trace(
-        "call messages::send: peer_id={}, text={}, mentions_flag={}",
-        peer_id,
-        text,
-        mentions_flag);
+    spdlog::trace("call messages::send: peer_id={}, text={}, mentions_flag={}", peer_id, text, mentions_flag);
 
     message_constructor(mentions_flag)
         .param("peer_id", std::to_string(peer_id))
@@ -22,10 +18,7 @@ void messages::send(int64_t peer_id, std::string_view text, bool mentions_flag)
 }
 
 void messages::send(
-    int64_t peer_id,
-    std::string_view text,
-    const std::vector<attachment::attachment_ptr_t>& list,
-    bool mentions_flag)
+    int64_t peer_id, std::string_view text, const std::vector<attachment::attachment_ptr_t>& list, bool mentions_flag)
 {
     spdlog::trace(
         "call messages::send: peer_id={}, text={}, attachments_count={}, mentions_flag={}",
@@ -41,11 +34,7 @@ void messages::send(
         .request_without_output();
 }
 
-void messages::send(
-    int64_t peer_id,
-    std::string_view text,
-    std::string_view keyboard_layout,
-    bool mentions_flag)
+void messages::send(int64_t peer_id, std::string_view text, std::string_view keyboard_layout, bool mentions_flag)
 {
     spdlog::trace(
         "call messages::send: peer_id={}, text={}, keyboard={}, mentions_flag={}",

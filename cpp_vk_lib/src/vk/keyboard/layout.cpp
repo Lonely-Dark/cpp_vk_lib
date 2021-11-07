@@ -21,8 +21,7 @@ void layout::add_row(std::vector<std::any>&& row)
 }
 
 template <typename T>
-static VK_REALLY_INLINE runtime::result<std::string, int>
-    create_impl(const std::any& button) noexcept
+static VK_REALLY_INLINE runtime::result<std::string, int> create_impl(const std::any& button) noexcept
 {
     try {
         return std::any_cast<std::decay_t<T>>(button).serialize();
@@ -33,18 +32,10 @@ static VK_REALLY_INLINE runtime::result<std::string, int>
 
 static std::string create_button(const std::any& button)
 {
-    if (auto result = create_impl<button::text>(button); !result.error()) {
-        return result.value();
-    }
-    if (auto result = create_impl<button::vk_pay>(button); !result.error()) {
-        return result.value();
-    }
-    if (auto result = create_impl<button::open_app>(button); !result.error()) {
-        return result.value();
-    }
-    if (auto result = create_impl<button::location>(button); !result.error()) {
-        return result.value();
-    }
+    if (auto result = create_impl<button::text>(button); !result.error()) { return result.value(); }
+    if (auto result = create_impl<button::vk_pay>(button); !result.error()) { return result.value(); }
+    if (auto result = create_impl<button::open_app>(button); !result.error()) { return result.value(); }
+    if (auto result = create_impl<button::location>(button); !result.error()) { return result.value(); }
     throw error::runtime_error(-1, "cannot create button: bad cast");
 }
 
@@ -53,29 +44,21 @@ void layout::serialize()
     serialized_.clear();
     serialized_.reserve(250);
     serialized_.push_back('{');
-    if (has_flag(flag::in_line)) {
-        serialized_.append("\"inline\":true,");
-    }
-    if (has_flag(flag::one_time)) {
-        serialized_.append("\"one_time\":true,");
-    }
+    if (has_flag(flag::in_line)) { serialized_.append("\"inline\":true,"); }
+    if (has_flag(flag::one_time)) { serialized_.append("\"one_time\":true,"); }
     serialized_.append("\"buttons\":[");
     std::vector<std::string> serialized_rows;
     for (const auto& row : buttons_) {
         std::vector<std::string> serialized_buttons;
-        std::transform(
-            row.begin(),
-            row.end(),
-            std::back_inserter(serialized_buttons),
-            [](const std::any& button) {
-                if (spdlog::get_level() == SPDLOG_LEVEL_TRACE) {
-                    std::string payload_data = create_button(button);
-                    spdlog::trace("create button: {}", payload_data);
-                    return payload_data;
-                } else {
-                    return create_button(button);
-                }
-            });
+        std::transform(row.begin(), row.end(), std::back_inserter(serialized_buttons), [](const std::any& button) {
+            if (spdlog::get_level() == SPDLOG_LEVEL_TRACE) {
+                std::string payload_data = create_button(button);
+                spdlog::trace("create button: {}", payload_data);
+                return payload_data;
+            } else {
+                return create_button(button);
+            }
+        });
         serialized_rows.push_back('[' + runtime::string_utils::join(serialized_buttons, ',') + ']');
     }
     serialized_ += runtime::string_utils::join(serialized_rows, ',');

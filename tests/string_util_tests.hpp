@@ -156,9 +156,7 @@ TEST(string_utils, lazy_split)
     const std::array<const char*, 3> assertion_output_2 = {"\x60", "\x60", "\x60"};
     size_t offset_1 = 0;
     size_t offset_2 = 0;
-    for (auto word : util::lazy_split("1___2___3", "___")) {
-        ASSERT_EQ(word, assertion_output_1[offset_1++]);
-    }
+    for (auto word : util::lazy_split("1___2___3", "___")) { ASSERT_EQ(word, assertion_output_1[offset_1++]); }
     for (auto word : util::lazy_split("\x60\x32\x60\x32\x60", "\x32")) {
         ASSERT_EQ(word, assertion_output_2[offset_2++]);
     }
@@ -169,9 +167,7 @@ TEST(string_utils, split_equality)
     const std::vector<std::string_view> assertion_output = {"\t\t\t\n", "\t\t\n\t", "\t\n\t\t"};
     constexpr std::string_view payload = "\t\t\t\n\v\t\t\n\t\v\t\n\t\t";
     std::vector<std::string_view> lazy_split_output;
-    for (auto element : util::lazy_split(payload, "\v")) {
-        lazy_split_output.push_back(element);
-    }
+    for (auto element : util::lazy_split(payload, "\v")) { lazy_split_output.push_back(element); }
     std::vector<std::string_view> regular_split_output = util::split(payload, "\v");
     ASSERT_EQ(lazy_split_output, regular_split_output);
     ASSERT_EQ(regular_split_output, assertion_output);
@@ -192,9 +188,8 @@ inline std::string create_split_buffer(size_t strings, size_t string_size, char 
 
 inline void dump_string_size(std::string_view input)
 {
-    std::cout << "             size: "
-              << (static_cast<double>(input.size() * sizeof(char)) / 1024.0 / 1024.0) << " MiB."
-              << std::endl;
+    std::cout << "             size: " << (static_cast<double>(input.size() * sizeof(char)) / 1024.0 / 1024.0)
+              << " MiB." << std::endl;
 }
 
 TEST(string_utils, split_by_char_speed_test)
@@ -221,9 +216,7 @@ TEST(string_utils, lazy_split_speed_test)
 TEST(string_utils, format_speed_test)
 {
     std::cout << "             format 60 MiB of data" << std::endl;
-    for (size_t i = 0; i < 5'000'000; ++i) {
-        fmt::format("params={}{}{}{}{}", "a", "b", "c", "d", "e");
-    }
+    for (size_t i = 0; i < 5'000'000; ++i) { fmt::format("params={}{}{}{}{}", "a", "b", "c", "d", "e"); }
 }
 
 TEST(string_utils, join_speed_test)

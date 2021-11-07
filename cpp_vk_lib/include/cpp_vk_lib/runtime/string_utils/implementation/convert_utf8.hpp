@@ -6,16 +6,12 @@
 
 namespace runtime::string_utils::implementation {
 
-inline std::string utf8_create(
-    std::string_view data,
-    const std::function<wchar_t(wchar_t, const std::locale&)>& convert)
+inline std::string
+    utf8_create(std::string_view data, const std::function<wchar_t(wchar_t, const std::locale&)>& convert)
 {
     static const std::locale utf_8_locale("en_US.UTF-8");
-    std::wstring wide_string =
-        std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(data.data());
-    for (auto& c : wide_string) {
-        c = convert(c, utf_8_locale);
-    }
+    std::wstring wide_string = std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(data.data());
+    for (auto& c : wide_string) { c = convert(c, utf_8_locale); }
     return std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(wide_string);
 }
 

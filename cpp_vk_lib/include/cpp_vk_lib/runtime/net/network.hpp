@@ -22,10 +22,8 @@ static constexpr bool omit_data = false;
  *            e.g {{"a", "1"}, {"b", "2"}} => a=1&b=2
  * \return response output
  */
-result<std::string, size_t> request(
-    bool output_needed,
-    std::string_view host,
-    const std::map<std::string, std::string>& target);
+result<std::string, size_t>
+    request(bool output_needed, std::string_view host, const std::map<std::string, std::string>& target);
 /*!
  * \brief Perform HTTP POST request
  *
@@ -34,10 +32,8 @@ result<std::string, size_t> request(
  *            e.g {{"a", "1"}, {"b", "2"}} => a=1&b=2
  * \return response output
  */
-result<std::string, size_t> request(
-    bool output_needed,
-    std::string_view host,
-    std::map<std::string, std::string>&& target = {});
+result<std::string, size_t>
+    request(bool output_needed, std::string_view host, std::map<std::string, std::string>&& target = {});
 /*!
  * \brief Download from server to filename
  *
@@ -61,10 +57,7 @@ size_t download(std::vector<uint8_t>& buffer, std::string_view server);
  * \return upload response
  */
 result<std::string, size_t> upload(
-    bool output_needed,
-    std::string_view field_name,
-    std::string_view filename,
-    std::string_view server,
+    bool output_needed, std::string_view field_name, std::string_view filename, std::string_view server,
     std::string_view content_type = "application/octet-stream");
 /*!
  * \brief Upload file from buffer to server
@@ -74,10 +67,7 @@ result<std::string, size_t> upload(
  * \return upload response
  */
 result<std::string, size_t> upload(
-    bool output_needed,
-    const std::vector<uint8_t>& buffer,
-    std::string_view field_name,
-    std::string_view server,
+    bool output_needed, const std::vector<uint8_t>& buffer, std::string_view field_name, std::string_view server,
     std::string_view content_type = "application/octet-stream");
 /*!
  * \brief Execute HTTP POST request with text data
@@ -86,8 +76,7 @@ result<std::string, size_t> upload(
  * \param[in] URL payload, e.g JSON
  * \return response output
  */
-result<std::string, size_t>
-    request_data(bool output_needed, std::string_view host, std::string_view data);
+result<std::string, size_t> request_data(bool output_needed, std::string_view host, std::string_view data);
 
 }// namespace runtime::network
 

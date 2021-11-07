@@ -35,15 +35,13 @@ message_constructor& message_constructor::param(std::string_view lhs, std::strin
     return *this;
 }
 
-message_constructor&
-    message_constructor::attachments(std::vector<vk::attachment::attachment_ptr_t>&& attachments)
+message_constructor& message_constructor::attachments(std::vector<vk::attachment::attachment_ptr_t>&& attachments)
 {
     param("attachment", serialize_attachments(std::move(attachments)).data());
     return *this;
 }
 
-message_constructor& message_constructor::attachments(
-    const std::vector<vk::attachment::attachment_ptr_t>& attachments)
+message_constructor& message_constructor::attachments(const std::vector<vk::attachment::attachment_ptr_t>& attachments)
 {
     param("attachment", serialize_attachments(attachments).data());
     return *this;

@@ -34,9 +34,7 @@ struct result : protected std::pair<First, Second>
     void tie(First& value, Second& error) noexcept
     {
         error = this->second;
-        if (!error) {
-            value = std::forward<result<First, Second>>(*this).first;
-        }
+        if (!error) { value = std::forward<result<First, Second>>(*this).first; }
     }
 
     const Second& error() const noexcept
@@ -48,9 +46,7 @@ struct result : protected std::pair<First, Second>
      */
     const First& value() const
     {
-        if (error()) {
-            throw std::runtime_error("failed to get value(): error exists");
-        }
+        if (error()) { throw std::runtime_error("failed to get value(): error exists"); }
         return this->first;
     }
 };

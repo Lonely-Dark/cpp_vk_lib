@@ -18,9 +18,7 @@ long_poll::long_poll(asio::io_context& io_context)
     , started_(false)
 {
     group_id_ = method::groups::get_by_id(errc_);
-    if (errc_) {
-        throw error::access_error(-1, "error retrieve group id");
-    }
+    if (errc_) { throw error::access_error(-1, "error retrieve group id"); }
     spdlog::info("long poll group: {}", group_id_);
 }
 
@@ -30,11 +28,7 @@ long_poll::poll_payload long_poll::server() const
 {
     const std::string data = method::groups::get_long_poll_server(group_id_);
     const simdjson::dom::object server_object = parser_->parse(data)["response"];
-
-    return {
-        std::string(server_object["key"]),
-        std::string(server_object["server"]),
-        std::string(server_object["ts"])};
+    return {std::string(server_object["key"]), std::string(server_object["server"]), std::string(server_object["ts"])};
 }
 
 std::vector<event::common> long_poll::listen(int8_t timeout)
@@ -70,15 +64,11 @@ std::vector<event::common> long_poll::listen(int8_t timeout)
     std::string ts(parsed_response["ts"]);
 
     for (auto update : parsed_response["updates"]) {
-        if (std::string_view(update["type"]) == "message_typing_state") {
-            continue;
-        }
+        if (std::string_view(update["type"]) == "message_typing_state") { continue; }
         simdjson::dom::object object = update["object"];
         simdjson::dom::object message;
         if (auto error = object["message"].get(message); error) {
-            if (object["from_id"].get_int64() == group_id_ * -1) {
-                continue;
-            }
+            if (object["from_id"].get_int64() == group_id_ * -1) { continue; }
         }
         event_list.emplace_back(ts, update);
     }
@@ -105,9 +95,7 @@ void long_poll::run(int8_t timeout)
             });
         }
         io_context_.run();
-        for (auto& t : threads) {
-            t.join();
-        }
+        for (auto& t : threads) { t.join(); }
         io_context_.restart();
     }
 }

@@ -61,11 +61,7 @@ public:
 class audio_message : public base
 {
 public:
-    explicit audio_message(
-        int32_t owner_id,
-        int32_t id,
-        std::string_view raw_ogg,
-        std::string_view raw_mp3);
+    explicit audio_message(int32_t owner_id, int32_t id, std::string_view raw_ogg, std::string_view raw_mp3);
 
     const std::string& raw_ogg() const noexcept;
     const std::string& raw_mp3() const noexcept;

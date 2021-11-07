@@ -14,9 +14,7 @@ std::vector<std::string_view> split(std::string_view data, Delimiter&& delim)
     size_t pos = 0;
     while (pos != std::string_view::npos) {
         pos = data.find_first_not_of(delim);
-        if (pos == std::string_view::npos) {
-            return splitted;
-        }
+        if (pos == std::string_view::npos) { return splitted; }
         data = data.substr(pos);
         pos = data.find_first_of(delim);
         splitted.emplace_back(data.substr(0, pos));

@@ -23,7 +23,20 @@ if (IS_TOP_PROJECT)
   initialize_submodule(modules/googletest)
   set(BUILD_GMOCK OFF CACHE BOOL "Do not build gmock")
   add_subdirectory(googletest)
-  
+endif()
+
+message(STATUS "Looking for CURL")
+find_package(CURL REQUIRED)
+
+if(CURL_FOUND)
+  message(STATUS "Found CURL version: ${CURL_VERSION_STRING}")
+  message(STATUS "Using CURL include dir(s): ${CURL_INCLUDE_DIRS}")
+  message(STATUS "Using CURL lib(s): ${CURL_LIBRARIES}")
+else()
+  message(STATUS "Fetching CURL")
+  include(FetchContent)
+  FetchContent_Declare(CURL GIT_REPOSITORY https://github.com/curl/curl.git)
+  FetchContent_MakeAvailable(CURL)
 endif()
 
 add_subdirectory(simdjson EXCLUDE_FROM_ALL)

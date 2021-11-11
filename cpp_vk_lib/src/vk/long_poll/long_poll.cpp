@@ -15,7 +15,6 @@ long_poll::long_poll(asio::io_context& io_context)
     , poll_payload_()
     , errc_()
     , io_context_(io_context)
-    , started_(false)
 {
     group_id_ = method::groups::get_by_id(errc_);
     if (errc_) { throw error::access_error(-1, "error retrieve group id"); }
@@ -33,9 +32,10 @@ long_poll::poll_payload long_poll::server() const
 
 std::vector<event::common> long_poll::listen(int8_t timeout)
 {
-    if (!started_) {
+    static bool new_server_needed = false;
+    if (!new_server_needed) {
         poll_payload_ = server();
-        started_ = true;
+        new_server_needed = true;
     }
 
     spdlog::trace("long poll: ts {}, timeout {}", poll_payload_.ts, timeout);
@@ -55,7 +55,7 @@ std::vector<event::common> long_poll::listen(int8_t timeout)
     if (parsed_response.begin().key() == "failed") {
         const int64_t code = parsed_response["failed"].get_int64();
         if (code == 2 || code == 3) {
-            started_ = false;
+            new_server_needed = false;
             listen(timeout);
         }
     }

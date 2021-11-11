@@ -81,7 +81,6 @@ private:
     error_code errc_;
     asio::io_context& io_context_;
     int64_t group_id_;
-    bool started_;
 };
 
 template <typename Executor>

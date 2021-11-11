@@ -73,7 +73,7 @@ static VK_REALLY_INLINE bool check_action(const std::any& action) noexcept
 {
     try {
         std::any_cast<T>(action);
-    } catch (std::bad_any_cast& err) {
+    } catch (...) {
         return false;
     }
     return true;
@@ -162,7 +162,7 @@ std::unique_ptr<message_new> message_new::reply() const
     throw error::access_error(-1, "attempting accessing empty reply");
 }
 
-static void dispatch_events(std::ostream& ostream, const message_new& event)
+static void dispatch_actions(std::ostream& ostream, const message_new& event)
 {
     if (event.has_action()) {
         if (event.on_action("chat_invite_user")) {
@@ -217,7 +217,7 @@ std::ostream& operator<<(std::ostream& ostream, const message_new& event)
 
     if (event.has_reply()) { ostream << std::endl << std::setw(30) << "reply: " << *event.reply() << std::endl; }
 
-    dispatch_events(ostream, event);
+    dispatch_actions(ostream, event);
 
     for (auto& attachment : event.attachments()) {
         ostream << std::setw(30) << "attachment: ";

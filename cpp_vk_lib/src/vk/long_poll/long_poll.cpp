@@ -32,10 +32,10 @@ long_poll::poll_payload long_poll::server() const
 
 std::vector<event::common> long_poll::listen(int8_t timeout)
 {
-    static bool new_server_needed = false;
-    if (!new_server_needed) {
+    static bool new_server_needed = true;
+    if (new_server_needed) {
         poll_payload_ = server();
-        new_server_needed = true;
+        new_server_needed = false;
     }
 
     spdlog::trace("long poll: ts {}, timeout {}", poll_payload_.ts, timeout);
@@ -55,7 +55,7 @@ std::vector<event::common> long_poll::listen(int8_t timeout)
     if (parsed_response.begin().key() == "failed") {
         const int64_t code = parsed_response["failed"].get_int64();
         if (code == 2 || code == 3) {
-            new_server_needed = false;
+            new_server_needed = true;
             listen(timeout);
         }
     }

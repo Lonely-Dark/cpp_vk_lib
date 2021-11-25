@@ -152,7 +152,6 @@ static runtime::result<std::string, size_t> libcurl_to_string_recv(CURL* handle,
 {
     std::string output;
     if (output_needed) {
-        output.reserve(1024);
         curl_easy_setopt(handle, CURLOPT_WRITEDATA, &output);
         curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, libcurl_string_write_cb);
         curl_easy_setopt(handle, CURLOPT_HEADERDATA, &output);

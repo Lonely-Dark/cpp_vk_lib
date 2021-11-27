@@ -11,12 +11,12 @@ namespace runtime {
 template <typename First, typename Second>
 struct result : protected std::pair<First, Second>
 {
+    static_assert(std::is_convertible_v<Second, bool>);
+    static_assert(std::is_copy_constructible_v<First> && std::is_move_constructible_v<First>);
+
     result() noexcept
         : result(First{}, Second{})
-    {
-        static_assert(std::is_convertible_v<Second, bool>);
-        static_assert(std::is_copy_constructible_v<First> || std::is_move_constructible_v<First>);
-    }
+    {}
 
     result(First&& value) noexcept
         : result(std::forward<First>(value), Second{})

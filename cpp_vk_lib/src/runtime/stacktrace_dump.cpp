@@ -64,48 +64,54 @@ static void android_stacktrace_dump_implementation()
 static void unix_stacktrace_dump_implementation()
 {
     // clang-format off
-    void* buffer[/*max_records=*/25];
-    int addresses_got = backtrace(buffer, sizeof(buffer) / sizeof(void*));
-    if (addresses_got == 0) {
+    void* strace_buffer[/*max_records=*/25];
+    int strace_size = backtrace(strace_buffer, sizeof(strace_buffer) / sizeof(void*));
+    if (strace_size == 0) {
         spdlog::critical("  empty stack trace, exiting...");
         return;
     }
-    char** stack_dump = backtrace_symbols(buffer, addresses_got);
-    char* demangled_name = static_cast<char*>(malloc(256));
-    for (int i = 0; i < addresses_got; ++i) {
-      char *mangled_name { nullptr },
-           *begin_offset { nullptr },
-           *end_offset { nullptr };
-      for (char* symbol = stack_dump[i]; *symbol; ++symbol) {
-          int need_exit = 0;
-          switch (*symbol) {
-              case '(': { mangled_name = symbol; break; }
-              case '+': { begin_offset = symbol; break; }
-              case ')': { end_offset = symbol; need_exit = 1; break; }
-              default: { break; }
-          }
-          if (need_exit == 1) { break; }
-      }
-      if (mangled_name && begin_offset && end_offset && mangled_name < begin_offset) {
-          *(mangled_name++) = '\0';
-          *(begin_offset++) = '\0';
-          *end_offset = '\0';
-          int status = 0;
-          size_t max_length = 256;
-          char* demangled = abi::__cxa_demangle(mangled_name, demangled_name, &max_length, &status);
-          if (status == 0) {
-              demangled_name = demangled;
-              spdlog::critical("  {}: {}+{}", stack_dump[i], demangled_name, begin_offset);
-          } else {
-              spdlog::critical("  {}: {}()+{}", stack_dump[i], mangled_name, begin_offset);
-          }
-      } else {
-          spdlog::critical("  {}", stack_dump[i]);
-      }
+    char** strace = backtrace_symbols(strace_buffer, strace_size);
+    char* demangle_buffer = static_cast<char*>(malloc(256));
+
+    for (int i = 0; i < strace_size; ++i) {
+        char* begin_mangled_name = nullptr;
+        char*   end_mangled_name = nullptr;
+        char*             offset = nullptr;
+        char*       strace_frame = *(strace + i);
+
+        while (strace_frame) {
+            switch (*strace_frame) {
+                case '+': { offset = strace_frame; break; }
+                case '(': { begin_mangled_name = strace_frame; break; }
+                case ')': { end_mangled_name = strace_frame; break; }
+            }
+            if (end_mangled_name) {
+                break;
+            }
+            ++strace_frame;
+        }
+
+        if (!begin_mangled_name || !end_mangled_name || !offset) {
+            continue;
+        }
+
+        *(begin_mangled_name++) = '\0';
+        *(  end_mangled_name++) = '\0';
+        *(            offset++) = '\0';
+
+        int demangle_status = 0;
+        size_t frame_size = 256;
+        demangle_buffer = abi::__cxa_demangle(begin_mangled_name, demangle_buffer, &frame_size, &demangle_status);
+        if (demangle_status == 0) {
+            spdlog::critical("  {}: {}+{}", strace[i], demangle_buffer, offset);
+        } else {
+            spdlog::critical("  {}: {}()+{}", strace[i], begin_mangled_name, offset);
+        }
     }
-    free(demangled_name);
-    free(stack_dump);
-    // clang-format off
+
+    free(demangle_buffer);
+    free(strace);
+    // clang-format on
 }
 #else
 static void unknown_platform_stacktrace_dump_implementation()

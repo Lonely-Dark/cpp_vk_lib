@@ -48,12 +48,12 @@ static void android_stacktrace_dump_implementation()
     const size_t stacktrace_size = capture_stacktrace(buffer, max_stacktrace_records);
     for (size_t i = 0; i < stacktrace_size; ++i) {
         const void* address = buffer[i];
-        const char* symbol = "";
+        const char* symbol  = "";
         if (Dl_info info; dladdr(address, &info) && info.dli_sname) { symbol = info.dli_sname; }
-        int status = 0;
-        size_t max_length = 256;
+        int status           = 0;
+        size_t max_length    = 256;
         char* demangled_name = static_cast<char*>(malloc(/*__size=*/256));
-        char* demangled = abi::__cxa_demangle(symbol, demangled_name, &max_length, &status);
+        char* demangled      = abi::__cxa_demangle(symbol, demangled_name, &max_length, &status);
         ostream << "  " << std::setw(2) << ": " << address << " " << demangled;
         << std::endl;
         free(demangled_name);

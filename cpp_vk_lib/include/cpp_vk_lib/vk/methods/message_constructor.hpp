@@ -14,7 +14,7 @@ class message_constructor
 {
 public:
     static inline bool disable_mentions = true;
-    static inline bool enable_mentions = false;
+    static inline bool enable_mentions  = false;
     /*!
      * Create constructor with following parameters:
      * - random_id=0

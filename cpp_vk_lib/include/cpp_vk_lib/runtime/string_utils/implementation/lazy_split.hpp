@@ -25,7 +25,7 @@ public:
     split_iterator& operator++() noexcept
     {
         first_ = last_ + delimiter_.size();
-        last_ = src_.find(delimiter_, first_);
+        last_  = src_.find(delimiter_, first_);
         return *this;
     }
 

@@ -19,17 +19,17 @@ client::client(std::string_view username, std::string_view password, vk::oauth::
 {
     switch (client_type_) {
         case target_client::android: {
-            target_client_id_ = api_constants::android_app_client_id;
+            target_client_id_     = api_constants::android_app_client_id;
             target_client_secret_ = api_constants::android_app_client_secret;
             break;
         }
         case target_client::iphone: {
-            target_client_id_ = api_constants::iphone_app_client_id;
+            target_client_id_     = api_constants::iphone_app_client_id;
             target_client_secret_ = api_constants::iphone_app_client_secret;
             break;
         }
         case target_client::windows: {
-            target_client_id_ = api_constants::windows_app_client_id;
+            target_client_id_     = api_constants::windows_app_client_id;
             target_client_secret_ = api_constants::windows_app_client_secret;
             break;
         }
@@ -60,7 +60,7 @@ void client::pull()
         throw error::access_error(-1, response["error_description"].get_c_str().take_value());
     }
 
-    pulled_token_ = response["access_token"].get_c_str().take_value();
+    pulled_token_   = response["access_token"].get_c_str().take_value();
     pulled_user_id_ = response["user_id"].get_int64();
 
     spdlog::trace("oauth: get token: {}", pulled_token_);

@@ -75,9 +75,9 @@ private:
     std::map<std::string, std::string> params_;
 };
 
-using user_constructor = constructor<policy::user_api>;
+using user_constructor  = constructor<policy::user_api>;
 using group_constructor = constructor<policy::group_api>;
-using raw_constructor = constructor<policy::do_not_use_api_link>;
+using raw_constructor   = constructor<policy::do_not_use_api_link>;
 
 }// namespace vk::method
 

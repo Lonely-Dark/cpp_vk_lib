@@ -5,8 +5,8 @@ namespace vk::keyboard {
 
 enum class flag : unsigned char
 {
-    none = (1 << 0),
-    in_line = (1 << 1),
+    none     = (1 << 0),
+    in_line  = (1 << 1),
     one_time = (1 << 2)
 };
 

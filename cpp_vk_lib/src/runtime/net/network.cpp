@@ -244,7 +244,7 @@ result<std::string, size_t> network::upload(
     std::string_view content_type)
 {
     struct curl_httppost* formpost = nullptr;
-    struct curl_httppost* lastptr = nullptr;
+    struct curl_httppost* lastptr  = nullptr;
     // clang-format off
     curl_formadd(&formpost, &lastptr,
         CURLFORM_COPYNAME,     field_name.data(),
@@ -261,7 +261,7 @@ result<std::string, size_t> network::upload(
     std::string_view content_type)
 {
     struct curl_httppost* formpost = nullptr;
-    struct curl_httppost* lastptr = nullptr;
+    struct curl_httppost* lastptr  = nullptr;
     // clang-format off
     curl_formadd(&formpost, &lastptr,
         CURLFORM_BUFFER,          "temp",

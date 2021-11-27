@@ -44,12 +44,12 @@ loader::loader(std::string_view path)
     simdjson::dom::parser parser;
     const simdjson::dom::element element = parser.load(path.data());
 
-    username_ = element["oauth"]["login"];
-    password_ = element["oauth"]["password"];
-    user_token_ = element["api"]["user_token"].get_c_str().take_value();
+    username_     = element["oauth"]["login"];
+    password_     = element["oauth"]["password"];
+    user_token_   = element["api"]["user_token"].get_c_str().take_value();
     access_token_ = element["api"]["access_token"].get_c_str().take_value();
-    log_path_ = element["environment"]["log_path"].get_c_str().take_value();
-    num_workers_ = element["environment"]["num_workers"].get_int64();
+    log_path_     = element["environment"]["log_path"].get_c_str().take_value();
+    num_workers_  = element["environment"]["num_workers"].get_int64();
 
     spdlog::info("config loaded successfully from {}", path);
 }

@@ -13,7 +13,7 @@ namespace vk::oauth {
 enum class target_client : uint8_t
 {
     android = (1 << 0),
-    iphone = (1 << 1),
+    iphone  = (1 << 1),
     windows = (1 << 2)
 };
 

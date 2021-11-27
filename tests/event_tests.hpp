@@ -239,11 +239,11 @@ static void create_basic_event_speed_test(const char* event, size_t length)
     size_t iterations = 10'000'000;
     simdjson::dom::parser parser;
     const simdjson::dom::element event_object = parser.parse(event, length);
-    auto start = std::chrono::high_resolution_clock::now();
+    auto start                                = std::chrono::high_resolution_clock::now();
     for (size_t i = 0; i < iterations; ++i) { Event e{event_object}; }
-    auto time_spent = std::chrono::high_resolution_clock::now() - start;
+    auto time_spent             = std::chrono::high_resolution_clock::now() - start;
     const float seconds_elapsed = std::chrono::duration_cast<std::chrono::duration<float>>(time_spent).count();
-    const float mib = (iterations) / 1024.0 / 1024.0;
+    const float mib             = (iterations) / 1024.0 / 1024.0;
     spdlog::info("total payload size: {} MiB", mib);
     spdlog::info("created {} event objects in {} seconds ", iterations, seconds_elapsed);
 }

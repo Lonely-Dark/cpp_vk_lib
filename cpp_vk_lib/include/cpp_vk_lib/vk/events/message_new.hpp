@@ -61,10 +61,10 @@ private:
 
     std::unique_ptr<simdjson::dom::object> event_json_;
     std::any action_;
-    bool has_action_ = false;
-    bool has_reply_ = false;
+    bool has_action_       = false;
+    bool has_reply_        = false;
     bool has_fwd_messages_ = false;
-    bool has_attachments_ = false;
+    bool has_attachments_  = false;
 };
 
 std::ostream& operator<<(std::ostream& ostream, const vk::event::message_new& event);

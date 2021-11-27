@@ -56,7 +56,7 @@
     type& operator=(const type&) = delete;
 
 #define VK_DISABLE_MOVE(type)                                                                                          \
-    type(type&&) = delete;                                                                                             \
+    type(type&&)  = delete;                                                                                            \
     type& operator=(type&&) = delete;
 
 #define VK_DISABLE_COPY_MOVE(x)                                                                                        \

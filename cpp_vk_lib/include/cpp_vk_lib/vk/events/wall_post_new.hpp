@@ -46,7 +46,7 @@ private:
 
     std::unique_ptr<simdjson::dom::object> event_json_;
     bool has_attachments_ = false;
-    bool has_repost_ = false;
+    bool has_repost_      = false;
 };
 
 std::ostream& operator<<(std::ostream& ostream, const wall_post_new& event);

@@ -13,7 +13,7 @@ extern bool cpp_vk_lib_curl_verbose;
 namespace runtime::network {
 
 static constexpr bool require_data = true;
-static constexpr bool omit_data = false;
+static constexpr bool omit_data    = false;
 /*!
  * \brief Perform HTTP POST request
  *

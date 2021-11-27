@@ -64,7 +64,7 @@ TEST(string_utils, initializer_list_join)
 TEST(string_utils, c_style_array_join)
 {
     std::string string_array[] = {"1", "2", "3"};
-    int int_array[] = {1, 2, 3};
+    int int_array[]            = {1, 2, 3};
     ASSERT_EQ(util::join(string_array, ','), "1,2,3");
     ASSERT_EQ(util::join(int_array, ','), "1,2,3");
 }
@@ -154,8 +154,8 @@ TEST(string_utils, lazy_split)
 {
     const std::array<const char*, 3> assertion_output_1 = {"1", "2", "3"};
     const std::array<const char*, 3> assertion_output_2 = {"\x60", "\x60", "\x60"};
-    size_t offset_1 = 0;
-    size_t offset_2 = 0;
+    size_t offset_1                                     = 0;
+    size_t offset_2                                     = 0;
     for (auto word : util::lazy_split("1___2___3", "___")) { ASSERT_EQ(word, assertion_output_1[offset_1++]); }
     for (auto word : util::lazy_split("\x60\x32\x60\x32\x60", "\x32")) {
         ASSERT_EQ(word, assertion_output_2[offset_2++]);
@@ -165,7 +165,7 @@ TEST(string_utils, lazy_split)
 TEST(string_utils, split_equality)
 {
     const std::vector<std::string_view> assertion_output = {"\t\t\t\n", "\t\t\n\t", "\t\n\t\t"};
-    constexpr std::string_view payload = "\t\t\t\n\v\t\t\n\t\v\t\n\t\t";
+    constexpr std::string_view payload                   = "\t\t\t\n\v\t\t\n\t\v\t\n\t\t";
     std::vector<std::string_view> lazy_split_output;
     for (auto element : util::lazy_split(payload, "\v")) { lazy_split_output.push_back(element); }
     std::vector<std::string_view> regular_split_output = util::split(payload, "\v");

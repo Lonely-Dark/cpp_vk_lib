@@ -22,8 +22,6 @@ long_poll::long_poll(asio::io_context& io_context)
     spdlog::info("long poll group: {}", group_id_);
 }
 
-long_poll::~long_poll() = default;
-
 long_poll::poll_payload long_poll::server() const
 {
     simdjson::dom::parser parser;

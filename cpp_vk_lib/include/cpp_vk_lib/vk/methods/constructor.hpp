@@ -46,15 +46,15 @@ public:
     /*!
      * Setup VK API method name.
      */
-    constructor& method(std::string_view method);
+    constructor& method(std::string_view);
     /*!
      * Append \c param=value pair to parameters list.
      */
-    constructor& param(std::string_view key, std::string_view value);
+    constructor& param(std::string_view, std::string_view);
     /*!
      * Append map to parameters list.
      */
-    constructor& append_map(std::map<std::string, std::string>&& additional_params);
+    constructor& append_map(std::map<std::string, std::string>&&);
     /*!
      * Execute HTTP POST request and return output.
      *

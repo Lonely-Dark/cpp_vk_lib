@@ -11,19 +11,19 @@ namespace vk::event {
 
 message_new::~message_new() = default;
 
-message_new::message_new(simdjson::dom::object event)
-    : event_json_(std::make_unique<simdjson::dom::object>(event))
+message_new::message_new(simdjson::dom::object incoming_message)
+    : event_json_(std::make_unique<simdjson::dom::object>(incoming_message))
     , action_()
 {
-    if (get_event()["reply_message"].is_object()) { has_reply_ = true; }
+    if (event()["reply_message"].is_object()) { has_reply_ = true; }
 
-    if (get_event()["attachments"].is_array()) { has_attachments_ = true; }
+    if (event()["attachments"].is_array()) { has_attachments_ = true; }
 
-    if (get_event()["fwd_messages"].is_array() && get_event()["fwd_messages"].get_array().size() != 0) {
+    if (event()["fwd_messages"].is_array() && event()["fwd_messages"].get_array().size() != 0) {
         has_fwd_messages_ = true;
     }
 
-    if (get_event()["action"].is_object()) {
+    if (event()["action"].is_object()) {
         has_action_ = true;
         try_get_actions();
     }
@@ -38,7 +38,7 @@ message_new::message_new(simdjson::dom::object event)
 
 void message_new::try_get_actions()
 {
-    simdjson::dom::object action = get_event()["action"].get_object();
+    simdjson::dom::object action = event()["action"].get_object();
     std::string action_name      = action["type"].get_string().take_value().data();
 
     if (action_name == "chat_invite_user") { action_ = action::chat_invite_user{action["member_id"].get_int64()}; }
@@ -90,29 +90,29 @@ bool message_new::on_action(std::string_view action_type) const noexcept
     return false;
 }
 
-simdjson::dom::object& message_new::get_event() const
+simdjson::dom::object& message_new::event() const
 {
     return *event_json_;
 }
 
 int64_t message_new::conversation_message_id() const noexcept
 {
-    return get_event()["conversation_message_id"].get_int64();
+    return event()["conversation_message_id"].get_int64();
 }
 
 int64_t message_new::peer_id() const noexcept
 {
-    return get_event()["peer_id"].get_int64();
+    return event()["peer_id"].get_int64();
 }
 
 int64_t message_new::from_id() const noexcept
 {
-    return get_event()["from_id"].get_int64();
+    return event()["from_id"].get_int64();
 }
 
 std::string message_new::text() const noexcept
 {
-    return get_event()["text"].get_c_str().take_value();
+    return event()["text"].get_c_str().take_value();
 }
 
 bool message_new::has_action() const noexcept
@@ -133,12 +133,14 @@ bool message_new::has_fwd_messages() const noexcept
 std::any message_new::action() const
 {
     if (has_action_) { return action_; }
+
     throw error::access_error(-1, "attempting accessing empty action");
 }
 
 std::vector<attachment::attachment_ptr_t> message_new::attachments() const
 {
-    if (has_attachments_) { return event::get_attachments(get_event()["attachments"].get_array()); }
+    if (has_attachments_) { return event::get_attachments(event()["attachments"].get_array()); }
+
     throw error::access_error(-1, "attempting accessing empty attachment list");
 }
 
@@ -147,7 +149,7 @@ std::vector<std::unique_ptr<message_new>> message_new::fwd_messages() const
     if (has_attachments_) {
         std::vector<std::unique_ptr<message_new>> fwd_messages;
 
-        for (simdjson::dom::element fwd_message : get_event()["fwd_messages"].get_array()) {
+        for (simdjson::dom::element fwd_message : event()["fwd_messages"].get_array()) {
             fwd_messages.emplace_back(std::make_unique<message_new>(fwd_message));
         }
 
@@ -158,7 +160,8 @@ std::vector<std::unique_ptr<message_new>> message_new::fwd_messages() const
 
 std::unique_ptr<message_new> message_new::reply() const
 {
-    if (has_reply_) { return std::make_unique<message_new>(get_event()["reply_message"].get_object()); }
+    if (has_reply_) { return std::make_unique<message_new>(event()["reply_message"].get_object()); }
+
     throw error::access_error(-1, "attempting accessing empty reply");
 }
 

@@ -24,17 +24,17 @@ public:
     /*!
      * constructor<policy::group_api> proxy.
      */
-    message_constructor& param(std::string_view lhs, std::string_view rhs);
+    message_constructor& param(std::string_view, std::string_view);
     /*!
      * Serialize and append attachment list to:
      * - attachments=(serialized output)
      */
-    message_constructor& attachments(const std::vector<attachment::attachment_ptr_t>& attachments);
+    message_constructor& attachments(const std::vector<attachment::attachment_ptr_t>&);
     /*!
      * Serialize and append attachment list to:
      * - attachments=(serialized output)
      */
-    message_constructor& attachments(std::vector<attachment::attachment_ptr_t>&& attachments);
+    message_constructor& attachments(std::vector<attachment::attachment_ptr_t>&&);
     /*!
      * constructor<policy::group_api> proxy.
      */

@@ -64,7 +64,7 @@ static void android_stacktrace_dump_implementation()
 static void unix_stacktrace_dump_implementation()
 {
     // clang-format off
-    void* strace_buffer[/*max_records=*/25];
+    void* strace_buffer[/*max_records=*/50];
     int strace_size = backtrace(strace_buffer, sizeof(strace_buffer) / sizeof(void*));
     if (strace_size == 0) {
         spdlog::critical("  empty stack trace, exiting...");

@@ -19,7 +19,7 @@ public:
     layout() = default;
     layout(keyboard::flag flags);
 
-    void add_row(std::vector<std::any>&& row);
+    void add_row(std::vector<std::any>&&);
     /*!
      * Convert stored buttons data to JSON schema and store output to
      * serialized_.
@@ -29,7 +29,7 @@ public:
      * \return reference to serialized layout.
      */
     const std::string& get() const noexcept;
-    bool has_flag(keyboard::flag flag) const noexcept;
+    bool has_flag(keyboard::flag) const noexcept;
 
 private:
     std::string serialized_{};

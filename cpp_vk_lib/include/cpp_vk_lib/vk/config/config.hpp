@@ -16,7 +16,7 @@ void load(std::string_view path);
  *
  * \note If config already exists, it will be overridden.
  */
-void load_string(std::string_view string);
+void load_string(std::string_view);
 void override_user_token(std::string_view token);
 
 const std::string& password();

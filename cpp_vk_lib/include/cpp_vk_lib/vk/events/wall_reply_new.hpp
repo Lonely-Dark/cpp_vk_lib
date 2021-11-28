@@ -18,7 +18,7 @@ namespace vk::event {
 class wall_reply_new
 {
 public:
-    explicit wall_reply_new(simdjson::dom::object event);
+    explicit wall_reply_new(simdjson::dom::object);
     ~wall_reply_new();
 
     int64_t id() const noexcept;
@@ -33,13 +33,13 @@ public:
     std::vector<attachment::attachment_ptr_t> attachments() const;
 
 private:
-    const simdjson::dom::object& get_event() const;
+    const simdjson::dom::object& event() const;
 
     std::unique_ptr<simdjson::dom::object> event_json_;
     bool has_attachments_ = false;
 };
 
-std::ostream& operator<<(std::ostream& ostream, const vk::event::wall_reply_new& reply);
+std::ostream& operator<<(std::ostream&, const vk::event::wall_reply_new&);
 
 }// namespace vk::event
 

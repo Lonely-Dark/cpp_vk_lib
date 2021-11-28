@@ -70,7 +70,6 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pri-types">Private Types</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classvk_1_1long__poll-members.html">List of all members</a>  </div>
@@ -90,8 +89,8 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0224e5d18cac631716eabe8cc09830ea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1long__poll.html#a0224e5d18cac631716eabe8cc09830ea">long_poll</a> (asio::io_context &amp;io_context)</td></tr>
-<tr class="separator:a0224e5d18cac631716eabe8cc09830ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfa91d8b9bcee69db1f4116b5915f30f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1long__poll.html#abfa91d8b9bcee69db1f4116b5915f30f">long_poll</a> (asio::io_context &amp;)</td></tr>
+<tr class="separator:abfa91d8b9bcee69db1f4116b5915f30f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c14dfda6b12ac210b971842a48a7f42"><td class="memTemplParams" colspan="2">template&lt;typename Executor &gt; </td></tr>
 <tr class="memitem:a1c14dfda6b12ac210b971842a48a7f42"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classvk_1_1long__poll.html#a1c14dfda6b12ac210b971842a48a7f42">on_event</a> (event::type, Executor)</td></tr>
 <tr class="separator:a1c14dfda6b12ac210b971842a48a7f42"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -112,12 +111,6 @@ Public Member Functions</h2></td></tr>
 <a class="el" href="structruntime_1_1unmovable.html">unmovable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="structruntime_1_1unmovable.html">unmovable</a> &amp;&amp;)=delete</td></tr>
 <tr class="separator:a690a2beac324adcf8ebde27bc2eec688 inherit pub_methods_structruntime_1_1unmovable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-types" name="pri-types"></a>
-Private Types</h2></td></tr>
-<tr class="memitem:ae56ec2c977fa7b0f629f25b79490371d"><td class="memItemLeft" align="right" valign="top"><a id="ae56ec2c977fa7b0f629f25b79490371d" name="ae56ec2c977fa7b0f629f25b79490371d"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>long_poll_callback_t</b> = std::function&lt; void(const <a class="el" href="classvk_1_1event_1_1common.html">vk::event::common</a> &amp;)&gt;</td></tr>
-<tr class="separator:ae56ec2c977fa7b0f629f25b79490371d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a1b8496ebf1f1fde5dd09b835725e0019"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structvk_1_1long__poll_1_1poll__payload.html">poll_payload</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1long__poll.html#a1b8496ebf1f1fde5dd09b835725e0019">server</a> () const</td></tr>
@@ -136,15 +129,15 @@ asio::io_context &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>io_
 <tr class="memitem:abefc067711824af71ba285a8cccad708"><td class="memItemLeft" align="right" valign="top"><a id="abefc067711824af71ba285a8cccad708" name="abefc067711824af71ba285a8cccad708"></a>
 int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>group_id_</b></td></tr>
 <tr class="separator:abefc067711824af71ba285a8cccad708"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5802355ca9fccff1f2a5b7a358b80cf"><td class="memItemLeft" align="right" valign="top"><a id="ad5802355ca9fccff1f2a5b7a358b80cf" name="ad5802355ca9fccff1f2a5b7a358b80cf"></a>
-std::unordered_map&lt; event::type, long_poll_callback_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>executors_</b></td></tr>
-<tr class="separator:ad5802355ca9fccff1f2a5b7a358b80cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2b5f713929ede4d3cfdeacdda0a6c85"><td class="memItemLeft" align="right" valign="top"><a id="af2b5f713929ede4d3cfdeacdda0a6c85" name="af2b5f713929ede4d3cfdeacdda0a6c85"></a>
+std::unordered_map&lt; event::type, std::function&lt; void(const <a class="el" href="classvk_1_1event_1_1common.html">vk::event::common</a> &amp;)&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>executors_</b></td></tr>
+<tr class="separator:af2b5f713929ede4d3cfdeacdda0a6c85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Event queue that implements group long polling. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a0224e5d18cac631716eabe8cc09830ea" name="a0224e5d18cac631716eabe8cc09830ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0224e5d18cac631716eabe8cc09830ea">&#9670;&nbsp;</a></span>long_poll()</h2>
+<a id="abfa91d8b9bcee69db1f4116b5915f30f" name="abfa91d8b9bcee69db1f4116b5915f30f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfa91d8b9bcee69db1f4116b5915f30f">&#9670;&nbsp;</a></span>long_poll()</h2>
 
 <div class="memitem">
 <div class="memproto">

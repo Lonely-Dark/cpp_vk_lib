@@ -23,7 +23,7 @@ namespace vk::event {
 class message_new
 {
 public:
-    message_new(simdjson::dom::object event);
+    message_new(simdjson::dom::object);
     ~message_new();
     /*!
      * \throws vk::exception::access_error if reply pointer is not set
@@ -53,11 +53,11 @@ public:
     bool has_fwd_messages() const noexcept;
     bool has_action() const noexcept;
 
-    friend std::ostream& operator<<(std::ostream& ostream, const message_new& event);
+    friend std::ostream& operator<<(std::ostream&, const message_new&);
 
 private:
     void try_get_actions();
-    simdjson::dom::object& get_event() const;
+    simdjson::dom::object& event() const;
 
     std::unique_ptr<simdjson::dom::object> event_json_;
     std::any action_;
@@ -67,7 +67,7 @@ private:
     bool has_attachments_  = false;
 };
 
-std::ostream& operator<<(std::ostream& ostream, const vk::event::message_new& event);
+std::ostream& operator<<(std::ostream&, const vk::event::message_new&);
 
 }// namespace vk::event
 

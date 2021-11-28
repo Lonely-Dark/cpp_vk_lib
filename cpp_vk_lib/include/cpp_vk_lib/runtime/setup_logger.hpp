@@ -9,7 +9,7 @@ namespace runtime {
  *
  * Logs will be written in "log_path" specifined in config.
  */
-void setup_logger(spdlog::level::level_enum level);
+void setup_logger(spdlog::level::level_enum);
 
 }// namespace runtime
 

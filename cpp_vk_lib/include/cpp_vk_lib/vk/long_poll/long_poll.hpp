@@ -35,7 +35,7 @@ public:
      *
      * \throw exception::access_error if group_id retrieving failed
      */
-    long_poll(asio::io_context& io_context);
+    long_poll(asio::io_context&);
     /*!
      * Setup action on selected event type.
      *

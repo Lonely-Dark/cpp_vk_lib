@@ -81,6 +81,7 @@ const simdjson::dom::object& wall_post_new::get_event() const
 std::vector<vk::attachment::attachment_ptr_t> wall_post_new::attachments() const
 {
     if (has_attachments_) { return event::get_attachments(get_event()["attachments"]); }
+
     throw error::access_error(-1, "Attempting accessing empty attachment list.");
 }
 

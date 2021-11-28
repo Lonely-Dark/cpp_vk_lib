@@ -12,8 +12,8 @@ class error_code
 public:
     error_code() noexcept;
     error_code(std::string_view message);
-    error_code(const error_code& rhs) = default;
-    error_code(error_code&& rhs) noexcept;
+    error_code(const error_code&) = default;
+    error_code(error_code&&) noexcept;
 
     error_code& operator=(const error_code&) = delete;
     error_code& operator=(error_code&&) = delete;

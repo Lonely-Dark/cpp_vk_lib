@@ -8,10 +8,10 @@ namespace vk::event {
 
 wall_reply_new::~wall_reply_new() = default;
 
-wall_reply_new::wall_reply_new(simdjson::dom::object event)
-    : event_json_(std::make_unique<simdjson::dom::object>(event))
+wall_reply_new::wall_reply_new(simdjson::dom::object incoming_reply)
+    : event_json_(std::make_unique<simdjson::dom::object>(incoming_reply))
 {
-    if (get_event()["attachments"].is_array() && get_event()["attachments"].get_array().size() > 0) {
+    if (event()["attachments"].is_array() && event()["attachments"].get_array().size() > 0) {
         has_attachments_ = true;
     }
 
@@ -23,34 +23,34 @@ wall_reply_new::wall_reply_new(simdjson::dom::object event)
     }
 }
 
-const simdjson::dom::object& wall_reply_new::get_event() const
+const simdjson::dom::object& wall_reply_new::event() const
 {
     return *event_json_;
 }
 
 int64_t wall_reply_new::id() const noexcept
 {
-    return get_event()["id"].get_int64();
+    return event()["id"].get_int64();
 }
 
 int64_t wall_reply_new::from_id() const noexcept
 {
-    return get_event()["from_id"].get_int64();
+    return event()["from_id"].get_int64();
 }
 
 int64_t wall_reply_new::post_id() const noexcept
 {
-    return get_event()["post_id"].get_int64();
+    return event()["post_id"].get_int64();
 }
 
 int64_t wall_reply_new::owner_id() const noexcept
 {
-    return get_event()["owner_id"].get_int64();
+    return event()["owner_id"].get_int64();
 }
 
 std::string wall_reply_new::text() const noexcept
 {
-    return get_event()["text"].get_c_str().take_value();
+    return event()["text"].get_c_str().take_value();
 }
 
 bool wall_reply_new::has_attachments() const noexcept
@@ -60,7 +60,8 @@ bool wall_reply_new::has_attachments() const noexcept
 
 std::vector<vk::attachment::attachment_ptr_t> wall_reply_new::attachments() const
 {
-    if (has_attachments_) { return event::get_attachments(get_event()["attachments"].get_array()); }
+    if (has_attachments_) { return event::get_attachments(event()["attachments"].get_array()); }
+
     throw error::access_error(-1, "Attempting accessing empty attachment list");
 }
 

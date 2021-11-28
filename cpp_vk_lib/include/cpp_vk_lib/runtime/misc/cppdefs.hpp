@@ -51,16 +51,4 @@
 #define VK_LIKELY(expr) __builtin_expect(!!(expr), 1)
 #define VK_UNLIKELY(expr) __builtin_expect(!!(expr), 0)
 
-#define VK_DISABLE_COPY(type)                                                                                          \
-    type(const type&) = delete;                                                                                        \
-    type& operator=(const type&) = delete;
-
-#define VK_DISABLE_MOVE(type)                                                                                          \
-    type(type&&)  = delete;                                                                                            \
-    type& operator=(type&&) = delete;
-
-#define VK_DISABLE_COPY_MOVE(x)                                                                                        \
-    VK_DISABLE_COPY(x)                                                                                                 \
-    VK_DISABLE_MOVE(x)
-
 #endif// RUNTIME_MISC_CPPDEFS_HPP

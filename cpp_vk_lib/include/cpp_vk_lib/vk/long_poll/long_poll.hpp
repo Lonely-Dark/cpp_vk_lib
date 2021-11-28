@@ -4,6 +4,8 @@
 #include "asio/io_context.hpp"
 #include "asio/post.hpp"
 #include "cpp_vk_lib/runtime/misc/cppdefs.hpp"
+#include "cpp_vk_lib/runtime/uncopyable.hpp"
+#include "cpp_vk_lib/runtime/unmovable.hpp"
 #include "cpp_vk_lib/vk/error/error_code.hpp"
 #include "cpp_vk_lib/vk/events/common.hpp"
 #include "cpp_vk_lib/vk/events/type.hpp"
@@ -11,16 +13,11 @@
 #include <unordered_map>
 #include <vector>
 
-namespace simdjson::dom {
-class object;
-class parser;
-}// namespace simdjson::dom
-
 namespace vk {
 /*!
  * \brief Event queue that implements group long polling.
  */
-class long_poll
+class long_poll : public runtime::uncopyable, public runtime::unmovable
 {
     /*!
      * groups.getLongPollServer wrapper
@@ -41,7 +38,6 @@ public:
     long_poll(asio::io_context& io_context);
     ~long_poll();
 
-    VK_DISABLE_COPY_MOVE(long_poll)
     /*!
      * Setup action on selected event type.
      *
@@ -54,7 +50,7 @@ public:
      *
      * After all tasks are completed, the queue returns to its original state.
      */
-    [[noreturn]] void run(int8_t timeout = 60);
+    void run(int8_t timeout = 60);
 
 private:
     /*!
@@ -75,12 +71,10 @@ private:
     std::vector<event::common> listen(int8_t timeout = 60);
 
     using long_poll_callback_t = std::function<void(const vk::event::common&)>;
-    std::unique_ptr<simdjson::dom::parser> parser_;
-    std::unordered_map<event::type, long_poll_callback_t> executors_;
-    poll_payload poll_payload_;
-    error_code errc_;
     asio::io_context& io_context_;
+    poll_payload poll_payload_;
     int64_t group_id_;
+    std::unordered_map<event::type, long_poll_callback_t> executors_;
 };
 
 template <typename Executor>

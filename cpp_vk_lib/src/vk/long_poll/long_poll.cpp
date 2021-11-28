@@ -10,14 +10,15 @@
 namespace vk {
 
 long_poll::long_poll(asio::io_context& io_context)
-    : parser_(std::make_unique<simdjson::dom::parser>())
-    , executors_()
-    , poll_payload_()
-    , errc_()
+    : runtime::uncopyable()
+    , runtime::unmovable()
     , io_context_(io_context)
+    , poll_payload_()
+    , executors_()
 {
-    group_id_ = method::groups::get_by_id(errc_);
-    if (errc_) { throw error::access_error(-1, "error retrieve group id"); }
+    error_code errc;
+    group_id_ = method::groups::get_by_id(errc);
+    if (errc) { throw error::access_error(-1, "error retrieve group id"); }
     spdlog::info("long poll group: {}", group_id_);
 }
 
@@ -25,8 +26,9 @@ long_poll::~long_poll() = default;
 
 long_poll::poll_payload long_poll::server() const
 {
+    simdjson::dom::parser parser;
     const std::string data   = method::groups::get_long_poll_server(group_id_);
-    const auto server_object = parser_->parse(data)["response"];
+    const auto server_object = parser.parse(data)["response"];
     return {std::string(server_object["key"]), std::string(server_object["server"]), std::string(server_object["ts"])};
 }
 
@@ -50,7 +52,8 @@ std::vector<event::common> long_poll::listen(int8_t timeout)
         .perform_request();
     // clang-format on
 
-    const simdjson::dom::object parsed_response = parser_->parse(response);
+    simdjson::dom::parser parser;
+    const simdjson::dom::object parsed_response = parser.parse(response);
 
     if (parsed_response.begin().key() == "failed") {
         const int64_t code = parsed_response["failed"].get_int64();

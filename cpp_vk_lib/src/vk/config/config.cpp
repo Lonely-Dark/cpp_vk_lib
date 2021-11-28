@@ -1,6 +1,7 @@
 #include "cpp_vk_lib/vk/config/config.hpp"
 
-#include "cpp_vk_lib/runtime/misc/cppdefs.hpp"
+#include "cpp_vk_lib/runtime/uncopyable.hpp"
+#include "cpp_vk_lib/runtime/unmovable.hpp"
 #include "simdjson.h"
 #include "spdlog/spdlog.h"
 
@@ -8,11 +9,9 @@
 
 namespace {
 
-class VK_HIDDEN loader
+class loader : public runtime::uncopyable, public runtime::unmovable
 {
 public:
-    VK_DISABLE_COPY_MOVE(loader)
-
     static void load(std::string_view path);
     static void load_string(std::string_view string);
     static loader& get();
@@ -40,6 +39,8 @@ private:
 }// anonymous namespace
 
 loader::loader(std::string_view path)
+    : runtime::uncopyable()
+    , runtime::unmovable()
 {
     simdjson::dom::parser parser;
     const simdjson::dom::element element = parser.load(path.data());

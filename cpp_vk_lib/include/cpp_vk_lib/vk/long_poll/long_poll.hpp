@@ -68,11 +68,10 @@ private:
      */
     std::vector<event::common> listen(int8_t timeout = 60);
 
-    using long_poll_callback_t = std::function<void(const vk::event::common&)>;
     asio::io_context& io_context_;
     poll_payload poll_payload_;
     int64_t group_id_;
-    std::unordered_map<event::type, long_poll_callback_t> executors_;
+    std::unordered_map<event::type, std::function<void(const vk::event::common&)>> executors_;
 };
 
 template <typename Executor>

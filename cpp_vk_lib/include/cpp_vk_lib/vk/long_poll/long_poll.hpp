@@ -42,7 +42,10 @@ public:
      * \note If invalid event type provided, nothing will happen.
      */
     template <typename Executor>
-    void on_event(event::type, Executor);
+    void on_event(event::type type, Executor executor)
+    {
+        executors_[type] = executor;
+    }
     /*!
      * Start infinite event loop after setup events event handlers using long_poll::on_event.
      *
@@ -73,12 +76,6 @@ private:
     int64_t group_id_;
     std::unordered_map<event::type, std::function<void(const vk::event::common&)>> executors_;
 };
-
-template <typename Executor>
-void long_poll::on_event(event::type type, Executor executor)
-{
-    executors_[type] = executor;
-}
 
 }// namespace vk
 

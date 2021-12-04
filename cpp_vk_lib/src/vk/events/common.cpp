@@ -5,6 +5,8 @@
 #include "cpp_vk_lib/vk/events/wall_reply_new.hpp"
 #include "simdjson.h"
 
+#include <iostream>
+
 namespace vk::event {
 
 common::~common() = default;

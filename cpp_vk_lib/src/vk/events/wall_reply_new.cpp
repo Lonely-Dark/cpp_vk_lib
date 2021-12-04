@@ -11,9 +11,7 @@ wall_reply_new::~wall_reply_new() = default;
 wall_reply_new::wall_reply_new(simdjson::dom::object incoming_reply)
     : event_json_(std::make_unique<simdjson::dom::object>(incoming_reply))
 {
-    if (event()["attachments"].is_array() && event()["attachments"].get_array().size() > 0) {
-        has_attachments_ = true;
-    }
+    if (event()["attachments"].is_array() && event()["attachments"].get_array().size() > 0) { has_attachments_ = true; }
 
     if (spdlog::get_level() == SPDLOG_LEVEL_TRACE) {
         std::ostringstream ostream;

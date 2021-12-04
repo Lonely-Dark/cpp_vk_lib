@@ -13,6 +13,10 @@
 #include <unordered_map>
 #include <vector>
 
+namespace simdjson::dom {
+class parser;
+}// namespace simdjson::dom
+
 namespace vk {
 /*!
  * \brief Event queue that implements group long polling.
@@ -36,6 +40,10 @@ public:
      * \throw exception::access_error if group_id retrieving failed
      */
     long_poll(asio::io_context&);
+    /*!
+     * Destructor to satisfy correct opaque pointer handling.
+     */
+    ~long_poll();
     /*!
      * Setup action on selected event type.
      *
@@ -75,6 +83,7 @@ private:
     poll_payload poll_payload_;
     int64_t group_id_;
     std::unordered_map<event::type, std::function<void(const vk::event::common&)>> executors_;
+    std::unique_ptr<simdjson::dom::parser> shared_parser_;
 };
 
 }// namespace vk

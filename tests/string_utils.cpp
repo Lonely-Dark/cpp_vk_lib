@@ -5,6 +5,7 @@
 #include <deque>
 #include <forward_list>
 #include <list>
+#include <array>
 
 int main(int argc, char* argv[])
 {

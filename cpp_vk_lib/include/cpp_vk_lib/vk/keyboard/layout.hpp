@@ -8,6 +8,7 @@
 #include "cpp_vk_lib/vk/keyboard/flags.hpp"
 
 #include <any>
+#include <vector>
 
 namespace vk::keyboard {
 /*!

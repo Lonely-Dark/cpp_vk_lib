@@ -2,7 +2,7 @@ find_library(cpp_vk_lib PATHS "../cpp_vk_lib")
 
 include_directories(../cpp_vk_lib/include)
 
-#enable_testing()
+enable_testing()
 
 function (add_cpp_vk_lib_test bin_name path)
   if (CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")

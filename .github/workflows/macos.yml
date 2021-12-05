@@ -23,4 +23,4 @@ jobs:
       run: mkdir build && cd build && cmake .. && cmake --build . --parallel
       
     - name: run tests
-      run: cd build && ./build/tests
+      run: cd build && ctest

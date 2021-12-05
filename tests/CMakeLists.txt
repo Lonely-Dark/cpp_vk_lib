@@ -1,17 +1,24 @@
 find_library(cpp_vk_lib PATHS "../cpp_vk_lib")
 
 include_directories(../cpp_vk_lib/include)
-include_directories(../modules/spdlog/include)
-include_directories(../modules/asio/asio/include)
 
-set(EXECUTABLE_OUTPUT_PATH ../build)
+#enable_testing()
 
-add_compile_options(-Wall -Wextra -Werror -Wunused -Wwrite-strings -Wimplicit-fallthrough -pedantic)
-add_compile_options(-fPIC -O3)
-
-if (CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
+function (add_cpp_vk_lib_test bin_name path)
+  if (CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
     add_compile_options(-Wno-deprecated -Wno-deprecated-declarations)
-endif()
+  endif()
+  add_executable(${bin_name} ${path})
+  target_link_libraries(${bin_name} PRIVATE simdjson)
+  target_link_libraries(${bin_name} PUBLIC cpp_vk_lib)
+  add_test(
+       NAME ${bin_name}
+    COMMAND ${bin_name}
+  )
+endfunction()
 
-add_executable(tests main.cpp)
-target_link_libraries(tests simdjson gtest cpp_vk_lib)
+file (GLOB test_files LIST_DIRECTORIES FALSE "*.cpp")
+foreach (file ${test_files})
+  get_filename_component(name ${file} NAME_WE)
+  add_cpp_vk_lib_test(${name} ${file})
+endforeach()

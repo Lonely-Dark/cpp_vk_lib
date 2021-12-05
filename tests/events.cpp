@@ -1,11 +1,11 @@
+#include "setup_testing_environment.hpp"
+
 #include "cpp_vk_lib/vk/events/common.hpp"
 #include "cpp_vk_lib/vk/events/message_new.hpp"
 #include "cpp_vk_lib/vk/events/wall_post_new.hpp"
 #include "cpp_vk_lib/vk/events/wall_reply_new.hpp"
-#include "simdjson.h"
-#include "spdlog/spdlog.h"
 
-#include <gtest/gtest.h>
+#include "simdjson.h"
 
 constexpr char message_new[] = R"__(
     {
@@ -17,7 +17,6 @@ constexpr char message_new[] = R"__(
         "text":"123",
         "conversation_message_id":120470,
         "fwd_messages":[
-
         ],
         "important":false,
         "random_id":0,
@@ -169,7 +168,6 @@ constexpr char wall_reply_new[] = R"__(
        "post_id":310,
        "owner_id":-192764727,
        "parents_stack":[
-
        ],
        "date":1614250994,
        "text":"123",
@@ -180,85 +178,56 @@ constexpr char wall_reply_new[] = R"__(
     }
 )__";
 
-TEST(message_new, default_event)
+int main(int argc, char* argv[])
 {
-    simdjson::dom::parser parser;
-    simdjson::dom::element event_object = parser.parse(message_new, strlen(message_new));
-    vk::event::message_new event(event_object);
-    ASSERT_EQ("123", event.text());
-    ASSERT_EQ(499047616, event.from_id());
-    ASSERT_EQ(2000000008, event.peer_id());
-    ASSERT_EQ(120470, event.conversation_message_id());
-    ASSERT_EQ(false, event.has_action());
-    ASSERT_EQ(false, event.has_fwd_messages());
-    ASSERT_EQ(false, event.has_reply());
-}
-
-TEST(message_new, event_attachments)
-{
-    simdjson::dom::parser parser;
-    simdjson::dom::element event_object = parser.parse(message_new, strlen(message_new));
-    vk::event::message_new event(event_object);
-    auto photo_attachment = std::move(event.attachments()[0]);
-    ASSERT_EQ(1, event.attachments().size());
-    ASSERT_EQ("photo", photo_attachment->type());
-    ASSERT_EQ("photo499047616_457273210", photo_attachment->value());
-}
-
-TEST(wall_post_new, default_event)
-{
-    simdjson::dom::parser parser;
-    simdjson::dom::element event_object = parser.parse(wall_post_new, strlen(wall_post_new));
-    vk::event::wall_post_new event(event_object);
-    ASSERT_EQ(309, event.id());
-    ASSERT_EQ(-192764727, event.from_id());
-    ASSERT_EQ(-192764727, event.owner_id());
-    ASSERT_FALSE(event.marked_as_ads());
-    ASSERT_EQ("123", event.text());
-    ASSERT_TRUE(event.can_edit());
-    ASSERT_TRUE(event.can_delete());
-    ASSERT_EQ(1, event.attachments().size());
-    ASSERT_EQ("photo-192764727_457350091", event.attachments()[0]->value());
-}
-
-TEST(wall_reply_new, default_event)
-{
-    simdjson::dom::parser parser;
-    simdjson::dom::element event_object = parser.parse(wall_reply_new, strlen(wall_reply_new));
-    vk::event::wall_reply_new event(event_object);
-    ASSERT_EQ(312, event.id());
-    ASSERT_EQ(499047616, event.from_id());
-    ASSERT_EQ(310, event.post_id());
-    ASSERT_EQ(-192764727, event.owner_id());
-    ASSERT_EQ("123", event.text());
-}
-
-template <typename Event>
-static void create_basic_event_speed_test(const char* event, size_t length)
-{
-    size_t iterations = 10'000'000;
-    simdjson::dom::parser parser;
-    const simdjson::dom::element event_object = parser.parse(event, length);
-    auto start                                = std::chrono::high_resolution_clock::now();
-    for (size_t i = 0; i < iterations; ++i) { Event e{event_object}; }
-    auto time_spent             = std::chrono::high_resolution_clock::now() - start;
-    const float seconds_elapsed = std::chrono::duration_cast<std::chrono::duration<float>>(time_spent).count();
-    const float mib             = (iterations) / 1024.0 / 1024.0;
-    spdlog::info("total payload size: {} MiB", mib);
-    spdlog::info("created {} event objects in {} seconds ", iterations, seconds_elapsed);
-}
-
-TEST(event, message_new_speed_test)
-{
-    create_basic_event_speed_test<vk::event::message_new>(message_new, strlen(message_new));
-}
-
-TEST(event, wall_reply_new_speed_test)
-{
-    create_basic_event_speed_test<vk::event::wall_reply_new>(wall_reply_new, strlen(wall_reply_new));
-}
-
-TEST(event, wall_post_new_speed_test)
-{
-    create_basic_event_speed_test<vk::event::wall_post_new>(wall_post_new, strlen(wall_post_new));
+    SECTION(basic_message_new)
+    {
+        simdjson::dom::parser parser;
+        simdjson::dom::element event_object = parser.parse(message_new, strlen(message_new));
+        vk::event::message_new event(event_object);
+        TEST_CASE("123" == event.text());
+        TEST_CASE(499047616 == event.from_id());
+        TEST_CASE(2000000008 == event.peer_id());
+        TEST_CASE(120470 == event.conversation_message_id());
+        TEST_CASE(!event.has_action());
+        TEST_CASE(!event.has_fwd_messages());
+        TEST_CASE(!event.has_reply());
+    }
+    SECTION(message_new_with_attachments)
+    {
+        simdjson::dom::parser parser;
+        simdjson::dom::element event_object = parser.parse(message_new, strlen(message_new));
+        vk::event::message_new event(event_object);
+        auto photo_attachment = std::move(event.attachments()[0]);
+        TEST_CASE(event.attachments().size() == 1);
+        TEST_CASE(photo_attachment->type() == "photo");
+        TEST_CASE(photo_attachment->value() == "photo499047616_457273210");
+    }
+    SECTION(basic_wall_post_new)
+    {
+        simdjson::dom::parser parser;
+        simdjson::dom::element event_object = parser.parse(wall_post_new, strlen(wall_post_new));
+        vk::event::wall_post_new event(event_object);
+        TEST_CASE(event.id() == 309);
+        TEST_CASE(event.from_id() == -192764727);
+        TEST_CASE(event.owner_id() == -192764727);
+        TEST_CASE(!event.marked_as_ads());
+        TEST_CASE(event.text() == "123");
+        TEST_CASE(event.can_edit());
+        TEST_CASE(event.can_delete());
+        TEST_CASE(event.attachments().size() == 1);
+        TEST_CASE(event.attachments()[0]->value() == "photo-192764727_457350091");
+    }
+    SECTION(basic_wall_reply_new)
+    {
+        simdjson::dom::parser parser;
+        simdjson::dom::element event_object = parser.parse(wall_reply_new, strlen(wall_reply_new));
+        vk::event::wall_reply_new event(event_object);
+        TEST_CASE(event.id() == 312);
+        TEST_CASE(event.from_id() == 499047616);
+        TEST_CASE(event.post_id() == 310);
+        TEST_CASE(event.owner_id() == -192764727);
+        TEST_CASE(event.text() == "123");
+    }
+    return EXIT_SUCCESS;
 }

@@ -53,26 +53,36 @@ static size_t libcurl_file_write_cb(char* contents, size_t size, size_t nmemb, v
 
 static size_t libcurl_string_header_cb(char* contents, size_t size, size_t nmemb, void* stream)
 {
-    if (!stream) { return size * nmemb; }
+    if (!stream) {
+        return size * nmemb;
+    }
     size_t bytes = 0;
     sscanf(contents, "content-length: %zu\n", &bytes);
-    if (bytes > 0) { static_cast<std::string*>(stream)->reserve(bytes); }
+    if (bytes > 0) {
+        static_cast<std::string*>(stream)->reserve(bytes);
+    }
     return size * nmemb;
 }
 
 static size_t libcurl_buffer_header_cb(char* contents, size_t size, size_t nmemb, void* stream)
 {
-    if (!stream) { return size * nmemb; }
+    if (!stream) {
+        return size * nmemb;
+    }
     size_t bytes = 0;
     sscanf(contents, "content-length: %zu\n", &bytes);
-    if (bytes > 0) { static_cast<std::vector<uint8_t>*>(stream)->reserve(bytes); }
+    if (bytes > 0) {
+        static_cast<std::vector<uint8_t>*>(stream)->reserve(bytes);
+    }
     return size * nmemb;
 }
 
 [[maybe_unused]] static int atexit_handler = []() noexcept {
     std::atexit([] {
         for (const auto& [thread_id, handle] : curl_handles) {
-            if (handle) { curl_easy_cleanup(handle); }
+            if (handle) {
+                curl_easy_cleanup(handle);
+            }
         }
         curl_share_cleanup(shared_handle);
     });
@@ -80,7 +90,9 @@ static size_t libcurl_buffer_header_cb(char* contents, size_t size, size_t nmemb
 }();
 
 [[maybe_unused]] static int shared_curl_handler = []() noexcept {
-    for (auto& i : share_data_lock) { pthread_mutex_init(&i, nullptr); }
+    for (auto& i : share_data_lock) {
+        pthread_mutex_init(&i, nullptr);
+    }
 
     shared_handle = curl_share_init();
     curl_share_setopt(shared_handle, CURLSHOPT_LOCKFUNC, libcurl_lock_cb);
@@ -116,21 +128,27 @@ static std::string create_url(std::string_view host, Body&& body)
         result += '&';
     }
 
-    if (!body.empty()) { result.pop_back(); }
+    if (!body.empty()) {
+        result.pop_back();
+    }
     result.shrink_to_fit();
     return result;
 }
 
 static void libcurl_set_optional_verbose(CURL* handle) noexcept
 {
-    if (cpp_vk_lib_curl_verbose) { curl_easy_setopt(handle, CURLOPT_VERBOSE, 1L); }
+    if (cpp_vk_lib_curl_verbose) {
+        curl_easy_setopt(handle, CURLOPT_VERBOSE, 1L);
+    }
 }
 
 static CURL* libcurl_create_handle(std::string_view url) noexcept
 {
     auto current_thread_handle = []() noexcept {
         const std::thread::id thread_id = std::this_thread::get_id();
-        if (curl_handles.find(thread_id) == curl_handles.end()) { curl_handles[thread_id] = curl_easy_init(); }
+        if (curl_handles.find(thread_id) == curl_handles.end()) {
+            curl_handles[thread_id] = curl_easy_init();
+        }
         return curl_handles[thread_id];
     };
 

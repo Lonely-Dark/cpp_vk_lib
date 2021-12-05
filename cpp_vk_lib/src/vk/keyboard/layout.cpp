@@ -32,10 +32,18 @@ static VK_REALLY_INLINE runtime::result<std::string, int> create_impl(const std:
 
 static std::string create_button(const std::any& button)
 {
-    if (auto result = create_impl<button::text>(button); !result.error()) { return result.value(); }
-    if (auto result = create_impl<button::vk_pay>(button); !result.error()) { return result.value(); }
-    if (auto result = create_impl<button::open_app>(button); !result.error()) { return result.value(); }
-    if (auto result = create_impl<button::location>(button); !result.error()) { return result.value(); }
+    if (auto result = create_impl<button::text>(button); !result.error()) {
+        return result.value();
+    }
+    if (auto result = create_impl<button::vk_pay>(button); !result.error()) {
+        return result.value();
+    }
+    if (auto result = create_impl<button::open_app>(button); !result.error()) {
+        return result.value();
+    }
+    if (auto result = create_impl<button::location>(button); !result.error()) {
+        return result.value();
+    }
     throw error::runtime_error(-1, "cannot create button: bad cast");
 }
 
@@ -44,8 +52,12 @@ void layout::serialize()
     serialized_.clear();
     serialized_.reserve(250);
     serialized_.push_back('{');
-    if (has_flag(flag::in_line)) { serialized_.append("\"inline\":true,"); }
-    if (has_flag(flag::one_time)) { serialized_.append("\"one_time\":true,"); }
+    if (has_flag(flag::in_line)) {
+        serialized_.append("\"inline\":true,");
+    }
+    if (has_flag(flag::one_time)) {
+        serialized_.append("\"one_time\":true,");
+    }
     serialized_.append("\"buttons\":[");
     std::vector<std::string> serialized_rows;
     for (const auto& row : buttons_) {

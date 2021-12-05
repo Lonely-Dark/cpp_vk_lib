@@ -16,7 +16,9 @@ static std::string call(bool output_needed, std::string_view method, std::map<st
 {
     runtime::result<std::string, size_t> response =
         runtime::network::request(output_needed, append_url(method), std::move(params));
-    if (response.error()) { throw vk::error::runtime_error(response.error(), "Failed to execute HTTP GET"); }
+    if (response.error()) {
+        throw vk::error::runtime_error(response.error(), "Failed to execute HTTP GET");
+    }
     return response.value();
 }
 
@@ -55,7 +57,9 @@ struct do_not_use_api_link
         VK_UNUSED(user_token);
         VK_UNUSED(access_token);
         auto response(runtime::network::request(output_needed, method, std::move(params)));
-        if (response.error()) { throw vk::error::runtime_error(response.error(), "Failed to execute HTTP GET"); }
+        if (response.error()) {
+            throw vk::error::runtime_error(response.error(), "Failed to execute HTTP GET");
+        }
         return response.value();
     }
 };

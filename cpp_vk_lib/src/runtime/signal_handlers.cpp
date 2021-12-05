@@ -22,7 +22,9 @@ void runtime::setup_signal_handlers()
 #endif
 
 #if defined(__FreeBSD__) || defined(__linux__) || defined(__APPLE__)
-    for (int sig : {SIGCHLD, SIGCONT, SIGUSR1, SIGUSR2, SIGURG}) { info_signals.push_back(sig); }
+    for (int sig : {SIGCHLD, SIGCONT, SIGUSR1, SIGUSR2, SIGURG}) {
+        info_signals.push_back(sig);
+    }
     for (int sig : critical_signals) {
         signal(sig, [](int signal) {
             spdlog::critical("{} signal got, showing stacktrace dump and exit...", strsignal(signal));

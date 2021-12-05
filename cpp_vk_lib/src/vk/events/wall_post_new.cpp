@@ -11,9 +11,13 @@ wall_post_new::~wall_post_new() = default;
 wall_post_new::wall_post_new(simdjson::dom::object event)
     : event_json_(std::make_unique<simdjson::dom::object>(event))
 {
-    if (get_event()["attachments"].is_array()) { has_attachments_ = true; }
+    if (get_event()["attachments"].is_array()) {
+        has_attachments_ = true;
+    }
 
-    if (get_event()["copy_history"].is_array()) { has_repost_ = true; }
+    if (get_event()["copy_history"].is_array()) {
+        has_repost_ = true;
+    }
 
     if (spdlog::get_level() == SPDLOG_LEVEL_TRACE) {
         std::ostringstream ostream;
@@ -80,7 +84,9 @@ const simdjson::dom::object& wall_post_new::get_event() const
 
 std::vector<vk::attachment::attachment_ptr_t> wall_post_new::attachments() const
 {
-    if (has_attachments_) { return event::get_attachments(get_event()["attachments"]); }
+    if (has_attachments_) {
+        return event::get_attachments(get_event()["attachments"]);
+    }
 
     throw error::access_error(-1, "Attempting accessing empty attachment list.");
 }
@@ -144,7 +150,9 @@ std::ostream& operator<<(std::ostream& ostream, const vk::event::wall_post_new& 
         }
     };
 
-    if (event.has_attachments()) { append_attachments(event.attachments()); }
+    if (event.has_attachments()) {
+        append_attachments(event.attachments());
+    }
 
     if (event.has_repost()) {
         ostream << std::endl << std::setw(30) << "repost:";
@@ -153,7 +161,9 @@ std::ostream& operator<<(std::ostream& ostream, const vk::event::wall_post_new& 
         ostream << std::setw(30) << "owner_id: " << event.repost()->owner_id() << std::endl;
         ostream << std::setw(30) << "text: " << event.repost()->text() << std::endl;
 
-        if (!event.repost()->attachments().empty()) { append_attachments(event.repost()->attachments()); }
+        if (!event.repost()->attachments().empty()) {
+            append_attachments(event.repost()->attachments());
+        }
     }
 
     return ostream;

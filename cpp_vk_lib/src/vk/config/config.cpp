@@ -73,7 +73,9 @@ void loader::load_string(std::string_view string)
 
 loader& loader::get()
 {
-    if (!instance_) { throw std::runtime_error("Please, load config first."); }
+    if (!instance_) {
+        throw std::runtime_error("Please, load config first.");
+    }
 
     return *instance_;
 }

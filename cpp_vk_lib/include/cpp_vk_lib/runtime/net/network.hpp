@@ -4,6 +4,7 @@
 #include "cpp_vk_lib/runtime/result.hpp"
 
 #include <map>
+#include <optional>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -14,69 +15,63 @@ namespace runtime::network {
 
 static constexpr bool require_data = true;
 static constexpr bool omit_data    = false;
+
+struct request_context
+{
+    std::optional<std::map<std::string, std::string>> target{};
+    std::optional<std::string> host{};
+    std::optional<std::string> request_data{};
+    std::optional<std::string> io_filename{};
+    std::optional<std::vector<uint8_t>*> io_buffer_ptr{};
+    std::optional<std::string> io_server{};
+    std::optional<std::string> upload_field{};
+    std::optional<std::string> upload_content_type{};
+    bool output_needed{false};
+};
 /*!
- * \brief Perform HTTP POST request
+ * Perform HTTP POST request.
+ * \param ctx Request context.
+ * \throw std::bad_optional_access if `host` and `target` fields were not specified.
  *
- * \param[in] host part of URL
- * \param[in] target list of arguments
- *            e.g {{"a", "1"}, {"b", "2"}} => a=1&b=2
- * \return response output
+ * \return Result with payload string and 0 error code on success, empty string and -1 error code
+ * otherwise.
  */
-result<std::string, size_t>
-    request(bool output_needed, std::string_view host, const std::map<std::string, std::string>& target);
+result<std::string, size_t> request(const request_context& ctx);
 /*!
- * \brief Perform HTTP POST request
+ * Perform HTTP POST request with specified data.
+ * \param ctx Request context.
+ * \throw std::bad_optional_access if `host` and `request_data` fields were not specified.
  *
- * \param[in] host part of URL
- * \param[in] target list of arguments
- *            e.g {{"a", "1"}, {"b", "2"}} => a=1&b=2
- * \return response output
+ * \return Result with payload string and 0 error code on success, empty string and -1 error code
+ * otherwise.
  */
-result<std::string, size_t>
-    request(bool output_needed, std::string_view host, std::map<std::string, std::string>&& target = {});
+result<std::string, size_t> request_data(const request_context& ctx);
 /*!
- * \brief Download from server to filename
+ * Upload bytes from file or buffer to remote server.
+ * \todo Fix actually unknown reason of IO errors in libcurl.
+ * \param ctx Request context.
+ * \throw std::runtime_error if neither filename or buffer was specified.
+ * \throw std::bad_optional_access if
+ *   `io_filename` or `io_buffer_ptr`,
+ *   `upload_field`,
+ *   `upload_content_type`,
+ *   `io_server` fields were not specified.
  *
- * \note If file already exists, it will be overridden
- * \note This function follows redirects
- * \return -1 if file was not created or opened, 0 otherwise
+ * \return Result with payload string and 0 error code on success, empty string and -1 error code
+ * otherwise.
  */
-size_t download(std::string_view filename, std::string_view server);
+result<std::string, size_t> upload(const request_context& ctx);
 /*!
- * \brief Download from server to in-memory buffer
- *
- * \note This function follows redirects
- * \note The buffer is flushing before writing
- * \return -1 if failed, 0 otherwise.
+ * Download bytes from remote server to file or buffer.
+ * \param ctx Request context.
+ * \throw std::runtime_error if neither filename or buffer was specified.
+ * \throw std::bad_optional_access if
+ *   `io_filename` or `io_buffer_ptr`,
+ *   `io_server` fields were not specified.
+ * \
+ * \return 0 on success, -1 otherwise. (Actually to rework...)
  */
-size_t download(std::vector<uint8_t>& buffer, std::string_view server);
-/*!
- * \brief Upload file from filename to server
- *
- * \param[in] field_name needed to correct file uploading
- * \return upload response
- */
-result<std::string, size_t> upload(
-    bool output_needed, std::string_view field_name, std::string_view filename, std::string_view server,
-    std::string_view content_type = "application/octet-stream");
-/*!
- * \brief Upload file from buffer to server
- *
- * \param[in] field_name needed to correct file uploading
- * \param[in] content_type e.g `text/html` or `multipart/form-data`
- * \return upload response
- */
-result<std::string, size_t> upload(
-    bool output_needed, const std::vector<uint8_t>& buffer, std::string_view field_name, std::string_view server,
-    std::string_view content_type = "application/octet-stream");
-/*!
- * \brief Execute HTTP POST request with text data
- *
- * \param[in] host part of URL
- * \param[in] URL payload, e.g JSON
- * \return response output
- */
-result<std::string, size_t> request_data(bool output_needed, std::string_view host, std::string_view data);
+size_t download(request_context& ctx);
 
 }// namespace runtime::network
 

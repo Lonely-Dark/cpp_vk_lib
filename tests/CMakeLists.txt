@@ -2,6 +2,8 @@ find_library(cpp_vk_lib PATHS "../cpp_vk_lib")
 
 include_directories(../cpp_vk_lib/include)
 
+add_compile_options(-fPIC -flto -O3)
+
 enable_testing()
 
 function (add_cpp_vk_lib_test bin_name path)

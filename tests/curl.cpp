@@ -6,6 +6,7 @@
 
 #include <fstream>
 #include <future>
+#include <iostream>
 
 int main(int argc, char* argv[])
 {
@@ -16,7 +17,11 @@ int main(int argc, char* argv[])
             std::promise<std::string> promise;
             std::future<std::string> future = promise.get_future();
             std::thread thread([promise = std::move(promise)]() mutable {
-                const auto received = runtime::network::request(runtime::network::require_data, "https://www.example.com");
+                runtime::network::request_context ctx;
+                ctx.output_needed = true;
+                ctx.host = "https://www.example.com";
+                ctx.target = std::make_optional<std::map<std::string, std::string>>();
+                const auto received = runtime::network::request(ctx);
                 promise.set_value(received.value());
             });
             threads.emplace_back(std::move(thread), std::move(future));
@@ -32,7 +37,11 @@ int main(int argc, char* argv[])
     }
     SECTION(POST_require_data)
     {
-        const auto received = runtime::network::request(runtime::network::require_data, "https://www.google.com");
+        runtime::network::request_context ctx;
+        ctx.output_needed = true;
+        ctx.host = "https://www.google.com";
+        ctx.target = std::make_optional<std::map<std::string, std::string>>();
+        const auto received = runtime::network::request(ctx);
         TEST_CASE(!received.error());
         const auto& result = received.value();
         TEST_CASE(!result.empty());
@@ -40,11 +49,19 @@ int main(int argc, char* argv[])
     }
     SECTION(POST_omit_data)
     {
-        const auto received = runtime::network::request(runtime::network::omit_data, "https://www.google.com");
+        runtime::network::request_context ctx;
+        ctx.output_needed = true;
+        ctx.host = "https://www.google.com";
+        ctx.target = std::make_optional<std::map<std::string, std::string>>();
+        const auto received = runtime::network::request(ctx);
         TEST_CASE(!received.error());
     }
 
-    static auto raw_url_result = runtime::network::request(runtime::network::require_data, "https://api.thecatapi.com/v1/images/search");
+    runtime::network::request_context ctx;
+    ctx.output_needed = true;
+    ctx.host = "https://api.thecatapi.com/v1/images/search";
+    ctx.target = std::make_optional<std::map<std::string, std::string>>();
+    const auto raw_url_result = runtime::network::request(ctx);
     TEST_CASE(!raw_url_result.error());
     TEST_CASE(!raw_url_result.value().empty());
     simdjson::dom::parser parser;
@@ -52,27 +69,34 @@ int main(int argc, char* argv[])
 
     SECTION(download_to_file)
     {
-        TEST_CASE(runtime::network::download("buffer", cat_url) == 0);
+        runtime::network::request_context cat_ctx;
+        cat_ctx.io_filename = "buffer";
+        cat_ctx.io_server = cat_url;
+        TEST_CASE(runtime::network::download(cat_ctx) == 0);
         std::remove("buffer");
     }
     SECTION(download_to_buffer)
     {
         std::vector<uint8_t> bytes;
-        TEST_CASE(runtime::network::download(bytes, cat_url) == 0);
+        runtime::network::request_context cat_ctx;
+        cat_ctx.io_buffer_ptr = &bytes;
+        cat_ctx.io_server = cat_url;
+        TEST_CASE(runtime::network::download(cat_ctx) == 0);
     }
     SECTION(download_compare)
     {
-        runtime::network::download("file", cat_url);
+        runtime::network::request_context file_ctx;
+        file_ctx.io_filename = "file";
+        file_ctx.io_server = cat_url;
         std::ostringstream ss;
         ss << std::ifstream("file").rdbuf();
         const std::string& streambuf = ss.str();
         std::vector<uint8_t> file_buffer(streambuf.begin(), streambuf.end());
 
         std::vector<uint8_t> raw_buffer;
-        runtime::network::download(raw_buffer, cat_url);
-
+        runtime::network::request_context buffer_ctx;
+        buffer_ctx.io_buffer_ptr = &raw_buffer;
         TEST_CASE(file_buffer == raw_buffer);
-
         std::remove("file");
     }
     return EXIT_SUCCESS;

@@ -34,8 +34,8 @@ if(CPP_VK_LIB_SANITIZE)
         -fsanitize-address-use-after-scope
     )
     if(CMAKE_CXX_COMPILER MATCHES "clang")
-        add_compile_options(-fsanitize=cfa)
-        link_libraries(-fsanitize=cfa)
+        add_compile_options(-fsanitize=cfi)
+        link_libraries(-fsanitize=cfi)
     endif()
 endif()
 

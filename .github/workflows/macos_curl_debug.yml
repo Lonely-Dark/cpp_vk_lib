@@ -1,4 +1,4 @@
-name: Ubuntu
+name: MacOS cURL debug
 
 on:
   push:
@@ -9,18 +9,18 @@ on:
   pull_request:
 
 jobs:
-  build-ubuntu:
+  cURL-debug:
 
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v2
 
     - name: install deps
-      run: sudo apt-get update && sudo apt-get install curl libcurl4-openssl-dev
+      run: brew install curl
 
     - name: run CMake
       run: mkdir build && cd build && cmake .. -DCPP_VK_LIB_SANITIZE=1 && cmake --build . --parallel
 
     - name: run tests
-      run: cd build/tests && ctest .
+      run: cd build/tests && ./keyboard

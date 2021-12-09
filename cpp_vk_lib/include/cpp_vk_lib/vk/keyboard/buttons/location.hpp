@@ -1,17 +1,17 @@
 #ifndef VK_KEYBOARD_BUTTONS_LOCATION_HPP
 #define VK_KEYBOARD_BUTTONS_LOCATION_HPP
 
-#include "spdlog/fmt/fmt.h"
+#include "cpp_vk_lib/vk/keyboard/buttons/base.hpp"
 
 namespace vk::keyboard::button {
 
-class location
+class location : public button::base
 {
 public:
-    std::string serialize() const noexcept
+    std::string serialize() const override
     {
         /// Escape '{' and '}' like other button payloads.
-        return fmt::format(R"__({{"action":{{"type":"location","payload":"{{\"button\":\"1\"}}"}}}})__");
+        return R"__({"action":{"type":"location","payload":"{\"button\":\"1\"}"}})__";
     }
 };
 

@@ -3,7 +3,6 @@
 #include "callback.hpp"
 #include "cpp_vk_lib/runtime/uncopyable.hpp"
 #include "cpp_vk_lib/runtime/unmovable.hpp"
-#include "spdlog/spdlog.h"
 
 #include <curl/curl.h>
 #include <iostream>
@@ -22,6 +21,16 @@ public:
         setup_shared_handle();
     }
 
+    ~libcurl_wrap()
+    {
+        for (const auto& [thread_id, handle] : handles_) {
+            if (handle) {
+                curl_easy_cleanup(handle);
+            }
+        }
+        curl_share_cleanup(shared_handle_);
+    }
+
     static libcurl_wrap* get()
     {
         if (!wrap_) {
@@ -33,16 +42,16 @@ public:
 
     static CURL* create(std::string_view url)
     {
-        auto current_thread_handle = []() {
-            static std::map<std::thread::id, CURL*> handles;
+        auto current_thread_handle = [&]() mutable {
             const std::thread::id thread_id = std::this_thread::get_id();
-            if (handles.find(thread_id) == handles.end()) {
-                handles[thread_id] = curl_easy_init();
+            if (handles_.find(thread_id) == handles_.end()) {
+                handles_[thread_id] = curl_easy_init();
             }
-            return handles[thread_id];
+            return handles_[thread_id];
         };
 
         CURL* handle = current_thread_handle();
+        curl_easy_reset(handle);
         if (!handle) {
             spdlog::error("curl_easy_init() failed");
             exit(-1);
@@ -91,11 +100,14 @@ private:
         pthread_mutex_unlock(&share_data_lock_[data]);
     }
 
+    static std::map<std::thread::id, CURL*> handles_;
     static libcurl_wrap* wrap_;
     static CURLSH* shared_handle_;
     static pthread_mutex_t share_data_lock_[CURL_LOCK_DATA_LAST];
+    static const int at_exit_handler;
 };
 
+std::map<std::thread::id, CURL*> libcurl_wrap::handles_{};
 libcurl_wrap* libcurl_wrap::wrap_    = nullptr;
 CURLSH* libcurl_wrap::shared_handle_ = nullptr;
 pthread_mutex_t libcurl_wrap::share_data_lock_[CURL_LOCK_DATA_LAST];
@@ -104,6 +116,13 @@ static libcurl_wrap* curl_handle()
 {
     return libcurl_wrap::get();
 }
+
+[[maybe_unused]] int at_exit_handler = []() {
+    std::atexit([] {
+        curl_handle()->~libcurl_wrap();
+    });
+    return 0;
+}();
 
 }// namespace impl
 
@@ -120,7 +139,7 @@ static std::string create_url(std::string_view host, Body&& body)
     result += host;
 
     auto escape = [](std::string_view url) {
-        char* encoded = curl_easy_escape(nullptr, url.data(), url.length());
+        char* encoded   = curl_easy_escape(nullptr, url.data(), url.length());
         std::string res = encoded;
         curl_free(encoded);
         return res;
@@ -157,7 +176,6 @@ static runtime::result<std::string, size_t> libcurl_to_string_recv(CURL* handle,
     }
     if (const CURLcode res = curl_easy_perform(handle); res != CURLE_OK) {
         spdlog::error("curl_easy_perform() failed: {}", curl_easy_strerror(res));
-        curl_easy_reset(handle);
         return {"", -1UL};
     }
     output.shrink_to_fit();
@@ -177,10 +195,8 @@ static size_t libcurl_to_buffer_recv(
     }
     if (const CURLcode res = curl_easy_perform(handle); res != CURLE_OK) {
         spdlog::error("curl_easy_perform() failed: {}", curl_easy_strerror(res));
-        curl_easy_reset(handle);
         return -1;
     }
-    curl_easy_reset(handle);
     return 0;
 }
 

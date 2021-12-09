@@ -4,9 +4,9 @@
 
 #include <iostream>
 
-#define TEST_CASE(stmt) if (!(stmt)) { return EXIT_FAILURE; }
+#define TEST_CASE(stmt) if (!(stmt)) { std::cout << "test case " << #stmt << " failed\n"; return EXIT_FAILURE; }
 
-#define SECTION(string)
+#define SECTION(string) (std::cout << "test section " #string << std::endl);
 
 void setup_cpp_vk_lib_environment()
 {
@@ -29,5 +29,5 @@ void setup_cpp_vk_lib_environment()
 
     vk::config::load_string(sample_config);
     runtime::setup_signal_handlers();
-    runtime::setup_logger(spdlog::level::level_enum::info);
+    runtime::setup_logger(spdlog::level::level_enum::trace);
 }

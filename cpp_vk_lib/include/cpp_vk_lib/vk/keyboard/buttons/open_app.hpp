@@ -3,9 +3,11 @@
 
 #include "spdlog/fmt/fmt.h"
 
+#include "cpp_vk_lib/vk/keyboard/buttons/base.hpp"
+
 namespace vk::keyboard::button {
 
-class open_app
+class open_app : public button::base
 {
 public:
     open_app(int64_t app_id, int64_t owner_id, std::string_view hash, std::string_view label)
@@ -15,7 +17,7 @@ public:
         , label_(label)
     {}
 
-    std::string serialize() const
+    std::string serialize() const override
     {
         return fmt::format(
             R"__({{"action":{{"type":"open_app","app_id":{},"owner_id":{},"hash":"{}","label":"{}"}}}})__",

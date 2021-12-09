@@ -7,7 +7,7 @@
 #include "cpp_vk_lib/vk/keyboard/buttons/vk_pay.hpp"
 #include "cpp_vk_lib/vk/keyboard/flags.hpp"
 
-#include <any>
+#include <memory>
 #include <vector>
 
 namespace vk::keyboard {
@@ -20,7 +20,13 @@ public:
     layout() = default;
     layout(keyboard::flag flags);
 
-    void add_row(std::vector<std::any>&&);
+    template <typename... Buttons>
+    void add_row(Buttons&&... buttons)
+    {
+        std::vector<std::shared_ptr<button::base>> row;
+        (row.push_back(std::forward<Buttons>(buttons)), ...);
+        buttons_.push_back(std::move(row));
+    }
     /*!
      * Convert stored buttons data to JSON schema and store output to
      * serialized_.
@@ -34,7 +40,7 @@ public:
 
 private:
     std::string serialized_{};
-    std::vector<std::vector<std::any>> buttons_{};
+    std::vector<std::vector<std::shared_ptr<button::base>>> buttons_{};
     flag flags_ = vk::keyboard::flag::none;
 };
 

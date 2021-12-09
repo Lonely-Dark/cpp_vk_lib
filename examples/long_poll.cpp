@@ -8,7 +8,7 @@
 
 #include <iostream>
 
-inline bool cpp_vk_lib_curl_verbose = false;
+inline bool cpp_vk_lib_curl_verbose = true;
 
 int main(int argc, char* argv[])
 {

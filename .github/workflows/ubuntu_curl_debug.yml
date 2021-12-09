@@ -1,4 +1,4 @@
-name: Ubuntu
+name: Ubuntu cURL debug
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
   pull_request:
 
 jobs:
-  build-ubuntu:
+  cURL-debug:
 
     runs-on: ubuntu-latest
 
@@ -23,4 +23,4 @@ jobs:
       run: mkdir build && cd build && cmake .. -DCPP_VK_LIB_SANITIZE=1 && cmake --build . --parallel
 
     - name: run tests
-      run: cd build/tests && ctest .
+      run: cd build/tests && ./curl

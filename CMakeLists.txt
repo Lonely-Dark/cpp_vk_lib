@@ -22,6 +22,7 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 
 set(BUILD_SHARED_LIBS ON CACHE BOOL "Link simdjson as shared library")
 set(CPP_VK_LIB_STATIC_BUILD OFF CACHE BOOL "Link cpp_vk_lib as shared library by default")
+set(CPP_VK_LIB_SANITIZE OFF CACHE BOOL "Enable address and CFI sanitizer for Clang")
 
 add_subdirectory(modules)
 add_subdirectory(cpp_vk_lib)

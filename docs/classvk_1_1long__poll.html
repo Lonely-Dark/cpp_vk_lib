@@ -91,9 +91,11 @@ Classes</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abfa91d8b9bcee69db1f4116b5915f30f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1long__poll.html#abfa91d8b9bcee69db1f4116b5915f30f">long_poll</a> (asio::io_context &amp;)</td></tr>
 <tr class="separator:abfa91d8b9bcee69db1f4116b5915f30f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c14dfda6b12ac210b971842a48a7f42"><td class="memTemplParams" colspan="2">template&lt;typename Executor &gt; </td></tr>
-<tr class="memitem:a1c14dfda6b12ac210b971842a48a7f42"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classvk_1_1long__poll.html#a1c14dfda6b12ac210b971842a48a7f42">on_event</a> (event::type, Executor)</td></tr>
-<tr class="separator:a1c14dfda6b12ac210b971842a48a7f42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac77b705c83cfe80c602cb6d85cd4a355"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1long__poll.html#ac77b705c83cfe80c602cb6d85cd4a355">~long_poll</a> ()</td></tr>
+<tr class="separator:ac77b705c83cfe80c602cb6d85cd4a355"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a431170553d53efd9883be2671562b03b"><td class="memTemplParams" colspan="2">template&lt;typename Executor &gt; </td></tr>
+<tr class="memitem:a431170553d53efd9883be2671562b03b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classvk_1_1long__poll.html#a431170553d53efd9883be2671562b03b">on_event</a> (event::type type, Executor executor)</td></tr>
+<tr class="separator:a431170553d53efd9883be2671562b03b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a052c147defdb287a2ad8d603c3e0dc3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1long__poll.html#a052c147defdb287a2ad8d603c3e0dc3e">run</a> (int8_t timeout=60)</td></tr>
 <tr class="separator:a052c147defdb287a2ad8d603c3e0dc3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_structruntime_1_1uncopyable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_structruntime_1_1uncopyable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="structruntime_1_1uncopyable.html">runtime::uncopyable</a></td></tr>
@@ -132,6 +134,9 @@ int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>group_id_</b></td>
 <tr class="memitem:af2b5f713929ede4d3cfdeacdda0a6c85"><td class="memItemLeft" align="right" valign="top"><a id="af2b5f713929ede4d3cfdeacdda0a6c85" name="af2b5f713929ede4d3cfdeacdda0a6c85"></a>
 std::unordered_map&lt; event::type, std::function&lt; void(const <a class="el" href="classvk_1_1event_1_1common.html">vk::event::common</a> &amp;)&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>executors_</b></td></tr>
 <tr class="separator:af2b5f713929ede4d3cfdeacdda0a6c85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa6524eb93ac199b96ef208e5f3f3773"><td class="memItemLeft" align="right" valign="top"><a id="afa6524eb93ac199b96ef208e5f3f3773" name="afa6524eb93ac199b96ef208e5f3f3773"></a>
+std::unique_ptr&lt; simdjson::dom::parser &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>shared_parser_</b></td></tr>
+<tr class="separator:afa6524eb93ac199b96ef208e5f3f3773"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Event queue that implements group long polling. </p>
@@ -158,6 +163,32 @@ std::unordered_map&lt; event::type, std::function&lt; void(const <a class="el" h
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ac77b705c83cfe80c602cb6d85cd4a355" name="ac77b705c83cfe80c602cb6d85cd4a355"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac77b705c83cfe80c602cb6d85cd4a355">&#9670;&nbsp;</a></span>~long_poll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">vk::long_poll::~long_poll </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Destructor to satisfy correct opaque pointer handling. </p>
 
 </div>
 </div>
@@ -192,13 +223,16 @@ std::unordered_map&lt; event::type, std::function&lt; void(const <a class="el" h
 
 </div>
 </div>
-<a id="a1c14dfda6b12ac210b971842a48a7f42" name="a1c14dfda6b12ac210b971842a48a7f42"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c14dfda6b12ac210b971842a48a7f42">&#9670;&nbsp;</a></span>on_event()</h2>
+<a id="a431170553d53efd9883be2671562b03b" name="a431170553d53efd9883be2671562b03b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a431170553d53efd9883be2671562b03b">&#9670;&nbsp;</a></span>on_event()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Executor &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void vk::long_poll::on_event </td>
@@ -218,6 +252,11 @@ template&lt;typename Executor &gt; </div>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p >Setup action on selected event type.</p>
 <dl class="section note"><dt>Note</dt><dd>If invalid event type provided, nothing will happen. </dd></dl>
@@ -239,7 +278,7 @@ template&lt;typename Executor &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Start infinite event loop after setup events event handlers using <a class="el" href="classvk_1_1long__poll.html#a1c14dfda6b12ac210b971842a48a7f42">long_poll::on_event</a>.</p>
+<p >Start infinite event loop after setup events event handlers using <a class="el" href="classvk_1_1long__poll.html#a431170553d53efd9883be2671562b03b">long_poll::on_event</a>.</p>
 <p >After all tasks are completed, the queue returns to its original state. </p>
 
 </div>

@@ -106,25 +106,29 @@ $(function() {
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">void</span> tie(First&amp; <a class="code hl_function" href="structruntime_1_1result.html#a7fafb322913e9bdbf02305322085a737">value</a>, Second&amp; error) <span class="keyword">noexcept</span></div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    {</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        error = this-&gt;second;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordflow">if</span> (!error) { <a class="code hl_function" href="structruntime_1_1result.html#a7fafb322913e9bdbf02305322085a737">value</a> = std::forward&lt;result&lt;First, Second&gt;&gt;(*this).first; }</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    }</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">const</span> Second&amp; error() <span class="keyword">const</span> <span class="keyword">noexcept</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    {</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">return</span> this-&gt;second;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    }</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="structruntime_1_1result.html#a7fafb322913e9bdbf02305322085a737">   47</a></span>    <span class="keyword">const</span> First&amp; <a class="code hl_function" href="structruntime_1_1result.html#a7fafb322913e9bdbf02305322085a737">value</a>()<span class="keyword"> const</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordflow">if</span> (error()) { <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;failed to get value(): error exists&quot;</span>); }</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">return</span> this-&gt;first;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    }</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>};</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>}<span class="comment">// namespace runtime</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#endif</span><span class="comment">// RUNTIME_RESULT_HPP</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordflow">if</span> (!error) {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            <a class="code hl_function" href="structruntime_1_1result.html#a7fafb322913e9bdbf02305322085a737">value</a> = std::forward&lt;result&lt;First, Second&gt;&gt;(*this).first;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    }</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">const</span> Second&amp; error() <span class="keyword">const</span> <span class="keyword">noexcept</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordflow">return</span> this-&gt;second;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    }</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="structruntime_1_1result.html#a7fafb322913e9bdbf02305322085a737">   49</a></span>    <span class="keyword">const</span> First&amp; <a class="code hl_function" href="structruntime_1_1result.html#a7fafb322913e9bdbf02305322085a737">value</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordflow">if</span> (error()) {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;failed to get value(): error exists&quot;</span>);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keywordflow">return</span> this-&gt;first;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    }</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>};</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>}<span class="comment">// namespace runtime</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#endif</span><span class="comment">// RUNTIME_RESULT_HPP</span></div>
 <div class="ttc" id="astructruntime_1_1result_html"><div class="ttname"><a href="structruntime_1_1result.html">runtime::result</a></div><div class="ttdef"><b>Definition:</b> result.hpp:13</div></div>
-<div class="ttc" id="astructruntime_1_1result_html_a7fafb322913e9bdbf02305322085a737"><div class="ttname"><a href="structruntime_1_1result.html#a7fafb322913e9bdbf02305322085a737">runtime::result::value</a></div><div class="ttdeci">const First &amp; value() const</div><div class="ttdef"><b>Definition:</b> result.hpp:47</div></div>
+<div class="ttc" id="astructruntime_1_1result_html_a7fafb322913e9bdbf02305322085a737"><div class="ttname"><a href="structruntime_1_1result.html#a7fafb322913e9bdbf02305322085a737">runtime::result::value</a></div><div class="ttdeci">const First &amp; value() const</div><div class="ttdef"><b>Definition:</b> result.hpp:49</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

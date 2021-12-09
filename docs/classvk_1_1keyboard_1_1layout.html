@@ -85,9 +85,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a44fc77f14bda899cb45ae90e625251c6"><td class="memItemLeft" align="right" valign="top"><a id="a44fc77f14bda899cb45ae90e625251c6" name="a44fc77f14bda899cb45ae90e625251c6"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>layout</b> (keyboard::flag flags)</td></tr>
 <tr class="separator:a44fc77f14bda899cb45ae90e625251c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca416c537ec34c43be61f69268dc0660"><td class="memItemLeft" align="right" valign="top"><a id="aca416c537ec34c43be61f69268dc0660" name="aca416c537ec34c43be61f69268dc0660"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>add_row</b> (std::vector&lt; std::any &gt; &amp;&amp;)</td></tr>
-<tr class="separator:aca416c537ec34c43be61f69268dc0660"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ddd0128346aeaa71440785acf73a805"><td class="memTemplParams" colspan="2"><a id="a6ddd0128346aeaa71440785acf73a805" name="a6ddd0128346aeaa71440785acf73a805"></a>
+template&lt;typename... Buttons&gt; </td></tr>
+<tr class="memitem:a6ddd0128346aeaa71440785acf73a805"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>add_row</b> (Buttons &amp;&amp;... buttons)</td></tr>
+<tr class="separator:a6ddd0128346aeaa71440785acf73a805"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c1a4c1fcb333d4c98e67cf097566c17"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1keyboard_1_1layout.html#a9c1a4c1fcb333d4c98e67cf097566c17">serialize</a> ()</td></tr>
 <tr class="separator:a9c1a4c1fcb333d4c98e67cf097566c17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2927084b2567e0b7188a83c7285f0ffc"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1keyboard_1_1layout.html#a2927084b2567e0b7188a83c7285f0ffc">get</a> () const noexcept</td></tr>
@@ -101,9 +102,9 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a59502e0b6575d8c93215579f6f5cf52e"><td class="memItemLeft" align="right" valign="top"><a id="a59502e0b6575d8c93215579f6f5cf52e" name="a59502e0b6575d8c93215579f6f5cf52e"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>serialized_</b> {}</td></tr>
 <tr class="separator:a59502e0b6575d8c93215579f6f5cf52e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab04b37967418c0ae40cae859b0fbf3c1"><td class="memItemLeft" align="right" valign="top"><a id="ab04b37967418c0ae40cae859b0fbf3c1" name="ab04b37967418c0ae40cae859b0fbf3c1"></a>
-std::vector&lt; std::vector&lt; std::any &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buttons_</b> {}</td></tr>
-<tr class="separator:ab04b37967418c0ae40cae859b0fbf3c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae420796f4eb2452ca4d261cf69747f01"><td class="memItemLeft" align="right" valign="top"><a id="ae420796f4eb2452ca4d261cf69747f01" name="ae420796f4eb2452ca4d261cf69747f01"></a>
+std::vector&lt; std::vector&lt; std::shared_ptr&lt; <a class="el" href="classvk_1_1keyboard_1_1button_1_1base.html">button::base</a> &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buttons_</b> {}</td></tr>
+<tr class="separator:ae420796f4eb2452ca4d261cf69747f01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9628549cabbf33edab4228a6ae96f71"><td class="memItemLeft" align="right" valign="top"><a id="af9628549cabbf33edab4228a6ae96f71" name="af9628549cabbf33edab4228a6ae96f71"></a>
 flag&#160;</td><td class="memItemRight" valign="bottom"><b>flags_</b> = vk::keyboard::flag::none</td></tr>
 <tr class="separator:af9628549cabbf33edab4228a6ae96f71"><td class="memSeparator" colspan="2">&#160;</td></tr>

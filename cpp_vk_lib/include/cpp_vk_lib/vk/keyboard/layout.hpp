@@ -24,6 +24,7 @@ public:
     void add_row(Buttons&&... buttons)
     {
         std::vector<std::shared_ptr<button::base>> row;
+        row.reserve(sizeof...(Buttons));
         (row.push_back(std::forward<Buttons>(buttons)), ...);
         buttons_.push_back(std::move(row));
     }

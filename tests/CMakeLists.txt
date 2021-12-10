@@ -4,6 +4,21 @@ include_directories(../cpp_vk_lib/include)
 
 add_compile_options(-fPIC -flto -O3)
 
+add_compile_options(
+    -fsanitize=address -fno-omit-frame-pointer
+    -fsanitize=undefined -fno-sanitize-recover=all
+    -fsanitize-address-use-after-scope
+)
+link_libraries(
+    -fsanitize=address -fno-omit-frame-pointer
+    -fsanitize=undefined -fno-sanitize-recover=all
+    -fsanitize-address-use-after-scope
+)
+if(CMAKE_CXX_COMPILER MATCHES "clang")
+    add_compile_options(-fsanitize=cfi)
+    link_libraries(-fsanitize=cfi)
+endif()
+
 enable_testing()
 
 function(add_cpp_vk_lib_test bin_name path)

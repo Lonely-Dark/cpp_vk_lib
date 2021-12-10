@@ -8,6 +8,8 @@ namespace vk::keyboard::button {
 class base
 {
 public:
+    virtual ~base() = default;
+
     virtual std::string serialize() const = 0;
 };
 

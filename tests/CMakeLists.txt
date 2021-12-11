@@ -1,5 +1,3 @@
-include(../cmake/cpp_vk_lib_sanitize.cmake)
-
 find_library(cpp_vk_lib PATHS "../cpp_vk_lib")
 
 include_directories(../cpp_vk_lib/include)

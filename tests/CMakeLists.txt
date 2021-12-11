@@ -1,35 +1,23 @@
+include(../cmake/cpp_vk_lib_sanitize.cmake)
+
 find_library(cpp_vk_lib PATHS "../cpp_vk_lib")
 
 include_directories(../cpp_vk_lib/include)
 
-add_compile_options(-fPIC -flto -O3)
-
-add_compile_options(
-    -fsanitize=address -fno-omit-frame-pointer
-    -fsanitize=undefined -fno-sanitize-recover=all
-    -fsanitize-address-use-after-scope
-)
-link_libraries(
-    -fsanitize=address -fno-omit-frame-pointer
-    -fsanitize=undefined -fno-sanitize-recover=all
-    -fsanitize-address-use-after-scope
-)
-if(CMAKE_CXX_COMPILER MATCHES "clang")
-    add_compile_options(-fsanitize=cfi)
-    link_libraries(-fsanitize=cfi)
-endif()
-
 enable_testing()
 
-function(add_cpp_vk_lib_test bin_name path)
+function(add_vk_test bin_name path)
     if(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
         add_compile_options(-Wno-deprecated -Wno-deprecated-declarations)
     endif()
     add_executable(${bin_name} ${path})
+    target_compile_options(
+        ${bin_name} PRIVATE -fPIC -flto -O3
+    )
     target_link_libraries(${bin_name} PRIVATE simdjson)
     target_link_libraries(${bin_name} PUBLIC cpp_vk_lib)
     add_test(
-        NAME ${bin_name}
+           NAME ${bin_name}
         COMMAND ${bin_name}
     )
 endfunction()
@@ -37,5 +25,5 @@ endfunction()
 file(GLOB test_files LIST_DIRECTORIES FALSE "*.cpp")
 foreach(file ${test_files})
     get_filename_component(name ${file} NAME_WE)
-    add_cpp_vk_lib_test(${name} ${file})
+    add_vk_test(${name} ${file})
 endforeach()

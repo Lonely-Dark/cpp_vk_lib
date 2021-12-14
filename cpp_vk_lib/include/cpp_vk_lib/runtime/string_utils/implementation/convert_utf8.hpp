@@ -3,6 +3,7 @@
 
 #include <codecvt>
 #include <locale>
+#include <functional>
 
 namespace runtime::string_utils::implementation {
 

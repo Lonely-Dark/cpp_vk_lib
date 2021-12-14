@@ -45,7 +45,7 @@ public:
         auto current_thread_handle = [&]() mutable {
             const std::thread::id thread_id = std::this_thread::get_id();
             if (handles_.find(thread_id) == handles_.end()) {
-                handles_[thread_id] = curl_easy_init();
+                handles_.insert(std::make_pair(thread_id, curl_easy_init()));
             }
             return handles_[thread_id];
         };

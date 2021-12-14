@@ -35,7 +35,6 @@ void layout::serialize()
     }
     serialized_ += runtime::string_utils::join(serialized_rows, ',');
     serialized_ += "]}";
-    serialized_.shrink_to_fit();
 }
 
 const std::string& layout::get() const noexcept

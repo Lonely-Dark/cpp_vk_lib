@@ -1,7 +1,7 @@
 #include "cpp_vk_lib/vk/events/message_new.hpp"
 
 #include "simdjson.h"
-#include "time_measurement.hpp"
+#include "../benchmarking.hpp"
 
 #include <fstream>
 #include <thread>
@@ -83,11 +83,11 @@ constexpr char message_new_payload[] = R"__(
 
 int main()
 {
-    std::ofstream benchmark_file("message_new.txt");
+    std::ofstream benchmark_file(get_current_file_without_extension() + ".txt");
     benchmark_file.clear();
     benchmark_file << "Total Seconds\n";
 
-    for (size_t total_events = 0; total_events < 50'000; total_events += 100) {
+    for (size_t total_events = 0; total_events < 50'000; total_events += 2500) {
         std::string time_spent = time_measurement(total_events, []{
             simdjson::dom::parser parser;
             simdjson::dom::element event_object = parser.parse(message_new_payload, strlen(message_new_payload));

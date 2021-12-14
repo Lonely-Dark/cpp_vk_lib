@@ -1,10 +1,8 @@
 #ifndef VK_KEYBOARD_BUTTONS_TEXT_HPP
 #define VK_KEYBOARD_BUTTONS_TEXT_HPP
 
-
 #include "cpp_vk_lib/vk/keyboard/buttons/base.hpp"
 #include "cpp_vk_lib/vk/keyboard/colors.hpp"
-
 #include "spdlog/fmt/fmt.h"
 #include "spdlog/fmt/ostr.h"
 

@@ -1,9 +1,8 @@
 ﻿#ifndef VK_KEYBOARD_BUTTONS_OPEN_APP_HPP
 #define VK_KEYBOARD_BUTTONS_OPEN_APP_HPP
 
-#include "spdlog/fmt/fmt.h"
-
 #include "cpp_vk_lib/vk/keyboard/buttons/base.hpp"
+#include "spdlog/fmt/fmt.h"
 
 namespace vk::keyboard::button {
 

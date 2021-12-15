@@ -1,10 +1,18 @@
 /*!
  * \mainpage
  *
- * ### CMake opts:
- * **-DCPP_VK_LIB_STATIC_BUILD**
- * - 1 - build static library
+ * ### CMake options:
+ * **-D CPP_VK_LIB_STATIC_BUILD**
  * - 0 - build shared library (default)
+ * - 1 - build static library
+ *
+ * **-D CPP_VK_LIB_SANITIZE**
+ * - 0 - build library without memory and control flow sanitizers
+ * - 1 - build library with memory and control flow sanitizers
+ *
+ * **-D CPP_VK_LIB_BENCHMARKING**
+ * - 0 - build benchmarks
+ * - 1 - do not build benchmarks
  *
  * ### Extern variables:
  * **bool cpp_vk_lib_curl_verbose**

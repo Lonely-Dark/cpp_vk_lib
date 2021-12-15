@@ -16,13 +16,13 @@ static std::string serialize_attachments(AttachmentList&& attachments)
 
 namespace vk::method {
 
-message_constructor::message_constructor(bool disable_mentions_flag)
+message_constructor::message_constructor(enum mentions flag)
 {
     constructor_.method("messages.send");
 
     param("random_id", "0");
 
-    if (disable_mentions_flag) {
+    if (flag == mentions::disable) {
         param("disable_mentions", "1");
     } else {
         param("disable_mentions", "0");

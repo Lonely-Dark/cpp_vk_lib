@@ -5,38 +5,14 @@
 
 namespace vk::action {
 
-struct chat_invite_user
-{
-    int64_t member_id;
-};
-
-struct chat_kick_user
-{
-    int64_t member_id;
-};
-
-struct chat_pin_message
-{
-    int64_t member_id;
-    int64_t conversation_member_id;
-    std::string message;
-};
-
-struct chat_unpin_message
-{
-    int64_t member_id;
-    int64_t conversation_member_id;
-};
-
-struct chat_photo_update
-{
-    // Empty.
-};
-
-struct chat_title_update
-{
-    std::string text;
-};
+// clang-format off
+struct chat_invite_user { int64_t member_id; };
+struct chat_kick_user { int64_t member_id; };
+struct chat_pin_message { int64_t member_id; std::string message; };
+struct chat_unpin_message { int64_t member_id; };
+struct chat_photo_update { /* Empty. */ };
+struct chat_title_update { std::string text; };
+// clang-format on
 
 }// namespace vk::action
 

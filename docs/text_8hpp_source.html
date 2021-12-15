@@ -70,43 +70,47 @@ $(function() {
   <div class="headertitle"><div class="title">text.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef VK_KEYBOARD_BUTTONS_TEXT_HPP</span></div>
+<a href="text_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef VK_KEYBOARD_BUTTONS_TEXT_HPP</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define VK_KEYBOARD_BUTTONS_TEXT_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;cpp_vk_lib/vk/keyboard/buttons/base.hpp&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;cpp_vk_lib/vk/keyboard/colors.hpp&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;spdlog/fmt/fmt.h&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;spdlog/fmt/ostr.h&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="base_8hpp.html">cpp_vk_lib/vk/keyboard/buttons/base.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="colors_8hpp.html">cpp_vk_lib/vk/keyboard/colors.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;spdlog/fmt/fmt.h&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;spdlog/fmt/ostr.h&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacevk_1_1keyboard_1_1button.html">vk::keyboard::button</a> {</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span>vk::keyboard::button {</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">class </span>text : <span class="keyword">public</span> button::base</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>{</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    text(color selected_color, std::string_view payload_data)</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        : selected_color_(selected_color)</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        , payload_data_(payload_data)</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    {}</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    std::string serialize()<span class="keyword"> const override</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* color = keyboard::get_color(selected_color_);</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keywordflow">return</span> fmt::format(</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            R<span class="stringliteral">&quot;__({{&quot;action&quot;:{{&quot;type&quot;:&quot;text&quot;,&quot;payload&quot;:&quot;{{\&quot;button\&quot;:\&quot;1\&quot;}}&quot;,&quot;label&quot;:&quot;{}&quot;}},&quot;color&quot;:&quot;{}&quot;}})__&quot;,</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="stringliteral">            payload_data_,</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="stringliteral">            color);</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="stringliteral">    }</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="stringliteral"></span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="stringliteral"></span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    color selected_color_ = color::none;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    std::string payload_data_;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>};</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">class </span>text : <span class="keyword">public</span> button::base</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>{</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    text(<a class="code hl_enumeration" href="namespacevk_1_1keyboard.html#a99e84c429aa7ee52c2be10ccb116f8ac">color</a> selected_color, std::string_view payload_data)</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        : selected_color_(selected_color)</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        , payload_data_(payload_data)</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    {}</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    std::string serialize()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_enumeration" href="namespacevk_1_1keyboard.html#a99e84c429aa7ee52c2be10ccb116f8ac">color</a> = <a class="code hl_function" href="namespacevk_1_1keyboard.html#a89a8cb2bab4cae70b5f63dc7812588e5">keyboard::get_color</a>(selected_color_);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordflow">return</span> fmt::format(</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>            R<span class="stringliteral">&quot;__({{&quot;action&quot;:{{&quot;type&quot;:&quot;text&quot;,&quot;payload&quot;:&quot;{{\&quot;button\&quot;:\&quot;1\&quot;}}&quot;,&quot;label&quot;:&quot;{}&quot;}},&quot;color&quot;:&quot;{}&quot;}})__&quot;,</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="stringliteral">            payload_data_,</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="stringliteral">            <a class="code hl_enumeration" href="namespacevk_1_1keyboard.html#a99e84c429aa7ee52c2be10ccb116f8ac">color</a>);</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="stringliteral">    }</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="stringliteral"></span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="stringliteral"></span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_enumeration" href="namespacevk_1_1keyboard.html#a99e84c429aa7ee52c2be10ccb116f8ac">color</a> selected_color_ = <a class="code hl_enumvalue" href="namespacevk_1_1keyboard.html#a99e84c429aa7ee52c2be10ccb116f8aca334c4a4c42fdb79d7ebc3e73b517e6f8">color::none</a>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    std::string payload_data_;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>};</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>}<span class="comment">// namespace vk::keyboard::button</span></div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>}<span class="comment">// namespace vk::keyboard::button</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#endif</span><span class="comment">// VK_KEYBOARD_BUTTONS_TEXT_HPP</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#endif</span><span class="comment">// VK_KEYBOARD_BUTTONS_TEXT_HPP</span></div>
+<div class="ttc" id="abase_8hpp_html"><div class="ttname"><a href="base_8hpp.html">base.hpp</a></div></div>
+<div class="ttc" id="acolors_8hpp_html"><div class="ttname"><a href="colors_8hpp.html">colors.hpp</a></div></div>
+<div class="ttc" id="anamespacevk_1_1keyboard_1_1button_html"><div class="ttname"><a href="namespacevk_1_1keyboard_1_1button.html">vk::keyboard::button</a></div><div class="ttdef"><b>Definition:</b> base.hpp:6</div></div>
+<div class="ttc" id="anamespacevk_1_1keyboard_html_a89a8cb2bab4cae70b5f63dc7812588e5"><div class="ttname"><a href="namespacevk_1_1keyboard.html#a89a8cb2bab4cae70b5f63dc7812588e5">vk::keyboard::get_color</a></div><div class="ttdeci">constexpr const char * get_color(color c) noexcept</div><div class="ttdef"><b>Definition:</b> colors.hpp:24</div></div>
+<div class="ttc" id="anamespacevk_1_1keyboard_html_a99e84c429aa7ee52c2be10ccb116f8ac"><div class="ttname"><a href="namespacevk_1_1keyboard.html#a99e84c429aa7ee52c2be10ccb116f8ac">vk::keyboard::color</a></div><div class="ttdeci">color</div><div class="ttdef"><b>Definition:</b> colors.hpp:16</div></div>
+<div class="ttc" id="anamespacevk_1_1keyboard_html_a99e84c429aa7ee52c2be10ccb116f8aca334c4a4c42fdb79d7ebc3e73b517e6f8"><div class="ttname"><a href="namespacevk_1_1keyboard.html#a99e84c429aa7ee52c2be10ccb116f8aca334c4a4c42fdb79d7ebc3e73b517e6f8">vk::keyboard::color::none</a></div><div class="ttdeci">@ none</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

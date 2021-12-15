@@ -11,7 +11,7 @@ class array;
 
 namespace vk::event {
 /*!
- * \brief Extract all attachments from JSON
+ * Extract all attachments from JSON
  *
  * \return Array of valid attachment pointers
  */

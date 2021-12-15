@@ -70,36 +70,40 @@ $(function() {
   <div class="headertitle"><div class="title">vk_pay.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef VK_KEYBOARD_BUTTONS_VK_PAY_HPP</span></div>
+<a href="vk__pay_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef VK_KEYBOARD_BUTTONS_VK_PAY_HPP</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define VK_KEYBOARD_BUTTONS_VK_PAY_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;cpp_vk_lib/vk/keyboard/buttons/base.hpp&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;spdlog/fmt/fmt.h&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span>vk::keyboard::button {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classvk_1_1keyboard_1_1button_1_1vk__pay.html">   10</a></span><span class="keyword">class </span><a class="code hl_class" href="classvk_1_1keyboard_1_1button_1_1vk__pay.html">vk_pay</a> : <span class="keyword">public</span> <a class="code hl_class" href="classvk_1_1keyboard_1_1button_1_1base.html">button::base</a></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <a class="code hl_class" href="classvk_1_1keyboard_1_1button_1_1vk__pay.html">vk_pay</a>(std::string_view hash)</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        : hash_(hash)</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    {}</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    std::string serialize()<span class="keyword"> const override</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="keywordflow">return</span> fmt::format(R<span class="stringliteral">&quot;__({{&quot;action&quot;:{{&quot;type&quot;:&quot;vkpay&quot;,&quot;hash&quot;:&quot;{}&quot;}}}})__&quot;, hash_);</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="stringliteral">    }</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="stringliteral"></span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="stringliteral"></span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    std::string hash_;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>};</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>}<span class="comment">// namespace vk::keyboard::button</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#endif</span><span class="comment">// VK_KEYBOARD_BUTTONS_VK_PAY_HPP</span></div>
-<div class="ttc" id="aclassvk_1_1keyboard_1_1button_1_1base_html"><div class="ttname"><a href="classvk_1_1keyboard_1_1button_1_1base.html">vk::keyboard::button::base</a></div><div class="ttdef"><b>Definition:</b> base.hpp:9</div></div>
-<div class="ttc" id="aclassvk_1_1keyboard_1_1button_1_1vk__pay_html"><div class="ttname"><a href="classvk_1_1keyboard_1_1button_1_1vk__pay.html">vk::keyboard::button::vk_pay</a></div><div class="ttdef"><b>Definition:</b> vk_pay.hpp:11</div></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="base_8hpp.html">cpp_vk_lib/vk/keyboard/buttons/base.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;spdlog/fmt/fmt.h&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacevk_1_1keyboard_1_1button.html">vk::keyboard::button</a> {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="classvk_1_1keyboard_1_1button_1_1vk__pay.html">    9</a></span><span class="keyword">class </span><a class="code hl_class" href="classvk_1_1keyboard_1_1button_1_1vk__pay.html">vk_pay</a> : <span class="keyword">public</span> <a class="code hl_class" href="classvk_1_1keyboard_1_1button_1_1base.html">button::base</a></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>{</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classvk_1_1keyboard_1_1button_1_1vk__pay.html#a14fad1a6457c236b425761a364e00bb6">   12</a></span>    <a class="code hl_function" href="classvk_1_1keyboard_1_1button_1_1vk__pay.html#a14fad1a6457c236b425761a364e00bb6">vk_pay</a>(std::string_view hash)</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>        : <a class="code hl_variable" href="classvk_1_1keyboard_1_1button_1_1vk__pay.html#a85ac5e8f9efdcb68a4421de648c3cdc9">hash_</a>(hash)</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    {}</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classvk_1_1keyboard_1_1button_1_1vk__pay.html#a36b63f645fc66185820c85229eac3957">   16</a></span>    std::string <a class="code hl_function" href="classvk_1_1keyboard_1_1button_1_1vk__pay.html#a36b63f645fc66185820c85229eac3957">serialize</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keywordflow">return</span> fmt::format(R<span class="stringliteral">&quot;__({{&quot;action&quot;:{{&quot;type&quot;:&quot;vkpay&quot;,&quot;hash&quot;:&quot;{}&quot;}}}})__&quot;, <a class="code hl_variable" href="classvk_1_1keyboard_1_1button_1_1vk__pay.html#a85ac5e8f9efdcb68a4421de648c3cdc9">hash_</a>);</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="stringliteral">    }</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="stringliteral"></span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="stringliteral"></span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classvk_1_1keyboard_1_1button_1_1vk__pay.html#a85ac5e8f9efdcb68a4421de648c3cdc9">   22</a></span>    std::string <a class="code hl_variable" href="classvk_1_1keyboard_1_1button_1_1vk__pay.html#a85ac5e8f9efdcb68a4421de648c3cdc9">hash_</a>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>};</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>}<span class="comment">// namespace vk::keyboard::button</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#endif</span><span class="comment">// VK_KEYBOARD_BUTTONS_VK_PAY_HPP</span></div>
+<div class="ttc" id="abase_8hpp_html"><div class="ttname"><a href="base_8hpp.html">base.hpp</a></div></div>
+<div class="ttc" id="aclassvk_1_1keyboard_1_1button_1_1base_html"><div class="ttname"><a href="classvk_1_1keyboard_1_1button_1_1base.html">vk::keyboard::button::base</a></div><div class="ttdef"><b>Definition:</b> base.hpp:12</div></div>
+<div class="ttc" id="aclassvk_1_1keyboard_1_1button_1_1vk__pay_html"><div class="ttname"><a href="classvk_1_1keyboard_1_1button_1_1vk__pay.html">vk::keyboard::button::vk_pay</a></div><div class="ttdef"><b>Definition:</b> vk_pay.hpp:10</div></div>
+<div class="ttc" id="aclassvk_1_1keyboard_1_1button_1_1vk__pay_html_a14fad1a6457c236b425761a364e00bb6"><div class="ttname"><a href="classvk_1_1keyboard_1_1button_1_1vk__pay.html#a14fad1a6457c236b425761a364e00bb6">vk::keyboard::button::vk_pay::vk_pay</a></div><div class="ttdeci">vk_pay(std::string_view hash)</div><div class="ttdef"><b>Definition:</b> vk_pay.hpp:12</div></div>
+<div class="ttc" id="aclassvk_1_1keyboard_1_1button_1_1vk__pay_html_a36b63f645fc66185820c85229eac3957"><div class="ttname"><a href="classvk_1_1keyboard_1_1button_1_1vk__pay.html#a36b63f645fc66185820c85229eac3957">vk::keyboard::button::vk_pay::serialize</a></div><div class="ttdeci">std::string serialize() const override</div><div class="ttdef"><b>Definition:</b> vk_pay.hpp:16</div></div>
+<div class="ttc" id="aclassvk_1_1keyboard_1_1button_1_1vk__pay_html_a85ac5e8f9efdcb68a4421de648c3cdc9"><div class="ttname"><a href="classvk_1_1keyboard_1_1button_1_1vk__pay.html#a85ac5e8f9efdcb68a4421de648c3cdc9">vk::keyboard::button::vk_pay::hash_</a></div><div class="ttdeci">std::string hash_</div><div class="ttdef"><b>Definition:</b> vk_pay.hpp:22</div></div>
+<div class="ttc" id="anamespacevk_1_1keyboard_1_1button_html"><div class="ttname"><a href="namespacevk_1_1keyboard_1_1button.html">vk::keyboard::button</a></div><div class="ttdef"><b>Definition:</b> base.hpp:6</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['on_5fevent_0',['on_event',['../classvk_1_1long__poll.html#a431170553d53efd9883be2671562b03b',1,'vk::long_poll']]],
-  ['open_5fapp_1',['open_app',['../classvk_1_1keyboard_1_1button_1_1open__app.html',1,'vk::keyboard::button']]],
-  ['operator_20bool_2',['operator bool',['../classvk_1_1error__code.html#a3b96b6b423c028a078ed6adabfccba60',1,'vk::error_code']]]
+  ['join_0',['join',['../namespaceruntime_1_1string__utils_1_1implementation.html#ae78ebd970045c66beabc6d6cabda6e12',1,'runtime::string_utils::implementation::join(Container &amp;&amp;container, Delimiter &amp;&amp;delimiter)'],['../namespaceruntime_1_1string__utils_1_1implementation.html#ab1d35f05ade994ad249cb379be300288',1,'runtime::string_utils::implementation::join(T(&amp;container)[Size], Delimiter &amp;&amp;delimiter)'],['../namespaceruntime_1_1string__utils.html#ab6c30d7e5cd9ed68c08f0a2fe79cf181',1,'runtime::string_utils::join(Container &amp;&amp;container, char delimiter)'],['../namespaceruntime_1_1string__utils.html#a0ca001e348f325e54b38152672b8a0c7',1,'runtime::string_utils::join(Container &amp;&amp;container, std::string_view delimiter)'],['../namespaceruntime_1_1string__utils.html#adaddbe618f1d564c9ffabf83b3fd2ee5',1,'runtime::string_utils::join(std::initializer_list&lt; T &gt; container, char delimiter)'],['../namespaceruntime_1_1string__utils.html#ad2a3d0e758dd7e916ccc4ade0ae0f8fb',1,'runtime::string_utils::join(std::initializer_list&lt; T &gt; container, std::string_view delimiter)']]],
+  ['join_2ehpp_1',['join.hpp',['../join_8hpp.html',1,'']]],
+  ['join_5fimpl_2',['join_impl',['../namespaceruntime_1_1string__utils_1_1implementation.html#afb46e31198948dd1a105ef9d9f33dbcf',1,'runtime::string_utils::implementation']]]
 ];

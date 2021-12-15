@@ -2,8 +2,8 @@
 #define RUNTIME_STRING_UTILS_IMPLEMENTATION_CONVERT_UTF8_HPP
 
 #include <codecvt>
-#include <locale>
 #include <functional>
+#include <locale>
 
 namespace runtime::string_utils::implementation {
 
@@ -22,17 +22,19 @@ inline std::string
 
 namespace runtime::string_utils {
 
-inline std::string utf8_to_upper(std::string_view data)
-{
-    return implementation::utf8_create(data, [](wchar_t c, const std::locale& locale) {
-        return std::toupper(c, locale);
-    });
-}
-
+/*! Convert both ASCII and UTF-8 string to lower case. */
 inline std::string utf8_to_lower(std::string_view data)
 {
     return implementation::utf8_create(data, [](wchar_t c, const std::locale& locale) {
         return std::tolower(c, locale);
+    });
+}
+
+/*! Convert both ASCII and UTF-8 string to upper case. */
+inline std::string utf8_to_upper(std::string_view data)
+{
+    return implementation::utf8_create(data, [](wchar_t c, const std::locale& locale) {
+        return std::toupper(c, locale);
     });
 }
 

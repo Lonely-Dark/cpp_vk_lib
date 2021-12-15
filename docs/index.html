@@ -67,10 +67,18 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h3><a class="anchor" id="autotoc_md0"></a>
-CMake opts:</h3>
-<p ><b>-DCPP_VK_LIB_STATIC_BUILD</b></p><ul>
-<li>1 - build static library</li>
+CMake options:</h3>
+<p ><b>-D CPP_VK_LIB_STATIC_BUILD</b></p><ul>
 <li>0 - build shared library (default)</li>
+<li>1 - build static library</li>
+</ul>
+<p ><b>-D CPP_VK_LIB_SANITIZE</b></p><ul>
+<li>0 - build library without memory and control flow sanitizers</li>
+<li>1 - build library with memory and control flow sanitizers</li>
+</ul>
+<p ><b>-D CPP_VK_LIB_BENCHMARKING</b></p><ul>
+<li>0 - build benchmarks</li>
+<li>1 - do not build benchmarks</li>
 </ul>
 <h3><a class="anchor" id="autotoc_md1"></a>
 Extern variables:</h3>

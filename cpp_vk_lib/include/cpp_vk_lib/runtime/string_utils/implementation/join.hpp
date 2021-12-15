@@ -56,24 +56,28 @@ std::string join(T (&container)[Size], Delimiter&& delimiter)
 
 namespace runtime::string_utils {
 
+/*! Join associative container to string using delimiter to separate elements. */
 template <typename Container>
 std::string join(Container&& container, char delimiter)
 {
     return implementation::join(std::forward<Container>(container), delimiter);
 }
 
+/*! Join associative container to string using delimiter to separate elements. */
 template <typename Container>
 std::string join(Container&& container, std::string_view delimiter)
 {
     return implementation::join(std::forward<Container>(container), delimiter);
 }
 
+/*! Special overload for unambiguous joining of IL's. */
 template <typename T>
 std::string join(std::initializer_list<T> container, char delimiter)
 {
     return implementation::join(container, delimiter);
 }
 
+/*! Special overload for unambiguous joining of IL's. */
 template <typename T>
 std::string join(std::initializer_list<T> container, std::string_view delimiter)
 {

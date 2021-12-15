@@ -63,7 +63,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>vk</b></li><li class="navelem"><b>keyboard</b></li><li class="navelem"><b>button</b></li><li class="navelem"><a class="el" href="classvk_1_1keyboard_1_1button_1_1base.html">base</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespacevk.html">vk</a></li><li class="navelem"><a class="el" href="namespacevk_1_1keyboard.html">keyboard</a></li><li class="navelem"><a class="el" href="namespacevk_1_1keyboard_1_1button.html">button</a></li><li class="navelem"><a class="el" href="classvk_1_1keyboard_1_1button_1_1base.html">base</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -73,13 +73,72 @@ $(function() {
   <div class="headertitle"><div class="title">vk::keyboard::button::base Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="base_8hpp_source.html">base.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9ac9df68f4e39cf95a86722fda060df7"><td class="memItemLeft" align="right" valign="top"><a id="a9ac9df68f4e39cf95a86722fda060df7" name="a9ac9df68f4e39cf95a86722fda060df7"></a>
-virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><b>serialize</b> () const =0</td></tr>
+<tr class="memitem:a1c7ae4e85df3e7e48741a47f9c9272c1"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1keyboard_1_1button_1_1base.html#a1c7ae4e85df3e7e48741a47f9c9272c1">~base</a> ()=default</td></tr>
+<tr class="separator:a1c7ae4e85df3e7e48741a47f9c9272c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ac9df68f4e39cf95a86722fda060df7"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1keyboard_1_1button_1_1base.html#a9ac9df68f4e39cf95a86722fda060df7">serialize</a> () const =0</td></tr>
 <tr class="separator:a9ac9df68f4e39cf95a86722fda060df7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Buttons are implemented as inheritance hierarchy just to simplify code, avoiding a lot of boilerplate code with std::variant's or std::any's. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a1c7ae4e85df3e7e48741a47f9c9272c1" name="a1c7ae4e85df3e7e48741a47f9c9272c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c7ae4e85df3e7e48741a47f9c9272c1">&#9670;&nbsp;</a></span>~base()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual vk::keyboard::button::base::~base </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a9ac9df68f4e39cf95a86722fda060df7" name="a9ac9df68f4e39cf95a86722fda060df7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ac9df68f4e39cf95a86722fda060df7">&#9670;&nbsp;</a></span>serialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string vk::keyboard::button::base::serialize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classvk_1_1keyboard_1_1button_1_1open__app.html#aa4663e186cdf20667be9acac1f29da66">vk::keyboard::button::open_app</a>, and <a class="el" href="classvk_1_1keyboard_1_1button_1_1vk__pay.html#a36b63f645fc66185820c85229eac3957">vk::keyboard::button::vk_pay</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

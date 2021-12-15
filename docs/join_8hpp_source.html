@@ -70,7 +70,7 @@ $(function() {
   <div class="headertitle"><div class="title">join.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef RUNTIME_STRING_UTILS_IMPLEMENTATION_JOIN_HPP</span></div>
+<a href="join_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef RUNTIME_STRING_UTILS_IMPLEMENTATION_JOIN_HPP</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define RUNTIME_STRING_UTILS_IMPLEMENTATION_JOIN_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;forward_list&gt;</span></div>
@@ -78,14 +78,14 @@ $(function() {
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;numeric&gt;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span>runtime::string_utils::implementation {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceruntime_1_1string__utils_1_1implementation.html">runtime::string_utils::implementation</a> {</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Container, <span class="keyword">typename</span> Delimiter&gt;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keywordtype">void</span> join_impl(std::string&amp; output, Container&amp;&amp; container, Delimiter&amp;&amp; delimiter)</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="namespaceruntime_1_1string__utils_1_1implementation.html#afb46e31198948dd1a105ef9d9f33dbcf">   12</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceruntime_1_1string__utils_1_1implementation.html#afb46e31198948dd1a105ef9d9f33dbcf">join_impl</a>(std::string&amp; output, Container&amp;&amp; container, Delimiter&amp;&amp; delimiter)</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; element : container) {</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_integral_v&lt;T&gt;) {</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>            output += std::to_string(element);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>            output += <a class="code hl_function" href="namespacevk_1_1method.html#a224d617fe7c5f987ad4c1d1651059c11">std::to_string</a>(element);</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>            output += element;</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        }</div>
@@ -100,7 +100,7 @@ $(function() {
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>}</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Container, <span class="keyword">typename</span> Delimiter&gt;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>std::string join(Container&amp;&amp; container, Delimiter&amp;&amp; delimiter)</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="namespaceruntime_1_1string__utils_1_1implementation.html#ae78ebd970045c66beabc6d6cabda6e12">   31</a></span>std::string <a class="code hl_function" href="namespaceruntime_1_1string__utils_1_1implementation.html#ae78ebd970045c66beabc6d6cabda6e12">join</a>(Container&amp;&amp; container, Delimiter&amp;&amp; delimiter)</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>{</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keyword">using</span> T = std::decay_t&lt;decltype(*std::begin(std::declval&lt;Container&gt;()))&gt;;</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    std::string output;</div>
@@ -115,7 +115,7 @@ $(function() {
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>}</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keywordtype">size_t</span> Size, <span class="keyword">typename</span> Delimiter&gt;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>std::string join(T (&amp;container)[Size], Delimiter&amp;&amp; delimiter)</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="namespaceruntime_1_1string__utils_1_1implementation.html#ab1d35f05ade994ad249cb379be300288">   46</a></span>std::string <a class="code hl_function" href="namespaceruntime_1_1string__utils_1_1implementation.html#ae78ebd970045c66beabc6d6cabda6e12">join</a>(T (&amp;container)[Size], Delimiter&amp;&amp; delimiter)</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>{</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    std::string output;</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">size_t</span> average_word_length = 20;</div>
@@ -126,35 +126,41 @@ $(function() {
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}<span class="comment">// namespace runtime::string_utils::implementation</span></div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="keyword">namespace </span>runtime::string_utils {</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceruntime_1_1string__utils.html">runtime::string_utils</a> {</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Container&gt;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>std::string join(Container&amp;&amp; container, <span class="keywordtype">char</span> delimiter)</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>{</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">return</span> implementation::join(std::forward&lt;Container&gt;(container), delimiter);</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>}</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Container&gt;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>std::string join(Container&amp;&amp; container, std::string_view delimiter)</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>{</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordflow">return</span> implementation::join(std::forward&lt;Container&gt;(container), delimiter);</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>}</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>std::string join(std::initializer_list&lt;T&gt; container, <span class="keywordtype">char</span> delimiter)</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>{</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordflow">return</span> implementation::join(container, delimiter);</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>}</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>std::string join(std::initializer_list&lt;T&gt; container, std::string_view delimiter)</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>{</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordflow">return</span> implementation::join(container, delimiter);</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>}</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>}<span class="comment">// namespace runtime::string_utils</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="preprocessor">#endif</span><span class="comment">// RUNTIME_STRING_UTILS_IMPLEMENTATION_JOIN_HPP</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Container&gt;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="namespaceruntime_1_1string__utils.html#ab6c30d7e5cd9ed68c08f0a2fe79cf181">   61</a></span>std::string <a class="code hl_function" href="namespaceruntime_1_1string__utils.html#ab6c30d7e5cd9ed68c08f0a2fe79cf181">join</a>(Container&amp;&amp; container, <span class="keywordtype">char</span> delimiter)</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>{</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="namespaceruntime_1_1string__utils_1_1implementation.html#ae78ebd970045c66beabc6d6cabda6e12">implementation::join</a>(std::forward&lt;Container&gt;(container), delimiter);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>}</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Container&gt;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="namespaceruntime_1_1string__utils.html#a0ca001e348f325e54b38152672b8a0c7">   68</a></span>std::string <a class="code hl_function" href="namespaceruntime_1_1string__utils.html#ab6c30d7e5cd9ed68c08f0a2fe79cf181">join</a>(Container&amp;&amp; container, std::string_view delimiter)</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>{</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="namespaceruntime_1_1string__utils_1_1implementation.html#ae78ebd970045c66beabc6d6cabda6e12">implementation::join</a>(std::forward&lt;Container&gt;(container), delimiter);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>}</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="namespaceruntime_1_1string__utils.html#adaddbe618f1d564c9ffabf83b3fd2ee5">   75</a></span>std::string <a class="code hl_function" href="namespaceruntime_1_1string__utils.html#ab6c30d7e5cd9ed68c08f0a2fe79cf181">join</a>(std::initializer_list&lt;T&gt; container, <span class="keywordtype">char</span> delimiter)</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>{</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="namespaceruntime_1_1string__utils_1_1implementation.html#ae78ebd970045c66beabc6d6cabda6e12">implementation::join</a>(container, delimiter);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>}</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="namespaceruntime_1_1string__utils.html#ad2a3d0e758dd7e916ccc4ade0ae0f8fb">   82</a></span>std::string <a class="code hl_function" href="namespaceruntime_1_1string__utils.html#ab6c30d7e5cd9ed68c08f0a2fe79cf181">join</a>(std::initializer_list&lt;T&gt; container, std::string_view delimiter)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>{</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="namespaceruntime_1_1string__utils_1_1implementation.html#ae78ebd970045c66beabc6d6cabda6e12">implementation::join</a>(container, delimiter);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>}</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>}<span class="comment">// namespace runtime::string_utils</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="preprocessor">#endif</span><span class="comment">// RUNTIME_STRING_UTILS_IMPLEMENTATION_JOIN_HPP</span></div>
+<div class="ttc" id="anamespaceruntime_1_1string__utils_1_1implementation_html"><div class="ttname"><a href="namespaceruntime_1_1string__utils_1_1implementation.html">runtime::string_utils::implementation</a></div><div class="ttdef"><b>Definition:</b> convert_ascii.hpp:9</div></div>
+<div class="ttc" id="anamespaceruntime_1_1string__utils_1_1implementation_html_ae78ebd970045c66beabc6d6cabda6e12"><div class="ttname"><a href="namespaceruntime_1_1string__utils_1_1implementation.html#ae78ebd970045c66beabc6d6cabda6e12">runtime::string_utils::implementation::join</a></div><div class="ttdeci">std::string join(Container &amp;&amp;container, Delimiter &amp;&amp;delimiter)</div><div class="ttdef"><b>Definition:</b> join.hpp:31</div></div>
+<div class="ttc" id="anamespaceruntime_1_1string__utils_1_1implementation_html_afb46e31198948dd1a105ef9d9f33dbcf"><div class="ttname"><a href="namespaceruntime_1_1string__utils_1_1implementation.html#afb46e31198948dd1a105ef9d9f33dbcf">runtime::string_utils::implementation::join_impl</a></div><div class="ttdeci">void join_impl(std::string &amp;output, Container &amp;&amp;container, Delimiter &amp;&amp;delimiter)</div><div class="ttdef"><b>Definition:</b> join.hpp:12</div></div>
+<div class="ttc" id="anamespaceruntime_1_1string__utils_html"><div class="ttname"><a href="namespaceruntime_1_1string__utils.html">runtime::string_utils</a></div><div class="ttdef"><b>Definition:</b> convert_ascii.hpp:9</div></div>
+<div class="ttc" id="anamespaceruntime_1_1string__utils_html_ab6c30d7e5cd9ed68c08f0a2fe79cf181"><div class="ttname"><a href="namespaceruntime_1_1string__utils.html#ab6c30d7e5cd9ed68c08f0a2fe79cf181">runtime::string_utils::join</a></div><div class="ttdeci">std::string join(Container &amp;&amp;container, char delimiter)</div><div class="ttdef"><b>Definition:</b> join.hpp:61</div></div>
+<div class="ttc" id="anamespacevk_1_1method_html_a224d617fe7c5f987ad4c1d1651059c11"><div class="ttname"><a href="namespacevk_1_1method.html#a224d617fe7c5f987ad4c1d1651059c11">vk::method::to_string</a></div><div class="ttdeci">constexpr const char * to_string(enum mentions m) noexcept</div><div class="ttdef"><b>Definition:</b> mentions.hpp:12</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

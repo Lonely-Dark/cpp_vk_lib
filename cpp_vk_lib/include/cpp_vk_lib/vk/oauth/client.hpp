@@ -9,28 +9,30 @@ class parser;
 }// namespace simdjson::dom
 
 namespace vk::oauth {
-
-enum class target_client : uint8_t
+/*! OAuth targets. */
+enum struct target_client
 {
-    android = (1 << 0),
-    iphone  = (1 << 1),
-    windows = (1 << 2)
+    android,
+    iphone,
+    windows
 };
 
 /*!
- * \brief VK Oauth client.
+ * VK Oauth client.
  *
- *  Example usage:
+ * \note Please be careful using this class in your open source
+ * code. Make sure that you don't store your personal data in
+ * string literals of your program. Much better to encapsulate that
+ * in an external config file.
+ *
+ * Example usage:
  *
  *  \code
       int main() {
-        vk::oauth::client client("phone number", "password",
+        vk::oauth::client client(config::phone_number(), config::password(),
           vk::oauth::target_client::windows);
         client.pull();
-        vk::method::constructor(client.token())
-          .method(...)
-          .param(...)
-          .perform_request();
+        vk::method::constructor(client.token())/ * ... * /.perform_request();
       }
  *  \endcode
  */
@@ -41,22 +43,29 @@ public:
     /*!
      * Try get user data.
      *
-     * \throw vk::exception::access_error with detailed description in case,
-     *        when wrong data were provided.
+     * \throws vk::exception::access_error with detailed description in case,
+     *         when wrong data were provided.
      */
     void pull();
     const std::string& token() const noexcept;
     int64_t user_id() const noexcept;
 
 private:
+    /*! Android, Windows or MacOS. */
     target_client client_type_;
+    /*! Email or phone number. */
     std::string username_;
+    /*! Account password. */
     std::string password_;
 
+    /*! Hash key associated with target_client. */
     std::string target_client_secret_;
+    /*! Client id associated with target_client. */
     int64_t target_client_id_;
 
+    /*! Received from OAuth token. */
     std::string pulled_token_;
+    /*! Id of person, who executes pulling. */
     int64_t pulled_user_id_;
 };
 

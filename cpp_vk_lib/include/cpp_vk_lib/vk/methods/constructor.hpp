@@ -1,20 +1,14 @@
-#ifndef VK_METHODS_UTILITY_CONSTRUCTOR_HPP
-#define VK_METHODS_UTILITY_CONSTRUCTOR_HPP
+#ifndef VK_METHODS_CONSTRUCTOR_HPP
+#define VK_METHODS_CONSTRUCTOR_HPP
 
 #include "cpp_vk_lib/runtime/net/network.hpp"
 
 namespace vk::method::policy {
-/*!
- * \brief Policy that uses group_token. user_token ignored.
- */
+/*! Policy that uses group_token. */
 struct group_api;
-/*!
- * \brief Policy that uses user_token. group_token ignored.
- */
+/*! Policy that uses user_token. */
 struct user_api;
-/*!
- * \brief Raw policy. All tokens are ignored.
- */
+/*! Raw policy. All tokens are ignored. */
 struct do_not_use_api_link;
 
 }// namespace vk::method::policy
@@ -35,36 +29,26 @@ template <typename ExecutionPolicy>
 class constructor
 {
 public:
-    /*!
-     * Loads user token from config.
-     */
+    /*! Load user token from config. */
     constructor();
-    /*!
-     * Loads user token from \c user_token.
-     */
+    /*! Initialize user token from parameter. */
     constructor(std::string_view user_token);
-    /*!
-     * Setup VK API method name.
-     */
+    /*! Setup VK API method name. */
     constructor& method(std::string_view);
-    /*!
-     * Append \c param=value pair to parameters list.
-     */
+    /*! Append \c param=value pair to parameters list. */
     constructor& param(std::string_view, std::string_view);
-    /*!
-     * Append map to parameters list.
-     */
+    /*! Append map to parameters list. */
     constructor& append_map(std::map<std::string, std::string>&&);
     /*!
      * Execute HTTP POST request and return output.
      *
-     * \note all params will be destroyed after request.
+     * \note all parameters are destroyed after request.
      */
     std::string perform_request();
     /*!
      * Execute HTTP POST request without returning anything.
      *
-     * \note all params will be destroyed after request.
+     * \note all parameters are destroyed after request.
      */
     void request_without_output();
 
@@ -81,4 +65,4 @@ using raw_constructor   = constructor<policy::do_not_use_api_link>;
 
 }// namespace vk::method
 
-#endif// VK_METHODS_UTILITY_CONSTRUCTOR_HPP
+#endif// VK_METHODS_CONSTRUCTOR_HPP

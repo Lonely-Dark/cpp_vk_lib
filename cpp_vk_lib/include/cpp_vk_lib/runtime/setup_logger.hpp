@@ -4,11 +4,7 @@
 #include "spdlog/common.h"
 
 namespace runtime {
-/*!
- * Setup file, stdout and stderr sinks.
- *
- * Logs will be written in "log_path" specifined in config.
- */
+/*! Setup file, stdout and stderr sinks. Logs will be written in "log_path" specified in config. */
 void setup_logger(spdlog::level::level_enum);
 
 }// namespace runtime

@@ -9,6 +9,7 @@
 #include <string_view>
 #include <vector>
 
+/*! Used for handling verbose cURL output. */
 extern bool cpp_vk_lib_curl_verbose;
 
 namespace runtime::network {
@@ -16,6 +17,7 @@ namespace runtime::network {
 static constexpr bool require_data = true;
 static constexpr bool omit_data    = false;
 
+/*! Wrapper aimed to reduce the great amount of input parameters. */
 struct request_context
 {
     std::optional<std::map<std::string, std::string>> target{};
@@ -48,7 +50,6 @@ result<std::string, size_t> request(const request_context& ctx);
 result<std::string, size_t> request_data(const request_context& ctx);
 /*!
  * Upload bytes from file or buffer to remote server.
- * \todo Fix actually unknown reason of IO errors in libcurl.
  * \param ctx Request context.
  * \throw std::runtime_error if neither filename or buffer was specified.
  * \throw std::bad_optional_access if

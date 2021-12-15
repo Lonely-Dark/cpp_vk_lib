@@ -2,7 +2,6 @@
 #define VK_EVENTS_MESSAGE_NEW_HPP
 
 #include "cpp_vk_lib/vk/attachment/attachment.hpp"
-#include "cpp_vk_lib/vk/events/action.hpp"
 
 #include <any>
 #include <vector>
@@ -18,7 +17,7 @@ namespace vk::event {
  * It means, that no data is extracted from JSON until the user
  * wants to access it, and there's meaningless to construct all
  * attachments, reply and forwarded messages objects in the case
- * you only need message text
+ * you only need message text.
  */
 class message_new
 {
@@ -52,8 +51,6 @@ public:
     bool has_reply() const noexcept;
     bool has_fwd_messages() const noexcept;
     bool has_action() const noexcept;
-
-    friend std::ostream& operator<<(std::ostream&, const message_new&);
 
 private:
     void try_get_actions();

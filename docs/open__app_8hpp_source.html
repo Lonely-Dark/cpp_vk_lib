@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>cpp_vk_lib: open_app.hpp Source File</title>
+<title>C++ VK library: open_app.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="cpp_vk_lib_logo.jpg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">cpp_vk_lib
+   <div id="projectname">C++ VK library
    </div>
   </td>
  </tr>
@@ -70,47 +70,54 @@ $(function() {
   <div class="headertitle"><div class="title">open_app.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef VK_KEYBOARD_BUTTONS_OPEN_APP_HPP</span></div>
+<a href="open__app_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef VK_KEYBOARD_BUTTONS_OPEN_APP_HPP</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define VK_KEYBOARD_BUTTONS_OPEN_APP_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;spdlog/fmt/fmt.h&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;cpp_vk_lib/vk/keyboard/buttons/base.hpp&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span>vk::keyboard::button {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classvk_1_1keyboard_1_1button_1_1open__app.html">   10</a></span><span class="keyword">class </span><a class="code hl_class" href="classvk_1_1keyboard_1_1button_1_1open__app.html">open_app</a> : <span class="keyword">public</span> <a class="code hl_class" href="classvk_1_1keyboard_1_1button_1_1base.html">button::base</a></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <a class="code hl_class" href="classvk_1_1keyboard_1_1button_1_1open__app.html">open_app</a>(int64_t app_id, int64_t owner_id, std::string_view hash, std::string_view label)</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        : app_id_(app_id)</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        , owner_id_(owner_id)</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        , hash_(hash)</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        , label_(label)</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    {}</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    std::string serialize()<span class="keyword"> const override</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordflow">return</span> fmt::format(</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>            R<span class="stringliteral">&quot;__({{&quot;action&quot;:{{&quot;type&quot;:&quot;open_app&quot;,&quot;app_id&quot;:{},&quot;owner_id&quot;:{},&quot;hash&quot;:&quot;{}&quot;,&quot;label&quot;:&quot;{}&quot;}}}})__&quot;,</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="stringliteral">            app_id_,</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="stringliteral">            owner_id_,</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="stringliteral">            hash_,</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="stringliteral">            label_);</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="stringliteral">    }</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="stringliteral"></span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="stringliteral"></span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    int64_t app_id_;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    int64_t owner_id_;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    std::string hash_;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    std::string label_;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>};</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>}<span class="comment">// namespace vk::keyboard::button</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#endif</span><span class="comment">// VK_KEYBOARD_BUTTONS_OPEN_APP_HPP</span></div>
-<div class="ttc" id="aclassvk_1_1keyboard_1_1button_1_1base_html"><div class="ttname"><a href="classvk_1_1keyboard_1_1button_1_1base.html">vk::keyboard::button::base</a></div><div class="ttdef"><b>Definition:</b> base.hpp:9</div></div>
-<div class="ttc" id="aclassvk_1_1keyboard_1_1button_1_1open__app_html"><div class="ttname"><a href="classvk_1_1keyboard_1_1button_1_1open__app.html">vk::keyboard::button::open_app</a></div><div class="ttdef"><b>Definition:</b> open_app.hpp:11</div></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="base_8hpp.html">cpp_vk_lib/vk/keyboard/buttons/base.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;spdlog/fmt/fmt.h&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacevk_1_1keyboard_1_1button.html">vk::keyboard::button</a> {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="classvk_1_1keyboard_1_1button_1_1open__app.html">    9</a></span><span class="keyword">class </span><a class="code hl_class" href="classvk_1_1keyboard_1_1button_1_1open__app.html">open_app</a> : <span class="keyword">public</span> <a class="code hl_class" href="classvk_1_1keyboard_1_1button_1_1base.html">button::base</a></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>{</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classvk_1_1keyboard_1_1button_1_1open__app.html#a4fa1ac9d1891514ca2ae4d5289a98212">   12</a></span>    <a class="code hl_function" href="classvk_1_1keyboard_1_1button_1_1open__app.html#a4fa1ac9d1891514ca2ae4d5289a98212">open_app</a>(int64_t app_id, int64_t owner_id, std::string_view hash, std::string_view label)</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>        : <a class="code hl_variable" href="classvk_1_1keyboard_1_1button_1_1open__app.html#a59d0ce9454f59ac797f6afa227e4e224">app_id_</a>(app_id)</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        , <a class="code hl_variable" href="classvk_1_1keyboard_1_1button_1_1open__app.html#a0a0fb796bdb0755b5fd61d35832d2a24">owner_id_</a>(owner_id)</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        , <a class="code hl_variable" href="classvk_1_1keyboard_1_1button_1_1open__app.html#aa4a77c7d068c5e847995542e59963d3a">hash_</a>(hash)</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        , <a class="code hl_variable" href="classvk_1_1keyboard_1_1button_1_1open__app.html#aaae90f96e4ee5ba3512864133b6989d4">label_</a>(label)</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    {}</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classvk_1_1keyboard_1_1button_1_1open__app.html#aa4663e186cdf20667be9acac1f29da66">   19</a></span>    std::string <a class="code hl_function" href="classvk_1_1keyboard_1_1button_1_1open__app.html#aa4663e186cdf20667be9acac1f29da66">serialize</a>()<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keywordflow">return</span> fmt::format(</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>            R<span class="stringliteral">&quot;__({{&quot;action&quot;:{{&quot;type&quot;:&quot;open_app&quot;,&quot;app_id&quot;:{},&quot;owner_id&quot;:{},&quot;hash&quot;:&quot;{}&quot;,&quot;label&quot;:&quot;{}&quot;}}}})__&quot;,</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="stringliteral">            <a class="code hl_variable" href="classvk_1_1keyboard_1_1button_1_1open__app.html#a59d0ce9454f59ac797f6afa227e4e224">app_id_</a>,</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="stringliteral">            <a class="code hl_variable" href="classvk_1_1keyboard_1_1button_1_1open__app.html#a0a0fb796bdb0755b5fd61d35832d2a24">owner_id_</a>,</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="stringliteral">            <a class="code hl_variable" href="classvk_1_1keyboard_1_1button_1_1open__app.html#aa4a77c7d068c5e847995542e59963d3a">hash_</a>,</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="stringliteral">            <a class="code hl_variable" href="classvk_1_1keyboard_1_1button_1_1open__app.html#aaae90f96e4ee5ba3512864133b6989d4">label_</a>);</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="stringliteral">    }</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="stringliteral"></span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="stringliteral"></span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classvk_1_1keyboard_1_1button_1_1open__app.html#a59d0ce9454f59ac797f6afa227e4e224">   30</a></span>    int64_t <a class="code hl_variable" href="classvk_1_1keyboard_1_1button_1_1open__app.html#a59d0ce9454f59ac797f6afa227e4e224">app_id_</a>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classvk_1_1keyboard_1_1button_1_1open__app.html#a0a0fb796bdb0755b5fd61d35832d2a24">   31</a></span>    int64_t <a class="code hl_variable" href="classvk_1_1keyboard_1_1button_1_1open__app.html#a0a0fb796bdb0755b5fd61d35832d2a24">owner_id_</a>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classvk_1_1keyboard_1_1button_1_1open__app.html#aa4a77c7d068c5e847995542e59963d3a">   32</a></span>    std::string <a class="code hl_variable" href="classvk_1_1keyboard_1_1button_1_1open__app.html#aa4a77c7d068c5e847995542e59963d3a">hash_</a>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classvk_1_1keyboard_1_1button_1_1open__app.html#aaae90f96e4ee5ba3512864133b6989d4">   33</a></span>    std::string <a class="code hl_variable" href="classvk_1_1keyboard_1_1button_1_1open__app.html#aaae90f96e4ee5ba3512864133b6989d4">label_</a>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>};</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>}<span class="comment">// namespace vk::keyboard::button</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#endif</span><span class="comment">// VK_KEYBOARD_BUTTONS_OPEN_APP_HPP</span></div>
+<div class="ttc" id="abase_8hpp_html"><div class="ttname"><a href="base_8hpp.html">base.hpp</a></div></div>
+<div class="ttc" id="aclassvk_1_1keyboard_1_1button_1_1base_html"><div class="ttname"><a href="classvk_1_1keyboard_1_1button_1_1base.html">vk::keyboard::button::base</a></div><div class="ttdef"><b>Definition:</b> base.hpp:13</div></div>
+<div class="ttc" id="aclassvk_1_1keyboard_1_1button_1_1open__app_html"><div class="ttname"><a href="classvk_1_1keyboard_1_1button_1_1open__app.html">vk::keyboard::button::open_app</a></div><div class="ttdef"><b>Definition:</b> open_app.hpp:10</div></div>
+<div class="ttc" id="aclassvk_1_1keyboard_1_1button_1_1open__app_html_a0a0fb796bdb0755b5fd61d35832d2a24"><div class="ttname"><a href="classvk_1_1keyboard_1_1button_1_1open__app.html#a0a0fb796bdb0755b5fd61d35832d2a24">vk::keyboard::button::open_app::owner_id_</a></div><div class="ttdeci">int64_t owner_id_</div><div class="ttdef"><b>Definition:</b> open_app.hpp:31</div></div>
+<div class="ttc" id="aclassvk_1_1keyboard_1_1button_1_1open__app_html_a4fa1ac9d1891514ca2ae4d5289a98212"><div class="ttname"><a href="classvk_1_1keyboard_1_1button_1_1open__app.html#a4fa1ac9d1891514ca2ae4d5289a98212">vk::keyboard::button::open_app::open_app</a></div><div class="ttdeci">open_app(int64_t app_id, int64_t owner_id, std::string_view hash, std::string_view label)</div><div class="ttdef"><b>Definition:</b> open_app.hpp:12</div></div>
+<div class="ttc" id="aclassvk_1_1keyboard_1_1button_1_1open__app_html_a59d0ce9454f59ac797f6afa227e4e224"><div class="ttname"><a href="classvk_1_1keyboard_1_1button_1_1open__app.html#a59d0ce9454f59ac797f6afa227e4e224">vk::keyboard::button::open_app::app_id_</a></div><div class="ttdeci">int64_t app_id_</div><div class="ttdef"><b>Definition:</b> open_app.hpp:30</div></div>
+<div class="ttc" id="aclassvk_1_1keyboard_1_1button_1_1open__app_html_aa4663e186cdf20667be9acac1f29da66"><div class="ttname"><a href="classvk_1_1keyboard_1_1button_1_1open__app.html#aa4663e186cdf20667be9acac1f29da66">vk::keyboard::button::open_app::serialize</a></div><div class="ttdeci">std::string serialize() const override</div><div class="ttdef"><b>Definition:</b> open_app.hpp:19</div></div>
+<div class="ttc" id="aclassvk_1_1keyboard_1_1button_1_1open__app_html_aa4a77c7d068c5e847995542e59963d3a"><div class="ttname"><a href="classvk_1_1keyboard_1_1button_1_1open__app.html#aa4a77c7d068c5e847995542e59963d3a">vk::keyboard::button::open_app::hash_</a></div><div class="ttdeci">std::string hash_</div><div class="ttdef"><b>Definition:</b> open_app.hpp:32</div></div>
+<div class="ttc" id="aclassvk_1_1keyboard_1_1button_1_1open__app_html_aaae90f96e4ee5ba3512864133b6989d4"><div class="ttname"><a href="classvk_1_1keyboard_1_1button_1_1open__app.html#aaae90f96e4ee5ba3512864133b6989d4">vk::keyboard::button::open_app::label_</a></div><div class="ttdeci">std::string label_</div><div class="ttdef"><b>Definition:</b> open_app.hpp:33</div></div>
+<div class="ttc" id="anamespacevk_1_1keyboard_1_1button_html"><div class="ttname"><a href="namespacevk_1_1keyboard_1_1button.html">vk::keyboard::button</a></div><div class="ttdef"><b>Definition:</b> base.hpp:6</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

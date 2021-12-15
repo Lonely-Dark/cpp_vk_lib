@@ -1,5 +1,28 @@
 var searchData=
 [
-  ['_7ecommon_0',['~common',['../classvk_1_1event_1_1common.html#aa40ac76931dbeba4868cc8c190cedec4',1,'vk::event::common']]],
-  ['_7elong_5fpoll_1',['~long_poll',['../classvk_1_1long__poll.html#ac77b705c83cfe80c602cb6d85cd4a355',1,'vk::long_poll']]]
+  ['implementation_0',['implementation',['../namespaceruntime_1_1string__utils_1_1implementation.html',1,'runtime::string_utils']]],
+  ['implementation_2ecpp_1',['implementation.cpp',['../runtime_2implementation_8cpp.html',1,'']]],
+  ['network_2',['network',['../namespaceruntime_1_1network.html',1,'runtime']]],
+  ['ostream_5foperators_3',['ostream_operators',['../namespaceruntime_1_1string__utils_1_1ostream__operators.html',1,'runtime::string_utils']]],
+  ['raw_5fconstructor_4',['raw_constructor',['../namespacevk_1_1method.html#a5a2b57fa2e58981fd9a011420522723f',1,'vk::method']]],
+  ['raw_5fmp3_5',['raw_mp3',['../classvk_1_1attachment_1_1audio__message.html#abf271068bb5ab542d235e9beaf688ea8',1,'vk::attachment::audio_message']]],
+  ['raw_5fmp3_5f_6',['raw_mp3_',['../classvk_1_1attachment_1_1audio__message.html#a174e55cd11f5511927f45f28303e6774',1,'vk::attachment::audio_message']]],
+  ['raw_5fogg_7',['raw_ogg',['../classvk_1_1attachment_1_1audio__message.html#ae3c158009eeb002cf15bc876f08d679e',1,'vk::attachment::audio_message']]],
+  ['raw_5fogg_5f_8',['raw_ogg_',['../classvk_1_1attachment_1_1audio__message.html#a5cb8a0210f6c03eee3394c0595f3a83a',1,'vk::attachment::audio_message']]],
+  ['raw_5furl_9',['raw_url',['../classvk_1_1attachment_1_1document.html#a13be058fa76d1bac33d5ac3c99151d17',1,'vk::attachment::document']]],
+  ['raw_5furl_5f_10',['raw_url_',['../classvk_1_1attachment_1_1document.html#a2eebcdee670919cb1b3ce566da4262f6',1,'vk::attachment::document']]],
+  ['red_11',['red',['../namespacevk_1_1keyboard.html#a99e84c429aa7ee52c2be10ccb116f8acabda9643ac6601722a28f238714274da4',1,'vk::keyboard::red()'],['../namespacevk_1_1keyboard_1_1colors.html#a8feb5e71118b96004f490ce0102a1ef4',1,'vk::keyboard::colors::red()']]],
+  ['reply_12',['reply',['../classvk_1_1event_1_1message__new.html#a615c3be78b6414e6b70f8d7d52e43369',1,'vk::event::message_new']]],
+  ['repost_13',['repost',['../classvk_1_1event_1_1wall__post__new.html#a71a32c4d6f0aa468a044bc733dee7d88',1,'vk::event::wall_post_new']]],
+  ['request_14',['request',['../namespaceruntime_1_1network.html#aa8020c9799d91e523b8b6e9ab027d572',1,'runtime::network']]],
+  ['request_5fcontext_15',['request_context',['../structruntime_1_1network_1_1request__context.html',1,'runtime::network']]],
+  ['request_5fdata_16',['request_data',['../structruntime_1_1network_1_1request__context.html#adc032c2ff13c76ca2cec294d32308f68',1,'runtime::network::request_context::request_data()'],['../namespaceruntime_1_1network.html#ad97ba80def9436686acb228851b289fe',1,'runtime::network::request_data()']]],
+  ['request_5fwithout_5foutput_17',['request_without_output',['../classvk_1_1method_1_1constructor.html#a44b8b9095c71e806d05d4f5e2066c57a',1,'vk::method::constructor::request_without_output()'],['../classvk_1_1method_1_1message__constructor.html#a76d6bb6f829949026407de1e04c5228e',1,'vk::method::message_constructor::request_without_output()']]],
+  ['require_5fdata_18',['require_data',['../namespaceruntime_1_1network.html#a98d864ad3efacf651bc56637e33b970e',1,'runtime::network']]],
+  ['result_19',['result',['../structruntime_1_1result.html#a28d5e7d43f22a2647722570bcc82fc9d',1,'runtime::result::result() noexcept'],['../structruntime_1_1result.html#a1529db251cd4bec722af2f0c43eae5f9',1,'runtime::result::result(Value &amp;&amp;value)'],['../structruntime_1_1result.html#a93475f5f7818212eb7e00c8eb0fce843',1,'runtime::result::result(Value &amp;&amp;value, Error &amp;&amp;error) noexcept'],['../structruntime_1_1result.html',1,'runtime::result&lt; Value, Error &gt;']]],
+  ['result_2ehpp_20',['result.hpp',['../result_8hpp.html',1,'']]],
+  ['run_21',['run',['../classvk_1_1long__poll.html#a052c147defdb287a2ad8d603c3e0dc3e',1,'vk::long_poll']]],
+  ['runtime_22',['runtime',['../namespaceruntime.html',1,'']]],
+  ['runtime_5ferror_23',['runtime_error',['../classvk_1_1error_1_1runtime__error.html#ae2810edfd248b3b352cbf3e1722c9652',1,'vk::error::runtime_error::runtime_error()'],['../namespacevk_1_1error_1_1anonymous__namespace_02translate__error_8cpp_03.html#a6888506c6634fd789e53bd0c5a567e6ea5b32065884bcc1f2ed126c47e6410808',1,'vk::error::anonymous_namespace{translate_error.cpp}::runtime_error()'],['../classvk_1_1error_1_1runtime__error.html',1,'vk::error::runtime_error']]],
+  ['string_5futils_24',['string_utils',['../namespaceruntime_1_1string__utils.html',1,'runtime']]]
 ];

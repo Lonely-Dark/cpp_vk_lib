@@ -1,4 +1,4 @@
-PROJECT_NAME           = cpp_vk_lib
+PROJECT_NAME           = C++ VK library
 PROJECT_LOGO           = images/cpp_vk_lib_logo.jpg
 OUTPUT_DIRECTORY       = .
 CREATE_SUBDIRS         = NO
@@ -9,7 +9,7 @@ REPEAT_BRIEF           = YES
 FULL_PATH_NAMES        = NO
 EXTRACT_PRIVATE        = YES
 TOC_INCLUDE_HEADINGS   = 5
-EXTRACT_ALL            = NO
+EXTRACT_ALL            = YES
 EXTRACT_ANON_NSPACES   = YES
 EXTRACT_STATIC         = YES
 INPUT                  = cpp_vk_lib
@@ -26,7 +26,7 @@ FILE_PATTERNS          = *.c \
                          *.hpp \
 
 SHOW_USED_FILES        = NO
-SHOW_FILES             = NO
+SHOW_FILES             = YES
 SHOW_NAMESPACES        = YES
 
 RECURSIVE              = YES

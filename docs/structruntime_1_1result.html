@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>cpp_vk_lib: runtime::result&lt; First, Second &gt; Struct Template Reference</title>
+<title>C++ VK library: runtime::result&lt; Value, Error &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="cpp_vk_lib_logo.jpg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">cpp_vk_lib
+   <div id="projectname">C++ VK library
    </div>
   </td>
  </tr>
@@ -63,51 +63,245 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>runtime</b></li><li class="navelem"><a class="el" href="structruntime_1_1result.html">result</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceruntime.html">runtime</a></li><li class="navelem"><a class="el" href="structruntime_1_1result.html">result</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="structruntime_1_1result-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">runtime::result&lt; First, Second &gt; Struct Template Reference</div></div>
+  <div class="headertitle"><div class="title">runtime::result&lt; Value, Error &gt; Struct Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="result_8hpp_source.html">result.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab64def387da6e1d49a14a49c58f9523a"><td class="memItemLeft" align="right" valign="top"><a id="ab64def387da6e1d49a14a49c58f9523a" name="ab64def387da6e1d49a14a49c58f9523a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>result</b> (First &amp;&amp;<a class="el" href="structruntime_1_1result.html#a7fafb322913e9bdbf02305322085a737">value</a>) noexcept</td></tr>
-<tr class="separator:ab64def387da6e1d49a14a49c58f9523a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec0fdfd83b1333f9d9d709c1ddfd345e"><td class="memItemLeft" align="right" valign="top"><a id="aec0fdfd83b1333f9d9d709c1ddfd345e" name="aec0fdfd83b1333f9d9d709c1ddfd345e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>result</b> (First &amp;&amp;<a class="el" href="structruntime_1_1result.html#a7fafb322913e9bdbf02305322085a737">value</a>, Second &amp;&amp;error) noexcept</td></tr>
-<tr class="separator:aec0fdfd83b1333f9d9d709c1ddfd345e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27a364060bb3d836a343921c8a142a29"><td class="memItemLeft" align="right" valign="top"><a id="a27a364060bb3d836a343921c8a142a29" name="a27a364060bb3d836a343921c8a142a29"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_error</b> (Second &amp;&amp;error) noexcept</td></tr>
-<tr class="separator:a27a364060bb3d836a343921c8a142a29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50c8d25e80c66b2ffc80b2f6b1019cc2"><td class="memItemLeft" align="right" valign="top"><a id="a50c8d25e80c66b2ffc80b2f6b1019cc2" name="a50c8d25e80c66b2ffc80b2f6b1019cc2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>tie</b> (First &amp;<a class="el" href="structruntime_1_1result.html#a7fafb322913e9bdbf02305322085a737">value</a>, Second &amp;error) noexcept</td></tr>
-<tr class="separator:a50c8d25e80c66b2ffc80b2f6b1019cc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a199ccfee5c94d2d3e9755fa22d5e5317"><td class="memItemLeft" align="right" valign="top"><a id="a199ccfee5c94d2d3e9755fa22d5e5317" name="a199ccfee5c94d2d3e9755fa22d5e5317"></a>
-const Second &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>error</b> () const noexcept</td></tr>
-<tr class="separator:a199ccfee5c94d2d3e9755fa22d5e5317"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fafb322913e9bdbf02305322085a737"><td class="memItemLeft" align="right" valign="top">const First &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structruntime_1_1result.html#a7fafb322913e9bdbf02305322085a737">value</a> () const</td></tr>
-<tr class="separator:a7fafb322913e9bdbf02305322085a737"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28d5e7d43f22a2647722570bcc82fc9d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structruntime_1_1result.html#a28d5e7d43f22a2647722570bcc82fc9d">result</a> () noexcept</td></tr>
+<tr class="separator:a28d5e7d43f22a2647722570bcc82fc9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1529db251cd4bec722af2f0c43eae5f9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structruntime_1_1result.html#a1529db251cd4bec722af2f0c43eae5f9">result</a> (Value &amp;&amp;<a class="el" href="structruntime_1_1result.html#ae30d7c02bcc08ad97f6fe3dc229bcd47">value</a>)</td></tr>
+<tr class="separator:a1529db251cd4bec722af2f0c43eae5f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93475f5f7818212eb7e00c8eb0fce843"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structruntime_1_1result.html#a93475f5f7818212eb7e00c8eb0fce843">result</a> (Value &amp;&amp;<a class="el" href="structruntime_1_1result.html#ae30d7c02bcc08ad97f6fe3dc229bcd47">value</a>, Error &amp;&amp;<a class="el" href="structruntime_1_1result.html#abb84fafed32bd7176edbe198d99dd2b8">error</a>) noexcept</td></tr>
+<tr class="separator:a93475f5f7818212eb7e00c8eb0fce843"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4cf708f50a93e14bb2283014467b2d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structruntime_1_1result.html#aa4cf708f50a93e14bb2283014467b2d6">set_error</a> (Error &amp;&amp;<a class="el" href="structruntime_1_1result.html#abb84fafed32bd7176edbe198d99dd2b8">error</a>) noexcept</td></tr>
+<tr class="separator:aa4cf708f50a93e14bb2283014467b2d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf215e5302210a107eef6fd2db17d4fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structruntime_1_1result.html#acf215e5302210a107eef6fd2db17d4fa">tie</a> (Value &amp;<a class="el" href="structruntime_1_1result.html#ae30d7c02bcc08ad97f6fe3dc229bcd47">value</a>, Error &amp;<a class="el" href="structruntime_1_1result.html#abb84fafed32bd7176edbe198d99dd2b8">error</a>) noexcept</td></tr>
+<tr class="separator:acf215e5302210a107eef6fd2db17d4fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb84fafed32bd7176edbe198d99dd2b8"><td class="memItemLeft" align="right" valign="top">const Error &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structruntime_1_1result.html#abb84fafed32bd7176edbe198d99dd2b8">error</a> () const noexcept</td></tr>
+<tr class="separator:abb84fafed32bd7176edbe198d99dd2b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae30d7c02bcc08ad97f6fe3dc229bcd47"><td class="memItemLeft" align="right" valign="top">const Value &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structruntime_1_1result.html#ae30d7c02bcc08ad97f6fe3dc229bcd47">value</a> () const</td></tr>
+<tr class="separator:ae30d7c02bcc08ad97f6fe3dc229bcd47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a7fafb322913e9bdbf02305322085a737" name="a7fafb322913e9bdbf02305322085a737"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7fafb322913e9bdbf02305322085a737">&#9670;&nbsp;</a></span>value()</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename Value, typename Error&gt;<br />
+struct runtime::result&lt; Value, Error &gt;</div><p >Optionally error-storing wrapper around Value type. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a28d5e7d43f22a2647722570bcc82fc9d" name="a28d5e7d43f22a2647722570bcc82fc9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28d5e7d43f22a2647722570bcc82fc9d">&#9670;&nbsp;</a></span>result() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename First , typename Second &gt; </div>
+template&lt;typename Value , typename Error &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const First &amp; <a class="el" href="structruntime_1_1result.html">runtime::result</a>&lt; First, Second &gt;::value </td>
+          <td class="memname"><a class="el" href="structruntime_1_1result.html">runtime::result</a>&lt; Value, Error &gt;::<a class="el" href="structruntime_1_1result.html">result</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Set both value and error to default values. </p>
+
+</div>
+</div>
+<a id="a1529db251cd4bec722af2f0c43eae5f9" name="a1529db251cd4bec722af2f0c43eae5f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1529db251cd4bec722af2f0c43eae5f9">&#9670;&nbsp;</a></span>result() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value , typename Error &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structruntime_1_1result.html">runtime::result</a>&lt; Value, Error &gt;::<a class="el" href="structruntime_1_1result.html">result</a> </td>
+          <td>(</td>
+          <td class="paramtype">Value &amp;&amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Set value and set error to false.</p>
+<dl class="section note"><dt>Note</dt><dd>Not marked as explicit to allow simply deduction to Value type. </dd></dl>
+
+</div>
+</div>
+<a id="a93475f5f7818212eb7e00c8eb0fce843" name="a93475f5f7818212eb7e00c8eb0fce843"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93475f5f7818212eb7e00c8eb0fce843">&#9670;&nbsp;</a></span>result() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value , typename Error &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structruntime_1_1result.html">runtime::result</a>&lt; Value, Error &gt;::<a class="el" href="structruntime_1_1result.html">result</a> </td>
+          <td>(</td>
+          <td class="paramtype">Value &amp;&amp;&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Error &amp;&amp;&#160;</td>
+          <td class="paramname"><em>error</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Set both value and error. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="abb84fafed32bd7176edbe198d99dd2b8" name="abb84fafed32bd7176edbe198d99dd2b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb84fafed32bd7176edbe198d99dd2b8">&#9670;&nbsp;</a></span>error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value , typename Error &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const Error &amp; <a class="el" href="structruntime_1_1result.html">runtime::result</a>&lt; Value, Error &gt;::error </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa4cf708f50a93e14bb2283014467b2d6" name="aa4cf708f50a93e14bb2283014467b2d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4cf708f50a93e14bb2283014467b2d6">&#9670;&nbsp;</a></span>set_error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value , typename Error &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="structruntime_1_1result.html">runtime::result</a>&lt; Value, Error &gt;::set_error </td>
+          <td>(</td>
+          <td class="paramtype">Error &amp;&amp;&#160;</td>
+          <td class="paramname"><em>error</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acf215e5302210a107eef6fd2db17d4fa" name="acf215e5302210a107eef6fd2db17d4fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf215e5302210a107eef6fd2db17d4fa">&#9670;&nbsp;</a></span>tie()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value , typename Error &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="structruntime_1_1result.html">runtime::result</a>&lt; Value, Error &gt;::tie </td>
+          <td>(</td>
+          <td class="paramtype">Value &amp;&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Error &amp;&#160;</td>
+          <td class="paramname"><em>error</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Reset error, then set value, if newly assigned error isn't present. </p>
+
+</div>
+</div>
+<a id="ae30d7c02bcc08ad97f6fe3dc229bcd47" name="ae30d7c02bcc08ad97f6fe3dc229bcd47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae30d7c02bcc08ad97f6fe3dc229bcd47">&#9670;&nbsp;</a></span>value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Value , typename Error &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const Value &amp; <a class="el" href="structruntime_1_1result.html">runtime::result</a>&lt; Value, Error &gt;::value </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -119,7 +313,13 @@ template&lt;typename First , typename Second &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p >We cannot retrieve value if we have error. </p>
+<p >Return value if error isn't present, throw otherwise.</p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

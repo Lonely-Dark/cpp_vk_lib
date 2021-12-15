@@ -5,33 +5,28 @@
 
 namespace vk {
 /*!
- * Error code. Stores a message inside.
+ * Error code that can be empty or with error represented as string.
  */
 class error_code
 {
 public:
+    /*! Create empty wrapper. */
     error_code() noexcept;
+    /*! Create with error. */
     error_code(std::string_view message);
     error_code(const error_code&) = default;
     error_code(error_code&&) noexcept;
 
     error_code& operator=(const error_code&) = delete;
     error_code& operator=(error_code&&) = delete;
-    /*!
-     * \note If any error message already exists, it will be overridden
-     * \post operator bool() returns `true`
-     */
+
+    /*! If any error message already exists, it will be overridden. */
     void assign(std::string_view error);
-    /*!
-     * Clear error code
-     * \post operator bool() returns `true`
-     */
+    /*! Clear error code */
     void clear();
     const std::string& message() const noexcept;
-    /*!
-     * Check if error present
-     */
-    explicit operator bool() const noexcept;
+    /*! Check if error present */
+    operator bool() const noexcept;
 
 private:
     std::string message_;

@@ -5,9 +5,7 @@
 #include <unordered_map>
 
 namespace vk::error {
-/*!
- * \return Detailed VK error description by its code
- */
+/*! Get VK error description represented as string by code. */
 const char* translate_to_string(size_t error_code);
 
 }// namespace vk::error

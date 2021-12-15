@@ -14,23 +14,29 @@ namespace vk::keyboard {
 
 enum class color : unsigned char
 {
-    none  = (1 << 0),
-    red   = (1 << 1),
-    green = (1 << 2),
-    blue  = (1 << 3),
-    white = (1 << 4)
+    none  = 1 << 0,
+    red   = 1 << 1,
+    green = 1 << 2,
+    blue  = 1 << 3,
+    white = 1 << 4
 };
 
 constexpr const char* get_color(color c) noexcept
 {
-    // clang-format off
     switch (c) {
-        case color::red: { return colors::red; }
-        case color::green: { return colors::green; }
-        case color::blue: { return colors::blue; }
-        default: { return colors::white; }
+        case color::red: {
+            return colors::red;
+        }
+        case color::green: {
+            return colors::green;
+        }
+        case color::blue: {
+            return colors::blue;
+        }
+        default: {
+            return colors::white;
+        }
     }
-    // clang-format on
 }
 
 }// namespace vk::keyboard

@@ -3,9 +3,11 @@
 
 namespace runtime {
 /*!
- * Show stackdump on every incoming signal and exit with status -1.
+ * Show stacktrace dump on every incoming signal.
  *
- * \note At this moment Unix only.
+ * This functions just shows call trace on SIGCHLD, SIGCONT, SIGUSR1, SIGUSR2 and SIGURG
+ * signals since they're don't critical. E.g SIGCHLD is sent from fork() syscall at thread
+ * exit.
  */
 void setup_signal_handlers();
 

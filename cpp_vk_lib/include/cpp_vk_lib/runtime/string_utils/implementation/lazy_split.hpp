@@ -82,6 +82,11 @@ private:
     String delimiter_;
 };
 
+/*!
+ * Constructs and returns iterable object without allocations with O(1) complexity.
+ *
+ * \note For better performance, i recommend use that instead of "classical" split.
+ */
 inline auto lazy_split(std::string_view data, std::string_view delimiter)
 {
     return split_range<std::string_view>(data, delimiter);

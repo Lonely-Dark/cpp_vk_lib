@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>cpp_vk_lib: error_code.hpp Source File</title>
+<title>C++ VK library: error_code.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="cpp_vk_lib_logo.jpg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">cpp_vk_lib
+   <div id="projectname">C++ VK library
    </div>
   </td>
  </tr>
@@ -70,38 +70,45 @@ $(function() {
   <div class="headertitle"><div class="title">error_code.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef VK_ERROR_ERROR_CODE_HPP</span></div>
+<a href="error__code_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef VK_ERROR_ERROR_CODE_HPP</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define VK_ERROR_ERROR_CODE_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">namespace </span>vk {</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacevk.html">vk</a> {</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classvk_1_1error__code.html">   10</a></span><span class="keyword">class </span><a class="code hl_class" href="classvk_1_1error__code.html">error_code</a></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <a class="code hl_class" href="classvk_1_1error__code.html">error_code</a>() <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <a class="code hl_class" href="classvk_1_1error__code.html">error_code</a>(std::string_view message);</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <a class="code hl_class" href="classvk_1_1error__code.html">error_code</a>(<span class="keyword">const</span> <a class="code hl_class" href="classvk_1_1error__code.html">error_code</a>&amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_class" href="classvk_1_1error__code.html">error_code</a>(<a class="code hl_class" href="classvk_1_1error__code.html">error_code</a>&amp;&amp;) <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_class" href="classvk_1_1error__code.html">error_code</a>&amp; operator=(<span class="keyword">const</span> <a class="code hl_class" href="classvk_1_1error__code.html">error_code</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_class" href="classvk_1_1error__code.html">error_code</a>&amp; operator=(<a class="code hl_class" href="classvk_1_1error__code.html">error_code</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <a class="code hl_function" href="classvk_1_1error__code.html#a718e03faec5e766296e0d412639ca804">error_code</a>() <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_function" href="classvk_1_1error__code.html#a718e03faec5e766296e0d412639ca804">error_code</a>(std::string_view <a class="code hl_function" href="classvk_1_1error__code.html#ae3e1f40d3a2b55f84e30fbb926344d79">message</a>);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classvk_1_1error__code.html#a4f4ae52e5009eba417bbf4760e5bf544">   17</a></span>    <a class="code hl_function" href="classvk_1_1error__code.html#a4f4ae52e5009eba417bbf4760e5bf544">error_code</a>(<span class="keyword">const</span> <a class="code hl_class" href="classvk_1_1error__code.html">error_code</a>&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_function" href="classvk_1_1error__code.html#a718e03faec5e766296e0d412639ca804">error_code</a>(<a class="code hl_class" href="classvk_1_1error__code.html">error_code</a>&amp;&amp;) noexcept;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classvk_1_1error__code.html#a78960200ef55bb3309dab9087646d0ef">   20</a></span>    <a class="code hl_class" href="classvk_1_1error__code.html">error_code</a>&amp; operator=(const <a class="code hl_class" href="classvk_1_1error__code.html">error_code</a>&amp;) = delete;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classvk_1_1error__code.html#ad36492d178ba7e57825cfbe014af340c">   21</a></span>    <a class="code hl_class" href="classvk_1_1error__code.html">error_code</a>&amp; operator=(<a class="code hl_class" href="classvk_1_1error__code.html">error_code</a>&amp;&amp;) = delete;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classvk_1_1error__code.html#a965001a151af89aad658b84289809192">assign</a>(std::string_view error);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classvk_1_1error__code.html#a208459babc53bfadd79db16b6dcfb8c1">clear</a>();</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">const</span> std::string&amp; message() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">explicit</span> <span class="keyword">operator</span> bool() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classvk_1_1error__code.html#a208459babc53bfadd79db16b6dcfb8c1">clear</a>();</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    const std::<span class="keywordtype">string</span>&amp; <a class="code hl_function" href="classvk_1_1error__code.html#ae3e1f40d3a2b55f84e30fbb926344d79">message</a>() const noexcept;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    operator <span class="keywordtype">bool</span>() const noexcept;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>private:</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classvk_1_1error__code.html#a4dbcf3c0d7918daff07a6eaf1841fa56">   32</a></span>    std::<span class="keywordtype">string</span> <a class="code hl_variable" href="classvk_1_1error__code.html#a4dbcf3c0d7918daff07a6eaf1841fa56">message_</a>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classvk_1_1error__code.html#aa7420a47ae93981cc544f466941b8d62">   33</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="classvk_1_1error__code.html#aa7420a47ae93981cc544f466941b8d62">has_error_</a>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>};</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    std::string message_;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">bool</span> has_error_;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>};</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>}<span class="comment">// namespace vk</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#endif</span><span class="comment">// VK_ERROR_ERROR_CODE_HPP</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>}<span class="comment">// namespace vk</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#endif</span><span class="comment">// VK_ERROR_ERROR_CODE_HPP</span></div>
 <div class="ttc" id="aclassvk_1_1error__code_html"><div class="ttname"><a href="classvk_1_1error__code.html">vk::error_code</a></div><div class="ttdef"><b>Definition:</b> error_code.hpp:11</div></div>
 <div class="ttc" id="aclassvk_1_1error__code_html_a208459babc53bfadd79db16b6dcfb8c1"><div class="ttname"><a href="classvk_1_1error__code.html#a208459babc53bfadd79db16b6dcfb8c1">vk::error_code::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdef"><b>Definition:</b> error_code.cpp:28</div></div>
+<div class="ttc" id="aclassvk_1_1error__code_html_a4dbcf3c0d7918daff07a6eaf1841fa56"><div class="ttname"><a href="classvk_1_1error__code.html#a4dbcf3c0d7918daff07a6eaf1841fa56">vk::error_code::message_</a></div><div class="ttdeci">std::string message_</div><div class="ttdef"><b>Definition:</b> error_code.hpp:32</div></div>
+<div class="ttc" id="aclassvk_1_1error__code_html_a4f4ae52e5009eba417bbf4760e5bf544"><div class="ttname"><a href="classvk_1_1error__code.html#a4f4ae52e5009eba417bbf4760e5bf544">vk::error_code::error_code</a></div><div class="ttdeci">error_code(const error_code &amp;)=default</div></div>
+<div class="ttc" id="aclassvk_1_1error__code_html_a718e03faec5e766296e0d412639ca804"><div class="ttname"><a href="classvk_1_1error__code.html#a718e03faec5e766296e0d412639ca804">vk::error_code::error_code</a></div><div class="ttdeci">error_code() noexcept</div><div class="ttdef"><b>Definition:</b> error_code.cpp:5</div></div>
 <div class="ttc" id="aclassvk_1_1error__code_html_a965001a151af89aad658b84289809192"><div class="ttname"><a href="classvk_1_1error__code.html#a965001a151af89aad658b84289809192">vk::error_code::assign</a></div><div class="ttdeci">void assign(std::string_view error)</div><div class="ttdef"><b>Definition:</b> error_code.cpp:22</div></div>
+<div class="ttc" id="aclassvk_1_1error__code_html_aa7420a47ae93981cc544f466941b8d62"><div class="ttname"><a href="classvk_1_1error__code.html#aa7420a47ae93981cc544f466941b8d62">vk::error_code::has_error_</a></div><div class="ttdeci">bool has_error_</div><div class="ttdef"><b>Definition:</b> error_code.hpp:33</div></div>
+<div class="ttc" id="aclassvk_1_1error__code_html_ae3e1f40d3a2b55f84e30fbb926344d79"><div class="ttname"><a href="classvk_1_1error__code.html#ae3e1f40d3a2b55f84e30fbb926344d79">vk::error_code::message</a></div><div class="ttdeci">const std::string &amp; message() const noexcept</div><div class="ttdef"><b>Definition:</b> error_code.cpp:39</div></div>
+<div class="ttc" id="anamespacevk_html"><div class="ttname"><a href="namespacevk.html">vk</a></div><div class="ttdef"><b>Definition:</b> api_constants.hpp:4</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -27,18 +27,21 @@ long_poll::long_poll(asio::io_context& io_context)
     spdlog::info("long poll group: {}", group_id_);
 }
 
-long_poll::poll_payload long_poll::server() const
+void long_poll::server()
 {
     const std::string data   = method::groups::get_long_poll_server(group_id_);
     const auto server_object = shared_parser_->parse(data)["response"];
-    return {std::string(server_object["key"]), std::string(server_object["server"]), std::string(server_object["ts"])};
+    poll_payload_            = {
+        std::string(server_object["key"]),
+        std::string(server_object["server"]),
+        std::string(server_object["ts"])};
 }
 
 std::vector<event::common> long_poll::listen(int8_t timeout)
 {
     static bool new_server_needed = true;
     if (new_server_needed) {
-        poll_payload_     = server();
+        server();
         new_server_needed = false;
     }
 

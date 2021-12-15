@@ -3,6 +3,7 @@
 
 #include "cpp_vk_lib/vk/attachment/attachment.hpp"
 #include "cpp_vk_lib/vk/error/error_code.hpp"
+#include "cpp_vk_lib/vk/methods/mentions.hpp"
 
 #include <vector>
 
@@ -12,11 +13,13 @@ class object;
 
 namespace vk::method::messages {
 
-void send(int64_t peer_id, std::string_view text, bool mentions_flag = false);
+void send(int64_t peer_id, std::string_view text, enum mentions mentions = mentions::disable);
 void send(
     int64_t peer_id, std::string_view text, const std::vector<attachment::attachment_ptr_t>& list,
-    bool mentions_flag = false);
-void send(int64_t peer_id, std::string_view text, std::string_view keyboard_layout, bool mentions_flag = false);
+    enum mentions mentions = mentions::disable);
+void send(
+    int64_t peer_id, std::string_view text, std::string_view keyboard_layout,
+    enum mentions mentions = mentions::disable);
 
 }// namespace vk::method::messages
 

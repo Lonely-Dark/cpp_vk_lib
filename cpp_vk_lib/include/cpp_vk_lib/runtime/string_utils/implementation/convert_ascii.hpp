@@ -8,28 +8,38 @@
 
 namespace runtime::string_utils::implementation {
 
-inline std::string ascii_convert(std::string_view data, std::function<int(int)> convert)
+template <typename Converter>
+std::string ascii_convert(std::string_view data, Converter&& convert)
 {
-    // clang-format off
-    return std::accumulate(data.begin(), data.end(), std::string(),
-        [&convert, length = data.length()](std::string& string, char c) {
-            if (string.empty()) {
-                string.reserve(length);
-            }
-            return string += static_cast<char>(convert(c));
-        });
-    // clang-format on
+    std::string output;
+    output.reserve(data.size());
+
+    for (char c : data) {
+        output += static_cast<char>(convert(c));
+    }
+
+    return output;
 }
 
 }// namespace runtime::string_utils::implementation
 
 namespace runtime::string_utils {
 
+/*!
+ * Convert ASCII-string to lower case.
+ *
+ * \note for strings converted to UTF-8 and other encodings behaviour is unspecified.
+ */
 inline std::string ascii_to_lower(std::string_view data)
 {
     return implementation::ascii_convert(data, tolower);
 }
 
+/*!
+ * Convert ASCII-string to upper case.
+ *
+ * \note for strings converted to UTF-8 and other encodings behaviour is unspecified.
+ */
 inline std::string ascii_to_upper(std::string_view data)
 {
     return implementation::ascii_convert(data, toupper);

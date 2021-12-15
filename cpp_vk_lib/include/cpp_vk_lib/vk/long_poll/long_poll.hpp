@@ -18,14 +18,10 @@ class parser;
 }// namespace simdjson::dom
 
 namespace vk {
-/*!
- * \brief Event queue that implements group long polling.
- */
+/*! Event queue that implements group long polling. */
 class long_poll : public runtime::uncopyable, public runtime::unmovable
 {
-    /*!
-     * groups.getLongPollServer wrapper
-     */
+    /*! groups.getLongPollServer wrapper. */
     struct poll_payload
     {
         std::string key;
@@ -37,12 +33,11 @@ public:
     /*!
      * Get and setup group_id by token.
      *
-     * \throw exception::access_error if group_id retrieving failed
+     * \throws exception::access_error if group_id retrieving failed
      */
     long_poll(asio::io_context&);
-    /*!
-     * Destructor to satisfy correct opaque pointer handling.
-     */
+
+    /*! Destructor to satisfy correct opaque pointer handling. */
     ~long_poll();
     /*!
      * Setup action on selected event type.
@@ -56,33 +51,31 @@ public:
     }
     /*!
      * Start infinite event loop after setup events event handlers using long_poll::on_event.
-     *
      * After all tasks are completed, the queue returns to its original state.
      */
     void run(int8_t timeout = 60);
 
 private:
-    /*!
-     * Get new long poll server.
-     *
-     * \note All checks is the responsibility of the caller.
-     */
-    poll_payload server() const;
+    /*! Get new long poll server. */
+    void server();
     /*!
      * Execute "listening" with maximum delay = timeout.
-     *
      * At first start, new Long Poll server retrieved.
-     *
      * If Long Poll returned error with code 2 or 3, new server is retrieved.
      *
      * \return raw event list
      */
     std::vector<event::common> listen(int8_t timeout = 60);
 
+    /*! Event asynchronous task queue. */
     asio::io_context& io_context_;
+    /*! Received information from polling. */
     poll_payload poll_payload_;
+    /*! Tracked group id. */
     int64_t group_id_;
+    /*! Set of executors, which are called on specified event type. */
     std::unordered_map<event::type, std::function<void(const vk::event::common&)>> executors_;
+    /*! Single parser to all methods for better performance. */
     std::unique_ptr<simdjson::dom::parser> shared_parser_;
 };
 

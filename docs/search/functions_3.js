@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['get_0',['get',['../classvk_1_1keyboard_1_1layout.html#a2927084b2567e0b7188a83c7285f0ffc',1,'vk::keyboard::layout']]]
+  ['dispatch_5factions_0',['dispatch_actions',['../namespacevk_1_1event.html#a7456b2d7f6983a7b1bcc4ab87c4a3c5b',1,'vk::event']]],
+  ['document_1',['document',['../classvk_1_1attachment_1_1document.html#ae138ec133215f493b1621efdd9c569b3',1,'vk::attachment::document']]],
+  ['download_2',['download',['../namespaceruntime_1_1network.html#aa1f776dd005f9999d6e045404b9279a5',1,'runtime::network']]],
+  ['dump_3',['dump',['../classvk_1_1event_1_1common.html#aa153253a251a9b06576b30256fe8b77a',1,'vk::event::common']]]
 ];

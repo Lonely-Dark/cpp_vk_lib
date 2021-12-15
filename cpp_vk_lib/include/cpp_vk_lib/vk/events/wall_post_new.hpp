@@ -35,10 +35,11 @@ public:
      */
     std::unique_ptr<wall_repost> repost() const;
     /*!
-     * throws vk::exception::access_error if no attachments were provided
+     * \throws vk::exception::access_error if no attachments were provided
      */
     std::vector<vk::attachment::attachment_ptr_t> attachments() const;
 
+    /*! Friend declaration really needed since the internal JSON is checked. */
     friend std::ostream& operator<<(std::ostream&, const wall_post_new&);
 
 private:

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>cpp_vk_lib: common.hpp Source File</title>
+<title>C++ VK library: common.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="cpp_vk_lib_logo.jpg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">cpp_vk_lib
+   <div id="projectname">C++ VK library
    </div>
   </td>
  </tr>
@@ -70,58 +70,79 @@ $(function() {
   <div class="headertitle"><div class="title">common.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef VK_EVENTS_COMMON_HPP</span></div>
+<a href="common_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef VK_EVENTS_COMMON_HPP</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define VK_EVENTS_COMMON_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;cpp_vk_lib/vk/events/type.hpp&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="type_8hpp.html">cpp_vk_lib/vk/events/type.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span>vk::event {</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">class </span>message_new;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">class </span>wall_post_new;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">class </span>wall_reply_new;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacevk_1_1event.html">vk::event</a> {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">class </span><a class="code hl_enumvalue" href="namespacevk_1_1event.html#a3ee70a930e6c9bf3a61c37654a7c2f12a37af7ac44b2875ab241f521e11e16b29">message_new</a>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">class </span><a class="code hl_enumvalue" href="namespacevk_1_1event.html#a3ee70a930e6c9bf3a61c37654a7c2f12ab79ada96fea365f26fd52ed1cae0e401">wall_post_new</a>;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">class </span><a class="code hl_enumvalue" href="namespacevk_1_1event.html#a3ee70a930e6c9bf3a61c37654a7c2f12a9c280ae51853f34afbc0fc12cc5cb6b6">wall_reply_new</a>;</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>}<span class="comment">// namespace vk::event</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">namespace </span>simdjson::dom {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacesimdjson_1_1dom.html">simdjson::dom</a> {</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">class </span>object;</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>}<span class="comment">// namespace simdjson::dom</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">namespace </span>vk::event {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacevk_1_1event.html">vk::event</a> {</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classvk_1_1event_1_1common.html">   25</a></span><span class="keyword">class </span><a class="code hl_class" href="classvk_1_1event_1_1common.html">common</a></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>{</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_class" href="classvk_1_1event_1_1common.html">common</a>(std::string_view ts, simdjson::dom::object event);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_class" href="classvk_1_1event_1_1common.html">common</a>(<a class="code hl_class" href="classvk_1_1event_1_1common.html">common</a>&amp;&amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classvk_1_1event_1_1common.html#aa40ac76931dbeba4868cc8c190cedec4">   33</a></span>    <a class="code hl_function" href="classvk_1_1event_1_1common.html#aa40ac76931dbeba4868cc8c190cedec4">~common</a>();</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    event::type type() const noexcept;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    const std::<span class="keywordtype">string</span>&amp; ts() const noexcept;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    std::<span class="keywordtype">string</span> dump() const;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_function" href="classvk_1_1event_1_1common.html#a20a252766562adcac18c138a9be6961c">common</a>(std::string_view <a class="code hl_function" href="classvk_1_1event_1_1common.html#a77e14639b13235d30c1d2938ee36e42c">ts</a>, simdjson::dom::object event);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classvk_1_1event_1_1common.html#ad000131db4b5234a95eea65fb882710d">   29</a></span>    <a class="code hl_function" href="classvk_1_1event_1_1common.html#ad000131db4b5234a95eea65fb882710d">common</a>(<a class="code hl_class" href="classvk_1_1event_1_1common.html">common</a>&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classvk_1_1event_1_1common.html#aa40ac76931dbeba4868cc8c190cedec4">   31</a></span>    <a class="code hl_function" href="classvk_1_1event_1_1common.html#aa40ac76931dbeba4868cc8c190cedec4">~common</a>();</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <a class="code hl_enumeration" href="namespacevk_1_1event.html#a3ee70a930e6c9bf3a61c37654a7c2f12">event::type</a> <a class="code hl_function" href="classvk_1_1event_1_1common.html#a5bd4662e7b1e173a7e4c4c77903fa46f">type</a>() const noexcept;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    const std::<span class="keywordtype">string</span>&amp; <a class="code hl_function" href="classvk_1_1event_1_1common.html#a77e14639b13235d30c1d2938ee36e42c">ts</a>() const noexcept;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    std::<span class="keywordtype">string</span> <a class="code hl_function" href="classvk_1_1event_1_1common.html#aa153253a251a9b06576b30256fe8b77a">dump</a>() const;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classvk_1_1event_1_1common.html#a9e98f6c9510b32908536c316ddaee9b3">on_type</a>(event::<a class="code hl_enumeration" href="namespacevk_1_1event.html#a3ee70a930e6c9bf3a61c37654a7c2f12">type</a>) const noexcept;</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">bool</span> on_type(event::type) const noexcept;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <a class="code hl_class" href="classvk_1_1event_1_1message__new.html">message_new</a> get_message_new() const;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_class" href="classvk_1_1event_1_1wall__post__new.html">wall_post_new</a> get_wall_post_new() const;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_class" href="classvk_1_1event_1_1wall__reply__new.html">wall_reply_new</a> get_wall_reply_new() const;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>private:</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    const simdjson::dom::<span class="keywordtype">object</span>&amp; get_event() const noexcept;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    std::<span class="keywordtype">string</span> ts_;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    event::type underlying_event_type_;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    std::unique_ptr&lt;simdjson::dom::<span class="keywordtype">object</span>&gt; event_json_;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>};</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <a class="code hl_class" href="classvk_1_1event_1_1message__new.html">message_new</a> <a class="code hl_function" href="classvk_1_1event_1_1common.html#ae0c85646490babae43cddc62b0957f40">get_message_new</a>() const;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <a class="code hl_class" href="classvk_1_1event_1_1wall__post__new.html">wall_post_new</a> <a class="code hl_function" href="classvk_1_1event_1_1common.html#ac9d4f2ee7897f4bd814a106d8884f323">get_wall_post_new</a>() const;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <a class="code hl_class" href="classvk_1_1event_1_1wall__reply__new.html">wall_reply_new</a> <a class="code hl_function" href="classvk_1_1event_1_1common.html#a73fa247e3cec56e068c9f156b41d415b">get_wall_reply_new</a>() const;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>private:</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    const <a class="code hl_namespace" href="namespacesimdjson.html">simdjson</a>::dom::<span class="keywordtype">object</span>&amp; <a class="code hl_function" href="classvk_1_1event_1_1common.html#a4e478c0d17e65844ee919d45066325c3">get_event</a>() const noexcept;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classvk_1_1event_1_1common.html#a275f9a5c30839cc61ccd12e2a098fa8e">   46</a></span>    std::<span class="keywordtype">string</span> <a class="code hl_variable" href="classvk_1_1event_1_1common.html#a275f9a5c30839cc61ccd12e2a098fa8e">ts_</a>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classvk_1_1event_1_1common.html#a1e3fc33764c2df8291474e7d17e10c78">   47</a></span>    event::<a class="code hl_enumeration" href="namespacevk_1_1event.html#a3ee70a930e6c9bf3a61c37654a7c2f12">type</a> <a class="code hl_variable" href="classvk_1_1event_1_1common.html#a1e3fc33764c2df8291474e7d17e10c78">underlying_event_type_</a>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classvk_1_1event_1_1common.html#a785da9ef035d6dc7031641a3d2a97bd8">   48</a></span>    std::unique_ptr&lt;<a class="code hl_namespace" href="namespacesimdjson.html">simdjson</a>::dom::<span class="keywordtype">object</span>&gt; <a class="code hl_variable" href="classvk_1_1event_1_1common.html#a785da9ef035d6dc7031641a3d2a97bd8">event_json_</a>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>};</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>}<span class="comment">// namespace vk::event</span></div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}<span class="comment">// namespace vk::event</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#endif</span><span class="comment">// VK_EVENTS_COMMON_EVENT_HPP</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#endif</span><span class="comment">// VK_EVENTS_COMMON_EVENT_HPP</span></div>
 <div class="ttc" id="aclassvk_1_1event_1_1common_html"><div class="ttname"><a href="classvk_1_1event_1_1common.html">vk::event::common</a></div><div class="ttdef"><b>Definition:</b> common.hpp:26</div></div>
+<div class="ttc" id="aclassvk_1_1event_1_1common_html_a1e3fc33764c2df8291474e7d17e10c78"><div class="ttname"><a href="classvk_1_1event_1_1common.html#a1e3fc33764c2df8291474e7d17e10c78">vk::event::common::underlying_event_type_</a></div><div class="ttdeci">event::type underlying_event_type_</div><div class="ttdef"><b>Definition:</b> common.hpp:47</div></div>
+<div class="ttc" id="aclassvk_1_1event_1_1common_html_a20a252766562adcac18c138a9be6961c"><div class="ttname"><a href="classvk_1_1event_1_1common.html#a20a252766562adcac18c138a9be6961c">vk::event::common::common</a></div><div class="ttdeci">common(std::string_view ts, simdjson::dom::object event)</div><div class="ttdef"><b>Definition:</b> common.cpp:14</div></div>
+<div class="ttc" id="aclassvk_1_1event_1_1common_html_a275f9a5c30839cc61ccd12e2a098fa8e"><div class="ttname"><a href="classvk_1_1event_1_1common.html#a275f9a5c30839cc61ccd12e2a098fa8e">vk::event::common::ts_</a></div><div class="ttdeci">std::string ts_</div><div class="ttdef"><b>Definition:</b> common.hpp:46</div></div>
+<div class="ttc" id="aclassvk_1_1event_1_1common_html_a4e478c0d17e65844ee919d45066325c3"><div class="ttname"><a href="classvk_1_1event_1_1common.html#a4e478c0d17e65844ee919d45066325c3">vk::event::common::get_event</a></div><div class="ttdeci">const simdjson::dom::object &amp; get_event() const noexcept</div><div class="ttdef"><b>Definition:</b> common.cpp:34</div></div>
+<div class="ttc" id="aclassvk_1_1event_1_1common_html_a5bd4662e7b1e173a7e4c4c77903fa46f"><div class="ttname"><a href="classvk_1_1event_1_1common.html#a5bd4662e7b1e173a7e4c4c77903fa46f">vk::event::common::type</a></div><div class="ttdeci">event::type type() const noexcept</div><div class="ttdef"><b>Definition:</b> common.cpp:65</div></div>
+<div class="ttc" id="aclassvk_1_1event_1_1common_html_a73fa247e3cec56e068c9f156b41d415b"><div class="ttname"><a href="classvk_1_1event_1_1common.html#a73fa247e3cec56e068c9f156b41d415b">vk::event::common::get_wall_reply_new</a></div><div class="ttdeci">wall_reply_new get_wall_reply_new() const</div><div class="ttdef"><b>Definition:</b> common.cpp:60</div></div>
+<div class="ttc" id="aclassvk_1_1event_1_1common_html_a77e14639b13235d30c1d2938ee36e42c"><div class="ttname"><a href="classvk_1_1event_1_1common.html#a77e14639b13235d30c1d2938ee36e42c">vk::event::common::ts</a></div><div class="ttdeci">const std::string &amp; ts() const noexcept</div><div class="ttdef"><b>Definition:</b> common.cpp:70</div></div>
+<div class="ttc" id="aclassvk_1_1event_1_1common_html_a785da9ef035d6dc7031641a3d2a97bd8"><div class="ttname"><a href="classvk_1_1event_1_1common.html#a785da9ef035d6dc7031641a3d2a97bd8">vk::event::common::event_json_</a></div><div class="ttdeci">std::unique_ptr&lt; simdjson::dom::object &gt; event_json_</div><div class="ttdef"><b>Definition:</b> common.hpp:48</div></div>
+<div class="ttc" id="aclassvk_1_1event_1_1common_html_a9e98f6c9510b32908536c316ddaee9b3"><div class="ttname"><a href="classvk_1_1event_1_1common.html#a9e98f6c9510b32908536c316ddaee9b3">vk::event::common::on_type</a></div><div class="ttdeci">bool on_type(event::type) const noexcept</div><div class="ttdef"><b>Definition:</b> common.cpp:39</div></div>
+<div class="ttc" id="aclassvk_1_1event_1_1common_html_aa153253a251a9b06576b30256fe8b77a"><div class="ttname"><a href="classvk_1_1event_1_1common.html#aa153253a251a9b06576b30256fe8b77a">vk::event::common::dump</a></div><div class="ttdeci">std::string dump() const</div><div class="ttdef"><b>Definition:</b> common.cpp:75</div></div>
 <div class="ttc" id="aclassvk_1_1event_1_1common_html_aa40ac76931dbeba4868cc8c190cedec4"><div class="ttname"><a href="classvk_1_1event_1_1common.html#aa40ac76931dbeba4868cc8c190cedec4">vk::event::common::~common</a></div><div class="ttdeci">~common()</div></div>
-<div class="ttc" id="aclassvk_1_1event_1_1message__new_html"><div class="ttname"><a href="classvk_1_1event_1_1message__new.html">vk::event::message_new</a></div><div class="ttdef"><b>Definition:</b> message_new.hpp:24</div></div>
+<div class="ttc" id="aclassvk_1_1event_1_1common_html_ac9d4f2ee7897f4bd814a106d8884f323"><div class="ttname"><a href="classvk_1_1event_1_1common.html#ac9d4f2ee7897f4bd814a106d8884f323">vk::event::common::get_wall_post_new</a></div><div class="ttdeci">wall_post_new get_wall_post_new() const</div><div class="ttdef"><b>Definition:</b> common.cpp:55</div></div>
+<div class="ttc" id="aclassvk_1_1event_1_1common_html_ad000131db4b5234a95eea65fb882710d"><div class="ttname"><a href="classvk_1_1event_1_1common.html#ad000131db4b5234a95eea65fb882710d">vk::event::common::common</a></div><div class="ttdeci">common(common &amp;&amp;)=default</div></div>
+<div class="ttc" id="aclassvk_1_1event_1_1common_html_ae0c85646490babae43cddc62b0957f40"><div class="ttname"><a href="classvk_1_1event_1_1common.html#ae0c85646490babae43cddc62b0957f40">vk::event::common::get_message_new</a></div><div class="ttdeci">message_new get_message_new() const</div><div class="ttdef"><b>Definition:</b> common.cpp:44</div></div>
+<div class="ttc" id="aclassvk_1_1event_1_1message__new_html"><div class="ttname"><a href="classvk_1_1event_1_1message__new.html">vk::event::message_new</a></div><div class="ttdef"><b>Definition:</b> message_new.hpp:23</div></div>
 <div class="ttc" id="aclassvk_1_1event_1_1wall__post__new_html"><div class="ttname"><a href="classvk_1_1event_1_1wall__post__new.html">vk::event::wall_post_new</a></div><div class="ttdef"><b>Definition:</b> wall_post_new.hpp:17</div></div>
 <div class="ttc" id="aclassvk_1_1event_1_1wall__reply__new_html"><div class="ttname"><a href="classvk_1_1event_1_1wall__reply__new.html">vk::event::wall_reply_new</a></div><div class="ttdef"><b>Definition:</b> wall_reply_new.hpp:19</div></div>
+<div class="ttc" id="anamespacesimdjson_1_1dom_html"><div class="ttname"><a href="namespacesimdjson_1_1dom.html">simdjson::dom</a></div><div class="ttdef"><b>Definition:</b> attachment_handler.hpp:8</div></div>
+<div class="ttc" id="anamespacesimdjson_html"><div class="ttname"><a href="namespacesimdjson.html">simdjson</a></div><div class="ttdef"><b>Definition:</b> attachment_handler.hpp:8</div></div>
+<div class="ttc" id="anamespacevk_1_1event_html"><div class="ttname"><a href="namespacevk_1_1event.html">vk::event</a></div><div class="ttdef"><b>Definition:</b> attachment_handler.hpp:12</div></div>
+<div class="ttc" id="anamespacevk_1_1event_html_a3ee70a930e6c9bf3a61c37654a7c2f12"><div class="ttname"><a href="namespacevk_1_1event.html#a3ee70a930e6c9bf3a61c37654a7c2f12">vk::event::type</a></div><div class="ttdeci">type</div><div class="ttdef"><b>Definition:</b> type.hpp:7</div></div>
+<div class="ttc" id="anamespacevk_1_1event_html_a3ee70a930e6c9bf3a61c37654a7c2f12a37af7ac44b2875ab241f521e11e16b29"><div class="ttname"><a href="namespacevk_1_1event.html#a3ee70a930e6c9bf3a61c37654a7c2f12a37af7ac44b2875ab241f521e11e16b29">vk::event::type::message_new</a></div><div class="ttdeci">@ message_new</div></div>
+<div class="ttc" id="anamespacevk_1_1event_html_a3ee70a930e6c9bf3a61c37654a7c2f12a9c280ae51853f34afbc0fc12cc5cb6b6"><div class="ttname"><a href="namespacevk_1_1event.html#a3ee70a930e6c9bf3a61c37654a7c2f12a9c280ae51853f34afbc0fc12cc5cb6b6">vk::event::type::wall_reply_new</a></div><div class="ttdeci">@ wall_reply_new</div></div>
+<div class="ttc" id="anamespacevk_1_1event_html_a3ee70a930e6c9bf3a61c37654a7c2f12ab79ada96fea365f26fd52ed1cae0e401"><div class="ttname"><a href="namespacevk_1_1event.html#a3ee70a930e6c9bf3a61c37654a7c2f12ab79ada96fea365f26fd52ed1cae0e401">vk::event::type::wall_post_new</a></div><div class="ttdeci">@ wall_post_new</div></div>
+<div class="ttc" id="atype_8hpp_html"><div class="ttname"><a href="type_8hpp.html">type.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

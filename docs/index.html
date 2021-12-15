@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>cpp_vk_lib: cpp_vk_lib</title>
+<title>C++ VK library: C++ VK library</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="cpp_vk_lib_logo.jpg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">cpp_vk_lib
+   <div id="projectname">C++ VK library
    </div>
   </td>
  </tr>
@@ -63,21 +63,63 @@ $(function() {
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">cpp_vk_lib </div></div>
+  <div class="headertitle"><div class="title">C++ VK library </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h3><a class="anchor" id="autotoc_md0"></a>
-CMake opts:</h3>
-<p ><b>-DCPP_VK_LIB_STATIC_BUILD</b></p><ul>
-<li>1 - build static library</li>
-<li>0 - build shared library (default)</li>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md0"></a>
+Organization</h1>
+<p >cpp_vk_lib is a double library, which is formed from <b>vk</b> and <b>runtime</b> modules, where <b>vk</b> depends on <b>runtime</b>.</p>
+<p >Since most devices today uses CPUs with asynchronous execution support, cpp_vk_lib is pretty thread-safe. Moreover, event processing system (long polling) is designed to be asynchronous.</p>
+<p ><b>Runtime</b> module contains</p><ul>
+<li><a class="el" href="namespaceruntime_1_1network.html">the networking module</a>;</li>
+<li><a class="el" href="namespaceruntime_1_1string__utils.html">string utilities</a>;</li>
+<li><a class="el" href="namespaceruntime.html#aa5db38c31116949c9448c1500726985e">logger environment</a>;</li>
+<li><a class="el" href="namespaceruntime.html#aa590d7896242a6de4a20d22591a217d3">Unix signal handlers</a>;</li>
+<li><a class="el" href="namespaceruntime.html#af62b6eb9159324eaf21c01176d1a9668">stacktrace dumps</a>;</li>
+<li>some utility classes <a class="el" href="structruntime_1_1result.html">here</a>, <a class="el" href="structruntime_1_1uncopyable.html">here</a> and <a class="el" href="structruntime_1_1unmovable.html">here</a>.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md1"></a>
-Extern variables:</h3>
+<p ><b>Vk</b> module contains</p><ul>
+<li><a class="el" href="namespacevk_1_1attachment.html">wrapper for attachments</a>;</li>
+<li><a class="el" href="namespacevk_1_1error.html">own exception hierarchy</a>;</li>
+<li><a class="el" href="namespacevk_1_1config.html">external configuration</a>;</li>
+<li><a class="el" href="namespacevk_1_1event.html">incoming event representations</a>;</li>
+<li><a class="el" href="namespacevk_1_1keyboard.html">keyboard</a>;</li>
+<li><a class="el" href="classvk_1_1long__poll.html">long poll API</a>;</li>
+<li><a class="el" href="namespacevk_1_1method.html">methods API</a>;</li>
+<li><a class="el" href="namespacevk_1_1oauth.html">OAuth</a>;</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Guidelines</h1>
+<p >At the moment I see 2 uses for cpp_vk_lib.</p>
+<p >1) Build chat-bots based on group long polling. To find more about designing bots using this library, you can visit <a href="https://github.com/epoll-reactor/template_cpp_vk_bot">this repo</a>, where placed ready-to-use implementation.</p>
+<p >2) Build small utilities to work with VK, e.g downloading media, sending messages, collecting data for analysis and so on. Of course, it makes sense to consider using another VK wrapper for these purposes, which is easier to setup and use.</p>
+<h1><a class="anchor" id="autotoc_md2"></a>
+CMake options</h1>
+<p ><b>-D CPP_VK_LIB_STATIC_BUILD</b></p><ul>
+<li>0 - build shared library (default)</li>
+<li>1 - build static library</li>
+</ul>
+<p ><b>-D CPP_VK_LIB_SANITIZE</b></p><ul>
+<li>0 - build library without memory and control flow sanitizers (default)</li>
+<li>1 - build library with memory and control flow sanitizers</li>
+</ul>
+<p ><b>-D CPP_VK_LIB_BENCHMARKING</b></p><ul>
+<li>0 - build benchmarks (default)</li>
+<li>1 - do not build benchmarks</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md3"></a>
+External variables</h1>
 <p ><b>bool cpp_vk_lib_curl_verbose</b></p><ul>
 <li>Enable or disable detailed cURL logging</li>
 </ul>
-<p >Please, check the <a href="https://github.com/threadpoolexecutor/cpp_vk_lib">README.md</a>. </p>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Plans for the future</h1>
+<ul>
+<li>Implement user long poll next to group long poll</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md5"></a>
+Note</h1>
+<p >Please, check the <a href="https://github.com/epoll-reactor/cpp_vk_lib">README.md</a>. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->

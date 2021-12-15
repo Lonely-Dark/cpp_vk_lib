@@ -3,7 +3,9 @@
 
 namespace runtime {
 /*!
- * Show stackdump.
+ * Create stacktrace dump and put it to screen on every incoming signal.
+ *
+ * \note At this moment, stacktrace dumps for Unix and Android only are implemented.
  */
 void stacktrace_dump();
 

@@ -6,6 +6,13 @@
 
 namespace runtime::string_utils {
 
+/*!
+ * Usual string splitter.
+ *
+ * \note Since this function works with `std::string_views`'s,
+ * be careful with the lifetime of your string, e.g don't return received
+ * vector from function, where source string was allocated on stack.
+ */
 template <typename Delimiter>
 std::vector<std::string_view> split(std::string_view data, Delimiter&& delim)
 {
@@ -26,6 +33,13 @@ std::vector<std::string_view> split(std::string_view data, Delimiter&& delim)
     return splitted;
 }
 
+/*!
+ * Simply split by whitespace characters.
+ *
+ * \note Since this function works with `std::string_views`'s,
+ * be careful with the lifetime of your string, e.g don't return received
+ * vector from function, where source string was allocated on stack.
+ */
 inline std::vector<std::string_view> whitespace_split(std::string_view data)
 {
     return split(data, " \f\n\r\t\v");

@@ -1,4 +1,3 @@
-#include "cpp_vk_lib/runtime/string_utils/string_utils.hpp"
 #include "cpp_vk_lib/runtime/setup_logger.hpp"
 #include "cpp_vk_lib/runtime/signal_handlers.hpp"
 #include "cpp_vk_lib/vk/long_poll/long_poll.hpp"

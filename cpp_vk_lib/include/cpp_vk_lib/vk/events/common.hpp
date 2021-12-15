@@ -27,9 +27,7 @@ class common
 public:
     common(std::string_view ts, simdjson::dom::object event);
     common(common&&) = default;
-    /*!
-     * Destructor to satisfy correct opaque pointer handling.
-     */
+    /*! Destructor to satisfy correct opaque pointer handling. */
     ~common();
 
     event::type type() const noexcept;

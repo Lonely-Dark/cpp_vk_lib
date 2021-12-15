@@ -1,6 +1,7 @@
 ﻿#include "cpp_vk_lib/vk/events/message_new.hpp"
 
 #include "cpp_vk_lib/runtime/misc/cppdefs.hpp"
+#include "cpp_vk_lib/vk/events/action.hpp"
 #include "cpp_vk_lib/vk/events/attachment_handler.hpp"
 #include "simdjson.h"
 #include "spdlog/spdlog.h"
@@ -54,15 +55,11 @@ void message_new::try_get_actions()
     }
 
     if (action_name == "chat_pin_message") {
-        action_ = action::chat_pin_message{
-            action["member_id"].get_int64(),
-            action["conversation_message_id"].get_int64(),
-            action["message"].get_c_str().take_value()};
+        action_ = action::chat_pin_message{action["member_id"].get_int64(), action["message"].get_c_str().take_value()};
     }
 
     if (action_name == "chat_unpin_message") {
-        action_ =
-            action::chat_unpin_message{action["member_id"].get_int64(), action["conversation_message_id"].get_int64()};
+        action_ = action::chat_unpin_message{action["member_id"].get_int64()};
     }
 
     if (action_name == "chat_photo_update") {

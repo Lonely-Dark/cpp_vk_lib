@@ -8,45 +8,57 @@
 
 namespace runtime {
 
-template <typename First, typename Second>
-struct result : protected std::pair<First, Second>
+/*! Optionally error-storing wrapper around Value type. */
+template <typename Value, typename Error>
+struct result : protected std::pair<Value, Error>
 {
-    static_assert(std::is_convertible_v<Second, bool>);
-    static_assert(std::is_copy_constructible_v<First> && std::is_move_constructible_v<First>);
+    static_assert(std::is_convertible_v<Error, bool>);
+    static_assert(std::is_copy_constructible_v<Value> && std::is_move_constructible_v<Value>);
 
+    /*! Set both value and error to default values. */
     result() noexcept
-        : result(First{}, Second{})
+        : result(Value{}, Error{})
     {}
 
-    result(First&& value) noexcept
-        : result(std::forward<First>(value), Second{})
+    /*!
+     * Set value and set error to false.
+     *
+     * \note Not marked as explicit to allow simply deduction to Value type.
+     */
+    result(Value&& value)
+        : result(std::forward<Value>(value), Error{false})
     {}
 
-    result(First&& value, Second&& error) noexcept
-        : std::pair<First, Second>(std::forward<First>(value), std::forward<Second>(error))
+    /*! Set both value and error. */
+    result(Value&& value, Error&& error) noexcept
+        : std::pair<Value, Error>(std::forward<Value>(value), std::forward<Error>(error))
     {}
 
-    void set_error(Second&& error) noexcept
+    void set_error(Error&& error) noexcept
     {
-        this->second = std::forward<Second>(error);
+        this->second = std::forward<Error>(error);
     }
 
-    void tie(First& value, Second& error) noexcept
+    /*! Reset error, then set value, if newly assigned error isn't present. */
+    void tie(Value& value, Error& error) noexcept
     {
         error = this->second;
         if (!error) {
-            value = std::forward<result<First, Second>>(*this).first;
+            value = std::forward<result<Value, Error>>(*this).first;
         }
     }
 
-    const Second& error() const noexcept
+    const Error& error() const noexcept
     {
         return this->second;
     }
+
     /*!
-     * We cannot retrieve value if we have error.
+     * Return value if error isn't present, throw otherwise.
+     *
+     * \throws std::runtime_error
      */
-    const First& value() const
+    const Value& value() const
     {
         if (error()) {
             throw std::runtime_error("failed to get value(): error exists");

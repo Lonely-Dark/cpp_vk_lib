@@ -3,7 +3,7 @@
 
 namespace vk::event {
 
-enum struct type : unsigned char
+enum struct type
 {
     message_new,
     wall_post_new,

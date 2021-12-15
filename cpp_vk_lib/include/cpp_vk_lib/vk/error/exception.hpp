@@ -7,9 +7,7 @@
 
 namespace vk::error {
 
-/*!
- * \brief General exception of VK method classes.
- */
+/*! General exception of VK method classes. */
 class common_exception : public std::exception
 {
 public:
@@ -17,12 +15,7 @@ public:
 
 protected:
     explicit common_exception(std::string_view what_arg);
-    /*!
-     * \param[in] id should represent VK error code
-     * \param[in] exception_name used in exception formatting
-     * \param[in] arg error reason itself
-     * \return formatted string
-     */
+    /*! Return formatted string in form "[vk.exception.id.exception_name]: arg". */
     static std::string create(int32_t id, const char* exception_name, const char* arg);
 
 private:
@@ -53,6 +46,7 @@ public:
     explicit runtime_error(int32_t id, const char* what_arg);
 };
 
+/*! This is used to inform the user about the wrong cast, showing template parameters on throw. */
 template <typename Base, typename Derived>
 class bad_cast_error : public common_exception
 {

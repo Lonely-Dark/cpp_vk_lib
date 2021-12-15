@@ -5,7 +5,7 @@ var searchData=
   ['on_5faction_2',['on_action',['../classvk_1_1event_1_1message__new.html#abb43f3c812808c5a30a72e746d024743',1,'vk::event::message_new']]],
   ['on_5fevent_3',['on_event',['../classvk_1_1long__poll.html#a431170553d53efd9883be2671562b03b',1,'vk::long_poll']]],
   ['on_5ftype_4',['on_type',['../classvk_1_1event_1_1common.html#a9e98f6c9510b32908536c316ddaee9b3',1,'vk::event::common']]],
-  ['one_5ftime_5',['one_time',['../namespacevk_1_1keyboard.html#acfaac25c7c91214c256cb65a52850654a42c65b4a0a42503f782c380c8db96925',1,'vk::keyboard']]],
+  ['one_5ftime_5',['one_time',['../namespacevk_1_1keyboard.html#ae00284c1efc87d492a98f83f0c31d450a42c65b4a0a42503f782c380c8db96925',1,'vk::keyboard']]],
   ['open_5fapp_6',['open_app',['../classvk_1_1keyboard_1_1button_1_1open__app.html#a4fa1ac9d1891514ca2ae4d5289a98212',1,'vk::keyboard::button::open_app::open_app()'],['../classvk_1_1keyboard_1_1button_1_1open__app.html',1,'vk::keyboard::button::open_app']]],
   ['open_5fapp_2ehpp_7',['open_app.hpp',['../open__app_8hpp.html',1,'']]],
   ['operator_20bool_8',['operator bool',['../classvk_1_1error__code.html#a3b96b6b423c028a078ed6adabfccba60',1,'vk::error_code']]],

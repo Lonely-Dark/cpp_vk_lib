@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>cpp_vk_lib: layout.hpp Source File</title>
+<title>C++ VK library: layout.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="cpp_vk_lib_logo.jpg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">cpp_vk_lib
+   <div id="projectname">C++ VK library
    </div>
   </td>
  </tr>
@@ -87,7 +87,7 @@ $(function() {
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>{</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classvk_1_1keyboard_1_1layout.html#ac899d40e7d07a7a7ea955e77a5014dd6">   20</a></span>    <a class="code hl_function" href="classvk_1_1keyboard_1_1layout.html#ac899d40e7d07a7a7ea955e77a5014dd6">layout</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_function" href="classvk_1_1keyboard_1_1layout.html#ac899d40e7d07a7a7ea955e77a5014dd6">layout</a>(<a class="code hl_enumeration" href="namespacevk_1_1keyboard.html#acfaac25c7c91214c256cb65a52850654">keyboard::flag</a> flags);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_function" href="classvk_1_1keyboard_1_1layout.html#ac899d40e7d07a7a7ea955e77a5014dd6">layout</a>(<a class="code hl_enumeration" href="namespacevk_1_1keyboard.html#ae00284c1efc87d492a98f83f0c31d450">keyboard::flag</a> flags);</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Buttons&gt;</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classvk_1_1keyboard_1_1layout.html#a6ddd0128346aeaa71440785acf73a805">   24</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classvk_1_1keyboard_1_1layout.html#a6ddd0128346aeaa71440785acf73a805">add_row</a>(Buttons&amp;&amp;... buttons)</div>
@@ -99,31 +99,32 @@ $(function() {
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    }</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classvk_1_1keyboard_1_1layout.html#a9c1a4c1fcb333d4c98e67cf097566c17">serialize</a>();</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">const</span> std::string&amp; <a class="code hl_function" href="classvk_1_1keyboard_1_1layout.html#a2927084b2567e0b7188a83c7285f0ffc">get</a>() const noexcept;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classvk_1_1keyboard_1_1layout.html#aa1aac8f2dfd183d7a320dc737fc773dd">has_flag</a>(keyboard::<a class="code hl_enumeration" href="namespacevk_1_1keyboard.html#acfaac25c7c91214c256cb65a52850654">flag</a>) const noexcept;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>private:</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="classvk_1_1keyboard_1_1layout.html#a59502e0b6575d8c93215579f6f5cf52e">   43</a></span>    std::<span class="keywordtype">string</span> <a class="code hl_variable" href="classvk_1_1keyboard_1_1layout.html#a59502e0b6575d8c93215579f6f5cf52e">serialized_</a>{};</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classvk_1_1keyboard_1_1layout.html#ae420796f4eb2452ca4d261cf69747f01">   44</a></span>    std::vector&lt;std::vector&lt;std::shared_ptr&lt;button::base&gt;&gt;&gt; <a class="code hl_variable" href="classvk_1_1keyboard_1_1layout.html#ae420796f4eb2452ca4d261cf69747f01">buttons_</a>{};</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classvk_1_1keyboard_1_1layout.html#af9628549cabbf33edab4228a6ae96f71">   45</a></span>    <a class="code hl_enumeration" href="namespacevk_1_1keyboard.html#acfaac25c7c91214c256cb65a52850654">flag</a> <a class="code hl_variable" href="classvk_1_1keyboard_1_1layout.html#af9628549cabbf33edab4228a6ae96f71">flags_</a> = <a class="code hl_enumvalue" href="namespacevk_1_1keyboard.html#acfaac25c7c91214c256cb65a52850654a334c4a4c42fdb79d7ebc3e73b517e6f8">vk::keyboard::flag::none</a>;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>};</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>}<span class="comment">// namespace vk::keyboard</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#endif</span><span class="comment">// VK_KEYBOARD_LAYOUT_HPP</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>private:</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classvk_1_1keyboard_1_1layout.html#aa1aac8f2dfd183d7a320dc737fc773dd">has_flag</a>(keyboard::<a class="code hl_enumeration" href="namespacevk_1_1keyboard.html#ae00284c1efc87d492a98f83f0c31d450">flag</a>) const noexcept;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classvk_1_1keyboard_1_1layout.html#a59502e0b6575d8c93215579f6f5cf52e">   44</a></span>    std::<span class="keywordtype">string</span> <a class="code hl_variable" href="classvk_1_1keyboard_1_1layout.html#a59502e0b6575d8c93215579f6f5cf52e">serialized_</a>{};</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classvk_1_1keyboard_1_1layout.html#ae420796f4eb2452ca4d261cf69747f01">   45</a></span>    std::vector&lt;std::vector&lt;std::shared_ptr&lt;button::base&gt;&gt;&gt; <a class="code hl_variable" href="classvk_1_1keyboard_1_1layout.html#ae420796f4eb2452ca4d261cf69747f01">buttons_</a>{};</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classvk_1_1keyboard_1_1layout.html#af9628549cabbf33edab4228a6ae96f71">   46</a></span>    <a class="code hl_enumeration" href="namespacevk_1_1keyboard.html#ae00284c1efc87d492a98f83f0c31d450">flag</a> <a class="code hl_variable" href="classvk_1_1keyboard_1_1layout.html#af9628549cabbf33edab4228a6ae96f71">flags_</a> = <a class="code hl_enumvalue" href="namespacevk_1_1keyboard.html#ae00284c1efc87d492a98f83f0c31d450a334c4a4c42fdb79d7ebc3e73b517e6f8">vk::keyboard::flag::none</a>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>};</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>}<span class="comment">// namespace vk::keyboard</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#endif</span><span class="comment">// VK_KEYBOARD_LAYOUT_HPP</span></div>
 <div class="ttc" id="aclassvk_1_1keyboard_1_1layout_html"><div class="ttname"><a href="classvk_1_1keyboard_1_1layout.html">vk::keyboard::layout</a></div><div class="ttdoc">The buttons grid representation.</div><div class="ttdef"><b>Definition:</b> layout.hpp:18</div></div>
 <div class="ttc" id="aclassvk_1_1keyboard_1_1layout_html_a2927084b2567e0b7188a83c7285f0ffc"><div class="ttname"><a href="classvk_1_1keyboard_1_1layout.html#a2927084b2567e0b7188a83c7285f0ffc">vk::keyboard::layout::get</a></div><div class="ttdeci">const std::string &amp; get() const noexcept</div><div class="ttdef"><b>Definition:</b> layout.cpp:40</div></div>
-<div class="ttc" id="aclassvk_1_1keyboard_1_1layout_html_a59502e0b6575d8c93215579f6f5cf52e"><div class="ttname"><a href="classvk_1_1keyboard_1_1layout.html#a59502e0b6575d8c93215579f6f5cf52e">vk::keyboard::layout::serialized_</a></div><div class="ttdeci">std::string serialized_</div><div class="ttdef"><b>Definition:</b> layout.hpp:43</div></div>
+<div class="ttc" id="aclassvk_1_1keyboard_1_1layout_html_a59502e0b6575d8c93215579f6f5cf52e"><div class="ttname"><a href="classvk_1_1keyboard_1_1layout.html#a59502e0b6575d8c93215579f6f5cf52e">vk::keyboard::layout::serialized_</a></div><div class="ttdeci">std::string serialized_</div><div class="ttdef"><b>Definition:</b> layout.hpp:44</div></div>
 <div class="ttc" id="aclassvk_1_1keyboard_1_1layout_html_a6ddd0128346aeaa71440785acf73a805"><div class="ttname"><a href="classvk_1_1keyboard_1_1layout.html#a6ddd0128346aeaa71440785acf73a805">vk::keyboard::layout::add_row</a></div><div class="ttdeci">void add_row(Buttons &amp;&amp;... buttons)</div><div class="ttdef"><b>Definition:</b> layout.hpp:24</div></div>
 <div class="ttc" id="aclassvk_1_1keyboard_1_1layout_html_a9c1a4c1fcb333d4c98e67cf097566c17"><div class="ttname"><a href="classvk_1_1keyboard_1_1layout.html#a9c1a4c1fcb333d4c98e67cf097566c17">vk::keyboard::layout::serialize</a></div><div class="ttdeci">void serialize()</div><div class="ttdef"><b>Definition:</b> layout.cpp:16</div></div>
 <div class="ttc" id="aclassvk_1_1keyboard_1_1layout_html_aa1aac8f2dfd183d7a320dc737fc773dd"><div class="ttname"><a href="classvk_1_1keyboard_1_1layout.html#aa1aac8f2dfd183d7a320dc737fc773dd">vk::keyboard::layout::has_flag</a></div><div class="ttdeci">bool has_flag(keyboard::flag) const noexcept</div><div class="ttdef"><b>Definition:</b> layout.cpp:45</div></div>
 <div class="ttc" id="aclassvk_1_1keyboard_1_1layout_html_ac899d40e7d07a7a7ea955e77a5014dd6"><div class="ttname"><a href="classvk_1_1keyboard_1_1layout.html#ac899d40e7d07a7a7ea955e77a5014dd6">vk::keyboard::layout::layout</a></div><div class="ttdeci">layout()=default</div></div>
-<div class="ttc" id="aclassvk_1_1keyboard_1_1layout_html_ae420796f4eb2452ca4d261cf69747f01"><div class="ttname"><a href="classvk_1_1keyboard_1_1layout.html#ae420796f4eb2452ca4d261cf69747f01">vk::keyboard::layout::buttons_</a></div><div class="ttdeci">std::vector&lt; std::vector&lt; std::shared_ptr&lt; button::base &gt; &gt; &gt; buttons_</div><div class="ttdef"><b>Definition:</b> layout.hpp:44</div></div>
-<div class="ttc" id="aclassvk_1_1keyboard_1_1layout_html_af9628549cabbf33edab4228a6ae96f71"><div class="ttname"><a href="classvk_1_1keyboard_1_1layout.html#af9628549cabbf33edab4228a6ae96f71">vk::keyboard::layout::flags_</a></div><div class="ttdeci">flag flags_</div><div class="ttdef"><b>Definition:</b> layout.hpp:45</div></div>
+<div class="ttc" id="aclassvk_1_1keyboard_1_1layout_html_ae420796f4eb2452ca4d261cf69747f01"><div class="ttname"><a href="classvk_1_1keyboard_1_1layout.html#ae420796f4eb2452ca4d261cf69747f01">vk::keyboard::layout::buttons_</a></div><div class="ttdeci">std::vector&lt; std::vector&lt; std::shared_ptr&lt; button::base &gt; &gt; &gt; buttons_</div><div class="ttdef"><b>Definition:</b> layout.hpp:45</div></div>
+<div class="ttc" id="aclassvk_1_1keyboard_1_1layout_html_af9628549cabbf33edab4228a6ae96f71"><div class="ttname"><a href="classvk_1_1keyboard_1_1layout.html#af9628549cabbf33edab4228a6ae96f71">vk::keyboard::layout::flags_</a></div><div class="ttdeci">flag flags_</div><div class="ttdef"><b>Definition:</b> layout.hpp:46</div></div>
 <div class="ttc" id="aflags_8hpp_html"><div class="ttname"><a href="flags_8hpp.html">flags.hpp</a></div></div>
 <div class="ttc" id="alocation_8hpp_html"><div class="ttname"><a href="location_8hpp.html">location.hpp</a></div></div>
 <div class="ttc" id="anamespacevk_1_1keyboard_html"><div class="ttname"><a href="namespacevk_1_1keyboard.html">vk::keyboard</a></div><div class="ttdef"><b>Definition:</b> base.hpp:6</div></div>
-<div class="ttc" id="anamespacevk_1_1keyboard_html_acfaac25c7c91214c256cb65a52850654"><div class="ttname"><a href="namespacevk_1_1keyboard.html#acfaac25c7c91214c256cb65a52850654">vk::keyboard::flag</a></div><div class="ttdeci">flag</div><div class="ttdef"><b>Definition:</b> flags.hpp:7</div></div>
-<div class="ttc" id="anamespacevk_1_1keyboard_html_acfaac25c7c91214c256cb65a52850654a334c4a4c42fdb79d7ebc3e73b517e6f8"><div class="ttname"><a href="namespacevk_1_1keyboard.html#acfaac25c7c91214c256cb65a52850654a334c4a4c42fdb79d7ebc3e73b517e6f8">vk::keyboard::flag::none</a></div><div class="ttdeci">@ none</div></div>
+<div class="ttc" id="anamespacevk_1_1keyboard_html_ae00284c1efc87d492a98f83f0c31d450"><div class="ttname"><a href="namespacevk_1_1keyboard.html#ae00284c1efc87d492a98f83f0c31d450">vk::keyboard::flag</a></div><div class="ttdeci">flag</div><div class="ttdef"><b>Definition:</b> flags.hpp:7</div></div>
+<div class="ttc" id="anamespacevk_1_1keyboard_html_ae00284c1efc87d492a98f83f0c31d450a334c4a4c42fdb79d7ebc3e73b517e6f8"><div class="ttname"><a href="namespacevk_1_1keyboard.html#ae00284c1efc87d492a98f83f0c31d450a334c4a4c42fdb79d7ebc3e73b517e6f8">vk::keyboard::flag::none</a></div><div class="ttdeci">@ none</div></div>
 <div class="ttc" id="aopen__app_8hpp_html"><div class="ttname"><a href="open__app_8hpp.html">open_app.hpp</a></div></div>
 <div class="ttc" id="atext_8hpp_html"><div class="ttname"><a href="text_8hpp.html">text.hpp</a></div></div>
 <div class="ttc" id="avk__pay_8hpp_html"><div class="ttname"><a href="vk__pay_8hpp.html">vk_pay.hpp</a></div></div>

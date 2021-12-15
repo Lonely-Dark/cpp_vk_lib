@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['flag_0',['flag',['../namespacevk_1_1keyboard.html#acfaac25c7c91214c256cb65a52850654',1,'vk::keyboard']]]
+  ['flag_0',['flag',['../namespacevk_1_1keyboard.html#ae00284c1efc87d492a98f83f0c31d450',1,'vk::keyboard']]]
 ];

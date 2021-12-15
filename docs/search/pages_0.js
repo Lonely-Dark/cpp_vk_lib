@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['cpp_5fvk_5flib_0',['cpp_vk_lib',['../index.html',1,'']]]
+  ['c_2b_2b_20vk_20library_0',['C++ VK library',['../index.html',1,'']]]
 ];

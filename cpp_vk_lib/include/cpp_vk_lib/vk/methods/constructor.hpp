@@ -8,7 +8,7 @@ namespace vk::method::policy {
 struct group_api;
 /*! Policy that uses user_token. */
 struct user_api;
-/*! Raw policy. All tokens are ignored. */
+/*! Raw policy that ignores both tokens. */
 struct do_not_use_api_link;
 
 }// namespace vk::method::policy

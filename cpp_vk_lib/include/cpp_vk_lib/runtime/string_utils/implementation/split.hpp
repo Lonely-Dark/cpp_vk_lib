@@ -6,7 +6,8 @@
 
 namespace runtime::string_utils {
 
-/*! Usual string splitter.
+/*!
+ * Usual string splitter.
  *
  * \note Since this function works with `std::string_views`'s,
  * be careful with the lifetime of your string, e.g don't return received
@@ -32,7 +33,8 @@ std::vector<std::string_view> split(std::string_view data, Delimiter&& delim)
     return splitted;
 }
 
-/*! Simply split by whitespace characters.
+/*!
+ * Simply split by whitespace characters.
  *
  * \note Since this function works with `std::string_views`'s,
  * be careful with the lifetime of your string, e.g don't return received

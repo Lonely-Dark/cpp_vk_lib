@@ -20,7 +20,8 @@ struct result : protected std::pair<Value, Error>
         : result(Value{}, Error{})
     {}
 
-    /*! Set value and set error to false.
+    /*!
+     * Set value and set error to false.
      *
      * \note Not marked as explicit to allow simply deduction to Value type.
      */
@@ -52,7 +53,8 @@ struct result : protected std::pair<Value, Error>
         return this->second;
     }
 
-    /*! Return value if error isn't present, throw otherwise.
+    /*!
+     * Return value if error isn't present, throw otherwise.
      *
      * \throws std::runtime_error
      */

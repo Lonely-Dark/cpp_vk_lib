@@ -18,7 +18,7 @@ class parser;
 }// namespace simdjson::dom
 
 namespace vk {
-/*!  Event queue that implements group long polling. */
+/*! Event queue that implements group long polling. */
 class long_poll : public runtime::uncopyable, public runtime::unmovable
 {
     /*! groups.getLongPollServer wrapper. */

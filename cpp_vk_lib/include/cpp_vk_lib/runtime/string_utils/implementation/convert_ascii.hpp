@@ -25,7 +25,8 @@ std::string ascii_convert(std::string_view data, Converter&& convert)
 
 namespace runtime::string_utils {
 
-/*! Convert ASCII-string to lower case.
+/*!
+ * Convert ASCII-string to lower case.
  *
  * \note for strings converted to UTF-8 and other encodings behaviour is unspecified.
  */
@@ -34,7 +35,8 @@ inline std::string ascii_to_lower(std::string_view data)
     return implementation::ascii_convert(data, tolower);
 }
 
-/*! Convert ASCII-string to upper case.
+/*!
+ * Convert ASCII-string to upper case.
  *
  * \note for strings converted to UTF-8 and other encodings behaviour is unspecified.
  */

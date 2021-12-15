@@ -82,7 +82,8 @@ private:
     String delimiter_;
 };
 
-/*! Constructs and returns iterable object without allocations with O(1) complexity.
+/*!
+ * Constructs and returns iterable object without allocations with O(1) complexity.
  *
  * \note For better performance, i recommend use that instead of "classical" split.
  */

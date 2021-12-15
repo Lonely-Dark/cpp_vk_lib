@@ -5,8 +5,9 @@
 
 namespace vk::keyboard::button {
 
-/*! Buttons are implemented as inheritance hierarchy just to simplify code,
- *  avoiding a lot of boilerplate code with std::variant's or std::any's.
+/*!
+ * Buttons are implemented as inheritance hierarchy just to simplify code,
+ * avoiding a lot of boilerplate code with std::variant's or std::any's.
  */
 class base
 {

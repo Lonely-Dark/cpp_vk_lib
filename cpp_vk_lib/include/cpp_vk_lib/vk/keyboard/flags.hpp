@@ -3,7 +3,7 @@
 
 namespace vk::keyboard {
 
-enum class flag : unsigned char
+enum struct flag
 {
     none     = (1 << 0),
     in_line  = (1 << 1),

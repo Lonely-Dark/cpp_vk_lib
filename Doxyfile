@@ -1,4 +1,4 @@
-PROJECT_NAME           = cpp_vk_lib
+PROJECT_NAME           = C++ VK library
 PROJECT_LOGO           = images/cpp_vk_lib_logo.jpg
 OUTPUT_DIRECTORY       = .
 CREATE_SUBDIRS         = NO

@@ -90,9 +90,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:abfa91d8b9bcee69db1f4116b5915f30f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac77b705c83cfe80c602cb6d85cd4a355"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1long__poll.html#ac77b705c83cfe80c602cb6d85cd4a355">~long_poll</a> ()</td></tr>
 <tr class="separator:ac77b705c83cfe80c602cb6d85cd4a355"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a431170553d53efd9883be2671562b03b"><td class="memTemplParams" colspan="2">template&lt;typename Executor &gt; </td></tr>
-<tr class="memitem:a431170553d53efd9883be2671562b03b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classvk_1_1long__poll.html#a431170553d53efd9883be2671562b03b">on_event</a> (<a class="el" href="namespacevk_1_1event.html#a3ee70a930e6c9bf3a61c37654a7c2f12">event::type</a> type, Executor executor)</td></tr>
-<tr class="separator:a431170553d53efd9883be2671562b03b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affc224c4a89f222fb1b9ee92cb97b50e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1long__poll.html#affc224c4a89f222fb1b9ee92cb97b50e">on_event</a> (<a class="el" href="namespacevk_1_1event.html#a3ee70a930e6c9bf3a61c37654a7c2f12">event::type</a> type, std::function&lt; void(const <a class="el" href="classvk_1_1event_1_1common.html">vk::event::common</a> &amp;)&gt; &amp;&amp;executor)</td></tr>
+<tr class="separator:affc224c4a89f222fb1b9ee92cb97b50e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a052c147defdb287a2ad8d603c3e0dc3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1long__poll.html#a052c147defdb287a2ad8d603c3e0dc3e">run</a> (int8_t timeout=60)</td></tr>
 <tr class="separator:a052c147defdb287a2ad8d603c3e0dc3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_structruntime_1_1uncopyable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_structruntime_1_1uncopyable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="structruntime_1_1uncopyable.html">runtime::uncopyable</a></td></tr>
@@ -213,13 +212,11 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a431170553d53efd9883be2671562b03b" name="a431170553d53efd9883be2671562b03b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a431170553d53efd9883be2671562b03b">&#9670;&nbsp;</a></span>on_event()</h2>
+<a id="affc224c4a89f222fb1b9ee92cb97b50e" name="affc224c4a89f222fb1b9ee92cb97b50e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affc224c4a89f222fb1b9ee92cb97b50e">&#9670;&nbsp;</a></span>on_event()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Executor &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -233,7 +230,7 @@ template&lt;typename Executor &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Executor&#160;</td>
+          <td class="paramtype">std::function&lt; void(const <a class="el" href="classvk_1_1event_1_1common.html">vk::event::common</a> &amp;)&gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>executor</em>&#160;</td>
         </tr>
         <tr>
@@ -268,7 +265,7 @@ template&lt;typename Executor &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Start infinite event loop after setup events event handlers using <a class="el" href="classvk_1_1long__poll.html#a431170553d53efd9883be2671562b03b">long_poll::on_event</a>. After all tasks are completed, the queue returns to its original state. </p>
+<p >Start infinite event loop after setup events event handlers using <a class="el" href="classvk_1_1long__poll.html#affc224c4a89f222fb1b9ee92cb97b50e">long_poll::on_event</a>. After all tasks are completed, the queue returns to its original state. </p>
 
 </div>
 </div>

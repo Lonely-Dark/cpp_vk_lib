@@ -104,8 +104,8 @@ Namespaces</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:ac3a349c35c908e5e30413ef1dc4d0dcc"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="constructor_8cpp.html#ac3a349c35c908e5e30413ef1dc4d0dcc">append_url</a> (std::string_view method)</td></tr>
 <tr class="separator:ac3a349c35c908e5e30413ef1dc4d0dcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab718dfbf7b9c91d3aca04d6314e80aea"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="constructor_8cpp.html#ab718dfbf7b9c91d3aca04d6314e80aea">call</a> (bool output_needed, std::string_view method, std::map&lt; std::string, std::string &gt; &amp;&amp;params)</td></tr>
-<tr class="separator:ab718dfbf7b9c91d3aca04d6314e80aea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af18b33281f21c6150284b3a3fb7f1d52"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="constructor_8cpp.html#af18b33281f21c6150284b3a3fb7f1d52">call</a> (std::string_view method, std::map&lt; std::string, std::string &gt; &amp;&amp;params, enum <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">runtime::network::data_flow</a> output_needed)</td></tr>
+<tr class="separator:af18b33281f21c6150284b3a3fb7f1d52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ac3a349c35c908e5e30413ef1dc4d0dcc" name="ac3a349c35c908e5e30413ef1dc4d0dcc"></a>
@@ -134,8 +134,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab718dfbf7b9c91d3aca04d6314e80aea" name="ab718dfbf7b9c91d3aca04d6314e80aea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab718dfbf7b9c91d3aca04d6314e80aea">&#9670;&nbsp;</a></span>call()</h2>
+<a id="af18b33281f21c6150284b3a3fb7f1d52" name="af18b33281f21c6150284b3a3fb7f1d52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af18b33281f21c6150284b3a3fb7f1d52">&#9670;&nbsp;</a></span>call()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -146,12 +146,6 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">static std::string call </td>
           <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>output_needed</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>method</em>, </td>
         </tr>
@@ -159,7 +153,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::map&lt; std::string, std::string &gt; &amp;&amp;&#160;</td>
-          <td class="paramname"><em>params</em>&#160;</td>
+          <td class="paramname"><em>params</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">enum <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">runtime::network::data_flow</a>&#160;</td>
+          <td class="paramname"><em>output_needed</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

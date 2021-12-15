@@ -20,7 +20,7 @@ var searchData=
   ['ascii_5fto_5flower_17',['ascii_to_lower',['../namespaceruntime_1_1string__utils.html#a1efc56b47f534d65493f99e09b6df057',1,'runtime::string_utils']]],
   ['ascii_5fto_5fupper_18',['ascii_to_upper',['../namespaceruntime_1_1string__utils.html#affcc65adcf8f75adf8b04fb9026a3198',1,'runtime::string_utils']]],
   ['assign_19',['assign',['../classvk_1_1error__code.html#a965001a151af89aad658b84289809192',1,'vk::error_code']]],
-  ['at_5fexit_5fhandler_20',['at_exit_handler',['../classimpl_1_1libcurl__wrap.html#af7768ce45e11acf5f996b3874a534d3d',1,'impl::libcurl_wrap::at_exit_handler()'],['../namespaceimpl.html#a035ee81107349fe7240d29ef0b3fcc37',1,'impl::at_exit_handler()']]],
+  ['at_5fexit_5fhandler_20',['at_exit_handler',['../namespaceimpl.html#a035ee81107349fe7240d29ef0b3fcc37',1,'impl']]],
   ['attachment_2ehpp_21',['attachment.hpp',['../attachment_8hpp.html',1,'']]],
   ['attachment_5fhandler_2ecpp_22',['attachment_handler.cpp',['../attachment__handler_8cpp.html',1,'']]],
   ['attachment_5fhandler_2ehpp_23',['attachment_handler.hpp',['../attachment__handler_8hpp.html',1,'']]],

@@ -83,12 +83,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a92068b85a433440fbc22a9880280cf02"><td class="memTemplParams" colspan="2">template&lt;typename Body &gt; </td></tr>
 <tr class="memitem:a92068b85a433440fbc22a9880280cf02"><td class="memTemplItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceimpl.html#a92068b85a433440fbc22a9880280cf02">create_url</a> (std::string_view host, Body &amp;&amp;body)</td></tr>
 <tr class="separator:a92068b85a433440fbc22a9880280cf02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad24016212f9efe5e3753d33e8574293"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structruntime_1_1result.html">runtime::result</a>&lt; std::string, size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceimpl.html#aad24016212f9efe5e3753d33e8574293">libcurl_to_string_recv</a> (CURL *handle, bool output_needed)</td></tr>
-<tr class="separator:aad24016212f9efe5e3753d33e8574293"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01e88a9f47d1a919a0399f085e1a8ed1"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceimpl.html#a01e88a9f47d1a919a0399f085e1a8ed1">libcurl_to_buffer_recv</a> (void *buffer, std::string_view server, curl_write_callback write_cb, curl_write_callback header_cb=nullptr) noexcept</td></tr>
-<tr class="separator:a01e88a9f47d1a919a0399f085e1a8ed1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f4d3987b9e14ba7e9109f4eca539e2e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structruntime_1_1result.html">runtime::result</a>&lt; std::string, size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceimpl.html#a0f4d3987b9e14ba7e9109f4eca539e2e">libcurl_from_buffer_send</a> (bool output_needed, struct curl_httppost *formpost, std::string_view server)</td></tr>
-<tr class="separator:a0f4d3987b9e14ba7e9109f4eca539e2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bcc0230f6a6c3f4c7a89c072a18612d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structruntime_1_1result.html">runtime::result</a>&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceimpl.html#a0bcc0230f6a6c3f4c7a89c072a18612d">libcurl_to_string_recv</a> (CURL *handle, enum <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">runtime::network::data_flow</a> output_needed)</td></tr>
+<tr class="separator:a0bcc0230f6a6c3f4c7a89c072a18612d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbd49c93ab13b78c448913788c54b27f"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceimpl.html#abbd49c93ab13b78c448913788c54b27f">libcurl_to_buffer_recv</a> (void *buffer, std::string_view server, curl_write_callback write_cb, curl_write_callback header_cb=nullptr) noexcept</td></tr>
+<tr class="separator:abbd49c93ab13b78c448913788c54b27f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7749a767c392d2d0bc70c58e6d4b6cd0"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structruntime_1_1result.html">runtime::result</a>&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceimpl.html#a7749a767c392d2d0bc70c58e6d4b6cd0">libcurl_from_buffer_send</a> (struct curl_httppost *formpost, std::string_view server, enum <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">runtime::network::data_flow</a> output_needed)</td></tr>
+<tr class="separator:a7749a767c392d2d0bc70c58e6d4b6cd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -159,8 +159,8 @@ template&lt;typename Body &gt; </div>
 
 </div>
 </div>
-<a id="a0f4d3987b9e14ba7e9109f4eca539e2e" name="a0f4d3987b9e14ba7e9109f4eca539e2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0f4d3987b9e14ba7e9109f4eca539e2e">&#9670;&nbsp;</a></span>libcurl_from_buffer_send()</h2>
+<a id="a7749a767c392d2d0bc70c58e6d4b6cd0" name="a7749a767c392d2d0bc70c58e6d4b6cd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7749a767c392d2d0bc70c58e6d4b6cd0">&#9670;&nbsp;</a></span>libcurl_from_buffer_send()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -169,14 +169,8 @@ template&lt;typename Body &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="structruntime_1_1result.html">runtime::result</a>&lt; std::string, size_t &gt; impl::libcurl_from_buffer_send </td>
+          <td class="memname">static <a class="el" href="structruntime_1_1result.html">runtime::result</a>&lt; std::string, bool &gt; impl::libcurl_from_buffer_send </td>
           <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>output_needed</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">struct curl_httppost *&#160;</td>
           <td class="paramname"><em>formpost</em>, </td>
         </tr>
@@ -184,7 +178,13 @@ template&lt;typename Body &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>server</em>&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">enum <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">runtime::network::data_flow</a>&#160;</td>
+          <td class="paramname"><em>output_needed</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -201,8 +201,8 @@ template&lt;typename Body &gt; </div>
 
 </div>
 </div>
-<a id="a01e88a9f47d1a919a0399f085e1a8ed1" name="a01e88a9f47d1a919a0399f085e1a8ed1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01e88a9f47d1a919a0399f085e1a8ed1">&#9670;&nbsp;</a></span>libcurl_to_buffer_recv()</h2>
+<a id="abbd49c93ab13b78c448913788c54b27f" name="abbd49c93ab13b78c448913788c54b27f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbd49c93ab13b78c448913788c54b27f">&#9670;&nbsp;</a></span>libcurl_to_buffer_recv()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -211,7 +211,7 @@ template&lt;typename Body &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static size_t impl::libcurl_to_buffer_recv </td>
+          <td class="memname">static bool impl::libcurl_to_buffer_recv </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>buffer</em>, </td>
@@ -249,8 +249,8 @@ template&lt;typename Body &gt; </div>
 
 </div>
 </div>
-<a id="aad24016212f9efe5e3753d33e8574293" name="aad24016212f9efe5e3753d33e8574293"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad24016212f9efe5e3753d33e8574293">&#9670;&nbsp;</a></span>libcurl_to_string_recv()</h2>
+<a id="a0bcc0230f6a6c3f4c7a89c072a18612d" name="a0bcc0230f6a6c3f4c7a89c072a18612d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bcc0230f6a6c3f4c7a89c072a18612d">&#9670;&nbsp;</a></span>libcurl_to_string_recv()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -259,7 +259,7 @@ template&lt;typename Body &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="structruntime_1_1result.html">runtime::result</a>&lt; std::string, size_t &gt; impl::libcurl_to_string_recv </td>
+          <td class="memname">static <a class="el" href="structruntime_1_1result.html">runtime::result</a>&lt; std::string, bool &gt; impl::libcurl_to_string_recv </td>
           <td>(</td>
           <td class="paramtype">CURL *&#160;</td>
           <td class="paramname"><em>handle</em>, </td>
@@ -267,7 +267,7 @@ template&lt;typename Body &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
+          <td class="paramtype">enum <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">runtime::network::data_flow</a>&#160;</td>
           <td class="paramname"><em>output_needed</em>&#160;</td>
         </tr>
         <tr>
@@ -304,7 +304,7 @@ template&lt;typename Body &gt; </div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}()</div>
 <div class="ttc" id="aclassimpl_1_1libcurl__wrap_html_a4761544823d471b9628a800f75f87cc4"><div class="ttname"><a href="classimpl_1_1libcurl__wrap.html#a4761544823d471b9628a800f75f87cc4">impl::libcurl_wrap::~libcurl_wrap</a></div><div class="ttdeci">~libcurl_wrap()</div><div class="ttdef"><b>Definition:</b> network.cpp:24</div></div>
-<div class="ttc" id="anamespaceimpl_html_a8a8875cf63ba5260e7650f72c31d325a"><div class="ttname"><a href="namespaceimpl.html#a8a8875cf63ba5260e7650f72c31d325a">impl::curl_handle</a></div><div class="ttdeci">static libcurl_wrap * curl_handle()</div><div class="ttdef"><b>Definition:</b> network.cpp:115</div></div>
+<div class="ttc" id="anamespaceimpl_html_a8a8875cf63ba5260e7650f72c31d325a"><div class="ttname"><a href="namespaceimpl.html#a8a8875cf63ba5260e7650f72c31d325a">impl::curl_handle</a></div><div class="ttdeci">static libcurl_wrap * curl_handle()</div><div class="ttdef"><b>Definition:</b> network.cpp:114</div></div>
 </div><!-- fragment -->
 </div>
 </div>

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['on_5faction_0',['on_action',['../classvk_1_1event_1_1message__new.html#abb43f3c812808c5a30a72e746d024743',1,'vk::event::message_new']]],
-  ['on_5fevent_1',['on_event',['../classvk_1_1long__poll.html#a431170553d53efd9883be2671562b03b',1,'vk::long_poll']]],
+  ['on_5fevent_1',['on_event',['../classvk_1_1long__poll.html#affc224c4a89f222fb1b9ee92cb97b50e',1,'vk::long_poll']]],
   ['on_5ftype_2',['on_type',['../classvk_1_1event_1_1common.html#a9e98f6c9510b32908536c316ddaee9b3',1,'vk::event::common']]],
   ['open_5fapp_3',['open_app',['../classvk_1_1keyboard_1_1button_1_1open__app.html#a4fa1ac9d1891514ca2ae4d5289a98212',1,'vk::keyboard::button::open_app']]],
   ['operator_20bool_4',['operator bool',['../classvk_1_1error__code.html#a3b96b6b423c028a078ed6adabfccba60',1,'vk::error_code']]],

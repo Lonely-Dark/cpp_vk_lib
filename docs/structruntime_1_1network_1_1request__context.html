@@ -94,8 +94,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:ab16979b56a15e29e2161a9668fcf0288"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae89a854f879783e4d7089e678e6a363c"><td class="memItemLeft" align="right" valign="top">std::optional&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structruntime_1_1network_1_1request__context.html#ae89a854f879783e4d7089e678e6a363c">upload_content_type</a> {}</td></tr>
 <tr class="separator:ae89a854f879783e4d7089e678e6a363c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa477efb2a181d8b73481183686036b94"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structruntime_1_1network_1_1request__context.html#aa477efb2a181d8b73481183686036b94">output_needed</a> {false}</td></tr>
-<tr class="separator:aa477efb2a181d8b73481183686036b94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a596ec8e4ef6e025b0ae1f2dff6fadc04"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">data_flow</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structruntime_1_1network_1_1request__context.html#a596ec8e4ef6e025b0ae1f2dff6fadc04">output_needed</a> {<a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047aa1a5669d0e1e95c8095e635b1f9cf904">data_flow::omit</a>}</td></tr>
+<tr class="separator:a596ec8e4ef6e025b0ae1f2dff6fadc04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Wrapper aimed to reduce the great amount of input parameters. </p>
@@ -111,6 +111,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >URL itself. </p>
 
 </div>
 </div>
@@ -125,6 +126,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Buffer for download/upload operations. </p>
 
 </div>
 </div>
@@ -139,6 +141,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Filename for download/upload operations. </p>
 
 </div>
 </div>
@@ -153,20 +156,22 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Server (target URL) for download/upload operations. </p>
 
 </div>
 </div>
-<a id="aa477efb2a181d8b73481183686036b94" name="aa477efb2a181d8b73481183686036b94"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa477efb2a181d8b73481183686036b94">&#9670;&nbsp;</a></span>output_needed</h2>
+<a id="a596ec8e4ef6e025b0ae1f2dff6fadc04" name="a596ec8e4ef6e025b0ae1f2dff6fadc04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a596ec8e4ef6e025b0ae1f2dff6fadc04">&#9670;&nbsp;</a></span>output_needed</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool runtime::network::request_context::output_needed {false}</td>
+          <td class="memname"><a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">data_flow</a> runtime::network::request_context::output_needed {<a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047aa1a5669d0e1e95c8095e635b1f9cf904">data_flow::omit</a>}</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Flag to tell ignore incoming output or not. </p>
 
 </div>
 </div>
@@ -181,6 +186,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Raw request data, e.g JSON. </p>
 
 </div>
 </div>
@@ -195,6 +201,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >URL parameters. </p>
 
 </div>
 </div>
@@ -209,6 +216,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Content-type HTTP header. </p>
 
 </div>
 </div>
@@ -223,6 +231,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Field (actually needed by VK only) used in download/upload operations. </p>
 
 </div>
 </div>

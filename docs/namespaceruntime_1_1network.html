@@ -69,8 +69,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">runtime::network Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -80,33 +80,61 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structruntime_1_1network_1_1request__context.html">request_context</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a0106f8cbc2fe54661a1e29820a6f6047"><td class="memItemLeft" align="right" valign="top">enum struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">data_flow</a> { <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047af0ffd3b7c2574ac324603ed00488c850">require</a>
+, <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047aa1a5669d0e1e95c8095e635b1f9cf904">omit</a>
+ }</td></tr>
+<tr class="separator:a0106f8cbc2fe54661a1e29820a6f6047"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa8020c9799d91e523b8b6e9ab027d572"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structruntime_1_1result.html">result</a>&lt; std::string, size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#aa8020c9799d91e523b8b6e9ab027d572">request</a> (const <a class="el" href="structruntime_1_1network_1_1request__context.html">request_context</a> &amp;ctx)</td></tr>
-<tr class="separator:aa8020c9799d91e523b8b6e9ab027d572"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad97ba80def9436686acb228851b289fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structruntime_1_1result.html">result</a>&lt; std::string, size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#ad97ba80def9436686acb228851b289fe">request_data</a> (const <a class="el" href="structruntime_1_1network_1_1request__context.html">request_context</a> &amp;ctx)</td></tr>
-<tr class="separator:ad97ba80def9436686acb228851b289fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a341c0cffa220e52cccfb65a32edc6619"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structruntime_1_1result.html">result</a>&lt; std::string, size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a341c0cffa220e52cccfb65a32edc6619">upload</a> (const <a class="el" href="structruntime_1_1network_1_1request__context.html">request_context</a> &amp;ctx)</td></tr>
-<tr class="separator:a341c0cffa220e52cccfb65a32edc6619"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1f776dd005f9999d6e045404b9279a5"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#aa1f776dd005f9999d6e045404b9279a5">download</a> (<a class="el" href="structruntime_1_1network_1_1request__context.html">request_context</a> &amp;ctx)</td></tr>
-<tr class="separator:aa1f776dd005f9999d6e045404b9279a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a98d864ad3efacf651bc56637e33b970e"><td class="memItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a98d864ad3efacf651bc56637e33b970e">require_data</a> = true</td></tr>
-<tr class="separator:a98d864ad3efacf651bc56637e33b970e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ff93e7468645e865e60053676f23d9b"><td class="memItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a4ff93e7468645e865e60053676f23d9b">omit_data</a> = false</td></tr>
-<tr class="separator:a4ff93e7468645e865e60053676f23d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe4d3b1635d1bf5bfd0b522bacdca928"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structruntime_1_1result.html">result</a>&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#abe4d3b1635d1bf5bfd0b522bacdca928">request</a> (const <a class="el" href="structruntime_1_1network_1_1request__context.html">request_context</a> &amp;ctx)</td></tr>
+<tr class="separator:abe4d3b1635d1bf5bfd0b522bacdca928"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1288d7e8217a5fbb3f8e7c28620125f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structruntime_1_1result.html">result</a>&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a1288d7e8217a5fbb3f8e7c28620125f5">request_data</a> (const <a class="el" href="structruntime_1_1network_1_1request__context.html">request_context</a> &amp;ctx)</td></tr>
+<tr class="separator:a1288d7e8217a5fbb3f8e7c28620125f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac30a4dd24d3d9b10caec73b26b26301c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structruntime_1_1result.html">result</a>&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#ac30a4dd24d3d9b10caec73b26b26301c">upload</a> (const <a class="el" href="structruntime_1_1network_1_1request__context.html">request_context</a> &amp;ctx)</td></tr>
+<tr class="separator:ac30a4dd24d3d9b10caec73b26b26301c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d6b6cb38d22da0f12eab16782dabb9d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a4d6b6cb38d22da0f12eab16782dabb9d">download</a> (<a class="el" href="structruntime_1_1network_1_1request__context.html">request_context</a> &amp;ctx)</td></tr>
+<tr class="separator:a4d6b6cb38d22da0f12eab16782dabb9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a0106f8cbc2fe54661a1e29820a6f6047" name="a0106f8cbc2fe54661a1e29820a6f6047"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0106f8cbc2fe54661a1e29820a6f6047">&#9670;&nbsp;</a></span>data_flow</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum struct <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">runtime::network::data_flow</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Flag to tell what to do with incoming data. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0106f8cbc2fe54661a1e29820a6f6047af0ffd3b7c2574ac324603ed00488c850" name="a0106f8cbc2fe54661a1e29820a6f6047af0ffd3b7c2574ac324603ed00488c850"></a>require&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a0106f8cbc2fe54661a1e29820a6f6047aa1a5669d0e1e95c8095e635b1f9cf904" name="a0106f8cbc2fe54661a1e29820a6f6047aa1a5669d0e1e95c8095e635b1f9cf904"></a>omit&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="aa1f776dd005f9999d6e045404b9279a5" name="aa1f776dd005f9999d6e045404b9279a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa1f776dd005f9999d6e045404b9279a5">&#9670;&nbsp;</a></span>download()</h2>
+<a id="a4d6b6cb38d22da0f12eab16782dabb9d" name="a4d6b6cb38d22da0f12eab16782dabb9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d6b6cb38d22da0f12eab16782dabb9d">&#9670;&nbsp;</a></span>download()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t runtime::network::download </td>
+          <td class="memname">bool runtime::network::download </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structruntime_1_1network_1_1request__context.html">request_context</a> &amp;&#160;</td>
           <td class="paramname"><em>ctx</em></td><td>)</td>
@@ -123,22 +151,22 @@ Variables</h2></td></tr>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">std::runtime_error</td><td>if neither filename or buffer was specified. </td></tr>
-    <tr><td class="paramname">std::bad_optional_access</td><td>if <code>io_filename</code> or <code>io_buffer_ptr</code>, <code>io_server</code> fields were not specified. \ </td></tr>
+    <tr><td class="paramname">std::bad_optional_access</td><td>if <code>io_filename</code> or <code>io_buffer_ptr</code>, <code>io_server</code> fields were not specified.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 otherwise. (Actually to rework...) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 otherwise. </dd></dl>
 
 </div>
 </div>
-<a id="aa8020c9799d91e523b8b6e9ab027d572" name="aa8020c9799d91e523b8b6e9ab027d572"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8020c9799d91e523b8b6e9ab027d572">&#9670;&nbsp;</a></span>request()</h2>
+<a id="abe4d3b1635d1bf5bfd0b522bacdca928" name="abe4d3b1635d1bf5bfd0b522bacdca928"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe4d3b1635d1bf5bfd0b522bacdca928">&#9670;&nbsp;</a></span>request()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structruntime_1_1result.html">result</a>&lt; std::string, size_t &gt; runtime::network::request </td>
+          <td class="memname"><a class="el" href="structruntime_1_1result.html">result</a>&lt; std::string, bool &gt; runtime::network::request </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structruntime_1_1network_1_1request__context.html">request_context</a> &amp;&#160;</td>
           <td class="paramname"><em>ctx</em></td><td>)</td>
@@ -162,14 +190,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ad97ba80def9436686acb228851b289fe" name="ad97ba80def9436686acb228851b289fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad97ba80def9436686acb228851b289fe">&#9670;&nbsp;</a></span>request_data()</h2>
+<a id="a1288d7e8217a5fbb3f8e7c28620125f5" name="a1288d7e8217a5fbb3f8e7c28620125f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1288d7e8217a5fbb3f8e7c28620125f5">&#9670;&nbsp;</a></span>request_data()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structruntime_1_1result.html">result</a>&lt; std::string, size_t &gt; runtime::network::request_data </td>
+          <td class="memname"><a class="el" href="structruntime_1_1result.html">result</a>&lt; std::string, bool &gt; runtime::network::request_data </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structruntime_1_1network_1_1request__context.html">request_context</a> &amp;&#160;</td>
           <td class="paramname"><em>ctx</em></td><td>)</td>
@@ -193,14 +221,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a341c0cffa220e52cccfb65a32edc6619" name="a341c0cffa220e52cccfb65a32edc6619"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a341c0cffa220e52cccfb65a32edc6619">&#9670;&nbsp;</a></span>upload()</h2>
+<a id="ac30a4dd24d3d9b10caec73b26b26301c" name="ac30a4dd24d3d9b10caec73b26b26301c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac30a4dd24d3d9b10caec73b26b26301c">&#9670;&nbsp;</a></span>upload()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structruntime_1_1result.html">result</a>&lt; std::string, size_t &gt; runtime::network::upload </td>
+          <td class="memname"><a class="el" href="structruntime_1_1result.html">result</a>&lt; std::string, bool &gt; runtime::network::upload </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structruntime_1_1network_1_1request__context.html">request_context</a> &amp;&#160;</td>
           <td class="paramname"><em>ctx</em></td><td>)</td>
@@ -216,57 +244,11 @@ Variables</h2></td></tr>
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">std::runtime_error</td><td>if neither filename or buffer was specified. </td></tr>
     <tr><td class="paramname">std::bad_optional_access</td><td>if <code>io_filename</code> or <code>io_buffer_ptr</code>, <code>upload_field</code>, <code>upload_content_type</code>, <code>io_server</code> fields were not specified.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Result with payload string and 0 error code on success, empty string and -1 error code otherwise. </dd></dl>
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a4ff93e7468645e865e60053676f23d9b" name="a4ff93e7468645e865e60053676f23d9b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4ff93e7468645e865e60053676f23d9b">&#9670;&nbsp;</a></span>omit_data</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr bool runtime::network::omit_data = false</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a98d864ad3efacf651bc56637e33b970e" name="a98d864ad3efacf651bc56637e33b970e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98d864ad3efacf651bc56637e33b970e">&#9670;&nbsp;</a></span>require_data</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr bool runtime::network::require_data = true</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
 
 </div>
 </div>

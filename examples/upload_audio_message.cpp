@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
     ctx.upload_field = "file";
     ctx.upload_content_type = "application/octet-stream";
     ctx.io_server = upload_server;
-    ctx.output_needed = true;
+    ctx.output_needed = runtime::network::data_flow::require;
     const auto upload_response = runtime::network::upload(ctx);
     if (upload_response.error()) {
         spdlog::error("Upload error: {}", upload_response.error());

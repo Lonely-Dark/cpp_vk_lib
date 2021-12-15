@@ -44,10 +44,9 @@ public:
      *
      * \note If invalid event type provided, nothing will happen.
      */
-    template <typename Executor>
-    void on_event(event::type type, Executor executor)
+    void on_event(event::type type, std::function<void(const vk::event::common&)>&& executor)
     {
-        executors_[type] = executor;
+        executors_[type] = std::move(executor);
     }
     /*!
      * Start infinite event loop after setup events event handlers using long_poll::on_event.

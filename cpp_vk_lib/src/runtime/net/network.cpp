@@ -104,7 +104,6 @@ private:
     static libcurl_wrap* wrap_;
     static CURLSH* shared_handle_;
     static pthread_mutex_t share_data_lock_[CURL_LOCK_DATA_LAST];
-    static const int at_exit_handler;
 };
 
 std::map<std::thread::id, CURL*> libcurl_wrap::handles_{};
@@ -163,10 +162,11 @@ static std::string create_url(std::string_view host, Body&& body)
 
 namespace impl {
 
-static runtime::result<std::string, size_t> libcurl_to_string_recv(CURL* handle, bool output_needed)
+static runtime::result<std::string, bool>
+    libcurl_to_string_recv(CURL* handle, enum runtime::network::data_flow output_needed)
 {
     std::string output;
-    if (output_needed) {
+    if (output_needed == runtime::network::data_flow::require) {
         curl_easy_setopt(handle, CURLOPT_WRITEDATA, &output);
         curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, libcurl_string_write_cb);
         curl_easy_setopt(handle, CURLOPT_HEADERDATA, &output);
@@ -176,13 +176,13 @@ static runtime::result<std::string, size_t> libcurl_to_string_recv(CURL* handle,
     }
     if (const CURLcode res = curl_easy_perform(handle); res != CURLE_OK) {
         spdlog::error("curl_easy_perform() failed: {}", curl_easy_strerror(res));
-        return {"", -1UL};
+        return {"", true};
     }
     output.shrink_to_fit();
-    return output;
+    return {std::move(output), false};
 }
 
-static size_t libcurl_to_buffer_recv(
+static bool libcurl_to_buffer_recv(
     void* buffer, std::string_view server, curl_write_callback write_cb,
     curl_write_callback header_cb = nullptr) noexcept
 {
@@ -195,13 +195,13 @@ static size_t libcurl_to_buffer_recv(
     }
     if (const CURLcode res = curl_easy_perform(handle); res != CURLE_OK) {
         spdlog::error("curl_easy_perform() failed: {}", curl_easy_strerror(res));
-        return -1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
-static runtime::result<std::string, size_t>
-    libcurl_from_buffer_send(bool output_needed, struct curl_httppost* formpost, std::string_view server)
+static runtime::result<std::string, bool> libcurl_from_buffer_send(
+    struct curl_httppost* formpost, std::string_view server, enum runtime::network::data_flow output_needed)
 {
     CURL* handle = impl::curl_handle()->create(server);
     curl_easy_setopt(handle, CURLOPT_HTTPPOST, formpost);
@@ -214,21 +214,21 @@ static runtime::result<std::string, size_t>
 
 namespace runtime::network {
 
-result<std::string, size_t> request(const request_context& ctx)
+result<std::string, bool> request(const request_context& ctx)
 {
     const auto& host   = ctx.host.value();
     const auto& target = ctx.target.value();
-    bool output_needed = ctx.output_needed;
+    auto output_needed = ctx.output_needed;
 
     const std::string url = impl::create_url(host, target);
     return impl::libcurl_to_string_recv(impl::curl_handle()->create(url), output_needed);
 }
 
-result<std::string, size_t> request_data(const request_context& ctx)
+result<std::string, bool> request_data(const request_context& ctx)
 {
     const auto& host   = ctx.host.value();
     const auto& data   = ctx.request_data.value();
-    bool output_needed = ctx.output_needed;
+    auto output_needed = ctx.output_needed;
 
     CURL* handle = impl::curl_handle()->create(host);
     curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, data.size());
@@ -236,14 +236,14 @@ result<std::string, size_t> request_data(const request_context& ctx)
     return impl::libcurl_to_string_recv(handle, output_needed);
 }
 
-result<std::string, size_t> upload(const request_context& ctx)
+result<std::string, bool> upload(const request_context& ctx)
 {
     const auto& filename_opt = ctx.io_filename;
     const auto& buffer_opt   = ctx.io_buffer_ptr;
     const auto& field_name   = ctx.upload_field.value();
     const auto& content_type = ctx.upload_content_type.value();
     const auto& server       = ctx.io_server.value();
-    bool output_needed       = ctx.output_needed;
+    auto output_needed       = ctx.output_needed;
 
     struct curl_httppost* formpost = nullptr;
     struct curl_httppost* lastptr  = nullptr;
@@ -257,7 +257,7 @@ result<std::string, size_t> upload(const request_context& ctx)
             CURLFORM_CONTENTTYPE,  content_type.data(),
             CURLFORM_END);
         // clang-format on
-        return impl::libcurl_from_buffer_send(output_needed, formpost, server);
+        return impl::libcurl_from_buffer_send(formpost, server, output_needed);
     }
     if (buffer_opt) {
         const auto& buffer = *buffer_opt.value();
@@ -272,12 +272,12 @@ result<std::string, size_t> upload(const request_context& ctx)
             CURLFORM_CONTENTTYPE,     content_type.data(),
             CURLFORM_END);
         // clang-format on
-        return impl::libcurl_from_buffer_send(output_needed, formpost, server);
+        return impl::libcurl_from_buffer_send(formpost, server, output_needed);
     }
     throw std::runtime_error("Neither filename or buffer was defined");
 }
 
-size_t download(request_context& ctx)
+bool download(request_context& ctx)
 {
     const auto& filename_opt = ctx.io_filename;
     auto& buffer_opt         = ctx.io_buffer_ptr;
@@ -289,7 +289,7 @@ size_t download(request_context& ctx)
         std::unique_ptr<FILE, decltype(&fclose)> fp(fopen(filename.data(), "wb"), fclose);
         if (!fp) {
             spdlog::error("libcurl: failed to open file {}", filename);
-            return -1;
+            return false;
         }
         return impl::libcurl_to_buffer_recv(fp.get(), server, libcurl_file_write_cb);
     }

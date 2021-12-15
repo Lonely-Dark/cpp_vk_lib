@@ -13,22 +13,34 @@
 extern bool cpp_vk_lib_curl_verbose;
 
 namespace runtime::network {
-
-static constexpr bool require_data = true;
-static constexpr bool omit_data    = false;
+/*! Flag to tell what to do with incoming data. */
+enum struct data_flow
+{
+    require,
+    omit
+};
 
 /*! Wrapper aimed to reduce the great amount of input parameters. */
 struct request_context
 {
+    /*! URL parameters. */
     std::optional<std::map<std::string, std::string>> target{};
+    /*! URL itself. */
     std::optional<std::string> host{};
+    /*! Raw request data, e.g JSON. */
     std::optional<std::string> request_data{};
+    /*! Filename for download/upload operations. */
     std::optional<std::string> io_filename{};
+    /*! Buffer for download/upload operations. */
     std::optional<std::vector<uint8_t>*> io_buffer_ptr{};
+    /*! Server (target URL) for download/upload operations. */
     std::optional<std::string> io_server{};
+    /*! Field (actually needed by VK only) used in download/upload operations. */
     std::optional<std::string> upload_field{};
+    /*! Content-type HTTP header. */
     std::optional<std::string> upload_content_type{};
-    bool output_needed{false};
+    /*! Flag to tell ignore incoming output or not. */
+    data_flow output_needed{data_flow::omit};
 };
 /*!
  * Perform HTTP POST request.
@@ -38,7 +50,7 @@ struct request_context
  * \return Result with payload string and 0 error code on success, empty string and -1 error code
  * otherwise.
  */
-result<std::string, size_t> request(const request_context& ctx);
+result<std::string, bool> request(const request_context& ctx);
 /*!
  * Perform HTTP POST request with specified data.
  * \param ctx Request context.
@@ -47,11 +59,10 @@ result<std::string, size_t> request(const request_context& ctx);
  * \return Result with payload string and 0 error code on success, empty string and -1 error code
  * otherwise.
  */
-result<std::string, size_t> request_data(const request_context& ctx);
+result<std::string, bool> request_data(const request_context& ctx);
 /*!
  * Upload bytes from file or buffer to remote server.
  * \param ctx Request context.
- * \throw std::runtime_error if neither filename or buffer was specified.
  * \throw std::bad_optional_access if
  *   `io_filename` or `io_buffer_ptr`,
  *   `upload_field`,
@@ -61,7 +72,7 @@ result<std::string, size_t> request_data(const request_context& ctx);
  * \return Result with payload string and 0 error code on success, empty string and -1 error code
  * otherwise.
  */
-result<std::string, size_t> upload(const request_context& ctx);
+result<std::string, bool> upload(const request_context& ctx);
 /*!
  * Download bytes from remote server to file or buffer.
  * \param ctx Request context.
@@ -69,10 +80,10 @@ result<std::string, size_t> upload(const request_context& ctx);
  * \throw std::bad_optional_access if
  *   `io_filename` or `io_buffer_ptr`,
  *   `io_server` fields were not specified.
- * \
- * \return 0 on success, -1 otherwise. (Actually to rework...)
+ *
+ * \return 0 on success, -1 otherwise.
  */
-size_t download(request_context& ctx);
+bool download(request_context& ctx);
 
 }// namespace runtime::network
 

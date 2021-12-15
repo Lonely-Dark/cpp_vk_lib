@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
     SECTION(POST_require_data)
     {
         runtime::network::request_context ctx;
-        ctx.output_needed = true;
+        ctx.output_needed = runtime::network::data_flow::require;
         ctx.host = "https://www.google.com";
         ctx.target = std::make_optional<std::map<std::string, std::string>>();
         const auto received = runtime::network::request(ctx);
@@ -27,14 +27,14 @@ int main(int argc, char* argv[])
     SECTION(POST_omit_data)
     {
         runtime::network::request_context ctx;
-        ctx.output_needed = true;
+        ctx.output_needed = runtime::network::data_flow::require;
         ctx.host = "https://www.google.com";
         ctx.target = std::make_optional<std::map<std::string, std::string>>();
         const auto received = runtime::network::request(ctx);
         TEST_CASE(!received.error());
     }
     runtime::network::request_context ctx;
-    ctx.output_needed = true;
+    ctx.output_needed = runtime::network::data_flow::require;
     ctx.host = "https://api.thecatapi.com/v1/images/search";
     ctx.target = std::make_optional<std::map<std::string, std::string>>();
     const auto raw_url_result = runtime::network::request(ctx);

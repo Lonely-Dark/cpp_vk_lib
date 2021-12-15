@@ -40,7 +40,7 @@ public:
 
 private:
     bool has_flag(keyboard::flag) const noexcept;
-    
+
     std::string serialized_{};
     std::vector<std::vector<std::shared_ptr<button::base>>> buttons_{};
     flag flags_ = vk::keyboard::flag::none;

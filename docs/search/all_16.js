@@ -17,5 +17,5 @@ var searchData=
   ['windows_14',['windows',['../namespacevk_1_1oauth.html#a594512bd2497211a5851e5870ee3e25ca0f4137ed1502b5045d6083aa258b5c42',1,'vk::oauth']]],
   ['windows_5fapp_5fclient_5fid_15',['windows_app_client_id',['../namespacevk_1_1api__constants.html#ae06fb91c0f9801f0e03665d2a193d9d9',1,'vk::api_constants']]],
   ['windows_5fapp_5fclient_5fsecret_16',['windows_app_client_secret',['../namespacevk_1_1api__constants.html#a1747767cb8da7d8b5e829b4be75c9832',1,'vk::api_constants']]],
-  ['wrap_5f_17',['wrap_',['../classimpl_1_1libcurl__wrap.html#a3ee9a7901740855cb5181cd8477f7a3e',1,'impl::libcurl_wrap']]]
+  ['wrap_5f_17',['wrap_',['../classcurl__wrap.html#a6edeace840561dcc3124e0dbdf456ef1',1,'curl_wrap']]]
 ];

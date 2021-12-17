@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['user_5fconstructor_0',['user_constructor',['../namespacevk_1_1method.html#a9036669c58907e5e2db60680aafb368d',1,'vk::method']]]
+  ['raw_5fconstructor_0',['raw_constructor',['../namespacevk_1_1method.html#a5a2b57fa2e58981fd9a011420522723f',1,'vk::method']]]
 ];

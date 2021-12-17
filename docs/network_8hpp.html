@@ -68,7 +68,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a> &#124;
@@ -78,18 +77,12 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="result_8hpp_source.html">cpp_vk_lib/runtime/result.hpp</a>&quot;</code><br />
 <code>#include &lt;map&gt;</code><br />
-<code>#include &lt;optional&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;string_view&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 </div>
 <p><a href="network_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structruntime_1_1network_1_1request__context.html">runtime::network::request_context</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceruntime"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime.html">runtime</a></td></tr>
@@ -101,19 +94,24 @@ Namespaces</h2></td></tr>
 Enumerations</h2></td></tr>
 <tr class="memitem:a0106f8cbc2fe54661a1e29820a6f6047"><td class="memItemLeft" align="right" valign="top">enum struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">runtime::network::data_flow</a> { <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047af0ffd3b7c2574ac324603ed00488c850">runtime::network::require</a>
 , <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047aa1a5669d0e1e95c8095e635b1f9cf904">runtime::network::omit</a>
+, <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047a334c4a4c42fdb79d7ebc3e73b517e6f8">runtime::network::none</a>
  }</td></tr>
 <tr class="separator:a0106f8cbc2fe54661a1e29820a6f6047"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:abe4d3b1635d1bf5bfd0b522bacdca928"><td class="memItemLeft" align="right" valign="top">result&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#abe4d3b1635d1bf5bfd0b522bacdca928">runtime::network::request</a> (const request_context &amp;ctx)</td></tr>
-<tr class="separator:abe4d3b1635d1bf5bfd0b522bacdca928"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1288d7e8217a5fbb3f8e7c28620125f5"><td class="memItemLeft" align="right" valign="top">result&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a1288d7e8217a5fbb3f8e7c28620125f5">runtime::network::request_data</a> (const request_context &amp;ctx)</td></tr>
-<tr class="separator:a1288d7e8217a5fbb3f8e7c28620125f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac30a4dd24d3d9b10caec73b26b26301c"><td class="memItemLeft" align="right" valign="top">result&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#ac30a4dd24d3d9b10caec73b26b26301c">runtime::network::upload</a> (const request_context &amp;ctx)</td></tr>
-<tr class="separator:ac30a4dd24d3d9b10caec73b26b26301c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d6b6cb38d22da0f12eab16782dabb9d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a4d6b6cb38d22da0f12eab16782dabb9d">runtime::network::download</a> (request_context &amp;ctx)</td></tr>
-<tr class="separator:a4d6b6cb38d22da0f12eab16782dabb9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8024b55c9e2524d385bad333b6b3e032"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a8024b55c9e2524d385bad333b6b3e032">runtime::network::request</a> (std::string_view host, const std::map&lt; std::string, std::string &gt; &amp;target, data_flow output_needed)</td></tr>
+<tr class="separator:a8024b55c9e2524d385bad333b6b3e032"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace36ede1b727f510228a44a80c418a81"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#ace36ede1b727f510228a44a80c418a81">runtime::network::request_data</a> (std::string_view host, std::string_view data, data_flow output_needed)</td></tr>
+<tr class="separator:ace36ede1b727f510228a44a80c418a81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11b108178556e27d6c9c9935f009754d"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a11b108178556e27d6c9c9935f009754d">runtime::network::upload</a> (std::string_view url, std::string_view field, std::string_view content_type, std::string_view filename, data_flow output_needed)</td></tr>
+<tr class="separator:a11b108178556e27d6c9c9935f009754d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8910b805466b623b5e8d60b49e8a541e"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a8910b805466b623b5e8d60b49e8a541e">runtime::network::upload</a> (std::string_view url, std::string_view field, std::string_view content_type, const std::vector&lt; uint8_t &gt; &amp;buffer, data_flow output_needed)</td></tr>
+<tr class="separator:a8910b805466b623b5e8d60b49e8a541e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57a29acc5eaee65a7540f9ae8a801efe"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a57a29acc5eaee65a7540f9ae8a801efe">runtime::network::download</a> (std::string_view url, std::string_view filename)</td></tr>
+<tr class="separator:a57a29acc5eaee65a7540f9ae8a801efe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48c26246ebf651370da77d96dbaec371"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a48c26246ebf651370da77d96dbaec371">runtime::network::download</a> (std::string_view url, std::vector&lt; uint8_t &gt; &amp;buffer)</td></tr>
+<tr class="separator:a48c26246ebf651370da77d96dbaec371"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>

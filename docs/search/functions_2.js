@@ -9,10 +9,19 @@ var searchData=
   ['common_6',['common',['../classvk_1_1event_1_1common.html#a20a252766562adcac18c138a9be6961c',1,'vk::event::common::common(std::string_view ts, simdjson::dom::object event)'],['../classvk_1_1event_1_1common.html#ad000131db4b5234a95eea65fb882710d',1,'vk::event::common::common(common &amp;&amp;)=default']]],
   ['common_5fexception_7',['common_exception',['../classvk_1_1error_1_1common__exception.html#a5669b8708a1f92fe3ca447a9f86ace5d',1,'vk::error::common_exception']]],
   ['construct_5fattachments_8',['construct_attachments',['../classvk_1_1event_1_1wall__repost.html#a7123cd4a83acefd5e92680a59373b7ea',1,'vk::event::wall_repost']]],
-  ['constructor_9',['constructor',['../classvk_1_1method_1_1constructor.html#aa26191ccc36721b6f57c87344fa66f2d',1,'vk::method::constructor::constructor(std::string_view user_token)'],['../classvk_1_1method_1_1constructor.html#a11da862a01e2a3d3764db8a81b49caa4',1,'vk::method::constructor::constructor()']]],
+  ['constructor_9',['constructor',['../classvk_1_1method_1_1constructor.html#a11da862a01e2a3d3764db8a81b49caa4',1,'vk::method::constructor::constructor()'],['../classvk_1_1method_1_1constructor.html#aa26191ccc36721b6f57c87344fa66f2d',1,'vk::method::constructor::constructor(std::string_view user_token)']]],
   ['conversation_5fmessage_5fid_10',['conversation_message_id',['../classvk_1_1event_1_1message__new.html#a7c6e7ecddc4654ed3a503790fb8e2da9',1,'vk::event::message_new']]],
-  ['create_11',['create',['../classvk_1_1error_1_1common__exception.html#a2a9a386e768f6d87364a51b46c93f615',1,'vk::error::common_exception::create()'],['../classimpl_1_1libcurl__wrap.html#a7316931ea0fde0233485efffddf8d276',1,'impl::libcurl_wrap::create()']]],
-  ['create_5furl_12',['create_url',['../namespaceimpl.html#a92068b85a433440fbc22a9880280cf02',1,'impl']]],
+  ['create_11',['create',['../classvk_1_1error_1_1common__exception.html#a2a9a386e768f6d87364a51b46c93f615',1,'vk::error::common_exception::create()'],['../classcurl__wrap.html#a1a50e0c056cd70fd6f8996eb53b56029',1,'curl_wrap::create()']]],
+  ['create_5furl_12',['create_url',['../classcurl__executor.html#a17f5765384c73291bfa22cde07673028',1,'curl_executor']]],
   ['created_5fby_13',['created_by',['../classvk_1_1event_1_1wall__post__new.html#ae790a988ada45c3302bf17febac34107',1,'vk::event::wall_post_new']]],
-  ['curl_5fhandle_14',['curl_handle',['../namespaceimpl.html#a8a8875cf63ba5260e7650f72c31d325a',1,'impl']]]
+  ['curl_5fbuffer_5fcb_14',['curl_buffer_cb',['../callback_8hpp.html#a457cab6c20573e0ac098b497ce2756a2',1,'callback.hpp']]],
+  ['curl_5fbuffer_5fheader_5fcb_15',['curl_buffer_header_cb',['../callback_8hpp.html#a17cdca5ca773731c8ed8694819a50ed8',1,'callback.hpp']]],
+  ['curl_5fexecutor_16',['curl_executor',['../classcurl__executor.html#a68283a03fde5a6df74218cefcac1b75e',1,'curl_executor']]],
+  ['curl_5ffile_5fcb_17',['curl_file_cb',['../callback_8hpp.html#a5d17f7453c01e8f7797248d541a1dd7e',1,'callback.hpp']]],
+  ['curl_5fget_18',['curl_get',['../classcurl__executor.html#aa7c44b7deca8f6fabd9073f749ec962c',1,'curl_executor']]],
+  ['curl_5fomit_5fcb_19',['curl_omit_cb',['../callback_8hpp.html#aeb03393bcf9fad37de01ae2f030254e2',1,'callback.hpp']]],
+  ['curl_5fpost_20',['curl_post',['../classcurl__executor.html#a56e1541e5a37788caff45d0f221522fc',1,'curl_executor']]],
+  ['curl_5fstring_5fcb_21',['curl_string_cb',['../callback_8hpp.html#a00849a96bab47e0d6e59916c730315d6',1,'callback.hpp']]],
+  ['curl_5fstring_5fheader_5fcb_22',['curl_string_header_cb',['../callback_8hpp.html#a8051d354b39eec8e1eee60cc7e84b4af',1,'callback.hpp']]],
+  ['curl_5fwrap_23',['curl_wrap',['../classcurl__wrap.html#ae26ce8c02d3a34c36ddaaad2f8778939',1,'curl_wrap']]]
 ];

@@ -12,10 +12,11 @@ int main(int argc, char* argv[])
         constexpr size_t test_chat_id = vk::api_constants::chat_id_constant + 1;
 
         vk::method::group_constructor constructor;
-        constructor.method("messages.send")
+        std::cout << "API returned: " << constructor.method("messages.send")
             .param("peer_id", std::to_string(test_chat_id))
             .param("text",    "methods::method_construct")
-            .perform_request();
+            .param("random_id", "0")
+            .perform_request() << std::endl;
     }
     return EXIT_SUCCESS;
 }

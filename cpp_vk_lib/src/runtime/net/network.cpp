@@ -11,17 +11,15 @@
 
 bool cpp_vk_lib_curl_verbose;
 
-namespace impl {
-
-class libcurl_wrap : public runtime::uncopyable, public runtime::unmovable
+class curl_wrap : public runtime::uncopyable, public runtime::unmovable
 {
 public:
-    libcurl_wrap()
+    curl_wrap()
     {
         setup_shared_handle();
     }
 
-    ~libcurl_wrap()
+    ~curl_wrap()
     {
         for (const auto& [thread_id, handle] : handles_) {
             if (handle) {
@@ -31,10 +29,10 @@ public:
         curl_share_cleanup(shared_handle_);
     }
 
-    static libcurl_wrap* get()
+    static curl_wrap* get()
     {
         if (!wrap_) {
-            wrap_ = new libcurl_wrap;
+            wrap_ = new curl_wrap;
         }
 
         return wrap_;
@@ -52,16 +50,19 @@ public:
 
         CURL* handle = current_thread_handle();
         curl_easy_reset(handle);
+
         if (!handle) {
             spdlog::error("curl_easy_init() failed");
             exit(-1);
         }
+
         curl_easy_setopt(handle, CURLOPT_URL, url.data());
         curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, 1L);
         curl_easy_setopt(handle, CURLOPT_TIMEOUT, 600L);
         curl_easy_setopt(handle, CURLOPT_USERAGENT, "cpp_vk_lib libcurl-agent/1.1");
         curl_easy_setopt(handle, CURLOPT_SHARE, shared_handle_);
         curl_easy_setopt(handle, CURLOPT_VERBOSE, cpp_vk_lib_curl_verbose ? 1L : 0L);
+
         return handle;
     }
 
@@ -73,10 +74,12 @@ private:
         }
 
         shared_handle_ = curl_share_init();
+
         if (!shared_handle_) {
             spdlog::error("curl_share_init() failed");
             exit(-1);
         }
+
         curl_share_setopt(shared_handle_, CURLSHOPT_UNSHARE, CURL_LOCK_DATA_COOKIE);
         curl_share_setopt(shared_handle_, CURLSHOPT_SHARE, CURL_LOCK_DATA_DNS);
         curl_share_setopt(shared_handle_, CURLSHOPT_SHARE, CURL_LOCK_DATA_CONNECT);
@@ -100,206 +103,243 @@ private:
         pthread_mutex_unlock(&share_data_lock_[data]);
     }
 
-    static std::map<std::thread::id, CURL*> handles_;
-    static libcurl_wrap* wrap_;
-    static CURLSH* shared_handle_;
-    static pthread_mutex_t share_data_lock_[CURL_LOCK_DATA_LAST];
+    static inline curl_wrap* wrap_       = nullptr;
+    static inline CURLSH* shared_handle_ = nullptr;
+    static inline std::map<std::thread::id, CURL*> handles_;
+    static inline pthread_mutex_t share_data_lock_[CURL_LOCK_DATA_LAST];
 };
 
-std::map<std::thread::id, CURL*> libcurl_wrap::handles_{};
-libcurl_wrap* libcurl_wrap::wrap_    = nullptr;
-CURLSH* libcurl_wrap::shared_handle_ = nullptr;
-pthread_mutex_t libcurl_wrap::share_data_lock_[CURL_LOCK_DATA_LAST];
-
-static libcurl_wrap* curl_handle()
-{
-    return libcurl_wrap::get();
-}
-
-[[maybe_unused]] int at_exit_handler = []() {
+[[maybe_unused]] int atexit_handler = [] {
     std::atexit([] {
-        curl_handle()->~libcurl_wrap();
+        curl_wrap::get()->~curl_wrap();
     });
     return 0;
 }();
 
-}// namespace impl
-
-namespace impl {
-
-template <typename Body>
-static std::string create_url(std::string_view host, Body&& body)
+class curl_executor
 {
-    const size_t estimated_params_length =
-        /* average word length */ 20 *
-        /* param, value */ 2 * body.size();
-    std::string result;
-    result.reserve(host.size() + estimated_params_length);
-    result += host;
+    using data_flow = runtime::network::data_flow;
 
-    auto escape = [](std::string_view url) {
-        char* encoded   = curl_easy_escape(nullptr, url.data(), url.length());
-        std::string res = encoded;
-        curl_free(encoded);
-        return res;
-    };
+public:
+    explicit curl_executor(std::string_view url)
+        : url_(url)
+    {}
 
-    for (const auto& [key, value] : body) {
-        result += key;
-        result += '=';
-        result += escape(value);
-        result += '&';
+    std::pair<std::string, bool> request(const std::map<std::string, std::string>& list, data_flow output_needed)
+    {
+        CURL* curl_handle = curl_wrap::create(create_url(url_, list));
+
+        return curl_get(curl_handle, output_needed);
     }
 
-    if (!body.empty()) {
-        result.pop_back();
+    std::pair<std::string, bool> request_data(std::string_view data, data_flow output_needed)
+    {
+        CURL* curl_handle = curl_wrap::create(url_);
+
+        curl_easy_setopt(curl_handle, CURLOPT_POSTFIELDS, data.data());
+        curl_easy_setopt(curl_handle, CURLOPT_POSTFIELDSIZE, data.size());
+
+        return curl_get(curl_handle, output_needed);
     }
-    result.shrink_to_fit();
-    return result;
-}
 
-}// namespace impl
+    std::pair<std::string, bool> upload(
+        std::string_view field, std::string_view content_type, std::string_view filename, data_flow output_needed)
+    {
+        curl_httppost* form_post     = nullptr;
+        curl_httppost* last_form_ptr = nullptr;
 
-namespace impl {
-
-static runtime::result<std::string, bool>
-    libcurl_to_string_recv(CURL* handle, enum runtime::network::data_flow output_needed)
-{
-    std::string output;
-    if (output_needed == runtime::network::data_flow::require) {
-        curl_easy_setopt(handle, CURLOPT_WRITEDATA, &output);
-        curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, libcurl_string_write_cb);
-        curl_easy_setopt(handle, CURLOPT_HEADERDATA, &output);
-        curl_easy_setopt(handle, CURLOPT_HEADERFUNCTION, libcurl_string_header_cb);
-    } else {
-        curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, libcurl_omit_string_cb);
-    }
-    if (const CURLcode res = curl_easy_perform(handle); res != CURLE_OK) {
-        spdlog::error("curl_easy_perform() failed: {}", curl_easy_strerror(res));
-        return {"", true};
-    }
-    output.shrink_to_fit();
-    return {std::move(output), false};
-}
-
-static bool libcurl_to_buffer_recv(
-    void* buffer, std::string_view server, curl_write_callback write_cb,
-    curl_write_callback header_cb = nullptr) noexcept
-{
-    CURL* handle = impl::curl_handle()->create(server);
-    curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, write_cb);
-    curl_easy_setopt(handle, CURLOPT_WRITEDATA, buffer);
-    if (header_cb) {
-        curl_easy_setopt(handle, CURLOPT_HEADERDATA, buffer);
-        curl_easy_setopt(handle, CURLOPT_HEADERFUNCTION, header_cb);
-    }
-    if (const CURLcode res = curl_easy_perform(handle); res != CURLE_OK) {
-        spdlog::error("curl_easy_perform() failed: {}", curl_easy_strerror(res));
-        return true;
-    }
-    return false;
-}
-
-static runtime::result<std::string, bool> libcurl_from_buffer_send(
-    struct curl_httppost* formpost, std::string_view server, enum runtime::network::data_flow output_needed)
-{
-    CURL* handle = impl::curl_handle()->create(server);
-    curl_easy_setopt(handle, CURLOPT_HTTPPOST, formpost);
-    auto result = libcurl_to_string_recv(handle, output_needed);
-    curl_formfree(formpost);
-    return result;
-}
-
-}// namespace impl
-
-namespace runtime::network {
-
-result<std::string, bool> request(const request_context& ctx)
-{
-    const auto& host   = ctx.host.value();
-    const auto& target = ctx.target.value();
-    auto output_needed = ctx.output_needed;
-
-    const std::string url = impl::create_url(host, target);
-    return impl::libcurl_to_string_recv(impl::curl_handle()->create(url), output_needed);
-}
-
-result<std::string, bool> request_data(const request_context& ctx)
-{
-    const auto& host   = ctx.host.value();
-    const auto& data   = ctx.request_data.value();
-    auto output_needed = ctx.output_needed;
-
-    CURL* handle = impl::curl_handle()->create(host);
-    curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, data.size());
-    curl_easy_setopt(handle, CURLOPT_POSTFIELDS, data.data());
-    return impl::libcurl_to_string_recv(handle, output_needed);
-}
-
-result<std::string, bool> upload(const request_context& ctx)
-{
-    const auto& filename_opt = ctx.io_filename;
-    const auto& buffer_opt   = ctx.io_buffer_ptr;
-    const auto& field_name   = ctx.upload_field.value();
-    const auto& content_type = ctx.upload_content_type.value();
-    const auto& server       = ctx.io_server.value();
-    auto output_needed       = ctx.output_needed;
-
-    struct curl_httppost* formpost = nullptr;
-    struct curl_httppost* lastptr  = nullptr;
-    if (filename_opt) {
-        const auto& filename = filename_opt.value();
         // clang-format off
-        curl_formadd(&formpost, &lastptr,
-            CURLFORM_COPYNAME,     field_name.data(),
+        curl_formadd(&form_post, &last_form_ptr,
+            CURLFORM_COPYNAME,     field.data(),
             CURLFORM_FILENAME,     filename.data(),
             CURLFORM_FILE,         filename.data(),
             CURLFORM_CONTENTTYPE,  content_type.data(),
-            CURLFORM_END);
+            CURLFORM_END
+        );
         // clang-format on
-        return impl::libcurl_from_buffer_send(formpost, server, output_needed);
+
+        auto result = curl_post(form_post, output_needed);
+        curl_formfree(form_post);
+        return result;
     }
-    if (buffer_opt) {
-        const auto& buffer = *buffer_opt.value();
+
+    std::pair<std::string, bool> upload(
+        std::string_view field, std::string_view content_type, const std::vector<uint8_t>& buffer,
+        data_flow output_needed)
+    {
+        curl_httppost* form_post     = nullptr;
+        curl_httppost* last_form_ptr = nullptr;
+
         // clang-format off
-        curl_formadd(&formpost, &lastptr,
+        curl_formadd(&form_post, &last_form_ptr,
             CURLFORM_BUFFER,          "temp",
             CURLFORM_PTRNAME,         "ptr",
-            CURLFORM_COPYNAME,        field_name.data(),
+            CURLFORM_COPYNAME,        field.data(),
             CURLFORM_BUFFERPTR,       buffer.data(),
             CURLFORM_BUFFERLENGTH,    buffer.size(),
             CURLFORM_CONTENTSLENGTH,  buffer.size(),
             CURLFORM_CONTENTTYPE,     content_type.data(),
-            CURLFORM_END);
+            CURLFORM_END
+        );
         // clang-format on
-        return impl::libcurl_from_buffer_send(formpost, server, output_needed);
+
+        auto result = curl_post(form_post, output_needed);
+        curl_formfree(form_post);
+        return result;
     }
-    throw std::runtime_error("Neither filename or buffer was defined");
-}
 
-bool download(request_context& ctx)
-{
-    const auto& filename_opt = ctx.io_filename;
-    auto& buffer_opt         = ctx.io_buffer_ptr;
-    const auto& server       = ctx.io_server.value();
-
-    if (filename_opt) {
-        const auto& filename = filename_opt.value();
-
+    bool download(std::string_view filename)
+    {
         std::unique_ptr<FILE, decltype(&fclose)> fp(fopen(filename.data(), "wb"), fclose);
         if (!fp) {
             spdlog::error("libcurl: failed to open file {}", filename);
             return false;
         }
-        return impl::libcurl_to_buffer_recv(fp.get(), server, libcurl_file_write_cb);
-    }
-    if (buffer_opt) {
-        auto& buffer = *buffer_opt.value();
 
-        buffer.clear();
-        return impl::libcurl_to_buffer_recv(&buffer, server, libcurl_buffer_write_cb, libcurl_buffer_header_cb);
+        CURL* curl_handle = curl_wrap::create(url_);
+
+        curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, fp.get());
+        curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, curl_file_cb);
+
+        CURLcode error_code = curl_easy_perform(curl_handle);
+
+        if (error_code != CURLE_OK) {
+            spdlog::error("curl_easy_perform() failed: {}", curl_easy_strerror(error_code));
+            return false;
+        }
+
+        return true;
     }
-    throw std::runtime_error("Neither filename or buffer was defined");
+
+    bool download(std::vector<uint8_t>& buffer)
+    {
+        CURL* curl_handle = curl_wrap::create(url_);
+
+        curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, &buffer);
+        curl_easy_setopt(curl_handle, CURLOPT_HEADERDATA, &buffer);
+        curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, curl_buffer_cb);
+        curl_easy_setopt(curl_handle, CURLOPT_HEADERFUNCTION, curl_buffer_header_cb);
+
+        CURLcode error_code = curl_easy_perform(curl_handle);
+
+        if (error_code != CURLE_OK) {
+            spdlog::error("curl_easy_perform() failed: {}", curl_easy_strerror(error_code));
+            return false;
+        }
+
+        return true;
+    }
+
+private:
+    static std::pair<std::string, bool> curl_get(CURL* curl_handle, data_flow output_needed)
+    {
+        std::string output;
+
+        if (output_needed == data_flow::require) {
+            curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, &output);
+            curl_easy_setopt(curl_handle, CURLOPT_HEADERDATA, &output);
+            curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, curl_string_cb);
+            curl_easy_setopt(curl_handle, CURLOPT_HEADERFUNCTION, curl_string_header_cb);
+        } else {
+            curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, curl_omit_cb);
+        }
+
+        CURLcode error_code = curl_easy_perform(curl_handle);
+
+        if (error_code != CURLE_OK) {
+            spdlog::error("curl_easy_perform() failed: {}", curl_easy_strerror(error_code));
+            return {"", curl_failure};
+        }
+
+        return {std::move(output), curl_success};
+    }
+
+    std::pair<std::string, bool> curl_post(curl_httppost* form_post, data_flow output_needed)
+    {
+        CURL* curl_handle = curl_wrap::create(url_);
+
+        curl_easy_setopt(curl_handle, CURLOPT_HTTPPOST, form_post);
+
+        return curl_get(curl_handle, output_needed);
+    }
+
+    template <typename Body>
+    static std::string create_url(std::string_view host, Body&& body)
+    {
+        const size_t estimated_params_length =
+            /* average word length */ 20 *
+            /* param, value */ 2 * body.size();
+        std::string result;
+        result.reserve(host.size() + estimated_params_length);
+        result += host;
+
+        auto escape = [](std::string_view url) {
+            char* encoded   = curl_escape(url.data(), url.length());
+            std::string res = encoded;
+            curl_free(encoded);
+            return res;
+        };
+
+        for (const auto& [key, value] : body) {
+            result += key;
+            result += '=';
+            result += escape(value);
+            result += '&';
+        }
+
+        if (!body.empty()) {
+            result.pop_back();
+        }
+        result.shrink_to_fit();
+        return result;
+    }
+
+    std::string_view url_;
+    static constexpr bool curl_success = false;
+    static constexpr bool curl_failure = true;
+};
+
+namespace runtime::network {
+
+std::pair<std::string, bool>
+    request(std::string_view host, const std::map<std::string, std::string>& target, data_flow output_needed)
+{
+    curl_executor executor(host);
+    return executor.request(target, output_needed);
+}
+
+std::pair<std::string, bool> request_data(std::string_view host, std::string_view data, data_flow output_needed)
+{
+    curl_executor executor(host);
+    return executor.request_data(data, output_needed);
+}
+
+std::pair<std::string, bool> upload(
+    std::string_view url, std::string_view field, std::string_view content_type, std::string_view filename,
+    data_flow output_needed)
+{
+    curl_executor executor(url);
+    return executor.upload(field, content_type, filename, output_needed);
+}
+
+std::pair<std::string, bool> upload(
+    std::string_view url, std::string_view field, std::string_view content_type, const std::vector<uint8_t>& buffer,
+    data_flow output_needed)
+{
+    curl_executor executor(url);
+    return executor.upload(field, content_type, buffer, output_needed);
+}
+
+bool download(std::string_view url, std::string_view filename)
+{
+    curl_executor executor(url);
+    return executor.download(filename);
+}
+
+bool download(std::string_view url, std::vector<uint8_t>& buffer)
+{
+    curl_executor executor(url);
+    return executor.download(buffer);
 }
 
 }// namespace runtime::network

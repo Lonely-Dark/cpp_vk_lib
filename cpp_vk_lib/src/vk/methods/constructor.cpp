@@ -16,16 +16,13 @@ static std::string call(
     std::string_view method, std::map<std::string, std::string>&& params,
     enum runtime::network::data_flow output_needed)
 {
-    runtime::network::request_context ctx;
-    ctx.output_needed = output_needed;
-    ctx.host          = append_url(method);
-    ctx.target        = std::move(params);
-    auto response     = runtime::network::request(ctx);
+    namespace net      = runtime::network;
+    auto [data, error] = net::request(append_url(method), params, output_needed);
 
-    if (response.error()) {
-        throw vk::error::runtime_error(response.error(), "Failed to execute HTTP GET");
+    if (error) {
+        throw vk::error::runtime_error(-1, "Failed to execute HTTP GET");
     }
-    return response.value();
+    return data;
 }
 
 namespace vk::method::policy {
@@ -62,16 +59,14 @@ struct do_not_use_api_link
     {
         VK_UNUSED(user_token);
         VK_UNUSED(access_token);
-        runtime::network::request_context ctx;
-        ctx.output_needed = output_needed;
-        ctx.host          = method;
-        ctx.target        = std::move(params);
-        auto response     = runtime::network::request(ctx);
 
-        if (response.error()) {
-            throw vk::error::runtime_error(response.error(), "Failed to execute HTTP GET");
+        namespace net      = runtime::network;
+        auto [data, error] = net::request(method, params, output_needed);
+
+        if (error) {
+            throw vk::error::runtime_error(-1, "Failed to execute HTTP GET");
         }
-        return response.value();
+        return data;
     }
 };
 

@@ -1,18 +1,19 @@
-#include "cpp_vk_lib/runtime/setup_logger.hpp"
-#include "cpp_vk_lib/runtime/signal_handlers.hpp"
-#include "cpp_vk_lib/vk/config/config.hpp"
-#include "cpp_vk_lib/vk/methods/constructor.hpp"
-#include "cpp_vk_lib/vk/events/wall_post_new.hpp"
-
-#include "simdjson.h"
-#include "spdlog/spdlog.h"
-
-#include <iostream>
-
-inline bool cpp_vk_lib_curl_verbose = true;
+//#include "cpp_vk_lib/runtime/setup_logger.hpp"
+//#include "cpp_vk_lib/runtime/signal_handlers.hpp"
+//#include "cpp_vk_lib/vk/config/config.hpp"
+//#include "cpp_vk_lib/vk/methods/constructor.hpp"
+//#include "cpp_vk_lib/vk/events/wall_post_new.hpp"
+//
+//#include "simdjson.h"
+//#include "spdlog/spdlog.h"
+//
+//#include <iostream>
+//
+//inline bool cpp_vk_lib_curl_verbose = true;
 
 int main(int argc, char* argv[])
 {
+    /*
     if (argc != 4) {
         std::cerr << "Usage: ./upload_audio_message <config.json> <file.mp3> <peer_id>" << std::endl;
         return 1;
@@ -70,4 +71,5 @@ int main(int argc, char* argv[])
         .param("attachments", atts[0]->value())
         .perform_request();
     return 0;
+     */
 }

@@ -8,59 +8,79 @@
 #include <future>
 #include <iostream>
 
+bool cpp_vk_lib_curl_verbose = false;
+
 int main(int argc, char* argv[])
 {
     setup_cpp_vk_lib_environment();
+    namespace net = runtime::network;
 
     SECTION(POST_require_data)
     {
-        runtime::network::request_context ctx;
-        ctx.output_needed = runtime::network::data_flow::require;
-        ctx.host = "https://www.google.com";
-        ctx.target = std::make_optional<std::map<std::string, std::string>>();
-        const auto received = runtime::network::request(ctx);
-        TEST_CASE(!received.error());
-        const auto& result = received.value();
-        TEST_CASE(!result.empty());
-        TEST_CASE(result.find("Google") != std::string::npos);
+        auto [data, error] = net::request("https://www.google.com", {}, net::data_flow::require);
+        TEST_CASE(!error);
+        TEST_CASE(!data.empty());
+        TEST_CASE(data.find("Google") != std::string::npos);
     }
     SECTION(POST_omit_data)
     {
-        runtime::network::request_context ctx;
-        ctx.output_needed = runtime::network::data_flow::require;
-        ctx.host = "https://www.google.com";
-        ctx.target = std::make_optional<std::map<std::string, std::string>>();
-        const auto received = runtime::network::request(ctx);
-        TEST_CASE(!received.error());
+        auto [data, error] = net::request("https://www.google.com", {}, net::data_flow::omit);
+        TEST_CASE(!error);
+        TEST_CASE(data.empty());
     }
-    runtime::network::request_context ctx;
-    ctx.output_needed = runtime::network::data_flow::require;
-    ctx.host = "https://api.thecatapi.com/v1/images/search";
-    ctx.target = std::make_optional<std::map<std::string, std::string>>();
-    const auto raw_url_result = runtime::network::request(ctx);
-    TEST_CASE(!raw_url_result.error());
-    TEST_CASE(!raw_url_result.value().empty());
-    simdjson::dom::parser parser;
-    std::string cat_url = std::string(parser.parse(raw_url_result.value()).get_array().at(0)["url"]);
-
-    SECTION(download_to_file)
+    SECTION(request_data)
     {
-        runtime::network::request_context cat_ctx;
-        cat_ctx.io_filename = "buffer";
-        cat_ctx.io_server = cat_url;
-        TEST_CASE(runtime::network::download(cat_ctx) == 0);
-        // Don't remove this file, so we need this file to compare below.
+        auto [data, error] = net::request_data(
+            "https://pelevin.gpt.dobro.ai/generate/", R"__({"prompt":"text","length":50})__", net::data_flow::require);
+        TEST_CASE(!error);
+        TEST_CASE(!data.empty());
     }
+    SECTION(request_multithread)
+    {
+        std::vector<std::pair<std::thread, std::future<std::string>>> threads;
+        for (size_t i = 0; i < std::thread::hardware_concurrency(); ++i) {
+            std::promise<std::string> promise;
+            std::future<std::string> future = promise.get_future();
+            std::thread thread([promise = std::move(promise)]() mutable {
+                auto [data, error] = net::request("https://www.example.com", {}, net::data_flow::require);
+                promise.set_value(std::move(data));
+            });
+            threads.emplace_back(std::move(thread), std::move(future));
+        }
+        std::vector<std::string> responses;
+        for (auto& el : threads) {
+            auto thread = std::move(el.first);
+            auto future = std::move(el.second);
+            responses.emplace_back(future.get());
+            thread.join();
+        }
+        TEST_CASE(std::adjacent_find(responses.begin(), responses.end(), std::not_equal_to<>()) == responses.end());
+    }
+
+    auto [cat_url, cat_error] = net::request(
+        "https://api.thecatapi.com/v1/images/search", {}, net::data_flow::require);
+    TEST_CASE(!cat_error);
+    TEST_CASE(!cat_url.empty());
+    simdjson::dom::parser parser;
+    std::string cat_image = std::string(parser.parse(cat_url).get_array().at(0)["url"]);
+    std::cout << cat_image << std::endl;
 
     std::vector<uint8_t> bytes;
 
     SECTION(download_to_buffer)
     {
-        runtime::network::request_context cat_ctx;
-        cat_ctx.io_buffer_ptr = &bytes;
-        cat_ctx.io_server = cat_url;
-        TEST_CASE(runtime::network::download(cat_ctx) == 0);
+        bool downloaded = net::download(cat_image, bytes);
+        TEST_CASE(downloaded);
+        std::cout << "Downloaded " << bytes.size() << " bytes to buffer\n";
     }
+
+    SECTION(download_to_file)
+    {
+        bool downloaded = net::download(cat_image, "buffer");
+        TEST_CASE(downloaded);
+        // Don't remove this file, so we need this file to compare below.
+    }
+
     SECTION(download_compare)
     {
         std::ostringstream ss;
@@ -70,6 +90,5 @@ int main(int argc, char* argv[])
         TEST_CASE(file_buffer == bytes);
         std::remove("buffer");
     }
-
     return EXIT_SUCCESS;
 }

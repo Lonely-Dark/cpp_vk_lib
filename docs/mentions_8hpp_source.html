@@ -74,33 +74,29 @@ $(function() {
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define VK_METHODS_MENTIONS_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacevk_1_1method.html">vk::method</a> {</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="namespacevk_1_1method.html#abb3e9f941c430fc198a3b15a7fb621a8">    6</a></span><span class="keyword">enum struct</span> <a class="code hl_enumeration" href="namespacevk_1_1method.html#abb3e9f941c430fc198a3b15a7fb621a8">mentions</a></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>{</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    <a class="code hl_enumvalue" href="namespacevk_1_1method.html#abb3e9f941c430fc198a3b15a7fb621a8a208f156d4a803025c284bb595a7576b4">enable</a>,</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <a class="code hl_enumvalue" href="namespacevk_1_1method.html#abb3e9f941c430fc198a3b15a7fb621a8a0aaa87422396fdd678498793b6d5250e">disable</a></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>};</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="namespacevk_1_1method.html#a224d617fe7c5f987ad4c1d1651059c11">   12</a></span><span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="namespacevk_1_1method.html#a224d617fe7c5f987ad4c1d1651059c11">to_string</a>(<span class="keyword">enum</span> <a class="code hl_enumeration" href="namespacevk_1_1method.html#abb3e9f941c430fc198a3b15a7fb621a8">mentions</a> m) <span class="keyword">noexcept</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordflow">switch</span> (m) {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacevk_1_1method.html#abb3e9f941c430fc198a3b15a7fb621a8a0aaa87422396fdd678498793b6d5250e">mentions::disable</a>: {</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>            <span class="keywordflow">return</span> <span class="stringliteral">&quot;mentions::disable&quot;</span>;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        }</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacevk_1_1method.html#abb3e9f941c430fc198a3b15a7fb621a8a208f156d4a803025c284bb595a7576b4">mentions::enable</a>: {</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>            <span class="keywordflow">return</span> <span class="stringliteral">&quot;mentions::enable&quot;</span>;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        }</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keywordflow">default</span>: {</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>            <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        }</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    }</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>}</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>}<span class="comment">// namespace vk::method</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#endif</span><span class="comment">// VK_METHODS_MENTIONS_HPP</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="namespacevk_1_1method.html#abb3e9f941c430fc198a3b15a7fb621a8">    6</a></span><span class="keyword">enum struct</span> <a class="code hl_enumeration" href="namespacevk_1_1method.html#abb3e9f941c430fc198a3b15a7fb621a8">mentions</a> { <a class="code hl_enumvalue" href="namespacevk_1_1method.html#abb3e9f941c430fc198a3b15a7fb621a8a208f156d4a803025c284bb595a7576b4">enable</a>, <a class="code hl_enumvalue" href="namespacevk_1_1method.html#abb3e9f941c430fc198a3b15a7fb621a8a0aaa87422396fdd678498793b6d5250e">disable</a> };</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="namespacevk_1_1method.html#a224d617fe7c5f987ad4c1d1651059c11">    8</a></span><span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="namespacevk_1_1method.html#a224d617fe7c5f987ad4c1d1651059c11">to_string</a>(<span class="keyword">enum</span> <a class="code hl_enumeration" href="namespacevk_1_1method.html#abb3e9f941c430fc198a3b15a7fb621a8">mentions</a> m) <span class="keyword">noexcept</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>{</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keywordflow">switch</span> (m) {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacevk_1_1method.html#abb3e9f941c430fc198a3b15a7fb621a8a0aaa87422396fdd678498793b6d5250e">mentions::disable</a>: {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>            <span class="keywordflow">return</span> <span class="stringliteral">&quot;mentions::disable&quot;</span>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>        }</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacevk_1_1method.html#abb3e9f941c430fc198a3b15a7fb621a8a208f156d4a803025c284bb595a7576b4">mentions::enable</a>: {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>            <span class="keywordflow">return</span> <span class="stringliteral">&quot;mentions::enable&quot;</span>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        }</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <span class="keywordflow">default</span>: {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>            <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        }</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    }</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>}</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>}<span class="comment">// namespace vk::method</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#endif</span><span class="comment">// VK_METHODS_MENTIONS_HPP</span></div>
 <div class="ttc" id="anamespacevk_1_1method_html"><div class="ttname"><a href="namespacevk_1_1method.html">vk::method</a></div><div class="ttdef"><b>Definition:</b> basic.hpp:14</div></div>
-<div class="ttc" id="anamespacevk_1_1method_html_a224d617fe7c5f987ad4c1d1651059c11"><div class="ttname"><a href="namespacevk_1_1method.html#a224d617fe7c5f987ad4c1d1651059c11">vk::method::to_string</a></div><div class="ttdeci">constexpr const char * to_string(enum mentions m) noexcept</div><div class="ttdef"><b>Definition:</b> mentions.hpp:12</div></div>
-<div class="ttc" id="anamespacevk_1_1method_html_abb3e9f941c430fc198a3b15a7fb621a8"><div class="ttname"><a href="namespacevk_1_1method.html#abb3e9f941c430fc198a3b15a7fb621a8">vk::method::mentions</a></div><div class="ttdeci">mentions</div><div class="ttdef"><b>Definition:</b> mentions.hpp:7</div></div>
+<div class="ttc" id="anamespacevk_1_1method_html_a224d617fe7c5f987ad4c1d1651059c11"><div class="ttname"><a href="namespacevk_1_1method.html#a224d617fe7c5f987ad4c1d1651059c11">vk::method::to_string</a></div><div class="ttdeci">constexpr const char * to_string(enum mentions m) noexcept</div><div class="ttdef"><b>Definition:</b> mentions.hpp:8</div></div>
+<div class="ttc" id="anamespacevk_1_1method_html_abb3e9f941c430fc198a3b15a7fb621a8"><div class="ttname"><a href="namespacevk_1_1method.html#abb3e9f941c430fc198a3b15a7fb621a8">vk::method::mentions</a></div><div class="ttdeci">mentions</div><div class="ttdef"><b>Definition:</b> mentions.hpp:6</div></div>
 <div class="ttc" id="anamespacevk_1_1method_html_abb3e9f941c430fc198a3b15a7fb621a8a0aaa87422396fdd678498793b6d5250e"><div class="ttname"><a href="namespacevk_1_1method.html#abb3e9f941c430fc198a3b15a7fb621a8a0aaa87422396fdd678498793b6d5250e">vk::method::mentions::disable</a></div><div class="ttdeci">@ disable</div></div>
 <div class="ttc" id="anamespacevk_1_1method_html_abb3e9f941c430fc198a3b15a7fb621a8a208f156d4a803025c284bb595a7576b4"><div class="ttname"><a href="namespacevk_1_1method.html#abb3e9f941c430fc198a3b15a7fb621a8a208f156d4a803025c284bb595a7576b4">vk::method::mentions::enable</a></div><div class="ttdeci">@ enable</div></div>
 </div><!-- fragment --></div><!-- contents -->

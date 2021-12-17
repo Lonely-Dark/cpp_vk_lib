@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['handles_5f_0',['handles_',['../classimpl_1_1libcurl__wrap.html#aaf0b9d3864f3a741390d393bbdc08c20',1,'impl::libcurl_wrap']]],
+  ['handles_5f_0',['handles_',['../classcurl__wrap.html#a906ec675d56d9f38e4a8acf31373fcf2',1,'curl_wrap']]],
   ['has_5faction_1',['has_action',['../classvk_1_1event_1_1message__new.html#a1b5c2d16241faa474a1d5c1aa66cadf4',1,'vk::event::message_new']]],
   ['has_5faction_5f_2',['has_action_',['../classvk_1_1event_1_1message__new.html#acf0f23c8079b21a6ae1619373e1c277f',1,'vk::event::message_new']]],
   ['has_5fattachments_3',['has_attachments',['../classvk_1_1event_1_1wall__post__new.html#a28fc56faaf2750baf744d983ba1a6917',1,'vk::event::wall_post_new::has_attachments()'],['../classvk_1_1event_1_1wall__reply__new.html#a68a080d9ad60de3c2b9f7fde1b98e09e',1,'vk::event::wall_reply_new::has_attachments()'],['../classvk_1_1event_1_1wall__repost.html#a8ecbaa8367380dd5481e533211169346',1,'vk::event::wall_repost::has_attachments()']]],
@@ -13,6 +13,5 @@ var searchData=
   ['has_5freply_5f_10',['has_reply_',['../classvk_1_1event_1_1message__new.html#a50298d7ce5a18e83f938885b3882c1d4',1,'vk::event::message_new']]],
   ['has_5frepost_11',['has_repost',['../classvk_1_1event_1_1wall__post__new.html#ac870365959904c6108855c2b5da0ad6f',1,'vk::event::wall_post_new']]],
   ['has_5frepost_5f_12',['has_repost_',['../classvk_1_1event_1_1wall__post__new.html#ae416c636bea149a2ece618039076ce23',1,'vk::event::wall_post_new']]],
-  ['hash_5f_13',['hash_',['../classvk_1_1keyboard_1_1button_1_1open__app.html#aa4a77c7d068c5e847995542e59963d3a',1,'vk::keyboard::button::open_app::hash_()'],['../classvk_1_1keyboard_1_1button_1_1vk__pay.html#a85ac5e8f9efdcb68a4421de648c3cdc9',1,'vk::keyboard::button::vk_pay::hash_()']]],
-  ['host_14',['host',['../structruntime_1_1network_1_1request__context.html#a45a1d625799ee19a9aaac173ecdcee32',1,'runtime::network::request_context']]]
+  ['hash_5f_13',['hash_',['../classvk_1_1keyboard_1_1button_1_1open__app.html#aa4a77c7d068c5e847995542e59963d3a',1,'vk::keyboard::button::open_app::hash_()'],['../classvk_1_1keyboard_1_1button_1_1vk__pay.html#a85ac5e8f9efdcb68a4421de648c3cdc9',1,'vk::keyboard::button::vk_pay::hash_()']]]
 ];

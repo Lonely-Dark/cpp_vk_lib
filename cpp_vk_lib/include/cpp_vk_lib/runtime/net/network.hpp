@@ -4,7 +4,6 @@
 #include "cpp_vk_lib/runtime/result.hpp"
 
 #include <map>
-#include <optional>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -13,77 +12,76 @@
 extern bool cpp_vk_lib_curl_verbose;
 
 namespace runtime::network {
+
 /*! Flag to tell what to do with incoming data. */
 enum struct data_flow
 {
     require,
-    omit
+    omit,
+    none
 };
 
-/*! Wrapper aimed to reduce the great amount of input parameters. */
-struct request_context
-{
-    /*! URL parameters. */
-    std::optional<std::map<std::string, std::string>> target{};
-    /*! URL itself. */
-    std::optional<std::string> host{};
-    /*! Raw request data, e.g JSON. */
-    std::optional<std::string> request_data{};
-    /*! Filename for download/upload operations. */
-    std::optional<std::string> io_filename{};
-    /*! Buffer for download/upload operations. */
-    std::optional<std::vector<uint8_t>*> io_buffer_ptr{};
-    /*! Server (target URL) for download/upload operations. */
-    std::optional<std::string> io_server{};
-    /*! Field (actually needed by VK only) used in download/upload operations. */
-    std::optional<std::string> upload_field{};
-    /*! Content-type HTTP header. */
-    std::optional<std::string> upload_content_type{};
-    /*! Flag to tell ignore incoming output or not. */
-    data_flow output_needed{data_flow::omit};
-};
 /*!
- * Perform HTTP POST request.
- * \param ctx Request context.
- * \throw std::bad_optional_access if `host` and `target` fields were not specified.
+ * Execute request.
  *
- * \return Result with payload string and 0 error code on success, empty string and -1 error code
- * otherwise.
+ * \param host Target URL (e.g https://example.com/).
+ * \param target Parameters list to be serialized to string like value_1=1&value_2=2&value_3=3.
+ * \param output_needed Specifies, write cURL output to string or not.
+ * \return Pair of string and bool, where bool set to true if error is present.
  */
-result<std::string, bool> request(const request_context& ctx);
+std::pair<std::string, bool>
+    request(std::string_view host, const std::map<std::string, std::string>& target, data_flow output_needed);
 /*!
- * Perform HTTP POST request with specified data.
- * \param ctx Request context.
- * \throw std::bad_optional_access if `host` and `request_data` fields were not specified.
+ * Execute request with POST data.
  *
- * \return Result with payload string and 0 error code on success, empty string and -1 error code
- * otherwise.
+ * \param host Target URL (e.g https://example.com/).
+ * \param data POST data (e.g JSON).
+ * \param output_needed Specifies, write cURL output to string or not.
+ * \return Pair of string and bool, where bool set to true if error is present.
  */
-result<std::string, bool> request_data(const request_context& ctx);
+std::pair<std::string, bool> request_data(std::string_view host, std::string_view data, data_flow output_needed);
 /*!
- * Upload bytes from file or buffer to remote server.
- * \param ctx Request context.
- * \throw std::bad_optional_access if
- *   `io_filename` or `io_buffer_ptr`,
- *   `upload_field`,
- *   `upload_content_type`,
- *   `io_server` fields were not specified.
+ * Upload file to server.
  *
- * \return Result with payload string and 0 error code on success, empty string and -1 error code
- * otherwise.
+ * \param url Target URL (e.g https://example.com/).
+ * \param field Upload POST field.
+ * \param content_type Content-Type allowed by HTTP.
+ * \param filename Path to source file.
+ * \param output_needed Specifies, write cURL output to string or not.
+ * \return
  */
-result<std::string, bool> upload(const request_context& ctx);
+std::pair<std::string, bool> upload(
+    std::string_view url, std::string_view field, std::string_view content_type, std::string_view filename,
+    data_flow output_needed);
 /*!
- * Download bytes from remote server to file or buffer.
- * \param ctx Request context.
- * \throw std::runtime_error if neither filename or buffer was specified.
- * \throw std::bad_optional_access if
- *   `io_filename` or `io_buffer_ptr`,
- *   `io_server` fields were not specified.
+ * Upload in-memory file representation to server.
  *
- * \return 0 on success, -1 otherwise.
+ * \param url Target URL (e.g https://example.com/).
+ * \param field Upload POST field.
+ * \param content_type Content-Type allowed by HTTP.
+ * \param buffer Vector of file represented as bytes.
+ * \param output_needed Specifies, write cURL output to string or not.
+ * \return
  */
-bool download(request_context& ctx);
+std::pair<std::string, bool> upload(
+    std::string_view url, std::string_view field, std::string_view content_type, const std::vector<uint8_t>& buffer,
+    data_flow output_needed);
+/*!
+ * Download URL contents to file.
+ *
+ * \param url Target URL (e.g https://example.com/).
+ * \param filename Source filename.
+ * \return true on success, false on error.
+ */
+bool download(std::string_view url, std::string_view filename);
+/*!
+ * Download URL contents to in-memory buffer.
+ *
+ * \param url Target URL (e.g https://example.com/).
+ * \param buffer Source buffer.
+ * \return true on success, false on error.
+ */
+bool download(std::string_view url, std::vector<uint8_t>& buffer);
 
 }// namespace runtime::network
 

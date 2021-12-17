@@ -10,5 +10,7 @@ var searchData=
   ['common_7',['common',['../classvk_1_1event_1_1common.html',1,'vk::event']]],
   ['common_5fexception_8',['common_exception',['../classvk_1_1error_1_1common__exception.html',1,'vk::error']]],
   ['constructor_9',['constructor',['../classvk_1_1method_1_1constructor.html',1,'vk::method']]],
-  ['constructor_3c_20policy_3a_3agroup_5fapi_20_3e_10',['constructor&lt; policy::group_api &gt;',['../classvk_1_1method_1_1constructor.html',1,'vk::method']]]
+  ['constructor_3c_20policy_3a_3agroup_5fapi_20_3e_10',['constructor&lt; policy::group_api &gt;',['../classvk_1_1method_1_1constructor.html',1,'vk::method']]],
+  ['curl_5fexecutor_11',['curl_executor',['../classcurl__executor.html',1,'']]],
+  ['curl_5fwrap_12',['curl_wrap',['../classcurl__wrap.html',1,'']]]
 ];

@@ -6,7 +6,7 @@ var searchData=
   ['server_3',['server',['../classvk_1_1long__poll.html#a187637b3908c0c72f9d07d1059783862',1,'vk::long_poll']]],
   ['set_5ferror_4',['set_error',['../structruntime_1_1result.html#aa4cf708f50a93e14bb2283014467b2d6',1,'runtime::result']]],
   ['setup_5flogger_5',['setup_logger',['../namespaceruntime.html#aa5db38c31116949c9448c1500726985e',1,'runtime']]],
-  ['setup_5fshared_5fhandle_6',['setup_shared_handle',['../classimpl_1_1libcurl__wrap.html#ac8a2cc1b989c05d4c73d98bde80a085b',1,'impl::libcurl_wrap']]],
+  ['setup_5fshared_5fhandle_6',['setup_shared_handle',['../classcurl__wrap.html#afe675aec02b9fff0498ba1c994739393',1,'curl_wrap']]],
   ['setup_5fsignal_5fhandlers_7',['setup_signal_handlers',['../namespaceruntime.html#aa590d7896242a6de4a20d22591a217d3',1,'runtime']]],
   ['split_8',['split',['../namespaceruntime_1_1string__utils.html#a13ac29f6263f1bb250421236110f3a89',1,'runtime::string_utils']]],
   ['split_5fiterator_9',['split_iterator',['../classruntime_1_1string__utils_1_1split__iterator.html#a10b1d859d5f213e13f2171e320318e16',1,'runtime::string_utils::split_iterator']]],

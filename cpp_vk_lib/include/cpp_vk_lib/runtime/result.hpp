@@ -17,8 +17,7 @@ struct result : protected std::pair<Value, Error>
 
     /*! Set both value and error to default values. */
     result() noexcept
-        : result(Value{}, Error{})
-    {}
+        : result(Value{}, Error{}) {}
 
     /*!
      * Set value and set error to false.
@@ -26,13 +25,11 @@ struct result : protected std::pair<Value, Error>
      * \note Not marked as explicit to allow simply deduction to Value type.
      */
     result(Value&& value)
-        : result(std::forward<Value>(value), Error{false})
-    {}
+        : result(std::forward<Value>(value), Error{false}) {}
 
     /*! Set both value and error. */
     result(Value&& value, Error&& error) noexcept
-        : std::pair<Value, Error>(std::forward<Value>(value), std::forward<Error>(error))
-    {}
+        : std::pair<Value, Error>(std::forward<Value>(value), std::forward<Error>(error)) {}
 
     void set_error(Error&& error) noexcept
     {

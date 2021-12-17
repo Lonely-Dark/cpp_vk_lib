@@ -17,9 +17,7 @@ void messages::send(int64_t peer_id, std::string_view text, enum mentions mentio
         .request_without_output();
 }
 
-void messages::send(
-    int64_t peer_id, std::string_view text, const std::vector<attachment::attachment_ptr_t>& list,
-    enum mentions mentions)
+void messages::send(int64_t peer_id, std::string_view text, const std::vector<attachment::attachment_ptr_t>& list, enum mentions mentions)
 {
     spdlog::trace(
         "call messages::send: peer_id={}, text={}, attachments_count={}, mentions_flag={}",

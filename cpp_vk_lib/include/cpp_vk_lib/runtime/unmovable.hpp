@@ -9,14 +9,12 @@ namespace runtime {
  * class my_singleton_object : public unmovable {};
  * \endcode
  */
-// clang-format off
 struct unmovable
 {
     unmovable() = default;
     unmovable(unmovable&&) = delete;
     unmovable& operator=(unmovable&&) = delete;
 };
-// clang-format on
 }// namespace runtime
 
 #endif// RUNTIME_UNMOVABLE_HPP

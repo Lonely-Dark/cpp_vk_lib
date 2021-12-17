@@ -9,9 +9,7 @@ namespace vk::keyboard::button {
 class vk_pay : public button::base
 {
 public:
-    vk_pay(std::string_view hash)
-        : hash_(hash)
-    {}
+    vk_pay(std::string_view hash) : hash_(hash) {}
 
     std::string serialize() const override
     {

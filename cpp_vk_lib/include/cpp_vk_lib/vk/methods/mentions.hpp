@@ -3,11 +3,7 @@
 
 namespace vk::method {
 /*! Mentions flag for messages.send method. */
-enum struct mentions
-{
-    enable,
-    disable
-};
+enum struct mentions { enable, disable };
 
 constexpr const char* to_string(enum mentions m) noexcept
 {

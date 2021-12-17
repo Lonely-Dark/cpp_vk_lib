@@ -66,7 +66,7 @@ static void unix_stacktrace_dump_implementation()
         spdlog::critical("  empty stack trace, exiting...");
         return;
     }
-    char** strace         = backtrace_symbols(strace_buffer, strace_size);
+    char** strace = backtrace_symbols(strace_buffer, strace_size);
     char* demangle_buffer = static_cast<char*>(malloc(256));
 
     for (int i = 0; i < strace_size; ++i) {
@@ -98,12 +98,12 @@ static void unix_stacktrace_dump_implementation()
         }
 
         *(begin_mangled_name++) = '\0';
-        *(end_mangled_name++)   = '\0';
-        *(offset++)             = '\0';
+        *(end_mangled_name++) = '\0';
+        *(offset++) = '\0';
 
         int demangle_status = 0;
-        size_t frame_size   = 256;
-        demangle_buffer     = abi::__cxa_demangle(begin_mangled_name, demangle_buffer, &frame_size, &demangle_status);
+        size_t frame_size = 256;
+        demangle_buffer = abi::__cxa_demangle(begin_mangled_name, demangle_buffer, &frame_size, &demangle_status);
         if (demangle_status == 0) {
             spdlog::critical("  {}: {}+{}", strace[i], demangle_buffer, offset);
         } else {

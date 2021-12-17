@@ -103,13 +103,13 @@ private:
         pthread_mutex_unlock(&share_data_lock_[data]);
     }
 
-    static inline curl_wrap* wrap_       = nullptr;
+    static inline curl_wrap* wrap_ = nullptr;
     static inline CURLSH* shared_handle_ = nullptr;
     static inline std::map<std::thread::id, CURL*> handles_;
     static inline pthread_mutex_t share_data_lock_[CURL_LOCK_DATA_LAST];
 };
 
-[[maybe_unused]] int atexit_handler = [] {
+[[maybe_unused]] int at_exit_handler = []() noexcept {
     std::atexit([] {
         curl_wrap::get()->~curl_wrap();
     });
@@ -142,13 +142,14 @@ public:
         return curl_get(curl_handle, output_needed);
     }
 
-    std::pair<std::string, bool> upload(
-        std::string_view field, std::string_view content_type, std::string_view filename, data_flow output_needed)
+    std::pair<std::string, bool> upload(std::string_view field,
+                                        std::string_view content_type,
+                                        std::string_view filename,
+                                        data_flow        output_needed)
     {
-        curl_httppost* form_post     = nullptr;
+        curl_httppost* form_post = nullptr;
         curl_httppost* last_form_ptr = nullptr;
 
-        // clang-format off
         curl_formadd(&form_post, &last_form_ptr,
             CURLFORM_COPYNAME,     field.data(),
             CURLFORM_FILENAME,     filename.data(),
@@ -156,21 +157,20 @@ public:
             CURLFORM_CONTENTTYPE,  content_type.data(),
             CURLFORM_END
         );
-        // clang-format on
 
         auto result = curl_post(form_post, output_needed);
         curl_formfree(form_post);
         return result;
     }
 
-    std::pair<std::string, bool> upload(
-        std::string_view field, std::string_view content_type, const std::vector<uint8_t>& buffer,
-        data_flow output_needed)
+    std::pair<std::string, bool> upload(std::string_view            field,
+                                        std::string_view            content_type,
+                                        const std::vector<uint8_t>& buffer,
+                                        data_flow                   output_needed)
     {
-        curl_httppost* form_post     = nullptr;
+        curl_httppost* form_post = nullptr;
         curl_httppost* last_form_ptr = nullptr;
 
-        // clang-format off
         curl_formadd(&form_post, &last_form_ptr,
             CURLFORM_BUFFER,          "temp",
             CURLFORM_PTRNAME,         "ptr",
@@ -181,7 +181,6 @@ public:
             CURLFORM_CONTENTTYPE,     content_type.data(),
             CURLFORM_END
         );
-        // clang-format on
 
         auto result = curl_post(form_post, output_needed);
         curl_formfree(form_post);
@@ -301,8 +300,7 @@ private:
 
 namespace runtime::network {
 
-std::pair<std::string, bool>
-    request(std::string_view host, const std::map<std::string, std::string>& target, data_flow output_needed)
+std::pair<std::string, bool> request(std::string_view host, const std::map<std::string, std::string>& target, data_flow output_needed)
 {
     curl_executor executor(host);
     return executor.request(target, output_needed);
@@ -314,17 +312,21 @@ std::pair<std::string, bool> request_data(std::string_view host, std::string_vie
     return executor.request_data(data, output_needed);
 }
 
-std::pair<std::string, bool> upload(
-    std::string_view url, std::string_view field, std::string_view content_type, std::string_view filename,
-    data_flow output_needed)
+std::pair<std::string, bool> upload(std::string_view url,
+                                    std::string_view field,
+                                    std::string_view content_type,
+                                    std::string_view filename,
+                                    data_flow        output_needed)
 {
     curl_executor executor(url);
     return executor.upload(field, content_type, filename, output_needed);
 }
 
-std::pair<std::string, bool> upload(
-    std::string_view url, std::string_view field, std::string_view content_type, const std::vector<uint8_t>& buffer,
-    data_flow output_needed)
+std::pair<std::string, bool> upload(std::string_view            url,
+                                    std::string_view            field,
+                                    std::string_view            content_type,
+                                    const std::vector<uint8_t>& buffer,
+                                    data_flow                   output_needed)
 {
     curl_executor executor(url);
     return executor.upload(field, content_type, buffer, output_needed);

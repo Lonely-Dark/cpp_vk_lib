@@ -12,11 +12,11 @@ static std::string append_url(std::string_view method)
     return fmt::format("https://api.vk.com/method/{}?", method);
 }
 
-static std::string call(
-    std::string_view method, std::map<std::string, std::string>&& params,
-    enum runtime::network::data_flow output_needed)
+static std::string call(std::string_view                     method,
+                        std::map<std::string, std::string>&& params,
+                        enum runtime::network::data_flow     output_needed)
 {
-    namespace net      = runtime::network;
+    namespace net = runtime::network;
     auto [data, error] = net::request(append_url(method), params, output_needed);
 
     if (error) {
@@ -29,9 +29,11 @@ namespace vk::method::policy {
 
 struct group_api
 {
-    static std::string execute(
-        std::map<std::string, std::string>&& params, const std::string& method, const std::string& access_token,
-        const std::string& user_token, enum runtime::network::data_flow output_needed)
+    static std::string execute(std::map<std::string, std::string>&& params,
+                               const std::string&                   method,
+                               const std::string&                   access_token,
+                               const std::string&                   user_token,
+                               enum runtime::network::data_flow     output_needed)
     {
         VK_UNUSED(user_token);
         params.insert({{"access_token", access_token}, {"v", api_constants::api_version}});
@@ -41,9 +43,11 @@ struct group_api
 
 struct user_api
 {
-    static std::string execute(
-        std::map<std::string, std::string>&& params, const std::string& method, const std::string& access_token,
-        const std::string& user_token, enum runtime::network::data_flow output_needed)
+    static std::string execute(std::map<std::string, std::string>&& params,
+                               const std::string&                   method,
+                               const std::string&                   access_token,
+                               const std::string&                   user_token,
+                               enum runtime::network::data_flow     output_needed)
     {
         VK_UNUSED(access_token);
         params.insert({{"access_token", user_token}, {"v", api_constants::api_version}});
@@ -53,9 +57,11 @@ struct user_api
 
 struct do_not_use_api_link
 {
-    static std::string execute(
-        std::map<std::string, std::string>&& params, const std::string& method, const std::string& access_token,
-        const std::string& user_token, enum runtime::network::data_flow output_needed)
+    static std::string execute(std::map<std::string, std::string>&& params,
+                               const std::string&                   method,
+                               const std::string&                   access_token,
+                               const std::string&                   user_token,
+                               enum runtime::network::data_flow     output_needed)
     {
         VK_UNUSED(user_token);
         VK_UNUSED(access_token);
@@ -116,7 +122,8 @@ std::string constructor<ExecutionPolicy>::perform_request()
         method_,
         access_token_,
         user_token_,
-        runtime::network::data_flow::require);
+        runtime::network::data_flow::require
+    );
 }
 
 template <typename ExecutionPolicy>
@@ -127,7 +134,8 @@ void constructor<ExecutionPolicy>::request_without_output()
         method_,
         access_token_,
         user_token_,
-        runtime::network::data_flow::omit);
+        runtime::network::data_flow::omit
+    );
 }
 
 template class constructor<policy::user_api>;

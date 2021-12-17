@@ -29,12 +29,13 @@ long_poll::long_poll(asio::io_context& io_context)
 
 void long_poll::server()
 {
-    const std::string data   = method::groups::get_long_poll_server(group_id_);
+    const std::string data = method::groups::get_long_poll_server(group_id_);
     const auto server_object = shared_parser_->parse(data)["response"];
-    poll_payload_            = {
+    poll_payload_ = {
         std::string(server_object["key"]),
         std::string(server_object["server"]),
-        std::string(server_object["ts"])};
+        std::string(server_object["ts"])
+    };
 }
 
 std::vector<event::common> long_poll::listen(int8_t timeout)
@@ -47,7 +48,6 @@ std::vector<event::common> long_poll::listen(int8_t timeout)
 
     spdlog::trace("long poll: ts {}, timeout {}", poll_payload_.ts, timeout);
 
-    // clang-format off
     const std::string response = method::raw_constructor()
         .method(poll_payload_.server + "?")
         .param("act",  "a_check")
@@ -55,7 +55,6 @@ std::vector<event::common> long_poll::listen(int8_t timeout)
         .param("ts",   poll_payload_.ts)
         .param("wait", std::to_string(timeout))
         .perform_request();
-    // clang-format on
 
     const simdjson::dom::object parsed_response = shared_parser_->parse(response);
 

@@ -112,49 +112,14 @@ size_t loader::num_workers() const noexcept
 
 namespace vk {
 
-void config::load(std::string_view path)
-{
-    loader::load(path);
-}
-
-void config::load_string(std::string_view string)
-{
-    loader::load_string(string);
-}
-
-void config::override_user_token(std::string_view token)
-{
-    loader::get().user_token() = token;
-}
-
-const std::string& config::password()
-{
-    return loader::get().password();
-}
-
-const std::string& config::username()
-{
-    return loader::get().username();
-}
-
-const std::string& config::user_token()
-{
-    return loader::get().user_token();
-}
-
-const std::string& config::access_token()
-{
-    return loader::get().access_token();
-}
-
-const std::string& config::log_path()
-{
-    return loader::get().log_path();
-}
-
-size_t config::num_workers()
-{
-    return loader::get().num_workers();
-}
+void config::load(std::string_view path) { loader::load(path); }
+void config::load_string(std::string_view string) { loader::load_string(string); }
+void config::override_user_token(std::string_view token) { loader::get().user_token() = token; }
+const std::string& config::password()     { return loader::get().password(); }
+const std::string& config::username()     { return loader::get().username(); }
+const std::string& config::user_token()   { return loader::get().user_token(); }
+const std::string& config::access_token() { return loader::get().access_token(); }
+const std::string& config::log_path()     { return loader::get().log_path(); }
+size_t config::num_workers()              { return loader::get().num_workers(); }
 
 }// namespace vk

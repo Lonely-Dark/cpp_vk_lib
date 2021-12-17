@@ -14,12 +14,7 @@ extern bool cpp_vk_lib_curl_verbose;
 namespace runtime::network {
 
 /*! Flag to tell what to do with incoming data. */
-enum struct data_flow
-{
-    require,
-    omit,
-    none
-};
+enum struct data_flow { require, omit, none };
 
 /*!
  * Execute request.
@@ -29,8 +24,7 @@ enum struct data_flow
  * \param output_needed Specifies, write cURL output to string or not.
  * \return Pair of string and bool, where bool set to true if error is present.
  */
-std::pair<std::string, bool>
-    request(std::string_view host, const std::map<std::string, std::string>& target, data_flow output_needed);
+std::pair<std::string, bool> request(std::string_view host, const std::map<std::string, std::string>& target, data_flow output_needed);
 /*!
  * Execute request with POST data.
  *
@@ -50,9 +44,11 @@ std::pair<std::string, bool> request_data(std::string_view host, std::string_vie
  * \param output_needed Specifies, write cURL output to string or not.
  * \return
  */
-std::pair<std::string, bool> upload(
-    std::string_view url, std::string_view field, std::string_view content_type, std::string_view filename,
-    data_flow output_needed);
+std::pair<std::string, bool> upload(std::string_view url,
+                                    std::string_view field,
+                                    std::string_view content_type,
+                                    std::string_view filename,
+                                    data_flow        output_needed);
 /*!
  * Upload in-memory file representation to server.
  *
@@ -63,9 +59,11 @@ std::pair<std::string, bool> upload(
  * \param output_needed Specifies, write cURL output to string or not.
  * \return
  */
-std::pair<std::string, bool> upload(
-    std::string_view url, std::string_view field, std::string_view content_type, const std::vector<uint8_t>& buffer,
-    data_flow output_needed);
+std::pair<std::string, bool> upload(std::string_view            url,
+                                    std::string_view            field,
+                                    std::string_view            content_type,
+                                    const std::vector<uint8_t>& buffer,
+                                    data_flow                   output_needed);
 /*!
  * Download URL contents to file.
  *

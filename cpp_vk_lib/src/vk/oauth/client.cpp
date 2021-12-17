@@ -55,12 +55,13 @@ void client::pull()
     simdjson::dom::parser parser;
     const simdjson::dom::object response = parser.parse(constructor.perform_request());
 
-    if (error_returned(response, "invalid_client") || error_returned(response, "invalid_request") ||
+    if (error_returned(response, "invalid_client") ||
+        error_returned(response, "invalid_request") ||
         error_returned(response, "invalid_grant")) {
         throw error::access_error(-1, response["error_description"].get_c_str().take_value());
     }
 
-    pulled_token_   = response["access_token"].get_c_str().take_value();
+    pulled_token_ = response["access_token"].get_c_str().take_value();
     pulled_user_id_ = response["user_id"].get_int64();
 
     spdlog::trace("oauth: get token: {}", pulled_token_);

@@ -27,9 +27,7 @@ public:
     int64_t owner_id() const noexcept;
     std::string text() const noexcept;
     bool has_attachments() const noexcept;
-    /*!
-     * \note If no attachments were provided, empty vector returned
-     */
+    /*! \note If no attachments were provided, empty vector returned */
     std::vector<attachment::attachment_ptr_t> attachments() const;
 
 private:

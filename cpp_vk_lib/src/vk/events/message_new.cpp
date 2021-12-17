@@ -44,7 +44,7 @@ message_new::message_new(simdjson::dom::object incoming_message)
 void message_new::try_get_actions()
 {
     simdjson::dom::object action = event()["action"].get_object();
-    std::string action_name      = action["type"].get_string().take_value().data();
+    std::string action_name = action["type"].get_string().take_value().data();
 
     if (action_name == "chat_invite_user") {
         action_ = action::chat_invite_user{action["member_id"].get_int64()};

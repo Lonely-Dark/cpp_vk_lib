@@ -13,8 +13,7 @@ class text : public button::base
 public:
     text(color selected_color, std::string_view payload_data)
         : selected_color_(selected_color)
-        , payload_data_(payload_data)
-    {}
+        , payload_data_(payload_data) {}
 
     std::string serialize() const override
     {

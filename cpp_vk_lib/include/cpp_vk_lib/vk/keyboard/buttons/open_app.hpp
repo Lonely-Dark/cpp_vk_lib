@@ -13,8 +13,7 @@ public:
         : app_id_(app_id)
         , owner_id_(owner_id)
         , hash_(hash)
-        , label_(label)
-    {}
+        , label_(label) {}
 
     std::string serialize() const override
     {

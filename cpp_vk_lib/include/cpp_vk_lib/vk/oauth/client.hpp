@@ -10,12 +10,7 @@ class parser;
 
 namespace vk::oauth {
 /*! OAuth targets. */
-enum struct target_client
-{
-    android,
-    iphone,
-    windows
-};
+enum struct target_client { android, iphone, windows };
 
 /*!
  * VK Oauth client.

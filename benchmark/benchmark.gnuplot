@@ -2,7 +2,7 @@ set term pdfcairo fontscale 0.35 noenhanced
 set output name
 set style fill solid
 set ylabel "processing speed in seconds (S)"
-set xlabel "events count"
+set xlabel "input size (MiB)"
 
 # Line style for grid
 set style line 81 lt 0  # dashed

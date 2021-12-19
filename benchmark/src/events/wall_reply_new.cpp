@@ -28,12 +28,14 @@ int main()
     benchmark_file.clear();
     benchmark_file << "Total Seconds\n";
 
-    for (size_t total_events = 0; total_events < 50'000; total_events += 2500) {
-        std::string time_spent = time_measurement(total_events, []{
-            simdjson::dom::parser parser;
-            simdjson::dom::element event_object = parser.parse(wall_reply_new_payload, strlen(wall_reply_new_payload));
-            vk::event::wall_reply_new event(event_object);
-        });
-        benchmark_file << time_spent << " " << total_events << std::endl << std::flush;
+    for (size_t iterations = 0; iterations < total_benchmark_iterations; ++iterations) {
+        for (size_t total_events = 0; total_events < 500'000; total_events += 25'000) {
+            std::string time_spent = time_measurement(total_events, [] {
+                simdjson::dom::parser parser;
+                simdjson::dom::element event_object = parser.parse(wall_reply_new_payload, strlen(wall_reply_new_payload));
+                vk::event::wall_reply_new event(event_object);
+            });
+            benchmark_file << time_spent << " " << string_length_to_mib(sizeof(wall_reply_new_payload) * total_events) << std::endl << std::flush;
+        }
     }
 }

@@ -10,11 +10,13 @@ int main()
     benchmark_file.clear();
     benchmark_file << "Total Seconds\n";
 
-    for (size_t total = 0; total < 2'000; total += 500) {
-        const std::string payload(total, 'a');
-        std::string time_spent = time_measurement(total, [&]{
-            std::string data = runtime::string_utils::utf8_to_lower(payload);
-        });
-        benchmark_file << time_spent << " " << total << std::endl << std::flush;
+    const std::string payload(1'000, 'a');
+    for (size_t iterations = 0; iterations < total_benchmark_iterations; ++iterations) {
+        for (size_t total = 1; total < 10'000; total += 1'000) {
+            std::string time_spent = time_measurement(total, [&] {
+                std::string data = runtime::string_utils::utf8_to_lower(payload);
+            });
+            benchmark_file << time_spent << " " << string_length_to_mib(payload.length() * total) << std::endl << std::flush;
+        }
     }
 }

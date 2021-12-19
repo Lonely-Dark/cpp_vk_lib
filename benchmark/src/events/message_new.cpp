@@ -87,12 +87,16 @@ int main()
     benchmark_file.clear();
     benchmark_file << "Total Seconds\n";
 
-    for (size_t total_events = 0; total_events < 50'000; total_events += 2500) {
-        std::string time_spent = time_measurement(total_events, []{
-            simdjson::dom::parser parser;
-            simdjson::dom::element event_object = parser.parse(message_new_payload, strlen(message_new_payload));
-            vk::event::message_new event(event_object);
-        });
-        benchmark_file << time_spent << " " << total_events << std::endl << std::flush;
+    const size_t message_new_length = sizeof(message_new_payload) - 1;
+
+    for (size_t iterations = 0; iterations < total_benchmark_iterations; ++iterations) {
+        for (size_t total_events = 0; total_events < 50'000; total_events += 2500) {
+            std::string time_spent = time_measurement(total_events, [&message_new_length] {
+                simdjson::dom::parser parser;
+                simdjson::dom::element event_object = parser.parse(message_new_payload, message_new_length);
+                vk::event::message_new event(event_object);
+            });
+            benchmark_file << time_spent << " " << string_length_to_mib(message_new_length * total_events) << std::endl << std::flush;
+        }
     }
 }

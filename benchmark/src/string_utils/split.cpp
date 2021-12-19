@@ -25,10 +25,12 @@ int main()
 
     const auto split_buffer = create_split_buffer(100, 10, 'x');
 
-    for (size_t total = 0; total < 100'000; total += 5'000) {
-        std::string time_spent = time_measurement(total, [&] {
-            runtime::string_utils::split(split_buffer, ' ');
-        });
-        benchmark_file << time_spent << " " << total << std::endl << std::flush;
+    for (size_t iterations = 0; iterations < total_benchmark_iterations; ++iterations) {
+        for (size_t total = 1; total < 100'000; total += 5'000) {
+            std::string time_spent = time_measurement(total, [&] {
+                static_cast<void>(runtime::string_utils::split(split_buffer, ' '));
+            });
+            benchmark_file << time_spent << " " << string_length_to_mib(split_buffer.size()) << std::endl << std::flush;
+        }
     }
 }

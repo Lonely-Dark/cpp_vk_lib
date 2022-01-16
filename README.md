@@ -6,28 +6,56 @@
 # cpp_vk_lib
 ![alt text](https://github.com/epoll-reactor/cpp_vk_lib/blob/master/images/vkcpplib-banner-github.png?raw=true)
 
-High performance VK API library
+VK API library
 
-## What this library for?
-* To develop expandable multithreaded bots. Example is [here](https://github.com/epoll-reactor/template_cpp_vk_bot).
-* To develop small one-function utilities. Please see **examples** directory.
+## What is it?
+This is a quite compact toolkit for VK. So with this you can easily create your bots and utilities.
 
-## Features
-* Async event processing
-* Cross-platform stacktrace dumps on crash
-* Multi-level logging
+[Here](https://github.com/epoll-reactor/template_cpp_vk_bot) is placed example project based on cpp_vk_lib, where
+you can learn how to embed it to your CMake project.
+
+## Key features
+* Easy API for methods;
+* multi-level logging.
 
 ## Tested under
-* Linux, MacOS, FreeBSD, Android
-
-## TODO
-* User Long Poll
-* Based on Boost Asio network module
+Linux, MacOS, FreeBSD, Android.
 
 ## Our team
-* **[epoll-reactor](https://github.com/epoll-reactor)** - author
-* **[vicsave](https://github.com/vicsave)** - library logo :)
-* **[edgjj](https://github.com/edgjj)** - cURL download/upload using in-memory buffers
+* **[epoll-reactor](https://github.com/epoll-reactor)** - author;
+* **[vicsave](https://github.com/vicsave)** - library logo;
+* **[edgjj](https://github.com/edgjj)** - cURL download/upload using in-memory buffers.
 
-## Note
-Please consider building your applications with [this template](https://github.com/epoll-reactor/template_cpp_vk_bot).
+## Sample
+
+```cpp
+#include "cpp_vk_lib/runtime/setup_logger.hpp"
+#include "cpp_vk_lib/runtime/signal_handlers.hpp"
+#include "cpp_vk_lib/vk/long_poll/long_poll.hpp"
+#include "cpp_vk_lib/vk/config/config.hpp"
+#include "cpp_vk_lib/vk/events/message_new.hpp"
+#include "cpp_vk_lib/vk/methods/basic.hpp"
+
+#include <iostream>
+
+int main(int argc, char* argv[])
+{
+    if (argc != 2) {						
+        std::cerr << "Usage: ./long_poll <config.json>" << std::endl;
+        return 1;
+    }
+
+    vk::config::load(argv[1]);
+    runtime::setup_signal_handlers();
+    runtime::setup_logger(spdlog::level::level_enum::trace);
+
+    asio::io_context io_context;
+    vk::long_poll api(io_context);
+
+    api.on_event(vk::event::type::message_new, [](const vk::event::common& event) {
+        vk::event::message_new message = event.get_message_new();
+        vk::method::messages::send(message.peer_id(), "response");
+    });
+    api.run();
+}
+```

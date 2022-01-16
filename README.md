@@ -4,7 +4,7 @@
 [![Documentation](https://img.shields.io/badge/docs-doxygen-blue.svg)](https://epoll-reactor.github.io/cpp_vk_lib/index.html)
 
 # cpp_vk_lib
-![alt text](https://github.com/epoll-reactor/cpp_vk_lib/blob/master/images/cpp_vk_lib_logo_big.jpg?raw=true)
+![alt text](https://github.com/epoll-reactor/cpp_vk_lib/blob/master/images/vkcpplib-banner-github.png?raw=true)
 
 High performance VK API library
 
@@ -26,7 +26,7 @@ High performance VK API library
 
 ## Our team
 * **[epoll-reactor](https://github.com/epoll-reactor)** - author
-* **[LvalueReference](https://github.com/LvalueReference)** - library logo :)
+* **[vicsave](https://github.com/vicsave)** - library logo :)
 * **[edgjj](https://github.com/edgjj)** - cURL download/upload using in-memory buffers
 
 ## Note

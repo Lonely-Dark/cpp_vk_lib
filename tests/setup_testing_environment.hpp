@@ -1,5 +1,4 @@
 #include "cpp_vk_lib/runtime/setup_logger.hpp"
-#include "cpp_vk_lib/runtime/signal_handlers.hpp"
 #include "cpp_vk_lib/vk/config/config.hpp"
 
 #include <iostream>
@@ -28,6 +27,5 @@ void setup_cpp_vk_lib_environment()
     )__";
 
     vk::config::load_string(sample_config);
-    runtime::setup_signal_handlers();
     runtime::setup_logger(spdlog::level::level_enum::trace);
 }

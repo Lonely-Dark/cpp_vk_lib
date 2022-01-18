@@ -1,5 +1,4 @@
 #include "cpp_vk_lib/runtime/setup_logger.hpp"
-#include "cpp_vk_lib/runtime/signal_handlers.hpp"
 #include "cpp_vk_lib/vk/config/config.hpp"
 #include "cpp_vk_lib/vk/attachment/attachment.hpp"
 #include "cpp_vk_lib/vk/methods/constructor.hpp"
@@ -24,7 +23,6 @@ int main(int argc, char* argv[])
     const char* query = argv[2];
     const char* count = argv[3];
     vk::config::load(argv[1]);
-    runtime::setup_signal_handlers();
     runtime::setup_logger(spdlog::level::level_enum::trace);
 
     std::vector<vk::attachment::attachment_ptr_t> documents;

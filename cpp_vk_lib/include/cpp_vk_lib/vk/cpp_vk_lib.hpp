@@ -13,8 +13,6 @@
  *   - \ref runtime::network "the networking module";
  *   - \ref runtime::string_utils "string utilities";
  *   - \ref runtime::setup_logger "logger environment";
- *   - \ref runtime::setup_signal_handlers "Unix signal handlers";
- *   - \ref runtime::stacktrace_dump "stacktrace dumps";
  *   - some utility classes
  *       \ref runtime::result "here",
  *       \ref runtime::uncopyable "here" and

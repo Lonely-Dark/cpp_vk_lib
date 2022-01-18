@@ -1,5 +1,4 @@
 #include "cpp_vk_lib/runtime/setup_logger.hpp"
-#include "cpp_vk_lib/runtime/signal_handlers.hpp"
 #include "cpp_vk_lib/vk/long_poll/long_poll.hpp"
 #include "cpp_vk_lib/vk/config/config.hpp"
 #include "cpp_vk_lib/vk/events/message_new.hpp"
@@ -17,7 +16,6 @@ int main(int argc, char* argv[])
     }
 
     vk::config::load(argv[1]);
-    runtime::setup_signal_handlers();
     runtime::setup_logger(spdlog::level::level_enum::trace);
 
     asio::io_context io_context;

@@ -1,5 +1,4 @@
 #include "cpp_vk_lib/runtime/setup_logger.hpp"
-#include "cpp_vk_lib/runtime/signal_handlers.hpp"
 #include "cpp_vk_lib/vk/config/config.hpp"
 #include "cpp_vk_lib/vk/methods/constructor.hpp"
 #include "cpp_vk_lib/vk/events/wall_post_new.hpp"
@@ -23,7 +22,6 @@ int main(int argc, char* argv[])
     const char* file_path = argv[2];
     const char* peer_id = argv[3];
     vk::config::load(config_path);
-    runtime::setup_signal_handlers();
     runtime::setup_logger(spdlog::level::level_enum::trace);
 
     const std::string server = vk::method::user_constructor()

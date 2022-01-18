@@ -1,5 +1,4 @@
 #include "cpp_vk_lib/runtime/setup_logger.hpp"
-#include "cpp_vk_lib/runtime/signal_handlers.hpp"
 #include "cpp_vk_lib/vk/config/config.hpp"
 #include "cpp_vk_lib/vk/methods/constructor.hpp"
 #include "cpp_vk_lib/vk/events/wall_post_new.hpp"
@@ -24,7 +23,6 @@ int main(int argc, char* argv[])
     const char* count_of_posts = argv[3];
     const char* out_path = argv[4];
     vk::config::load(config_path);
-    runtime::setup_signal_handlers();
     runtime::setup_logger(spdlog::level::level_enum::trace);
 
     const std::string response = vk::method::user_constructor()

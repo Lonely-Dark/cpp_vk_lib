@@ -9,7 +9,7 @@ var searchData=
   ['open_5fapp_6',['open_app',['../classvk_1_1keyboard_1_1button_1_1open__app.html#a4fa1ac9d1891514ca2ae4d5289a98212',1,'vk::keyboard::button::open_app::open_app()'],['../classvk_1_1keyboard_1_1button_1_1open__app.html',1,'vk::keyboard::button::open_app']]],
   ['open_5fapp_2ehpp_7',['open_app.hpp',['../open__app_8hpp.html',1,'']]],
   ['operator_20bool_8',['operator bool',['../classvk_1_1error__code.html#a3b96b6b423c028a078ed6adabfccba60',1,'vk::error_code']]],
-  ['operator_21_3d_9',['operator!=',['../classruntime_1_1string__utils_1_1split__iterator.html#a6ea7fdda56b9d84182886de93b66ade5',1,'runtime::string_utils::split_iterator::operator!=()'],['../classruntime_1_1string__utils_1_1split__iterator.html#a7d333896c3971d160a583d71ccac3172',1,'runtime::string_utils::split_iterator::operator!=()']]],
+  ['operator_21_3d_9',['operator!=',['../classruntime_1_1string__utils_1_1split__iterator.html#a741622bd71c01ac1f6aec0ab1030d44e',1,'runtime::string_utils::split_iterator::operator!=()'],['../classruntime_1_1string__utils_1_1split__iterator.html#aa120ea7113bcd336c0da2162d155263b',1,'runtime::string_utils::split_iterator::operator!=()']]],
   ['operator_26_10',['operator&amp;',['../namespacevk_1_1keyboard.html#ad6680c53b97f78e32bbffd1b953c44d6',1,'vk::keyboard']]],
   ['operator_2a_11',['operator*',['../classruntime_1_1string__utils_1_1split__iterator.html#af0b96c224cded0edea30daa3ed9f92da',1,'runtime::string_utils::split_iterator']]],
   ['operator_2b_2b_12',['operator++',['../classruntime_1_1string__utils_1_1split__iterator.html#a9de20288346ca302f7bddd48bab7be54',1,'runtime::string_utils::split_iterator']]],

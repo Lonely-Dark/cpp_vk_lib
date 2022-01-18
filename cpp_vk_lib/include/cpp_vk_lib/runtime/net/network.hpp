@@ -14,7 +14,7 @@ extern bool cpp_vk_lib_curl_verbose;
 namespace runtime::network {
 
 /*! Flag to tell what to do with incoming data. */
-enum struct data_flow { require, omit, none };
+enum struct data_flow { require, omit };
 
 /*!
  * Execute request.

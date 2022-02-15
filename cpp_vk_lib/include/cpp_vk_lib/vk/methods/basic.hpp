@@ -18,7 +18,10 @@ void send(int64_t                                          peer_id,
           std::string_view                                 text,
           const std::vector<attachment::attachment_ptr_t>& list,
           enum mentions                                    mentions = mentions::disable);
-
+void send(int64_t                        peer_id,
+          std::string_view               text,
+          attachment::attachment_ptr_t&& attachment,
+          enum mentions                  mentions = mentions::disable);
 void send(int64_t          peer_id,
           std::string_view text,
           std::string_view keyboard_layout,

@@ -33,6 +33,13 @@ void messages::send(int64_t peer_id, std::string_view text, const std::vector<at
         .request_without_output();
 }
 
+void messages::send(int64_t peer_id, std::string_view text, attachment::attachment_ptr_t&& attachment, enum mentions mentions)
+{
+    std::vector<vk::attachment::attachment_ptr_t> attachments;
+    attachments.push_back(std::move(attachment));
+    send(peer_id, text, attachments, mentions);
+}
+
 void messages::send(int64_t peer_id, std::string_view text, std::string_view keyboard_layout, enum mentions mentions)
 {
     spdlog::trace(

@@ -88,7 +88,7 @@ std::vector<vk::attachment::attachment_ptr_t> wall_post_new::attachments() const
         return event::get_attachments(get_event()["attachments"]);
     }
 
-    throw error::access_error(-1, "Attempting accessing empty attachment list.");
+    throw error::access_error(-1, "Trying to access an empty attachment list.");
 }
 
 std::unique_ptr<wall_repost> wall_post_new::repost() const
@@ -108,7 +108,7 @@ std::unique_ptr<wall_repost> wall_post_new::repost() const
 
         return repost;
     }
-    throw error::access_error(-1, "Attempting accessing empty repost");
+    throw error::access_error(-1, "Trying to access an empty repost");
 }
 
 std::ostream& operator<<(std::ostream& ostream, const vk::event::wall_post_new& event)

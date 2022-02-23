@@ -58,7 +58,7 @@ struct result : protected std::pair<Value, Error>
     const Value& value() const
     {
         if (error()) {
-            throw std::runtime_error("failed to get value(): error exists");
+            throw std::runtime_error("Failed to get value: error exists");
         }
         return this->first;
     }

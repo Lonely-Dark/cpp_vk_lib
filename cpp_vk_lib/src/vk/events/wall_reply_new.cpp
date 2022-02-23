@@ -64,7 +64,7 @@ std::vector<vk::attachment::attachment_ptr_t> wall_reply_new::attachments() cons
         return event::get_attachments(event()["attachments"].get_array());
     }
 
-    throw error::access_error(-1, "Attempting accessing empty attachment list");
+    throw error::access_error(-1, "Trying to access an empty attachment list");
 }
 
 std::ostream& operator<<(std::ostream& ostream, const vk::event::wall_reply_new& reply)

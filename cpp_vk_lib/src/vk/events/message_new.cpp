@@ -153,7 +153,7 @@ std::any message_new::action() const
         return action_;
     }
 
-    throw error::access_error(-1, "attempting accessing empty action");
+    throw error::access_error(-1, "Trying to access an empty action");
 }
 
 std::vector<attachment::attachment_ptr_t> message_new::attachments() const
@@ -162,7 +162,7 @@ std::vector<attachment::attachment_ptr_t> message_new::attachments() const
         return event::get_attachments(event()["attachments"].get_array());
     }
 
-    throw error::access_error(-1, "attempting accessing empty attachment list");
+    throw error::access_error(-1, "Trying to access an empty attachment list");
 }
 
 std::vector<std::unique_ptr<message_new>> message_new::fwd_messages() const
@@ -176,7 +176,7 @@ std::vector<std::unique_ptr<message_new>> message_new::fwd_messages() const
 
         return fwd_messages;
     }
-    throw error::access_error(-1, "attempting accessing empty forward messages list");
+    throw error::access_error(-1, "Trying to access an empty forward messages list");
 }
 
 std::unique_ptr<message_new> message_new::reply() const
@@ -185,7 +185,7 @@ std::unique_ptr<message_new> message_new::reply() const
         return std::make_unique<message_new>(event()["reply_message"].get_object());
     }
 
-    throw error::access_error(-1, "attempting accessing empty reply");
+    throw error::access_error(-1, "Trying to access an empty reply");
 }
 
 static void dispatch_actions(std::ostream& ostream, const message_new& event)

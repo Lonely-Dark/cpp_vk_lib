@@ -1,9 +1,10 @@
 #include "spdlog/spdlog.h"
+#include "cpp_vk_lib/runtime/misc/cppdefs.hpp"
 
 static size_t curl_omit_cb(char* contents, size_t size, size_t nmemb, void* stream) noexcept
 {
-    (void)(contents);
-    (void)(stream);
+    VK_UNUSED(contents);
+    VK_UNUSED(stream);
     return size * nmemb;
 }
 

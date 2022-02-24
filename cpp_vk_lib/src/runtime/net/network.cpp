@@ -90,16 +90,16 @@ private:
 
     static void libcurl_lock_cb(CURL* handle, curl_lock_data data, curl_lock_access access, void* stream) noexcept
     {
-        (void)(handle);
-        (void)(access);
-        (void)(stream);
+        VK_UNUSED(handle);
+        VK_UNUSED(access);
+        VK_UNUSED(stream);
         pthread_mutex_lock(&share_data_lock_[data]);
     }
 
     static void libcurl_unlock_cb(CURL* handle, curl_lock_data data, void* stream) noexcept
     {
-        (void)(handle);
-        (void)(stream);
+        VK_UNUSED(handle);
+        VK_UNUSED(stream);
         pthread_mutex_unlock(&share_data_lock_[data]);
     }
 

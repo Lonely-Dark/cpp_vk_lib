@@ -3,6 +3,8 @@
 #include "cpp_vk_lib/runtime/string_utils/implementation/join.hpp"
 #include "cpp_vk_lib/vk/error/exception.hpp"
 
+#include "spdlog/spdlog.h"
+
 #include <algorithm>
 
 namespace vk::keyboard {
@@ -15,6 +17,7 @@ layout::layout(flag flags)
 
 void layout::serialize()
 {
+    spdlog::debug("create keyboard with {} rows", buttons_.size());
     serialized_.clear();
     serialized_.reserve(250);
     serialized_.push_back('{');

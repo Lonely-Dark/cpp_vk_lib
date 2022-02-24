@@ -24,7 +24,7 @@ long_poll::long_poll(asio::io_context& io_context)
     if (errc) {
         throw error::access_error(-1, "Failed to get group_id");
     }
-    spdlog::info("long poll group: {}", group_id_);
+    spdlog::debug("starting to listen events in group {}", group_id_);
 }
 
 void long_poll::server()
@@ -46,7 +46,7 @@ std::vector<event::common> long_poll::listen(int8_t timeout)
         new_server_needed = false;
     }
 
-    spdlog::trace("long poll: ts {}, timeout {}", poll_payload_.ts, timeout);
+    spdlog::debug("long polling: ts={}, timeout={}", poll_payload_.ts, timeout);
 
     const std::string response = method::raw_constructor()
         .method(poll_payload_.server + "?")

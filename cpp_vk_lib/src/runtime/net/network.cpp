@@ -4,6 +4,8 @@
 #include "cpp_vk_lib/runtime/uncopyable.hpp"
 #include "cpp_vk_lib/runtime/unmovable.hpp"
 
+#include "spdlog/spdlog.h"
+
 #include <curl/curl.h>
 #include <iostream>
 #include <map>
@@ -43,7 +45,16 @@ public:
         auto current_thread_handle = [&]() mutable {
             const std::thread::id thread_id = std::this_thread::get_id();
             if (handles_.find(thread_id) == handles_.end()) {
-                handles_.insert(std::make_pair(thread_id, curl_easy_init()));
+                CURL* handle = curl_easy_init();
+                if (!handle) {
+                    spdlog::error("curl_easy_init() failed");
+                    exit(-1);
+                }
+                spdlog::trace(
+                    "initialize cURL handle at address {} in thread {}",
+                    handle, std::hash<std::thread::id>{}(thread_id)
+                );
+                handles_.insert(std::make_pair(thread_id, handle));
             }
             return handles_[thread_id];
         };
@@ -79,6 +90,8 @@ private:
             spdlog::error("curl_share_init() failed");
             exit(-1);
         }
+        // This marked as info message because it runs before any spdlog runtime settings.
+        spdlog::info("initialize shared cURL handle at address {}", shared_handle_);
 
         curl_share_setopt(shared_handle_, CURLSHOPT_UNSHARE, CURL_LOCK_DATA_COOKIE);
         curl_share_setopt(shared_handle_, CURLSHOPT_SHARE, CURL_LOCK_DATA_DNS);
@@ -110,6 +123,8 @@ private:
 };
 
 [[maybe_unused]] int at_exit_handler = []() noexcept {
+    /// Initialize shared cURL handle before potential first use.
+    curl_wrap::get();
     std::atexit([] {
         curl_wrap::get()->~curl_wrap();
     });
@@ -160,6 +175,9 @@ public:
 
         auto result = curl_post(form_post, output_needed);
         curl_formfree(form_post);
+
+        spdlog::trace("upload from {} performed", filename);
+
         return result;
     }
 
@@ -184,6 +202,9 @@ public:
 
         auto result = curl_post(form_post, output_needed);
         curl_formfree(form_post);
+
+        spdlog::trace("upload from buffer performed, {} bytes have been uploaded", buffer.size());
+
         return result;
     }
 
@@ -207,6 +228,8 @@ public:
             return false;
         }
 
+        spdlog::trace("download to {} performed", filename);
+
         return true;
     }
 
@@ -226,11 +249,13 @@ public:
             return false;
         }
 
+        spdlog::trace("download to buffer performed, {} bytes have been received", buffer.size());
+
         return true;
     }
 
 private:
-    static std::pair<std::string, bool> curl_get(CURL* curl_handle, data_flow output_needed)
+    std::pair<std::string, bool> curl_get(CURL* curl_handle, data_flow output_needed)
     {
         std::string output;
 
@@ -250,6 +275,12 @@ private:
             return {"", curl_failure};
         }
 
+        if (output_needed == data_flow::omit) {
+            spdlog::trace("GET request with omitting data performed");
+        } else {
+            spdlog::trace("GET request performed, {} bytes have been received", output.size());
+        }
+
         return {std::move(output), curl_success};
     }
 
@@ -263,7 +294,7 @@ private:
     }
 
     template <typename Body>
-    static std::string create_url(std::string_view host, Body&& body)
+    std::string create_url(std::string_view host, Body&& body)
     {
         const size_t estimated_params_length =
             /* average word length */ 20 *

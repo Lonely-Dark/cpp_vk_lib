@@ -15,7 +15,7 @@ public:
 
 protected:
     explicit common_exception(std::string_view what_arg);
-    /*! Return formatted string in form "[vk.exception.id.exception_name]: arg". */
+    /*! \return formatted string in form "[vk.exception.id.exception_name]: arg". */
     static std::string create(int32_t id, const char* exception_name, const char* arg);
 
 private:

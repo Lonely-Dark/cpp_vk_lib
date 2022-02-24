@@ -66,7 +66,7 @@ struct do_not_use_api_link
         VK_UNUSED(user_token);
         VK_UNUSED(access_token);
 
-        namespace net      = runtime::network;
+        namespace net = runtime::network;
         auto [data, error] = net::request(method, params, output_needed);
 
         if (error) {

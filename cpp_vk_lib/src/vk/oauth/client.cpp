@@ -64,8 +64,8 @@ void client::pull()
     pulled_token_ = response["access_token"].get_c_str().take_value();
     pulled_user_id_ = response["user_id"].get_int64();
 
-    spdlog::trace("oauth: get token: {}", pulled_token_);
-    spdlog::trace("oauth: get user_id: {}", pulled_user_id_);
+    spdlog::debug("OAuth token: {}", pulled_token_);
+    spdlog::debug("OAuth user_id: {}", pulled_user_id_);
 }
 
 const std::string& client::token() const noexcept

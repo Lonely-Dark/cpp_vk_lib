@@ -12,6 +12,6 @@ void runtime::setup_logger(spdlog::level::level_enum level)
     std::vector<spdlog::sink_ptr> sinks{stdout_sink, rotating_sink};
     auto logger = std::make_shared<spdlog::logger>("logger", sinks.begin(), sinks.end());
     logger->set_level(level);
-    logger->set_pattern("[%H:%M:%S:%f] (%l): %v");
+    logger->set_pattern("[%b %d %Y %H:%M:%S:%f] (%l): %v");
     spdlog::set_default_logger(logger);
 }

@@ -9,7 +9,14 @@ namespace vk::method {
 
 void messages::send(int64_t peer_id, std::string_view text, enum mentions mentions)
 {
-    spdlog::trace("call messages::send: peer_id={}, text={}, mentions_flag={}", peer_id, text, to_string(mentions));
+    if (spdlog::get_level() <= spdlog::level::debug) {
+        std::string one_line_text = text.data();
+        std::replace(one_line_text.begin(), one_line_text.end(), '\n', ' ');
+        spdlog::debug(
+            "call messages::send: peer_id={}, text={}, mentions_flag={}",
+            peer_id, one_line_text, to_string(mentions)
+        );
+    }
 
     message_constructor(mentions)
         .param("peer_id", std::to_string(peer_id))
@@ -19,12 +26,14 @@ void messages::send(int64_t peer_id, std::string_view text, enum mentions mentio
 
 void messages::send(int64_t peer_id, std::string_view text, const std::vector<attachment::attachment_ptr_t>& list, enum mentions mentions)
 {
-    spdlog::trace(
-        "call messages::send: peer_id={}, text={}, attachments_count={}, mentions_flag={}",
-        peer_id,
-        text,
-        list.size(),
-        to_string(mentions));
+    if (spdlog::get_level() <= spdlog::level::debug) {
+        std::string one_line_text = text.data();
+        std::replace(one_line_text.begin(), one_line_text.end(), '\n', ' ');
+        spdlog::debug(
+            "call messages::send: peer_id={}, text={}, attachments_count={}, mentions_flag={}",
+            peer_id, one_line_text, list.size(), to_string(mentions)
+        );
+    }
 
     message_constructor(mentions)
         .param("peer_id", std::to_string(peer_id))
@@ -42,12 +51,14 @@ void messages::send(int64_t peer_id, std::string_view text, attachment::attachme
 
 void messages::send(int64_t peer_id, std::string_view text, std::string_view keyboard_layout, enum mentions mentions)
 {
-    spdlog::trace(
-        "call messages::send: peer_id={}, text={}, keyboard={}, mentions_flag={}",
-        peer_id,
-        text,
-        keyboard_layout,
-        to_string(mentions));
+    if (spdlog::get_level() <= spdlog::level::debug) {
+        std::string one_line_text = text.data();
+        std::replace(one_line_text.begin(), one_line_text.end(), '\n', ' ');
+        spdlog::debug(
+            "call messages::send: peer_id={}, text={}, keyboard={}, mentions_flag={}",
+            peer_id, one_line_text, keyboard_layout, to_string(mentions)
+        );
+    }
 
     message_constructor(mentions)
         .param("peer_id", std::to_string(peer_id))
@@ -58,7 +69,7 @@ void messages::send(int64_t peer_id, std::string_view text, std::string_view key
 
 int64_t groups::get_by_id(error_code& errc)
 {
-    spdlog::trace("call groups::get_by_id");
+    spdlog::debug("call groups::get_by_id");
 
     const std::string response = group_constructor().method("groups.getById").perform_request();
 
@@ -75,7 +86,7 @@ int64_t groups::get_by_id(error_code& errc)
 
 std::string groups::get_long_poll_server(int64_t group_id)
 {
-    spdlog::trace("call groups::get_long_poll_server: group_id={}", group_id);
+    spdlog::debug("call groups::get_long_poll_server: group_id={}", group_id);
 
     return group_constructor()
         .method("groups.getLongPollServer")

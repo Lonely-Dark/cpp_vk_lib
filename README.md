@@ -28,6 +28,8 @@ Linux, MacOS, FreeBSD, Android.
 
 ## Sample
 
+### Note
+you can find an example of config in `json_schema/sample_config.json`.
 ```cpp
 #include "cpp_vk_lib/runtime/setup_logger.hpp"
 #include "cpp_vk_lib/runtime/signal_handlers.hpp"
@@ -46,7 +48,6 @@ int main(int argc, char* argv[])
     }
 
     vk::config::load(argv[1]);
-    runtime::setup_signal_handlers();
     runtime::setup_logger(spdlog::level::level_enum::trace);
 
     asio::io_context io_context;

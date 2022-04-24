@@ -31,13 +31,13 @@ private:
         std::size_t user_id;
         std::string avatar_url;
 
-        bool operator==(const user& rhs) {
+        bool operator==(const user& rhs) const {
             return user_id == rhs.user_id;
         }
-        bool operator!=(const user& rhs) {
+        bool operator!=(const user& rhs) const {
             return !(*this == rhs);
         }
-        bool operator<(const user& rhs) {
+        bool operator<(const user& rhs) const {
             return user_id < rhs.user_id;
         }
     };

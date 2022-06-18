@@ -1,26 +1,26 @@
 name: MacOS
 
-on:
-  push:
-    branches:
-      - feature
-      - master
-      - release/*
-  pull_request:
+on: [push, pull_request]
 
 jobs:
-  build-macos:
-  
+  build-macos:  
     runs-on: macos-latest
-    
+
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: install deps
-      run: brew install curl
-      
-    - name: run CMake
-      run: mkdir build && cd build && cmake .. -DCPP_VK_LIB_SANITIZE=1 && cmake --build . --parallel
-      
-    - name: run tests
-      run: cd build/tests && ctest
+    - uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: |
+        brew install curl
+
+    - name: Run CMake
+      run: |
+        mkdir build &&
+        cd build &&
+        cmake .. -DCPP_VK_LIB_SANITIZE=1 &&
+        cmake --build . --parallel
+
+    - name: Run tests
+      run: |
+        cd build/tests &&
+        ctest

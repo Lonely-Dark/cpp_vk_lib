@@ -37,24 +37,27 @@ int main(int argc, char* argv[])
     }
     SECTION(request_multithread)
     {
-        std::vector<std::pair<std::thread, std::future<std::string>>> threads;
-        for (size_t i = 0; i < std::thread::hardware_concurrency(); ++i) {
-            std::promise<std::string> promise;
-            std::future<std::string> future = promise.get_future();
-            std::thread thread([promise = std::move(promise)]() mutable {
-                auto [data, error] = net::request("https://www.example.com", {}, net::data_flow::require);
-                promise.set_value(std::move(data));
-            });
-            threads.emplace_back(std::move(thread), std::move(future));
+        for (size_t _ = 0; _ < 4; ++_) {
+            std::cout << "Curl multithread test case...\n";
+            std::vector<std::pair<std::thread, std::future<std::string>>> threads;
+            for (size_t i = 0; i < std::thread::hardware_concurrency(); ++i) {
+                std::promise<std::string> promise;
+                std::future<std::string> future = promise.get_future();
+                std::thread thread([promise = std::move(promise)]() mutable {
+                    auto[data, error] = net::request("https://www.example.com", {}, net::data_flow::require);
+                    promise.set_value(std::move(data));
+                });
+                threads.emplace_back(std::move(thread), std::move(future));
+            }
+            std::vector<std::string> responses;
+            for (auto& el: threads) {
+                auto thread = std::move(el.first);
+                auto future = std::move(el.second);
+                responses.emplace_back(future.get());
+                thread.join();
+            }
+            TEST_CASE(std::adjacent_find(responses.begin(), responses.end(), std::not_equal_to<>()) == responses.end());
         }
-        std::vector<std::string> responses;
-        for (auto& el : threads) {
-            auto thread = std::move(el.first);
-            auto future = std::move(el.second);
-            responses.emplace_back(future.get());
-            thread.join();
-        }
-        TEST_CASE(std::adjacent_find(responses.begin(), responses.end(), std::not_equal_to<>()) == responses.end());
     }
 
     auto [cat_url, cat_error] = net::request(

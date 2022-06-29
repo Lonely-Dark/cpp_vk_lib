@@ -42,37 +42,61 @@ public:
 
     static CURL* create(std::string_view url)
     {
-        auto current_thread_handle = [&]() mutable {
+        auto current_thread_handle = [&]() mutable -> CURL* {
             const std::thread::id thread_id = std::this_thread::get_id();
-            if (handles_.find(thread_id) == handles_.end()) {
-                CURL* handle = curl_easy_init();
-                if (!handle) {
-                    spdlog::error("curl_easy_init() failed");
-                    exit(-1);
-                }
+
+            if (handles_.count(thread_id) > 0U) {
+                return handles_[thread_id];
+            }
+
+            CURL* handle = curl_easy_init();
+
+            auto log_and_return = [&] {
                 spdlog::trace(
                     "initialize cURL handle at address {} in thread {}",
                     handle, std::hash<std::thread::id>{}(thread_id)
                 );
                 handles_.insert(std::make_pair(thread_id, handle));
+                return handles_[thread_id];
+            };
+
+            if (handle) {
+                return log_and_return();
             }
-            return handles_[thread_id];
+
+            // Try to retrieve cURL handle 10 more times before fail.
+            for (size_t i = 0U; i < 10U; ++i) {
+                spdlog::trace("{}: could not allocate cURL handle, trying again...", i);
+                handle = curl_easy_init();
+                if (handle) {
+                    return log_and_return();
+                }
+            }
+
+            spdlog::error(
+                "failed to allocate cURL handle in thread {}",
+                std::hash<std::thread::id>{}(thread_id)
+            );
+            return nullptr;
         };
 
         CURL* handle = current_thread_handle();
-        curl_easy_reset(handle);
 
         if (!handle) {
-            spdlog::error("curl_easy_init() failed");
-            exit(-1);
+            return nullptr;
         }
+
+        curl_easy_reset(handle);
 
         curl_easy_setopt(handle, CURLOPT_URL, url.data());
         curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, 1L);
         curl_easy_setopt(handle, CURLOPT_TIMEOUT, 600L);
         curl_easy_setopt(handle, CURLOPT_USERAGENT, "cpp_vk_lib libcurl-agent/1.1");
-        curl_easy_setopt(handle, CURLOPT_SHARE, shared_handle_);
         curl_easy_setopt(handle, CURLOPT_VERBOSE, cpp_vk_lib_curl_verbose ? 1L : 0L);
+
+        if (shared_handle_) {
+            curl_easy_setopt(handle, CURLOPT_SHARE, shared_handle_);
+        }
 
         return handle;
     }
@@ -87,8 +111,8 @@ private:
         shared_handle_ = curl_share_init();
 
         if (!shared_handle_) {
-            spdlog::error("curl_share_init() failed");
-            exit(-1);
+            spdlog::error("curl_share_init() failed, disabling shared cURL capabilities...");
+            return;
         }
         // This marked as info message because it runs before any spdlog runtime settings.
         spdlog::info("initialize shared cURL handle at address {}", shared_handle_);
@@ -142,19 +166,27 @@ public:
 
     std::pair<std::string, bool> request(const std::map<std::string, std::string>& list, data_flow output_needed)
     {
-        CURL* curl_handle = curl_wrap::create(create_url(url_, list));
+        CURL* handle = curl_wrap::create(create_url(url_, list));
 
-        return curl_get(curl_handle, output_needed);
+        if (!handle) {
+            return {"", false};
+        }
+
+        return curl_get(handle, output_needed);
     }
 
     std::pair<std::string, bool> request_data(std::string_view data, data_flow output_needed)
     {
-        CURL* curl_handle = curl_wrap::create(url_);
+        CURL* handle = curl_wrap::create(url_);
 
-        curl_easy_setopt(curl_handle, CURLOPT_POSTFIELDS, data.data());
-        curl_easy_setopt(curl_handle, CURLOPT_POSTFIELDSIZE, data.size());
+        if (!handle) {
+            return {"", false};
+        }
 
-        return curl_get(curl_handle, output_needed);
+        curl_easy_setopt(handle, CURLOPT_POSTFIELDS, data.data());
+        curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, data.size());
+
+        return curl_get(handle, output_needed);
     }
 
     std::pair<std::string, bool> upload(std::string_view field,
@@ -216,12 +248,16 @@ public:
             return false;
         }
 
-        CURL* curl_handle = curl_wrap::create(url_);
+        CURL* handle = curl_wrap::create(url_);
 
-        curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, fp.get());
-        curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, curl_file_cb);
+        if (!handle) {
+            return false;
+        }
 
-        CURLcode error_code = curl_easy_perform(curl_handle);
+        curl_easy_setopt(handle, CURLOPT_WRITEDATA, fp.get());
+        curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, curl_file_cb);
+
+        CURLcode error_code = curl_easy_perform(handle);
 
         if (error_code != CURLE_OK) {
             spdlog::error("curl_easy_perform() failed: {}", curl_easy_strerror(error_code));
@@ -235,14 +271,18 @@ public:
 
     bool download(std::vector<uint8_t>& buffer)
     {
-        CURL* curl_handle = curl_wrap::create(url_);
+        CURL* handle = curl_wrap::create(url_);
 
-        curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, &buffer);
-        curl_easy_setopt(curl_handle, CURLOPT_HEADERDATA, &buffer);
-        curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, curl_buffer_cb);
-        curl_easy_setopt(curl_handle, CURLOPT_HEADERFUNCTION, curl_buffer_header_cb);
+        if (!handle) {
+            return false;
+        }
 
-        CURLcode error_code = curl_easy_perform(curl_handle);
+        curl_easy_setopt(handle, CURLOPT_WRITEDATA, &buffer);
+        curl_easy_setopt(handle, CURLOPT_HEADERDATA, &buffer);
+        curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, curl_buffer_cb);
+        curl_easy_setopt(handle, CURLOPT_HEADERFUNCTION, curl_buffer_header_cb);
+
+        CURLcode error_code = curl_easy_perform(handle);
 
         if (error_code != CURLE_OK) {
             spdlog::error("curl_easy_perform() failed: {}", curl_easy_strerror(error_code));
@@ -255,20 +295,20 @@ public:
     }
 
 private:
-    std::pair<std::string, bool> curl_get(CURL* curl_handle, data_flow output_needed)
+    std::pair<std::string, bool> curl_get(CURL* handle, data_flow output_needed)
     {
         std::string output;
 
         if (output_needed == data_flow::require) {
-            curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, &output);
-            curl_easy_setopt(curl_handle, CURLOPT_HEADERDATA, &output);
-            curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, curl_string_cb);
-            curl_easy_setopt(curl_handle, CURLOPT_HEADERFUNCTION, curl_string_header_cb);
+            curl_easy_setopt(handle, CURLOPT_WRITEDATA, &output);
+            curl_easy_setopt(handle, CURLOPT_HEADERDATA, &output);
+            curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, curl_string_cb);
+            curl_easy_setopt(handle, CURLOPT_HEADERFUNCTION, curl_string_header_cb);
         } else {
-            curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, curl_omit_cb);
+            curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, curl_omit_cb);
         }
 
-        CURLcode error_code = curl_easy_perform(curl_handle);
+        CURLcode error_code = curl_easy_perform(handle);
 
         if (error_code != CURLE_OK) {
             spdlog::error("curl_easy_perform() failed: {}", curl_easy_strerror(error_code));
@@ -286,11 +326,15 @@ private:
 
     std::pair<std::string, bool> curl_post(curl_httppost* form_post, data_flow output_needed)
     {
-        CURL* curl_handle = curl_wrap::create(url_);
+        CURL* handle = curl_wrap::create(url_);
 
-        curl_easy_setopt(curl_handle, CURLOPT_HTTPPOST, form_post);
+        if (!handle) {
+            return {"", false};
+        }
 
-        return curl_get(curl_handle, output_needed);
+        curl_easy_setopt(handle, CURLOPT_HTTPPOST, form_post);
+
+        return curl_get(handle, output_needed);
     }
 
     template <typename Body>
@@ -331,13 +375,17 @@ private:
 
 namespace runtime::network {
 
-std::pair<std::string, bool> request(std::string_view host, const std::map<std::string, std::string>& target, data_flow output_needed)
+std::pair<std::string, bool> request(std::string_view                          host,
+                                     const std::map<std::string, std::string>& target,
+                                     data_flow                                 output_needed)
 {
     curl_executor executor(host);
     return executor.request(target, output_needed);
 }
 
-std::pair<std::string, bool> request_data(std::string_view host, std::string_view data, data_flow output_needed)
+std::pair<std::string, bool> request_data(std::string_view host,
+                                          std::string_view data,
+                                          data_flow        output_needed)
 {
     curl_executor executor(host);
     return executor.request_data(data, output_needed);

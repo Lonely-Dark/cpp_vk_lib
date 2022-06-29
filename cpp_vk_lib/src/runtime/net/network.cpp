@@ -64,9 +64,10 @@ public:
                 return log_and_return();
             }
 
+            spdlog::trace("could not allocate cURL handle, trying again...");
             // Try to retrieve cURL handle 10 more times before fail.
             for (size_t i = 0U; i < 10U; ++i) {
-                spdlog::trace("{}: could not allocate cURL handle, trying again...", i);
+                spdlog::trace("cURL allocation attempt {}", i);
                 handle = curl_easy_init();
                 if (handle) {
                     return log_and_return();

@@ -6,10 +6,12 @@ static std::string serialize_attachments(AttachmentList&& attachments)
     std::string result;
     result.reserve(attachments.size() * 20);
 
-    for (auto& attachment : attachments) {
+    for (const auto& attachment : attachments) {
         result += attachment->value();
         result += ',';
     }
+
+    spdlog::trace("{} attachment(s) successfully serialized", attachments.size());
 
     return result;
 }

@@ -22,13 +22,14 @@ long_poll::long_poll(asio::io_context& io_context)
     error_code errc;
     group_id_ = method::groups::get_by_id(errc);
     if (errc) {
-        throw error::access_error(-1, "Failed to get group_id");
+        throw error::access_error(-1, "failed to get group_id");
     }
-    spdlog::debug("starting to listen events in group {}", group_id_);
+    spdlog::trace("starting to listen events in group {}", group_id_);
 }
 
 void long_poll::server()
 {
+    spdlog::info("getting long poll server for group {}", group_id_);
     const std::string data = method::groups::get_long_poll_server(group_id_);
     const auto server_object = shared_parser_->parse(data)["response"];
     poll_payload_ = {
@@ -46,7 +47,7 @@ std::vector<event::common> long_poll::listen(int8_t timeout)
         new_server_needed = false;
     }
 
-    spdlog::debug("long polling: ts={}, timeout={}", poll_payload_.ts, timeout);
+    spdlog::info("long polling: ts={}, timeout={}", poll_payload_.ts, timeout);
 
     const std::string response = method::raw_constructor()
         .method(poll_payload_.server + "?")
@@ -61,6 +62,7 @@ std::vector<event::common> long_poll::listen(int8_t timeout)
     if (parsed_response.begin().key() == "failed") {
         const int64_t code = parsed_response["failed"].get_int64();
         if (code == 2 || code == 3) {
+            spdlog::info("long poll server expired. Getting new one...");
             new_server_needed = true;
             listen(timeout);
         }
@@ -70,13 +72,16 @@ std::vector<event::common> long_poll::listen(int8_t timeout)
     std::string ts(parsed_response["ts"]);
 
     for (auto update : parsed_response["updates"]) {
-        if (std::string_view type(update["type"]); type == "message_typing_state") {
+        std::string_view type(update["type"]);
+        if (type == "message_typing_state") {
+            spdlog::trace("received message typing event, skip...");
             continue;
-        } else if (type == "message_new") {
+        }
+        if (type == "message_new") {
             simdjson::dom::object object = update["object"];
             simdjson::dom::object message;
             if (auto error = object["message"].get(message); error) {
-                if (object["from_id"].get_int64() == group_id_ * -1) {
+                if (object["from_id"].get_int64() == -group_id_) {
                     continue;
                 }
             }
@@ -84,6 +89,8 @@ std::vector<event::common> long_poll::listen(int8_t timeout)
         }
     }
     poll_payload_.ts = std::move(ts);
+
+    spdlog::trace("long poll returned {} event(s)", event_list.size());
 
     return event_list;
 }

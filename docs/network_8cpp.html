@@ -78,6 +78,7 @@ $(function() {
 <code>#include &quot;<a class="el" href="callback_8hpp_source.html">callback.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="uncopyable_8hpp_source.html">cpp_vk_lib/runtime/uncopyable.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="unmovable_8hpp_source.html">cpp_vk_lib/runtime/unmovable.hpp</a>&quot;</code><br />
+<code>#include &quot;spdlog/spdlog.h&quot;</code><br />
 <code>#include &lt;curl/curl.h&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;map&gt;</code><br />
@@ -132,13 +133,15 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= []() <span class="keyword">noexcept</span> {</div>
+<div class="line">    </div>
+<div class="line">    <a class="code hl_function" href="classcurl__wrap.html#a3fbbd96faea154d34e0712a6e5bd7fd9">curl_wrap::get</a>();</div>
 <div class="line">    std::atexit([] {</div>
 <div class="line">        <a class="code hl_function" href="classcurl__wrap.html#a3fbbd96faea154d34e0712a6e5bd7fd9">curl_wrap::get</a>()-&gt;<a class="code hl_function" href="classcurl__wrap.html#ac99819d5f69ffc17d65afe285cdfb0a1">~curl_wrap</a>();</div>
 <div class="line">    });</div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}()</div>
-<div class="ttc" id="aclasscurl__wrap_html_a3fbbd96faea154d34e0712a6e5bd7fd9"><div class="ttname"><a href="classcurl__wrap.html#a3fbbd96faea154d34e0712a6e5bd7fd9">curl_wrap::get</a></div><div class="ttdeci">static curl_wrap * get()</div><div class="ttdef"><b>Definition:</b> network.cpp:32</div></div>
-<div class="ttc" id="aclasscurl__wrap_html_ac99819d5f69ffc17d65afe285cdfb0a1"><div class="ttname"><a href="classcurl__wrap.html#ac99819d5f69ffc17d65afe285cdfb0a1">curl_wrap::~curl_wrap</a></div><div class="ttdeci">~curl_wrap()</div><div class="ttdef"><b>Definition:</b> network.cpp:22</div></div>
+<div class="ttc" id="aclasscurl__wrap_html_a3fbbd96faea154d34e0712a6e5bd7fd9"><div class="ttname"><a href="classcurl__wrap.html#a3fbbd96faea154d34e0712a6e5bd7fd9">curl_wrap::get</a></div><div class="ttdeci">static curl_wrap * get()</div><div class="ttdef"><b>Definition:</b> network.cpp:34</div></div>
+<div class="ttc" id="aclasscurl__wrap_html_ac99819d5f69ffc17d65afe285cdfb0a1"><div class="ttname"><a href="classcurl__wrap.html#ac99819d5f69ffc17d65afe285cdfb0a1">curl_wrap::~curl_wrap</a></div><div class="ttdeci">~curl_wrap()</div><div class="ttdef"><b>Definition:</b> network.cpp:24</div></div>
 </div><!-- fragment -->
 </div>
 </div>

@@ -10,7 +10,7 @@ var searchData=
   ['error_7',['error',['../namespacevk_1_1error.html',1,'vk']]],
   ['event_8',['event',['../namespacevk_1_1event.html',1,'vk']]],
   ['groups_9',['groups',['../namespacevk_1_1method_1_1groups.html',1,'vk::method']]],
-  ['implementation_2ecpp_10',['implementation.cpp',['../vk_2attachment_2implementation_8cpp.html',1,'(Global Namespace)'],['../vk_2events_2implementation_8cpp.html',1,'(Global Namespace)'],['../vk_2implementation_8cpp.html',1,'(Global Namespace)']]],
+  ['implementation_2ecpp_10',['implementation.cpp',['../vk_2implementation_8cpp.html',1,'']]],
   ['keyboard_11',['keyboard',['../namespacevk_1_1keyboard.html',1,'vk']]],
   ['messages_12',['messages',['../namespacevk_1_1method_1_1messages.html',1,'vk::method']]],
   ['method_13',['method',['../namespacevk_1_1method.html',1,'vk']]],

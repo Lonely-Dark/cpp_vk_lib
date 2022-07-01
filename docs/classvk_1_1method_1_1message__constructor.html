@@ -82,10 +82,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa456ddd2c2cadd9574815104af864b02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06d645b4c3b784fdc8e76216ceb38839"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvk_1_1method_1_1message__constructor.html">message_constructor</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1method_1_1message__constructor.html#a06d645b4c3b784fdc8e76216ceb38839">param</a> (std::string_view key, std::string_view value)</td></tr>
 <tr class="separator:a06d645b4c3b784fdc8e76216ceb38839"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a33201accfa0620c035a5eee5fb1b6a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvk_1_1method_1_1message__constructor.html">message_constructor</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1method_1_1message__constructor.html#a6a33201accfa0620c035a5eee5fb1b6a">attachment</a> (const <a class="el" href="namespacevk_1_1attachment.html#ae9b99f0f44c48217c6aca2ce5b36dc05">attachment::attachment_ptr_t</a> &amp;)</td></tr>
+<tr class="separator:a6a33201accfa0620c035a5eee5fb1b6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab109d8ceadf4fe19244273a161f17505"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvk_1_1method_1_1message__constructor.html">message_constructor</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1method_1_1message__constructor.html#ab109d8ceadf4fe19244273a161f17505">attachments</a> (const std::vector&lt; <a class="el" href="namespacevk_1_1attachment.html#ae9b99f0f44c48217c6aca2ce5b36dc05">attachment::attachment_ptr_t</a> &gt; &amp;)</td></tr>
 <tr class="separator:ab109d8ceadf4fe19244273a161f17505"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0ae44f9b244ed1aec3df18723b5a7ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvk_1_1method_1_1message__constructor.html">message_constructor</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1method_1_1message__constructor.html#af0ae44f9b244ed1aec3df18723b5a7ac">attachments</a> (std::vector&lt; <a class="el" href="namespacevk_1_1attachment.html#ae9b99f0f44c48217c6aca2ce5b36dc05">attachment::attachment_ptr_t</a> &gt; &amp;&amp;)</td></tr>
-<tr class="separator:af0ae44f9b244ed1aec3df18723b5a7ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7903ca16658ab3295a9cbbff1520b6cc"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1method_1_1message__constructor.html#a7903ca16658ab3295a9cbbff1520b6cc">perform_request</a> ()</td></tr>
 <tr class="separator:a7903ca16658ab3295a9cbbff1520b6cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76d6bb6f829949026407de1e04c5228e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvk_1_1method_1_1message__constructor.html#a76d6bb6f829949026407de1e04c5228e">request_without_output</a> ()</td></tr>
@@ -130,8 +130,27 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6a33201accfa0620c035a5eee5fb1b6a" name="a6a33201accfa0620c035a5eee5fb1b6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a33201accfa0620c035a5eee5fb1b6a">&#9670;&nbsp;</a></span>attachment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvk_1_1method_1_1message__constructor.html">message_constructor</a> &amp; vk::method::message_constructor::attachment </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespacevk_1_1attachment.html#ae9b99f0f44c48217c6aca2ce5b36dc05">attachment::attachment_ptr_t</a> &amp;&#160;</td>
+          <td class="paramname"><em>attachment</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Serialize and append single attachment to form <code>attachments=(serialized output)</code>. </p>
+
+</div>
+</div>
 <a id="ab109d8ceadf4fe19244273a161f17505" name="ab109d8ceadf4fe19244273a161f17505"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab109d8ceadf4fe19244273a161f17505">&#9670;&nbsp;</a></span>attachments() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab109d8ceadf4fe19244273a161f17505">&#9670;&nbsp;</a></span>attachments()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -145,26 +164,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Serialize and append attachment list to form <code>attachments=(serialized output)</code> </p>
-
-</div>
-</div>
-<a id="af0ae44f9b244ed1aec3df18723b5a7ac" name="af0ae44f9b244ed1aec3df18723b5a7ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af0ae44f9b244ed1aec3df18723b5a7ac">&#9670;&nbsp;</a></span>attachments() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classvk_1_1method_1_1message__constructor.html">message_constructor</a> &amp; vk::method::message_constructor::attachments </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="namespacevk_1_1attachment.html#ae9b99f0f44c48217c6aca2ce5b36dc05">attachment::attachment_ptr_t</a> &gt; &amp;&amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Serialize and append attachment list to form <code>attachments=(serialized output)</code> </p>
+<p >Serialize and append attachment list to form <code>attachments=(serialized output)</code>. </p>
 
 </div>
 </div>

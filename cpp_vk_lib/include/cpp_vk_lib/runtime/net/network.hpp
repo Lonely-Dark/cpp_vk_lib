@@ -22,7 +22,7 @@ enum struct data_flow { require, omit };
  * \param host Target URL (e.g https://example.com/).
  * \param target Parameters list to be serialized to string like value_1=1&value_2=2&value_3=3.
  * \param output_needed Specifies, write cURL output to string or not.
- * \return Pair of string and bool, where bool set to true if error is present.
+ * \return Pair of string and bool, where bool set to true if an error occurred.
  */
 std::pair<std::string, bool> request(std::string_view host, const std::map<std::string, std::string>& target, data_flow output_needed);
 /*!
@@ -31,7 +31,7 @@ std::pair<std::string, bool> request(std::string_view host, const std::map<std::
  * \param host Target URL (e.g https://example.com/).
  * \param data POST data (e.g JSON).
  * \param output_needed Specifies, write cURL output to string or not.
- * \return Pair of string and bool, where bool set to true if error is present.
+ * \return Pair of string and bool, where bool set to true if an error occurred.
  */
 std::pair<std::string, bool> request_data(std::string_view host, std::string_view data, data_flow output_needed);
 /*!
@@ -42,7 +42,7 @@ std::pair<std::string, bool> request_data(std::string_view host, std::string_vie
  * \param content_type Content-Type allowed by HTTP.
  * \param filename Path to source file.
  * \param output_needed Specifies, write cURL output to string or not.
- * \return
+ * \return Pair of string and bool, where bool set to true if an error occurred.
  */
 std::pair<std::string, bool> upload(std::string_view url,
                                     std::string_view field,
@@ -57,7 +57,7 @@ std::pair<std::string, bool> upload(std::string_view url,
  * \param content_type Content-Type allowed by HTTP.
  * \param buffer Vector of file represented as bytes.
  * \param output_needed Specifies, write cURL output to string or not.
- * \return
+ * \return Pair of string and bool, where bool set to true if an error occurred.
  */
 std::pair<std::string, bool> upload(std::string_view            url,
                                     std::string_view            field,

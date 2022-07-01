@@ -23,7 +23,7 @@ namespace vk::method {
  * via constructors remains. After request, object is
  * ready to perform next one.
  * \code
- * constructor<user_api> constructor;
+ * constructor<user_api> constructor("user_token"); // Remains after request.
  * constructor
  *   .method("utils.resolveScreenName")
  *   .param("screen_name", "durov")

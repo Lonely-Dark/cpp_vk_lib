@@ -20,10 +20,10 @@ public:
     explicit message_constructor(enum mentions flag);
     /*! constructor<policy::group_api> proxy. */
     message_constructor& param(std::string_view key, std::string_view value);
-    /*! Serialize and append attachment list to form `attachments=(serialized output)` */
+    /*! Serialize and append single attachment to form `attachments=(serialized output)`. */
+    message_constructor& attachment(const attachment::attachment_ptr_t&);
+    /*! Serialize and append attachment list to form `attachments=(serialized output)`. */
     message_constructor& attachments(const std::vector<attachment::attachment_ptr_t>&);
-    /*! Serialize and append attachment list to form `attachments=(serialized output)` */
-    message_constructor& attachments(std::vector<attachment::attachment_ptr_t>&&);
     /*! constructor<policy::group_api> proxy. */
     std::string perform_request();
     /*! constructor<policy::group_api> proxy. */

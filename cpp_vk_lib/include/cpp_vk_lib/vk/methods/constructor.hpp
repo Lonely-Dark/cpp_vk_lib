@@ -18,11 +18,21 @@ namespace vk::method {
  * Basic class to construct VK API requests.
  * Tokens and API version appends automatically.
  *
+ * \note All passed parameters and method name are
+ * destroyed after performing request, but tokens passed
+ * via constructors remains. After request, object is
+ * ready to perform next one.
  * \code
-     constructor<user_api>()
-       .method("utils.resolveScreenName")
-       .param("screen_name", "durov")
-       .perform_request();
+ * constructor<user_api> constructor;
+ * constructor
+ *   .method("utils.resolveScreenName")
+ *   .param("screen_name", "durov")
+ *   .perform_request(); // Passed above data destroys there.
+ * // Correctly creates and does request to API.
+ * constructor
+ *   .method("messages.send")
+ *   .param("text", "Hello, World")
+ *   .perform_request(); // Passed above data destroys there.
  * \endcode
  */
 template <typename ExecutionPolicy>
@@ -39,20 +49,14 @@ public:
     constructor& param(std::string_view, std::string_view);
     /*! Append map to parameters list. */
     constructor& append_map(std::map<std::string, std::string>&&);
-    /*!
-     * Execute HTTP POST request and return output.
-     *
-     * \note all parameters are destroyed after request.
-     */
+    /*! Execute HTTP POST request and return output. */
     std::string perform_request();
-    /*!
-     * Execute HTTP POST request without returning anything.
-     *
-     * \note all parameters are destroyed after request.
-     */
+    /*! Execute HTTP POST request without returning anything. */
     void request_without_output();
 
 private:
+    void reset();
+
     std::string user_token_;
     std::string access_token_;
     std::string method_;

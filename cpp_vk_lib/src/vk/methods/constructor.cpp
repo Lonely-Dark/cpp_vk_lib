@@ -117,13 +117,17 @@ constructor<ExecutionPolicy>&
 template <typename ExecutionPolicy>
 std::string constructor<ExecutionPolicy>::perform_request()
 {
-    return ExecutionPolicy::execute(
+    std::string output = ExecutionPolicy::execute(
         std::move(params_),
         method_,
         access_token_,
         user_token_,
         runtime::network::data_flow::require
     );
+
+    reset();
+
+    return output;
 }
 
 template <typename ExecutionPolicy>
@@ -136,6 +140,15 @@ void constructor<ExecutionPolicy>::request_without_output()
         user_token_,
         runtime::network::data_flow::omit
     );
+
+    reset();
+}
+
+template <typename ExecutionPolicy>
+void constructor<ExecutionPolicy>::reset()
+{
+    method_.clear();
+    // params_ is moved, so we don't clear it.
 }
 
 template class constructor<policy::user_api>;

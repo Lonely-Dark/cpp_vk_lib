@@ -5,18 +5,26 @@
 #include "simdjson.h"
 #include "spdlog/spdlog.h"
 
+template <typename... Args>
+static void perform_messages_method_log(std::string_view fmt, int64_t peer_id, std::string_view text, Args&&... args)
+{
+    if (spdlog::get_level() > spdlog::level::debug) {
+        return;
+    }
+
+    std::string one_line_text = text.data();
+    std::replace(one_line_text.begin(), one_line_text.end(), '\n', ' ');
+    spdlog::debug(fmt, peer_id, one_line_text, std::forward<Args>(args)...);
+}
+
 namespace vk::method {
 
 void messages::send(int64_t peer_id, std::string_view text, enum mentions mentions)
 {
-    if (spdlog::get_level() <= spdlog::level::debug) {
-        std::string one_line_text = text.data();
-        std::replace(one_line_text.begin(), one_line_text.end(), '\n', ' ');
-        spdlog::debug(
-            "call messages::send: peer_id={}, text={}, mentions_flag={}",
-            peer_id, one_line_text, to_string(mentions)
-        );
-    }
+    perform_messages_method_log(
+        "call messages::send: peer_id={}, text={}, mentions_flag={}",
+        peer_id, text, to_string(mentions)
+    );
 
     message_constructor(mentions)
         .param("peer_id", std::to_string(peer_id))
@@ -26,14 +34,10 @@ void messages::send(int64_t peer_id, std::string_view text, enum mentions mentio
 
 void messages::send(int64_t peer_id, std::string_view text, const std::vector<attachment::attachment_ptr_t>& list, enum mentions mentions)
 {
-    if (spdlog::get_level() <= spdlog::level::debug) {
-        std::string one_line_text = text.data();
-        std::replace(one_line_text.begin(), one_line_text.end(), '\n', ' ');
-        spdlog::debug(
-            "call messages::send: peer_id={}, text={}, attachments_count={}, mentions_flag={}",
-            peer_id, one_line_text, list.size(), to_string(mentions)
-        );
-    }
+    perform_messages_method_log(
+        "call messages::send: peer_id={}, text={}, attachments_count={}, mentions_flag={}",
+        peer_id, text, list.size(), to_string(mentions)
+    );
 
     message_constructor(mentions)
         .param("peer_id", std::to_string(peer_id))
@@ -42,23 +46,26 @@ void messages::send(int64_t peer_id, std::string_view text, const std::vector<at
         .request_without_output();
 }
 
-void messages::send(int64_t peer_id, std::string_view text, attachment::attachment_ptr_t&& attachment, enum mentions mentions)
+void messages::send(int64_t peer_id, std::string_view text, const attachment::attachment_ptr_t& attachment, enum mentions mentions)
 {
-    std::vector<vk::attachment::attachment_ptr_t> attachments;
-    attachments.push_back(std::move(attachment));
-    send(peer_id, text, attachments, mentions);
+    perform_messages_method_log(
+        "call messages::send: peer_id={}, text={}, attachment={}, mentions_flag={}",
+        peer_id, text, attachment->value(), to_string(mentions)
+    );
+
+    message_constructor(mentions)
+        .param("peer_id", std::to_string(peer_id))
+        .param("message", text)
+        .attachment(attachment)
+        .request_without_output();
 }
 
 void messages::send(int64_t peer_id, std::string_view text, std::string_view keyboard_layout, enum mentions mentions)
 {
-    if (spdlog::get_level() <= spdlog::level::debug) {
-        std::string one_line_text = text.data();
-        std::replace(one_line_text.begin(), one_line_text.end(), '\n', ' ');
-        spdlog::debug(
-            "call messages::send: peer_id={}, text={}, keyboard={}, mentions_flag={}",
-            peer_id, one_line_text, keyboard_layout, to_string(mentions)
-        );
-    }
+    perform_messages_method_log(
+        "call messages::send: peer_id={}, text={}, keyboard={}, mentions_flag={}",
+        peer_id, text, keyboard_layout, to_string(mentions)
+    );
 
     message_constructor(mentions)
         .param("peer_id", std::to_string(peer_id))

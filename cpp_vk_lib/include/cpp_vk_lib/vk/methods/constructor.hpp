@@ -39,9 +39,9 @@ template <typename ExecutionPolicy>
 class constructor
 {
 public:
-    /*! Load user token from config. */
+    /*! Load user and group tokens from config. */
     constructor();
-    /*! Initialize user token from parameter. */
+    /*! Load group token from config and user token from parameter. */
     constructor(std::string_view user_token);
     /*! Setup VK API method name. */
     constructor& method(std::string_view);

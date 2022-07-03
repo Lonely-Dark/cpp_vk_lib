@@ -1,6 +1,8 @@
 #ifndef VK_API_CONSTANTS_HPP
 #define VK_API_CONSTANTS_HPP
 
+#include <cstdint>
+
 namespace vk::api_constants {
 
 inline constexpr char api_version[] = "5.130";

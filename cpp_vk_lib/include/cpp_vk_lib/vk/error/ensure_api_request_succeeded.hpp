@@ -6,11 +6,9 @@
 #include <cstddef>
 #include <unordered_map>
 
-namespace simdjson {
-namespace dom {
+namespace simdjson::dom {
 class object;
-} // namespace dom
-} // namespace simdjson
+} // namespace simdjson::dom
 
 namespace vk::error {
 

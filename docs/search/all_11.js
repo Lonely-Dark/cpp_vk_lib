@@ -19,10 +19,8 @@ var searchData=
   ['request_5fwithout_5foutput_16',['request_without_output',['../classvk_1_1method_1_1constructor.html#a44b8b9095c71e806d05d4f5e2066c57a',1,'vk::method::constructor::request_without_output()'],['../classvk_1_1method_1_1message__constructor.html#a76d6bb6f829949026407de1e04c5228e',1,'vk::method::message_constructor::request_without_output()']]],
   ['require_17',['require',['../namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047af0ffd3b7c2574ac324603ed00488c850',1,'runtime::network']]],
   ['reset_18',['reset',['../classvk_1_1method_1_1constructor.html#a04262095406a1f978db576617db77524',1,'vk::method::constructor']]],
-  ['result_19',['result',['../structruntime_1_1result.html#a28d5e7d43f22a2647722570bcc82fc9d',1,'runtime::result::result() noexcept'],['../structruntime_1_1result.html#a1529db251cd4bec722af2f0c43eae5f9',1,'runtime::result::result(Value &amp;&amp;value)'],['../structruntime_1_1result.html#a93475f5f7818212eb7e00c8eb0fce843',1,'runtime::result::result(Value &amp;&amp;value, Error &amp;&amp;error) noexcept'],['../structruntime_1_1result.html',1,'runtime::result&lt; Value, Error &gt;']]],
-  ['result_2ehpp_20',['result.hpp',['../result_8hpp.html',1,'']]],
-  ['run_21',['run',['../classvk_1_1long__poll.html#a052c147defdb287a2ad8d603c3e0dc3e',1,'vk::long_poll']]],
-  ['runtime_22',['runtime',['../namespaceruntime.html',1,'']]],
-  ['runtime_5ferror_23',['runtime_error',['../namespacevk_1_1error_1_1anonymous__namespace_02ensure__api__request__succeeded_8cpp_03.html#a71fdfcbb40fb369c98df56c5354a0efaa5b32065884bcc1f2ed126c47e6410808',1,'vk::error::anonymous_namespace{ensure_api_request_succeeded.cpp}::runtime_error()'],['../classvk_1_1error_1_1runtime__error.html#a9c6c5cf4723f395c5beeded8cc463711',1,'vk::error::runtime_error::runtime_error()'],['../classvk_1_1error_1_1runtime__error.html',1,'vk::error::runtime_error']]],
-  ['string_5futils_24',['string_utils',['../namespaceruntime_1_1string__utils.html',1,'runtime']]]
+  ['run_19',['run',['../classvk_1_1long__poll.html#a052c147defdb287a2ad8d603c3e0dc3e',1,'vk::long_poll']]],
+  ['runtime_20',['runtime',['../namespaceruntime.html',1,'']]],
+  ['runtime_5ferror_21',['runtime_error',['../classvk_1_1error_1_1runtime__error.html#a9c6c5cf4723f395c5beeded8cc463711',1,'vk::error::runtime_error::runtime_error()'],['../namespacevk_1_1error_1_1anonymous__namespace_02ensure__api__request__succeeded_8cpp_03.html#a71fdfcbb40fb369c98df56c5354a0efaa5b32065884bcc1f2ed126c47e6410808',1,'vk::error::anonymous_namespace{ensure_api_request_succeeded.cpp}::runtime_error()'],['../classvk_1_1error_1_1runtime__error.html',1,'vk::error::runtime_error']]],
+  ['string_5futils_22',['string_utils',['../namespaceruntime_1_1string__utils.html',1,'runtime']]]
 ];

@@ -6,7 +6,6 @@
 #include "cpp_vk_lib/runtime/misc/cppdefs.hpp"
 #include "cpp_vk_lib/runtime/uncopyable.hpp"
 #include "cpp_vk_lib/runtime/unmovable.hpp"
-#include "cpp_vk_lib/vk/error/error_code.hpp"
 #include "cpp_vk_lib/vk/events/common.hpp"
 #include "cpp_vk_lib/vk/events/type.hpp"
 

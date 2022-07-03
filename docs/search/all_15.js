@@ -16,7 +16,7 @@ var searchData=
   ['method_13',['method',['../namespacevk_1_1method.html',1,'vk']]],
   ['oauth_14',['oauth',['../namespacevk_1_1oauth.html',1,'vk']]],
   ['policy_15',['policy',['../namespacevk_1_1method_1_1policy.html',1,'vk::method']]],
-  ['value_16',['value',['../structruntime_1_1result.html#ae30d7c02bcc08ad97f6fe3dc229bcd47',1,'runtime::result::value()'],['../classvk_1_1attachment_1_1base.html#ad3aec9fdda5bd00bc0276f20b13784ec',1,'vk::attachment::base::value()']]],
+  ['value_16',['value',['../classvk_1_1attachment_1_1base.html#ad3aec9fdda5bd00bc0276f20b13784ec',1,'vk::attachment::base']]],
   ['video_17',['video',['../classvk_1_1attachment_1_1video.html#a93f2bbc483dca9854cef3495142d804d',1,'vk::attachment::video::video()'],['../classvk_1_1attachment_1_1video.html',1,'vk::attachment::video']]],
   ['video_2ecpp_18',['video.cpp',['../video_8cpp.html',1,'']]],
   ['vk_19',['vk',['../namespacevk.html',1,'']]],

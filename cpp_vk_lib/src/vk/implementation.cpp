@@ -6,7 +6,6 @@
 #include "attachment/video.cpp"
 #include "attachment/wall.cpp"
 #include "config/config.cpp"
-#include "error/error_code.cpp"
 #include "error/exception.cpp"
 #include "error/ensure_api_request_succeeded.cpp"
 #include "events/attachment_handler.cpp"

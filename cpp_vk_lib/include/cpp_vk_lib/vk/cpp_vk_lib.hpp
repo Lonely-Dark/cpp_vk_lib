@@ -14,7 +14,6 @@
  *   - \ref runtime::string_utils "string utilities";
  *   - \ref runtime::setup_logger "logger environment";
  *   - some utility classes
- *       \ref runtime::result "here",
  *       \ref runtime::uncopyable "here" and
  *       \ref runtime::unmovable "here".
  *

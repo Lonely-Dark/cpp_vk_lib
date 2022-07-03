@@ -1,8 +1,6 @@
 #ifndef RUNTIME_NET_NETWORK_HPP
 #define RUNTIME_NET_NETWORK_HPP
 
-#include "cpp_vk_lib/runtime/result.hpp"
-
 #include <map>
 #include <string>
 #include <string_view>

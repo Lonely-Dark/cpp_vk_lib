@@ -80,7 +80,6 @@ $(function() {
 <code>#include &quot;<a class="el" href="unmovable_8hpp_source.html">cpp_vk_lib/runtime/unmovable.hpp</a>&quot;</code><br />
 <code>#include &quot;spdlog/spdlog.h&quot;</code><br />
 <code>#include &lt;curl/curl.h&gt;</code><br />
-<code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;map&gt;</code><br />
 <code>#include &lt;thread&gt;</code><br />
 </div><table class="memberdecls">
@@ -100,18 +99,18 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a8024b55c9e2524d385bad333b6b3e032"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a8024b55c9e2524d385bad333b6b3e032">runtime::network::request</a> (std::string_view host, const std::map&lt; std::string, std::string &gt; &amp;target, data_flow output_needed)</td></tr>
-<tr class="separator:a8024b55c9e2524d385bad333b6b3e032"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace36ede1b727f510228a44a80c418a81"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#ace36ede1b727f510228a44a80c418a81">runtime::network::request_data</a> (std::string_view host, std::string_view data, data_flow output_needed)</td></tr>
-<tr class="separator:ace36ede1b727f510228a44a80c418a81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11b108178556e27d6c9c9935f009754d"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a11b108178556e27d6c9c9935f009754d">runtime::network::upload</a> (std::string_view url, std::string_view field, std::string_view content_type, std::string_view filename, data_flow output_needed)</td></tr>
-<tr class="separator:a11b108178556e27d6c9c9935f009754d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8910b805466b623b5e8d60b49e8a541e"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a8910b805466b623b5e8d60b49e8a541e">runtime::network::upload</a> (std::string_view url, std::string_view field, std::string_view content_type, const std::vector&lt; uint8_t &gt; &amp;buffer, data_flow output_needed)</td></tr>
-<tr class="separator:a8910b805466b623b5e8d60b49e8a541e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57a29acc5eaee65a7540f9ae8a801efe"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a57a29acc5eaee65a7540f9ae8a801efe">runtime::network::download</a> (std::string_view url, std::string_view filename)</td></tr>
-<tr class="separator:a57a29acc5eaee65a7540f9ae8a801efe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48c26246ebf651370da77d96dbaec371"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a48c26246ebf651370da77d96dbaec371">runtime::network::download</a> (std::string_view url, std::vector&lt; uint8_t &gt; &amp;buffer)</td></tr>
-<tr class="separator:a48c26246ebf651370da77d96dbaec371"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69380a648f320462b9493784efcd0857"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a69380a648f320462b9493784efcd0857">runtime::network::request</a> (std::string_view host, const std::map&lt; std::string, std::string &gt; &amp;target, data_flow output_needed)</td></tr>
+<tr class="separator:a69380a648f320462b9493784efcd0857"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a32517900ea469f375bf4afeb861ef5"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a4a32517900ea469f375bf4afeb861ef5">runtime::network::request_data</a> (std::string_view host, std::string_view data, data_flow output_needed)</td></tr>
+<tr class="separator:a4a32517900ea469f375bf4afeb861ef5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35f46d10040fb2d1802fbacf1cdcd659"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a35f46d10040fb2d1802fbacf1cdcd659">runtime::network::upload</a> (std::string_view url, std::string_view field, std::string_view content_type, std::string_view filename, data_flow output_needed)</td></tr>
+<tr class="separator:a35f46d10040fb2d1802fbacf1cdcd659"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e23681f8cb3206195a68fe7034e96c3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a3e23681f8cb3206195a68fe7034e96c3">runtime::network::upload</a> (std::string_view url, std::string_view field, std::string_view content_type, const std::vector&lt; uint8_t &gt; &amp;buffer, data_flow output_needed)</td></tr>
+<tr class="separator:a3e23681f8cb3206195a68fe7034e96c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a115a3a47d286a2524451b516519847f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a115a3a47d286a2524451b516519847f3">runtime::network::download</a> (std::string_view url, std::string_view filename)</td></tr>
+<tr class="separator:a115a3a47d286a2524451b516519847f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41801c1545decfa58edb12b376eed15e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceruntime_1_1network.html#a41801c1545decfa58edb12b376eed15e">runtime::network::download</a> (std::string_view url, std::vector&lt; uint8_t &gt; &amp;buffer)</td></tr>
+<tr class="separator:a41801c1545decfa58edb12b376eed15e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -140,8 +139,8 @@ Variables</h2></td></tr>
 <div class="line">    });</div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}()</div>
-<div class="ttc" id="aclasscurl__wrap_html_a3fbbd96faea154d34e0712a6e5bd7fd9"><div class="ttname"><a href="classcurl__wrap.html#a3fbbd96faea154d34e0712a6e5bd7fd9">curl_wrap::get</a></div><div class="ttdeci">static curl_wrap * get()</div><div class="ttdef"><b>Definition:</b> network.cpp:34</div></div>
-<div class="ttc" id="aclasscurl__wrap_html_ac99819d5f69ffc17d65afe285cdfb0a1"><div class="ttname"><a href="classcurl__wrap.html#ac99819d5f69ffc17d65afe285cdfb0a1">curl_wrap::~curl_wrap</a></div><div class="ttdeci">~curl_wrap()</div><div class="ttdef"><b>Definition:</b> network.cpp:24</div></div>
+<div class="ttc" id="aclasscurl__wrap_html_a3fbbd96faea154d34e0712a6e5bd7fd9"><div class="ttname"><a href="classcurl__wrap.html#a3fbbd96faea154d34e0712a6e5bd7fd9">curl_wrap::get</a></div><div class="ttdeci">static curl_wrap * get()</div><div class="ttdef"><b>Definition:</b> network.cpp:33</div></div>
+<div class="ttc" id="aclasscurl__wrap_html_ac99819d5f69ffc17d65afe285cdfb0a1"><div class="ttname"><a href="classcurl__wrap.html#ac99819d5f69ffc17d65afe285cdfb0a1">curl_wrap::~curl_wrap</a></div><div class="ttdeci">~curl_wrap()</div><div class="ttdef"><b>Definition:</b> network.cpp:23</div></div>
 </div><!-- fragment -->
 </div>
 </div>

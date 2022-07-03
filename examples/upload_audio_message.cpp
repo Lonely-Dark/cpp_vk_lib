@@ -33,15 +33,17 @@ int main(int argc, char* argv[])
     const std::string upload_server(parser.parse(server)["response"]["upload_url"]);
     namespace net = runtime::network;
 
-    auto [uploaded, upload_error] = runtime::network::upload(
-        upload_server,
-        "file",
-        "application/octet-stream",
-        file_path,
-        net::data_flow::require
-    );
-    if (upload_error) {
-        spdlog::error("Upload error");
+    std::string uploaded;
+    try {
+        uploaded = runtime::network::upload(
+            upload_server,
+            "file",
+            "application/octet-stream",
+            file_path,
+            net::data_flow::require
+        );
+    } catch (std::exception& error) {
+        std::cout << error.what() << std::endl;
         return 1;
     }
     const simdjson::dom::element parsed_upload = parser.parse(uploaded);

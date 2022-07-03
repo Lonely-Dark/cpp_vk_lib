@@ -17,22 +17,19 @@ int main(int argc, char* argv[])
 
     SECTION(POST_require_data)
     {
-        auto [data, error] = net::request("https://www.google.com", {}, net::data_flow::require);
-        TEST_CASE(!error);
+        std::string data = net::request("https://www.google.com", {}, net::data_flow::require);
         TEST_CASE(!data.empty());
         TEST_CASE(data.find("Google") != std::string::npos);
     }
     SECTION(POST_omit_data)
     {
-        auto [data, error] = net::request("https://www.google.com", {}, net::data_flow::omit);
-        TEST_CASE(!error);
+        std::string data = net::request("https://www.google.com", {}, net::data_flow::omit);
         TEST_CASE(data.empty());
     }
     SECTION(request_data)
     {
-        auto [data, error] = net::request_data(
+        std::string data = net::request_data(
             "https://pelevin.gpt.dobro.ai/generate/", R"__({"prompt":"text","length":50})__", net::data_flow::require);
-        TEST_CASE(!error);
         TEST_CASE(!data.empty());
     }
     SECTION(request_multithread)
@@ -44,7 +41,7 @@ int main(int argc, char* argv[])
                 std::promise<std::string> promise;
                 std::future<std::string> future = promise.get_future();
                 std::thread thread([promise = std::move(promise)]() mutable {
-                    auto[data, error] = net::request("https://www.example.com", {}, net::data_flow::require);
+                    std::string data = net::request("https://www.example.com", {}, net::data_flow::require);
                     promise.set_value(std::move(data));
                 });
                 threads.emplace_back(std::move(thread), std::move(future));
@@ -60,9 +57,8 @@ int main(int argc, char* argv[])
         }
     }
 
-    auto [cat_url, cat_error] = net::request(
+    std::string cat_url = net::request(
         "https://api.thecatapi.com/v1/images/search", {}, net::data_flow::require);
-    TEST_CASE(!cat_error);
     TEST_CASE(!cat_url.empty());
     simdjson::dom::parser parser;
     std::string cat_image = std::string(parser.parse(cat_url).get_array().at(0)["url"]);
@@ -72,15 +68,13 @@ int main(int argc, char* argv[])
 
     SECTION(download_to_buffer)
     {
-        bool downloaded = net::download(cat_image, bytes);
-        TEST_CASE(downloaded);
+        net::download(cat_image, bytes);
         std::cout << "Downloaded " << bytes.size() << " bytes to buffer\n";
     }
 
     SECTION(download_to_file)
     {
-        bool downloaded = net::download(cat_image, "buffer");
-        TEST_CASE(downloaded);
+        net::download(cat_image, "buffer");
         // Don't remove this file, so we need this file to compare below.
     }
 

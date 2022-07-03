@@ -17,12 +17,7 @@ static std::string call(std::string_view                     method,
                         enum runtime::network::data_flow     output_needed)
 {
     namespace net = runtime::network;
-    auto [data, error] = net::request(append_url(method), params, output_needed);
-
-    if (error) {
-        throw vk::error::runtime_error(-1, "Failed to execute HTTP GET");
-    }
-    return data;
+    return net::request(append_url(method), params, output_needed);
 }
 
 namespace vk::method::policy {
@@ -67,12 +62,7 @@ struct do_not_use_api_link
         VK_UNUSED(access_token);
 
         namespace net = runtime::network;
-        auto [data, error] = net::request(method, params, output_needed);
-
-        if (error) {
-            throw vk::error::runtime_error(-1, "Failed to execute HTTP GET");
-        }
-        return data;
+        return net::request(method, params, output_needed);
     }
 };
 

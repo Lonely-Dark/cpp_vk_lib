@@ -67,7 +67,6 @@ $(function() {
 <a href="#pri-types">Private Types</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
-<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classcurl__executor-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">curl_executor Class Reference</div></div>
 </div><!--header-->
@@ -77,18 +76,18 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a68283a03fde5a6df74218cefcac1b75e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcurl__executor.html#a68283a03fde5a6df74218cefcac1b75e">curl_executor</a> (std::string_view url)</td></tr>
 <tr class="separator:a68283a03fde5a6df74218cefcac1b75e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a0a400c17467169a3b66d67a755d5b7"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcurl__executor.html#a6a0a400c17467169a3b66d67a755d5b7">request</a> (const std::map&lt; std::string, std::string &gt; &amp;list, <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">data_flow</a> output_needed)</td></tr>
-<tr class="separator:a6a0a400c17467169a3b66d67a755d5b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e834734f3cb8364d579c646c3836f82"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcurl__executor.html#a6e834734f3cb8364d579c646c3836f82">request_data</a> (std::string_view data, <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">data_flow</a> output_needed)</td></tr>
-<tr class="separator:a6e834734f3cb8364d579c646c3836f82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af80481614dc5357f470c8d0afd42698b"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcurl__executor.html#af80481614dc5357f470c8d0afd42698b">upload</a> (std::string_view field, std::string_view content_type, std::string_view filename, <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">data_flow</a> output_needed)</td></tr>
-<tr class="separator:af80481614dc5357f470c8d0afd42698b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77826059dbb4c1b39ad5d3b00a39f36e"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcurl__executor.html#a77826059dbb4c1b39ad5d3b00a39f36e">upload</a> (std::string_view field, std::string_view content_type, const std::vector&lt; uint8_t &gt; &amp;buffer, <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">data_flow</a> output_needed)</td></tr>
-<tr class="separator:a77826059dbb4c1b39ad5d3b00a39f36e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39d62b5d2149890777035bb76ba4ed0e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcurl__executor.html#a39d62b5d2149890777035bb76ba4ed0e">download</a> (std::string_view filename)</td></tr>
-<tr class="separator:a39d62b5d2149890777035bb76ba4ed0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6428e8b2bf2494a55339b4205be9c017"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcurl__executor.html#a6428e8b2bf2494a55339b4205be9c017">download</a> (std::vector&lt; uint8_t &gt; &amp;buffer)</td></tr>
-<tr class="separator:a6428e8b2bf2494a55339b4205be9c017"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b927c0e2f006d3e30c26ff4fb4d0113"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcurl__executor.html#a6b927c0e2f006d3e30c26ff4fb4d0113">request</a> (const std::map&lt; std::string, std::string &gt; &amp;list, <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">data_flow</a> output_needed)</td></tr>
+<tr class="separator:a6b927c0e2f006d3e30c26ff4fb4d0113"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13f75bbda9431478f7fd3d791a855d1a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcurl__executor.html#a13f75bbda9431478f7fd3d791a855d1a">request_data</a> (std::string_view data, <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">data_flow</a> output_needed)</td></tr>
+<tr class="separator:a13f75bbda9431478f7fd3d791a855d1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64b90eeacb3ec332b6df011dfe686434"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcurl__executor.html#a64b90eeacb3ec332b6df011dfe686434">upload</a> (std::string_view field, std::string_view content_type, std::string_view filename, <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">data_flow</a> output_needed)</td></tr>
+<tr class="separator:a64b90eeacb3ec332b6df011dfe686434"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f7a9d3c8bf498ac69af5baa598e6b5f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcurl__executor.html#a3f7a9d3c8bf498ac69af5baa598e6b5f">upload</a> (std::string_view field, std::string_view content_type, const std::vector&lt; uint8_t &gt; &amp;buffer, <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">data_flow</a> output_needed)</td></tr>
+<tr class="separator:a3f7a9d3c8bf498ac69af5baa598e6b5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeca7da39b4e6ae7dbb74ea2cd75e5980"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcurl__executor.html#aeca7da39b4e6ae7dbb74ea2cd75e5980">download</a> (std::string_view filename)</td></tr>
+<tr class="separator:aeca7da39b4e6ae7dbb74ea2cd75e5980"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab629a988572b8896e3aedcfe7d1f9508"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcurl__executor.html#ab629a988572b8896e3aedcfe7d1f9508">download</a> (std::vector&lt; uint8_t &gt; &amp;buffer)</td></tr>
+<tr class="separator:ab629a988572b8896e3aedcfe7d1f9508"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-types" name="pri-types"></a>
 Private Types</h2></td></tr>
@@ -97,10 +96,10 @@ Private Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a39ecea84bf6af929cc460f9936b901c2"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcurl__executor.html#a39ecea84bf6af929cc460f9936b901c2">curl_get</a> (CURL *handle, <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">data_flow</a> output_needed)</td></tr>
-<tr class="separator:a39ecea84bf6af929cc460f9936b901c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56e1541e5a37788caff45d0f221522fc"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcurl__executor.html#a56e1541e5a37788caff45d0f221522fc">curl_post</a> (curl_httppost *form_post, <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">data_flow</a> output_needed)</td></tr>
-<tr class="separator:a56e1541e5a37788caff45d0f221522fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3233823113ef1e0518692bb73cd87d54"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcurl__executor.html#a3233823113ef1e0518692bb73cd87d54">curl_get</a> (CURL *handle, <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">data_flow</a> output_needed)</td></tr>
+<tr class="separator:a3233823113ef1e0518692bb73cd87d54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacebb21278fee131a90f053329da037f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcurl__executor.html#aacebb21278fee131a90f053329da037f">curl_post</a> (curl_httppost *form_post, <a class="el" href="namespaceruntime_1_1network.html#a0106f8cbc2fe54661a1e29820a6f6047">data_flow</a> output_needed)</td></tr>
+<tr class="separator:aacebb21278fee131a90f053329da037f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c69c2c10ef9a247908896a953c833b2"><td class="memTemplParams" colspan="2">template&lt;typename Body &gt; </td></tr>
 <tr class="memitem:a2c69c2c10ef9a247908896a953c833b2"><td class="memTemplItemLeft" align="right" valign="top">std::string&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcurl__executor.html#a2c69c2c10ef9a247908896a953c833b2">create_url</a> (std::string_view host, Body &amp;&amp;body)</td></tr>
 <tr class="separator:a2c69c2c10ef9a247908896a953c833b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -109,13 +108,6 @@ Private Member Functions</h2></td></tr>
 Private Attributes</h2></td></tr>
 <tr class="memitem:af27f2663c920bbe318ec7164c80d4f74"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcurl__executor.html#af27f2663c920bbe318ec7164c80d4f74">url_</a></td></tr>
 <tr class="separator:af27f2663c920bbe318ec7164c80d4f74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
-Static Private Attributes</h2></td></tr>
-<tr class="memitem:a3183c3066cd8ffa60ec0ac10f89025df"><td class="memItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcurl__executor.html#a3183c3066cd8ffa60ec0ac10f89025df">curl_success</a> = false</td></tr>
-<tr class="separator:a3183c3066cd8ffa60ec0ac10f89025df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f198105c525ce3d442255cf3c59a901"><td class="memItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcurl__executor.html#a0f198105c525ce3d442255cf3c59a901">curl_failure</a> = true</td></tr>
-<tr class="separator:a0f198105c525ce3d442255cf3c59a901"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a2a4ed727f5e46f088319b9157a0b27d0" name="a2a4ed727f5e46f088319b9157a0b27d0"></a>
@@ -206,8 +198,8 @@ template&lt;typename Body &gt; </div>
 
 </div>
 </div>
-<a id="a39ecea84bf6af929cc460f9936b901c2" name="a39ecea84bf6af929cc460f9936b901c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39ecea84bf6af929cc460f9936b901c2">&#9670;&nbsp;</a></span>curl_get()</h2>
+<a id="a3233823113ef1e0518692bb73cd87d54" name="a3233823113ef1e0518692bb73cd87d54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3233823113ef1e0518692bb73cd87d54">&#9670;&nbsp;</a></span>curl_get()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -216,7 +208,7 @@ template&lt;typename Body &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::pair&lt; std::string, bool &gt; curl_executor::curl_get </td>
+          <td class="memname">std::string curl_executor::curl_get </td>
           <td>(</td>
           <td class="paramtype">CURL *&#160;</td>
           <td class="paramname"><em>handle</em>, </td>
@@ -242,8 +234,8 @@ template&lt;typename Body &gt; </div>
 
 </div>
 </div>
-<a id="a56e1541e5a37788caff45d0f221522fc" name="a56e1541e5a37788caff45d0f221522fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56e1541e5a37788caff45d0f221522fc">&#9670;&nbsp;</a></span>curl_post()</h2>
+<a id="aacebb21278fee131a90f053329da037f" name="aacebb21278fee131a90f053329da037f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacebb21278fee131a90f053329da037f">&#9670;&nbsp;</a></span>curl_post()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -252,7 +244,7 @@ template&lt;typename Body &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::pair&lt; std::string, bool &gt; curl_executor::curl_post </td>
+          <td class="memname">std::string curl_executor::curl_post </td>
           <td>(</td>
           <td class="paramtype">curl_httppost *&#160;</td>
           <td class="paramname"><em>form_post</em>, </td>
@@ -278,8 +270,8 @@ template&lt;typename Body &gt; </div>
 
 </div>
 </div>
-<a id="a39d62b5d2149890777035bb76ba4ed0e" name="a39d62b5d2149890777035bb76ba4ed0e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39d62b5d2149890777035bb76ba4ed0e">&#9670;&nbsp;</a></span>download() <span class="overload">[1/2]</span></h2>
+<a id="aeca7da39b4e6ae7dbb74ea2cd75e5980" name="aeca7da39b4e6ae7dbb74ea2cd75e5980"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeca7da39b4e6ae7dbb74ea2cd75e5980">&#9670;&nbsp;</a></span>download() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -288,7 +280,7 @@ template&lt;typename Body &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool curl_executor::download </td>
+          <td class="memname">void curl_executor::download </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>filename</em></td><td>)</td>
@@ -304,8 +296,8 @@ template&lt;typename Body &gt; </div>
 
 </div>
 </div>
-<a id="a6428e8b2bf2494a55339b4205be9c017" name="a6428e8b2bf2494a55339b4205be9c017"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6428e8b2bf2494a55339b4205be9c017">&#9670;&nbsp;</a></span>download() <span class="overload">[2/2]</span></h2>
+<a id="ab629a988572b8896e3aedcfe7d1f9508" name="ab629a988572b8896e3aedcfe7d1f9508"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab629a988572b8896e3aedcfe7d1f9508">&#9670;&nbsp;</a></span>download() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -314,7 +306,7 @@ template&lt;typename Body &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool curl_executor::download </td>
+          <td class="memname">void curl_executor::download </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
           <td class="paramname"><em>buffer</em></td><td>)</td>
@@ -330,8 +322,8 @@ template&lt;typename Body &gt; </div>
 
 </div>
 </div>
-<a id="a6a0a400c17467169a3b66d67a755d5b7" name="a6a0a400c17467169a3b66d67a755d5b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a0a400c17467169a3b66d67a755d5b7">&#9670;&nbsp;</a></span>request()</h2>
+<a id="a6b927c0e2f006d3e30c26ff4fb4d0113" name="a6b927c0e2f006d3e30c26ff4fb4d0113"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b927c0e2f006d3e30c26ff4fb4d0113">&#9670;&nbsp;</a></span>request()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -340,7 +332,7 @@ template&lt;typename Body &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::pair&lt; std::string, bool &gt; curl_executor::request </td>
+          <td class="memname">std::string curl_executor::request </td>
           <td>(</td>
           <td class="paramtype">const std::map&lt; std::string, std::string &gt; &amp;&#160;</td>
           <td class="paramname"><em>list</em>, </td>
@@ -366,8 +358,8 @@ template&lt;typename Body &gt; </div>
 
 </div>
 </div>
-<a id="a6e834734f3cb8364d579c646c3836f82" name="a6e834734f3cb8364d579c646c3836f82"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e834734f3cb8364d579c646c3836f82">&#9670;&nbsp;</a></span>request_data()</h2>
+<a id="a13f75bbda9431478f7fd3d791a855d1a" name="a13f75bbda9431478f7fd3d791a855d1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13f75bbda9431478f7fd3d791a855d1a">&#9670;&nbsp;</a></span>request_data()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -376,7 +368,7 @@ template&lt;typename Body &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::pair&lt; std::string, bool &gt; curl_executor::request_data </td>
+          <td class="memname">std::string curl_executor::request_data </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>data</em>, </td>
@@ -402,8 +394,8 @@ template&lt;typename Body &gt; </div>
 
 </div>
 </div>
-<a id="a77826059dbb4c1b39ad5d3b00a39f36e" name="a77826059dbb4c1b39ad5d3b00a39f36e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77826059dbb4c1b39ad5d3b00a39f36e">&#9670;&nbsp;</a></span>upload() <span class="overload">[1/2]</span></h2>
+<a id="a3f7a9d3c8bf498ac69af5baa598e6b5f" name="a3f7a9d3c8bf498ac69af5baa598e6b5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f7a9d3c8bf498ac69af5baa598e6b5f">&#9670;&nbsp;</a></span>upload() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -412,7 +404,7 @@ template&lt;typename Body &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::pair&lt; std::string, bool &gt; curl_executor::upload </td>
+          <td class="memname">std::string curl_executor::upload </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>field</em>, </td>
@@ -450,8 +442,8 @@ template&lt;typename Body &gt; </div>
 
 </div>
 </div>
-<a id="af80481614dc5357f470c8d0afd42698b" name="af80481614dc5357f470c8d0afd42698b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af80481614dc5357f470c8d0afd42698b">&#9670;&nbsp;</a></span>upload() <span class="overload">[2/2]</span></h2>
+<a id="a64b90eeacb3ec332b6df011dfe686434" name="a64b90eeacb3ec332b6df011dfe686434"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64b90eeacb3ec332b6df011dfe686434">&#9670;&nbsp;</a></span>upload() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -460,7 +452,7 @@ template&lt;typename Body &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::pair&lt; std::string, bool &gt; curl_executor::upload </td>
+          <td class="memname">std::string curl_executor::upload </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>field</em>, </td>
@@ -499,50 +491,6 @@ template&lt;typename Body &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a0f198105c525ce3d442255cf3c59a901" name="a0f198105c525ce3d442255cf3c59a901"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0f198105c525ce3d442255cf3c59a901">&#9670;&nbsp;</a></span>curl_failure</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr bool curl_executor::curl_failure = true</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a3183c3066cd8ffa60ec0ac10f89025df" name="a3183c3066cd8ffa60ec0ac10f89025df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3183c3066cd8ffa60ec0ac10f89025df">&#9670;&nbsp;</a></span>curl_success</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr bool curl_executor::curl_success = false</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="af27f2663c920bbe318ec7164c80d4f74" name="af27f2663c920bbe318ec7164c80d4f74"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af27f2663c920bbe318ec7164c80d4f74">&#9670;&nbsp;</a></span>url_</h2>
 

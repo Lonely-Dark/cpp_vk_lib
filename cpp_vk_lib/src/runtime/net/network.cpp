@@ -7,7 +7,6 @@
 #include "spdlog/spdlog.h"
 
 #include <curl/curl.h>
-#include <iostream>
 #include <map>
 #include <thread>
 
@@ -74,18 +73,14 @@ public:
                 }
             }
 
-            spdlog::error(
+            std::string msg = fmt::format(
                 "failed to allocate cURL handle in thread {}",
                 std::hash<std::thread::id>{}(thread_id)
             );
-            return nullptr;
+            throw std::runtime_error(msg);
         };
 
         CURL* handle = current_thread_handle();
-
-        if (!handle) {
-            return nullptr;
-        }
 
         curl_easy_reset(handle);
 
@@ -165,24 +160,16 @@ public:
         : url_(url)
     {}
 
-    std::pair<std::string, bool> request(const std::map<std::string, std::string>& list, data_flow output_needed)
+    std::string request(const std::map<std::string, std::string>& list, data_flow output_needed)
     {
         CURL* handle = curl_wrap::create(create_url(url_, list));
-
-        if (!handle) {
-            return {"", false};
-        }
 
         return curl_get(handle, output_needed);
     }
 
-    std::pair<std::string, bool> request_data(std::string_view data, data_flow output_needed)
+    std::string request_data(std::string_view data, data_flow output_needed)
     {
         CURL* handle = curl_wrap::create(url_);
-
-        if (!handle) {
-            return {"", false};
-        }
 
         curl_easy_setopt(handle, CURLOPT_POSTFIELDS, data.data());
         curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, data.size());
@@ -190,10 +177,10 @@ public:
         return curl_get(handle, output_needed);
     }
 
-    std::pair<std::string, bool> upload(std::string_view field,
-                                        std::string_view content_type,
-                                        std::string_view filename,
-                                        data_flow        output_needed)
+    std::string upload(std::string_view field,
+                       std::string_view content_type,
+                       std::string_view filename,
+                       data_flow        output_needed)
     {
         curl_httppost* form_post = nullptr;
         curl_httppost* last_form_ptr = nullptr;
@@ -214,10 +201,10 @@ public:
         return result;
     }
 
-    std::pair<std::string, bool> upload(std::string_view            field,
-                                        std::string_view            content_type,
-                                        const std::vector<uint8_t>& buffer,
-                                        data_flow                   output_needed)
+    std::string upload(std::string_view            field,
+                       std::string_view            content_type,
+                       const std::vector<uint8_t>& buffer,
+                       data_flow                   output_needed)
     {
         curl_httppost* form_post = nullptr;
         curl_httppost* last_form_ptr = nullptr;
@@ -241,19 +228,15 @@ public:
         return result;
     }
 
-    bool download(std::string_view filename)
+    void download(std::string_view filename)
     {
         std::unique_ptr<FILE, decltype(&fclose)> fp(fopen(filename.data(), "wb"), fclose);
         if (!fp) {
-            spdlog::error("libcurl: failed to open file {}", filename);
-            return false;
+            std::string msg = fmt::format("failed to open file {}", filename);
+            throw std::runtime_error(msg);
         }
 
         CURL* handle = curl_wrap::create(url_);
-
-        if (!handle) {
-            return false;
-        }
 
         curl_easy_setopt(handle, CURLOPT_WRITEDATA, fp.get());
         curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, curl_file_cb);
@@ -261,22 +244,16 @@ public:
         CURLcode error_code = curl_easy_perform(handle);
 
         if (error_code != CURLE_OK) {
-            spdlog::error("curl_easy_perform() failed: {}", curl_easy_strerror(error_code));
-            return false;
+            std::string msg = fmt::format("curl_easy_perform() failed: {}", curl_easy_strerror(error_code));
+            throw std::runtime_error(msg);
         }
 
         spdlog::trace("download to {} performed", filename);
-
-        return true;
     }
 
-    bool download(std::vector<uint8_t>& buffer)
+    void download(std::vector<uint8_t>& buffer)
     {
         CURL* handle = curl_wrap::create(url_);
-
-        if (!handle) {
-            return false;
-        }
 
         curl_easy_setopt(handle, CURLOPT_WRITEDATA, &buffer);
         curl_easy_setopt(handle, CURLOPT_HEADERDATA, &buffer);
@@ -286,17 +263,15 @@ public:
         CURLcode error_code = curl_easy_perform(handle);
 
         if (error_code != CURLE_OK) {
-            spdlog::error("curl_easy_perform() failed: {}", curl_easy_strerror(error_code));
-            return false;
+            std::string msg = fmt::format("curl_easy_perform() failed: {}", curl_easy_strerror(error_code));
+            throw std::runtime_error(msg);
         }
 
         spdlog::trace("download to buffer performed, {} bytes have been received", buffer.size());
-
-        return true;
     }
 
 private:
-    std::pair<std::string, bool> curl_get(CURL* handle, data_flow output_needed)
+    std::string curl_get(CURL* handle, data_flow output_needed)
     {
         std::string output;
 
@@ -312,8 +287,8 @@ private:
         CURLcode error_code = curl_easy_perform(handle);
 
         if (error_code != CURLE_OK) {
-            spdlog::error("curl_easy_perform() failed: {}", curl_easy_strerror(error_code));
-            return {"", curl_failure};
+            std::string msg = fmt::format("curl_easy_perform() failed: {}", curl_easy_strerror(error_code));
+            throw std::runtime_error(msg);
         }
 
         if (output_needed == data_flow::omit) {
@@ -322,16 +297,12 @@ private:
             spdlog::trace("GET request performed, {} bytes have been received", output.size());
         }
 
-        return {std::move(output), curl_success};
+        return output;
     }
 
-    std::pair<std::string, bool> curl_post(curl_httppost* form_post, data_flow output_needed)
+    std::string curl_post(curl_httppost* form_post, data_flow output_needed)
     {
         CURL* handle = curl_wrap::create(url_);
-
-        if (!handle) {
-            return {"", false};
-        }
 
         curl_easy_setopt(handle, CURLOPT_HTTPPOST, form_post);
 
@@ -370,55 +341,53 @@ private:
     }
 
     std::string_view url_;
-    static constexpr bool curl_success = false;
-    static constexpr bool curl_failure = true;
 };
 
 namespace runtime::network {
 
-std::pair<std::string, bool> request(std::string_view                          host,
-                                     const std::map<std::string, std::string>& target,
-                                     data_flow                                 output_needed)
+std::string request(std::string_view                          host,
+                    const std::map<std::string, std::string>& target,
+                    data_flow                                 output_needed)
 {
     curl_executor executor(host);
     return executor.request(target, output_needed);
 }
 
-std::pair<std::string, bool> request_data(std::string_view host,
-                                          std::string_view data,
-                                          data_flow        output_needed)
+std::string request_data(std::string_view host,
+                         std::string_view data,
+                         data_flow        output_needed)
 {
     curl_executor executor(host);
     return executor.request_data(data, output_needed);
 }
 
-std::pair<std::string, bool> upload(std::string_view url,
-                                    std::string_view field,
-                                    std::string_view content_type,
-                                    std::string_view filename,
-                                    data_flow        output_needed)
+std::string upload(std::string_view url,
+                   std::string_view field,
+                   std::string_view content_type,
+                   std::string_view filename,
+                   data_flow        output_needed)
 {
     curl_executor executor(url);
     return executor.upload(field, content_type, filename, output_needed);
 }
 
-std::pair<std::string, bool> upload(std::string_view            url,
-                                    std::string_view            field,
-                                    std::string_view            content_type,
-                                    const std::vector<uint8_t>& buffer,
-                                    data_flow                   output_needed)
+std::string upload(std::string_view            url,
+                   std::string_view            field,
+                   std::string_view            content_type,
+                   const std::vector<uint8_t>& buffer,
+                   data_flow                   output_needed)
 {
     curl_executor executor(url);
     return executor.upload(field, content_type, buffer, output_needed);
 }
 
-bool download(std::string_view url, std::string_view filename)
+void download(std::string_view url, std::string_view filename)
 {
     curl_executor executor(url);
     return executor.download(filename);
 }
 
-bool download(std::string_view url, std::vector<uint8_t>& buffer)
+void download(std::string_view url, std::vector<uint8_t>& buffer)
 {
     curl_executor executor(url);
     return executor.download(buffer);

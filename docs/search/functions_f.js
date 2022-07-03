@@ -11,5 +11,5 @@ var searchData=
   ['reset_8',['reset',['../classvk_1_1method_1_1constructor.html#a04262095406a1f978db576617db77524',1,'vk::method::constructor']]],
   ['result_9',['result',['../structruntime_1_1result.html#a28d5e7d43f22a2647722570bcc82fc9d',1,'runtime::result::result() noexcept'],['../structruntime_1_1result.html#a1529db251cd4bec722af2f0c43eae5f9',1,'runtime::result::result(Value &amp;&amp;value)'],['../structruntime_1_1result.html#a93475f5f7818212eb7e00c8eb0fce843',1,'runtime::result::result(Value &amp;&amp;value, Error &amp;&amp;error) noexcept']]],
   ['run_10',['run',['../classvk_1_1long__poll.html#a052c147defdb287a2ad8d603c3e0dc3e',1,'vk::long_poll']]],
-  ['runtime_5ferror_11',['runtime_error',['../classvk_1_1error_1_1runtime__error.html#ae2810edfd248b3b352cbf3e1722c9652',1,'vk::error::runtime_error']]]
+  ['runtime_5ferror_11',['runtime_error',['../classvk_1_1error_1_1runtime__error.html#a9c6c5cf4723f395c5beeded8cc463711',1,'vk::error::runtime_error']]]
 ];

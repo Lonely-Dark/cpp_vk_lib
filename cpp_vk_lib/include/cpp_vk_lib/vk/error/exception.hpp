@@ -16,7 +16,7 @@ public:
 protected:
     explicit common_exception(std::string_view what_arg);
     /*! \return formatted string in form "[vk.exception.id.exception_name]: arg". */
-    static std::string create(int32_t id, const char* exception_name, const char* arg);
+    static std::string create(size_t id, const char* exception_name, const char* arg);
 
 private:
     std::runtime_error error_;
@@ -25,25 +25,25 @@ private:
 class upload_error : public common_exception
 {
 public:
-    explicit upload_error(int32_t id, const char* what_arg);
+    explicit upload_error(size_t id, const char* what_arg);
 };
 
 class access_error : public common_exception
 {
 public:
-    explicit access_error(int32_t id, const char* what_arg);
+    explicit access_error(size_t id, const char* what_arg);
 };
 
 class invalid_parameter_error : public common_exception
 {
 public:
-    explicit invalid_parameter_error(int32_t id, const char* what_arg);
+    explicit invalid_parameter_error(size_t id, const char* what_arg);
 };
 
 class runtime_error : public common_exception
 {
 public:
-    explicit runtime_error(int32_t id, const char* what_arg);
+    explicit runtime_error(size_t id, const char* what_arg);
 };
 
 /*! This is used to inform the user about the wrong cast, showing template parameters on throw. */

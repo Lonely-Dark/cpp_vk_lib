@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C++ VK library: translate_error.hpp File Reference</title>
+<title>C++ VK library: ensure_api_request_succeeded.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,16 +69,21 @@ $(function() {
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">translate_error.hpp File Reference</div></div>
+  <div class="headertitle"><div class="title">ensure_api_request_succeeded.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cstddef&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="exception_8hpp_source.html">cpp_vk_lib/vk/error/exception.hpp</a>&quot;</code><br />
+<code>#include &lt;cstddef&gt;</code><br />
 <code>#include &lt;unordered_map&gt;</code><br />
 </div>
-<p><a href="translate__error_8hpp_source.html">Go to the source code of this file.</a></p>
+<p><a href="ensure__api__request__succeeded_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
+<tr class="memitem:namespacesimdjson"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesimdjson.html">simdjson</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacesimdjson_1_1dom"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesimdjson_1_1dom.html">simdjson::dom</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespacevk"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevk.html">vk</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespacevk_1_1error"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevk_1_1error.html">vk::error</a></td></tr>
@@ -86,8 +91,10 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ab39345d146a158aab191c95b4c2afd7e"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevk_1_1error.html#ab39345d146a158aab191c95b4c2afd7e">vk::error::do_throw_by</a> (size_t error_code)</td></tr>
-<tr class="separator:ab39345d146a158aab191c95b4c2afd7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cde715cb9f49bbbe4257d66288baf39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevk_1_1error.html#a5cde715cb9f49bbbe4257d66288baf39">vk::error::ensure_api_request_succeeded</a> (std::string_view response)</td></tr>
+<tr class="separator:a5cde715cb9f49bbbe4257d66288baf39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b822af194d7e263e5b29a1c45f4e169"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevk_1_1error.html#a6b822af194d7e263e5b29a1c45f4e169">vk::error::ensure_api_request_succeeded</a> (const simdjson::dom::object &amp;response)</td></tr>
+<tr class="separator:a6b822af194d7e263e5b29a1c45f4e169"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

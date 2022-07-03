@@ -77,7 +77,7 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:namespacevk_1_1error_1_1anonymous__namespace_02translate__error_8cpp_03"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevk_1_1error_1_1anonymous__namespace_02translate__error_8cpp_03.html">anonymous_namespace{translate_error.cpp}</a></td></tr>
+<tr class="memitem:namespacevk_1_1error_1_1anonymous__namespace_02ensure__api__request__succeeded_8cpp_03"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevk_1_1error_1_1anonymous__namespace_02ensure__api__request__succeeded_8cpp_03.html">anonymous_namespace{ensure_api_request_succeeded.cpp}</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
@@ -97,8 +97,12 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ab39345d146a158aab191c95b4c2afd7e"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevk_1_1error.html#ab39345d146a158aab191c95b4c2afd7e">translate_to_string</a> (size_t <a class="el" href="classvk_1_1error__code.html">error_code</a>)</td></tr>
-<tr class="separator:ab39345d146a158aab191c95b4c2afd7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cde715cb9f49bbbe4257d66288baf39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevk_1_1error.html#a5cde715cb9f49bbbe4257d66288baf39">ensure_api_request_succeeded</a> (std::string_view response)</td></tr>
+<tr class="separator:a5cde715cb9f49bbbe4257d66288baf39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b822af194d7e263e5b29a1c45f4e169"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevk_1_1error.html#a6b822af194d7e263e5b29a1c45f4e169">ensure_api_request_succeeded</a> (const simdjson::dom::object &amp;response)</td></tr>
+<tr class="separator:a6b822af194d7e263e5b29a1c45f4e169"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f7b2a0931bf1e6bffd89047ca9a267b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevk_1_1error.html#a1f7b2a0931bf1e6bffd89047ca9a267b">do_throw_by</a> (size_t <a class="el" href="classvk_1_1error__code.html">error_code</a>)</td></tr>
+<tr class="separator:a1f7b2a0931bf1e6bffd89047ca9a267b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -106,22 +110,67 @@ Variables</h2></td></tr>
 <tr class="separator:aa9ce39c56b42335074f719cb40e05ae6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ab39345d146a158aab191c95b4c2afd7e" name="ab39345d146a158aab191c95b4c2afd7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab39345d146a158aab191c95b4c2afd7e">&#9670;&nbsp;</a></span>translate_to_string()</h2>
+<a id="a1f7b2a0931bf1e6bffd89047ca9a267b" name="a1f7b2a0931bf1e6bffd89047ca9a267b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f7b2a0931bf1e6bffd89047ca9a267b">&#9670;&nbsp;</a></span>do_throw_by()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const char * vk::error::translate_to_string </td>
+          <td class="memname">static void vk::error::do_throw_by </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>error_code</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-<p >Get VK error description represented as string by code. </p>
+
+</div>
+</div>
+<a id="a6b822af194d7e263e5b29a1c45f4e169" name="a6b822af194d7e263e5b29a1c45f4e169"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b822af194d7e263e5b29a1c45f4e169">&#9670;&nbsp;</a></span>ensure_api_request_succeeded() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void vk::error::ensure_api_request_succeeded </td>
+          <td>(</td>
+          <td class="paramtype">const simdjson::dom::object &amp;&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Check JSON object for VK API errors and do throw if it's present. </p>
+
+</div>
+</div>
+<a id="a5cde715cb9f49bbbe4257d66288baf39" name="a5cde715cb9f49bbbe4257d66288baf39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cde715cb9f49bbbe4257d66288baf39">&#9670;&nbsp;</a></span>ensure_api_request_succeeded() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void vk::error::ensure_api_request_succeeded </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Parse and check string for VK API errors and do throw if it's present. </p>
 
 </div>
 </div>

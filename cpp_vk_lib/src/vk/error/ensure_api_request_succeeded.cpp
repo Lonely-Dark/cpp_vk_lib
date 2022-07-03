@@ -1,4 +1,6 @@
-#include "cpp_vk_lib/vk/error/translate_error.hpp"
+#include "cpp_vk_lib/vk/error/ensure_api_request_succeeded.hpp"
+
+#include "simdjson.h"
 
 #include <unordered_map>
 
@@ -82,13 +84,44 @@ static const std::unordered_map<size_t, error> errors = {
     {3610, {"User is deactivated", error_type::access_error}},
     {3611, {"Service is deactivated for user", error_type::access_error}}};
 
+static void do_throw_by(size_t error_code)
+{
+    auto it = errors.find(error_code);
+
+    if (it == errors.end()) {
+        throw std::runtime_error(fmt::format("wrong VK error code: {}", error_code));
+    }
+
+    auto [message, type] = it->second;
+
+    switch (type) {
+        case error_type::access_error:
+            throw vk::error::access_error(error_code, message);
+        case error_type::runtime_error:
+            throw vk::error::runtime_error(error_code, message);
+        case error_type::invalid_parameter_error:
+            throw vk::error::invalid_parameter_error(error_code, message);
+        case error_type::upload_error:
+            throw vk::error::upload_error(error_code, message);
+    }
+}
+
 }// namespace vk::error
 
 namespace vk {
 
-const char* error::translate_to_string(size_t error_code)
+void error::ensure_api_request_succeeded(const simdjson::dom::object& response)
 {
-    return errors.at(error_code).message;
+    if (response.begin().key() == "error") {
+        do_throw_by(response["error"]["error_code"].get_int64());
+    }
+}
+
+void error::ensure_api_request_succeeded(std::string_view response)
+{
+    simdjson::dom::parser parser;
+    simdjson::dom::object parsed = parser.parse(response);
+    ensure_api_request_succeeded(parsed);
 }
 
 }// namespace vk

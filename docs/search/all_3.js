@@ -38,7 +38,7 @@ var searchData=
   ['cpp_5fvk_5flib_2ehpp_35',['cpp_vk_lib.hpp',['../cpp__vk__lib_8hpp.html',1,'']]],
   ['cpp_5fvk_5flib_5fcurl_5fverbose_36',['cpp_vk_lib_curl_verbose',['../network_8cpp.html#a6b118b869e0397e428787e3e2b4a2aef',1,'cpp_vk_lib_curl_verbose():&#160;network.cpp'],['../network_8hpp.html#a6b118b869e0397e428787e3e2b4a2aef',1,'cpp_vk_lib_curl_verbose():&#160;network.cpp']]],
   ['cppdefs_2ehpp_37',['cppdefs.hpp',['../cppdefs_8hpp.html',1,'']]],
-  ['create_38',['create',['../classvk_1_1error_1_1common__exception.html#a2a9a386e768f6d87364a51b46c93f615',1,'vk::error::common_exception::create()'],['../classcurl__wrap.html#a1a50e0c056cd70fd6f8996eb53b56029',1,'curl_wrap::create()']]],
+  ['create_38',['create',['../classvk_1_1error_1_1common__exception.html#ae78a4be18d9d9a05d3c3853e89264a13',1,'vk::error::common_exception::create()'],['../classcurl__wrap.html#a1a50e0c056cd70fd6f8996eb53b56029',1,'curl_wrap::create()']]],
   ['create_5furl_39',['create_url',['../classcurl__executor.html#a2c69c2c10ef9a247908896a953c833b2',1,'curl_executor']]],
   ['created_5fby_40',['created_by',['../classvk_1_1event_1_1wall__post__new.html#ae790a988ada45c3302bf17febac34107',1,'vk::event::wall_post_new']]],
   ['curl_5fbuffer_5fcb_41',['curl_buffer_cb',['../callback_8hpp.html#a457cab6c20573e0ac098b497ce2756a2',1,'callback.hpp']]],

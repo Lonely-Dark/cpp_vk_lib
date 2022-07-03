@@ -11,7 +11,7 @@ var searchData=
   ['construct_5fattachments_8',['construct_attachments',['../classvk_1_1event_1_1wall__repost.html#a7123cd4a83acefd5e92680a59373b7ea',1,'vk::event::wall_repost']]],
   ['constructor_9',['constructor',['../classvk_1_1method_1_1constructor.html#a11da862a01e2a3d3764db8a81b49caa4',1,'vk::method::constructor::constructor()'],['../classvk_1_1method_1_1constructor.html#aa26191ccc36721b6f57c87344fa66f2d',1,'vk::method::constructor::constructor(std::string_view user_token)']]],
   ['conversation_5fmessage_5fid_10',['conversation_message_id',['../classvk_1_1event_1_1message__new.html#a7c6e7ecddc4654ed3a503790fb8e2da9',1,'vk::event::message_new']]],
-  ['create_11',['create',['../classvk_1_1error_1_1common__exception.html#a2a9a386e768f6d87364a51b46c93f615',1,'vk::error::common_exception::create()'],['../classcurl__wrap.html#a1a50e0c056cd70fd6f8996eb53b56029',1,'curl_wrap::create()']]],
+  ['create_11',['create',['../classvk_1_1error_1_1common__exception.html#ae78a4be18d9d9a05d3c3853e89264a13',1,'vk::error::common_exception::create()'],['../classcurl__wrap.html#a1a50e0c056cd70fd6f8996eb53b56029',1,'curl_wrap::create()']]],
   ['create_5furl_12',['create_url',['../classcurl__executor.html#a2c69c2c10ef9a247908896a953c833b2',1,'curl_executor']]],
   ['created_5fby_13',['created_by',['../classvk_1_1event_1_1wall__post__new.html#ae790a988ada45c3302bf17febac34107',1,'vk::event::wall_post_new']]],
   ['curl_5fbuffer_5fcb_14',['curl_buffer_cb',['../callback_8hpp.html#a457cab6c20573e0ac098b497ce2756a2',1,'callback.hpp']]],

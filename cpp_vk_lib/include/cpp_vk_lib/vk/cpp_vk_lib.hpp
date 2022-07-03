@@ -70,7 +70,7 @@
 
 #include "cpp_vk_lib/vk/attachment/attachment.hpp"
 #include "cpp_vk_lib/vk/config/config.hpp"
-#include "cpp_vk_lib/vk/error/translate_error.hpp"
+#include "cpp_vk_lib/vk/error/ensure_api_request_succeeded.hpp"
 #include "cpp_vk_lib/vk/events/action.hpp"
 #include "cpp_vk_lib/vk/events/attachment_handler.hpp"
 #include "cpp_vk_lib/vk/events/common.hpp"

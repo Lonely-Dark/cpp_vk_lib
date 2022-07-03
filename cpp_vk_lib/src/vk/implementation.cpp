@@ -8,7 +8,7 @@
 #include "config/config.cpp"
 #include "error/error_code.cpp"
 #include "error/exception.cpp"
-#include "error/translate_error.cpp"
+#include "error/ensure_api_request_succeeded.cpp"
 #include "events/attachment_handler.cpp"
 #include "events/common.cpp"
 #include "events/message_new.cpp"

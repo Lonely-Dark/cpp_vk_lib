@@ -23,6 +23,6 @@ var searchData=
   ['result_2ehpp_20',['result.hpp',['../result_8hpp.html',1,'']]],
   ['run_21',['run',['../classvk_1_1long__poll.html#a052c147defdb287a2ad8d603c3e0dc3e',1,'vk::long_poll']]],
   ['runtime_22',['runtime',['../namespaceruntime.html',1,'']]],
-  ['runtime_5ferror_23',['runtime_error',['../namespacevk_1_1error_1_1anonymous__namespace_02translate__error_8cpp_03.html#a6888506c6634fd789e53bd0c5a567e6ea5b32065884bcc1f2ed126c47e6410808',1,'vk::error::anonymous_namespace{translate_error.cpp}::runtime_error()'],['../classvk_1_1error_1_1runtime__error.html#ae2810edfd248b3b352cbf3e1722c9652',1,'vk::error::runtime_error::runtime_error()'],['../classvk_1_1error_1_1runtime__error.html',1,'vk::error::runtime_error']]],
+  ['runtime_5ferror_23',['runtime_error',['../namespacevk_1_1error_1_1anonymous__namespace_02ensure__api__request__succeeded_8cpp_03.html#a71fdfcbb40fb369c98df56c5354a0efaa5b32065884bcc1f2ed126c47e6410808',1,'vk::error::anonymous_namespace{ensure_api_request_succeeded.cpp}::runtime_error()'],['../classvk_1_1error_1_1runtime__error.html#a9c6c5cf4723f395c5beeded8cc463711',1,'vk::error::runtime_error::runtime_error()'],['../classvk_1_1error_1_1runtime__error.html',1,'vk::error::runtime_error']]],
   ['string_5futils_24',['string_utils',['../namespaceruntime_1_1string__utils.html',1,'runtime']]]
 ];

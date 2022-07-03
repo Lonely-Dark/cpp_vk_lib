@@ -31,7 +31,7 @@ void send(int64_t          peer_id,
 
 namespace vk::method::groups {
 
-int64_t get_by_id(error_code& errc);
+int64_t get_by_id();
 std::string get_long_poll_server(int64_t group_id);
 
 }// namespace vk::method::groups

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['action_0',['action',['../namespacevk_1_1action.html',1,'vk']]],
-  ['anonymous_5fnamespace_7btranslate_5ferror_2ecpp_7d_1',['anonymous_namespace{translate_error.cpp}',['../namespacevk_1_1error_1_1anonymous__namespace_02translate__error_8cpp_03.html',1,'vk::error']]],
+  ['anonymous_5fnamespace_7bensure_5fapi_5frequest_5fsucceeded_2ecpp_7d_1',['anonymous_namespace{ensure_api_request_succeeded.cpp}',['../namespacevk_1_1error_1_1anonymous__namespace_02ensure__api__request__succeeded_8cpp_03.html',1,'vk::error']]],
   ['api_5fconstants_2',['api_constants',['../namespacevk_1_1api__constants.html',1,'vk']]],
   ['attachment_3',['attachment',['../namespacevk_1_1attachment.html',1,'vk']]],
   ['button_4',['button',['../namespacevk_1_1keyboard_1_1button.html',1,'vk::keyboard']]],

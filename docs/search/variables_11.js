@@ -6,5 +6,5 @@ var searchData=
   ['text_5f_3',['text_',['../classvk_1_1event_1_1wall__repost.html#a3a60dcbb7b19876a15b7be7756713c50',1,'vk::event::wall_repost']]],
   ['ts_4',['ts',['../structvk_1_1long__poll_1_1poll__payload.html#aeb2038c0e9d315f73a3e111d176898c3',1,'vk::long_poll::poll_payload']]],
   ['ts_5f_5',['ts_',['../classvk_1_1event_1_1common.html#a275f9a5c30839cc61ccd12e2a098fa8e',1,'vk::event::common']]],
-  ['type_6',['type',['../structvk_1_1error_1_1anonymous__namespace_02translate__error_8cpp_03_1_1error.html#a9567f5ba1add53ede2490231b617d02e',1,'vk::error::anonymous_namespace{translate_error.cpp}::error']]]
+  ['type_6',['type',['../structvk_1_1error_1_1anonymous__namespace_02ensure__api__request__succeeded_8cpp_03_1_1error.html#ac235d0eef1679f2524a99197dc1ed759',1,'vk::error::anonymous_namespace{ensure_api_request_succeeded.cpp}::error']]]
 ];

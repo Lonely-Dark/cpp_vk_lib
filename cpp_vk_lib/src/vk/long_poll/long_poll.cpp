@@ -1,7 +1,7 @@
 #include "cpp_vk_lib/vk/long_poll/long_poll.hpp"
 
 #include "cpp_vk_lib/vk/config/config.hpp"
-#include "cpp_vk_lib/vk/error/translate_error.hpp"
+#include "cpp_vk_lib/vk/error/ensure_api_request_succeeded.hpp"
 #include "cpp_vk_lib/vk/methods/basic.hpp"
 #include "cpp_vk_lib/vk/methods/constructor.hpp"
 #include "simdjson.h"
@@ -19,11 +19,7 @@ long_poll::long_poll(asio::io_context& io_context)
     , executors_()
     , shared_parser_(std::make_unique<simdjson::dom::parser>())
 {
-    error_code errc;
-    group_id_ = method::groups::get_by_id(errc);
-    if (errc) {
-        throw error::access_error(-1, "failed to get group_id");
-    }
+    group_id_ = method::groups::get_by_id();
     spdlog::trace("starting to listen events in group {}", group_id_);
 }
 

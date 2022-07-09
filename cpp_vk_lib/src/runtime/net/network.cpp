@@ -241,12 +241,7 @@ public:
         curl_easy_setopt(handle, CURLOPT_WRITEDATA, fp.get());
         curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, curl_file_cb);
 
-        CURLcode error_code = curl_easy_perform(handle);
-
-        if (error_code != CURLE_OK) {
-            std::string msg = fmt::format("curl_easy_perform() failed: {}", curl_easy_strerror(error_code));
-            throw std::runtime_error(msg);
-        }
+        do_curl_perform(handle);
 
         spdlog::trace("download to {} performed", filename);
     }
@@ -260,12 +255,7 @@ public:
         curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, curl_buffer_cb);
         curl_easy_setopt(handle, CURLOPT_HEADERFUNCTION, curl_buffer_header_cb);
 
-        CURLcode error_code = curl_easy_perform(handle);
-
-        if (error_code != CURLE_OK) {
-            std::string msg = fmt::format("curl_easy_perform() failed: {}", curl_easy_strerror(error_code));
-            throw std::runtime_error(msg);
-        }
+        do_curl_perform(handle);
 
         spdlog::trace("download to buffer performed, {} bytes have been received", buffer.size());
     }
@@ -284,12 +274,7 @@ private:
             curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, curl_omit_cb);
         }
 
-        CURLcode error_code = curl_easy_perform(handle);
-
-        if (error_code != CURLE_OK) {
-            std::string msg = fmt::format("curl_easy_perform() failed: {}", curl_easy_strerror(error_code));
-            throw std::runtime_error(msg);
-        }
+        do_curl_perform(handle);
 
         if (output_needed == data_flow::omit) {
             spdlog::trace("GET request with omitting data performed");
@@ -307,6 +292,26 @@ private:
         curl_easy_setopt(handle, CURLOPT_HTTPPOST, form_post);
 
         return curl_get(handle, output_needed);
+    }
+
+
+    void do_curl_perform(CURL* handle)
+    {
+        size_t attempts = 0;
+
+        while (true) {
+            CURLcode error_code = curl_easy_perform(handle);
+            if (error_code != CURLE_OK) {
+                spdlog::trace(
+                    "{} attempt of cURL allocation failed: {}",
+                    attempts++, curl_easy_strerror(error_code)
+                );
+                using namespace std::chrono_literals;
+                std::this_thread::sleep_for(1s);
+                continue;
+            }
+            break;
+        }
     }
 
     template <typename Body>

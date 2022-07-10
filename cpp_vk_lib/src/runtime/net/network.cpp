@@ -297,18 +297,43 @@ private:
 
     void do_curl_perform(CURL* handle)
     {
-        size_t attempts = 0;
+        size_t attempts = 0U;
 
         while (true) {
             CURLcode error_code = curl_easy_perform(handle);
-            if (error_code != CURLE_OK) {
-                spdlog::trace(
-                    "{} attempt of cURL allocation failed: {}",
-                    attempts++, curl_easy_strerror(error_code)
-                );
-                using namespace std::chrono_literals;
-                std::this_thread::sleep_for(1s);
-                continue;
+            switch (error_code) {
+                case CURLE_OK:
+                    return;
+                case CURLE_FAILED_INIT:
+                case CURLE_COULDNT_RESOLVE_PROXY:
+                case CURLE_COULDNT_RESOLVE_HOST:
+                case CURLE_COULDNT_CONNECT:
+                case CURLE_WEIRD_SERVER_REPLY:
+                case CURLE_REMOTE_ACCESS_DENIED:
+                case CURLE_UPLOAD_FAILED:
+                case CURLE_OUT_OF_MEMORY:
+                case CURLE_HTTP_POST_ERROR:
+                case CURLE_SSL_CONNECT_ERROR:
+                case CURLE_TOO_MANY_REDIRECTS:
+                case CURLE_GOT_NOTHING:
+                case CURLE_SEND_ERROR:
+                case CURLE_RECV_ERROR: {
+                    spdlog::trace(
+                        "{} attempt of curl_easy_perform() failed: {}",
+                        attempts++, curl_easy_strerror(error_code)
+                    );
+                    using namespace std::chrono_literals;
+                    std::this_thread::sleep_for(1s);
+                    continue;
+                }
+                default: {
+                    throw std::runtime_error(
+                        fmt::format(
+                            "curl_easy_perform() failed: {}",
+                            curl_easy_strerror(error_code)
+                        )
+                    );
+                }
             }
             break;
         }

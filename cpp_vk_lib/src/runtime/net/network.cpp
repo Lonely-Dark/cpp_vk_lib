@@ -316,6 +316,7 @@ private:
                 case CURLE_SSL_CONNECT_ERROR:
                 case CURLE_TOO_MANY_REDIRECTS:
                 case CURLE_GOT_NOTHING:
+                case CURLE_PARTIAL_FILE:
                 case CURLE_SEND_ERROR:
                 case CURLE_RECV_ERROR: {
                     spdlog::trace(

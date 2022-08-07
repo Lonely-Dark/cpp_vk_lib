@@ -4,10 +4,8 @@
 #include "cpp_vk_lib/vk/events/wall_post_new.hpp"
 
 #include "simdjson.h"
-#include "spdlog/spdlog.h"
 
 #include <iostream>
-#include <fstream>
 
 bool cpp_vk_lib_curl_verbose = false;
 
@@ -58,7 +56,7 @@ int main(int argc, char* argv[])
         .perform_request();
     const simdjson::dom::element uploaded_document = parser.parse(docs_save_response);
     const simdjson::dom::element audio_message = uploaded_document["response"]["audio_message"];
-    std::unique_ptr<vk::attachment::audio_message> doc =
+    auto doc =
         std::make_unique<vk::attachment::audio_message>(
             audio_message["owner_id"].get_int64(),
             audio_message["id"].get_int64(),

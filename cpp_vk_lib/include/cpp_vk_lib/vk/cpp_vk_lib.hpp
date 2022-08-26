@@ -27,18 +27,70 @@
  *   - \ref vk::method "methods API";
  *   - \ref vk::oauth "OAuth";
  *
- * # Guidelines
+ * # Usage
  *   At the moment I see 2 uses for cpp_vk_lib.
  *
- *   1) Build chat-bots based on group long polling. To find more about
+ *   1) To build chat-bots based on group long polling. To find more about
  *      designing bots using this library, you can visit
  *      [this repo](https://github.com/epoll-reactor/template_cpp_vk_bot),
  *      where placed ready-to-use implementation.
  *
- *   2) Build small utilities to work with VK, e.g downloading media,
+ *   2) To build small utilities to work with VK, e.g downloading media,
  *      sending messages, collecting data for analysis and so on. Of course,
  *      it makes sense to consider using another VK wrapper for these
  *      purposes, which is easier to setup and use.
+ *
+ * # About API methods
+ *   Library has a couple of commonly used methods, like a
+ *   \ref vk::method::messages::send or
+ *   \ref vk::method::groups::get_long_poll_server, but in general
+ *   user should implement needed for him functionality.
+ *
+ *   However, there is an interface to do that. There is a few instruments
+ *   used for methods constructions:
+ *   - \ref vk::method::group_constructor used for methods which require
+ *     a group access token.
+ *   - \ref vk::method::user_constructor used for methods which require
+ *     a user access token.
+ *   - \ref vk::method::raw_constructor used for specifying API method
+ *     parameters without adding ones implicitly (explained below).
+ *
+ *   \ref vk::method::group_constructor "group" and
+ *   \ref vk::method::user_constructor "user" method constructors adding
+ *   to final request string epilogue (**api.vk.com/method** part of URL)
+ *   and the parameter list **access_token** and **v** (VK API version) fields, unlike
+ *   \ref vk::method::raw_constructor, that does not adding anything.
+ *
+ *   ## Examples
+ *     \code
+ *       vk::user_constructor constructor; // You can optionally pass the user token to constructor.
+ *       constructor
+ *         .method("utils.resolveScreenName")
+ *         .param("screen_name", "durov")
+ *         .perform_request(); // Passed above data destroys there.
+ *       // Correctly creates and does request to API.
+ *     \endcode
+ *
+ *     <br>
+ *
+ *     \code
+ *       vk::group_constructor()
+ *         .method("utils.resolveScreenName")
+ *         .param("screen_name", "durov")
+ *         .perform_request(); // Passed above data destroys there.
+ *       // Correctly creates and does request to API.
+ *     \endcode
+ *
+ *     <br>
+ *
+ *     \code
+ *       vk::raw_constructor;
+ *         .method("https://lp.vk.com/wh111111111?") // For example, to illustrate long polling.
+ *         .param("act", "a_check")
+ *         ...
+ *         .perform_request(); // Passed above data destroys there.
+ *       // Correctly creates and does request to API.
+ *     \endcode
  *
  * # CMake options
  *   **-D CPP_VK_LIB_STATIC_BUILD**

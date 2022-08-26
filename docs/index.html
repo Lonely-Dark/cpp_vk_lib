@@ -86,11 +86,49 @@ Organization</h1>
 <li><a class="el" href="namespacevk_1_1oauth.html">OAuth</a>;</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md1"></a>
-Guidelines</h1>
+Usage</h1>
 <p >At the moment I see 2 uses for cpp_vk_lib.</p>
-<p >1) Build chat-bots based on group long polling. To find more about designing bots using this library, you can visit <a href="https://github.com/epoll-reactor/template_cpp_vk_bot">this repo</a>, where placed ready-to-use implementation.</p>
-<p >2) Build small utilities to work with VK, e.g downloading media, sending messages, collecting data for analysis and so on. Of course, it makes sense to consider using another VK wrapper for these purposes, which is easier to setup and use.</p>
+<p >1) To build chat-bots based on group long polling. To find more about designing bots using this library, you can visit <a href="https://github.com/epoll-reactor/template_cpp_vk_bot">this repo</a>, where placed ready-to-use implementation.</p>
+<p >2) To build small utilities to work with VK, e.g downloading media, sending messages, collecting data for analysis and so on. Of course, it makes sense to consider using another VK wrapper for these purposes, which is easier to setup and use.</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
+About API methods</h1>
+<p >Library has a couple of commonly used methods, like a <a class="el" href="namespacevk_1_1method_1_1messages.html#aff2a69d5625ab24faf722fea627a2a8e">vk::method::messages::send</a> or <a class="el" href="namespacevk_1_1method_1_1groups.html#a0033a2c522ec8d9a586c7f0cdc8d1b36">vk::method::groups::get_long_poll_server</a>, but in general user should implement needed for him functionality.</p>
+<p >However, there is an interface to do that. There is a few instruments used for methods constructions:</p><ul>
+<li><a class="el" href="namespacevk_1_1method.html#ac00ed30445fc8f02aede3bc59119eafc">vk::method::group_constructor</a> used for methods which require a group access token.</li>
+<li><a class="el" href="namespacevk_1_1method.html#a9036669c58907e5e2db60680aafb368d">vk::method::user_constructor</a> used for methods which require a user access token.</li>
+<li><a class="el" href="namespacevk_1_1method.html#a5a2b57fa2e58981fd9a011420522723f">vk::method::raw_constructor</a> used for specifying API method parameters without adding ones implicitly (explained below).</li>
+</ul>
+<p ><a class="el" href="namespacevk_1_1method.html#ac00ed30445fc8f02aede3bc59119eafc">group</a> and <a class="el" href="namespacevk_1_1method.html#a9036669c58907e5e2db60680aafb368d">user</a> method constructors adding to final request string epilogue (<b>api.vk.com/method</b> part of URL) and the parameter list <b>access_token</b> and <b>v</b> (VK API version) fields, unlike <a class="el" href="namespacevk_1_1method.html#a5a2b57fa2e58981fd9a011420522723f">vk::method::raw_constructor</a>, that does not adding anything.</p>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Examples</h2>
+<div class="fragment"><div class="line"><a class="code hl_typedef" href="namespacevk_1_1method.html#a9036669c58907e5e2db60680aafb368d">vk::user_constructor</a> constructor; <span class="comment">// You can optionally pass the user token to constructor.</span></div>
+<div class="line">constructor</div>
+<div class="line">  .method(<span class="stringliteral">&quot;utils.resolveScreenName&quot;</span>)</div>
+<div class="line">  .param(<span class="stringliteral">&quot;screen_name&quot;</span>, <span class="stringliteral">&quot;durov&quot;</span>)</div>
+<div class="line">  .perform_request(); <span class="comment">// Passed above data destroys there.</span></div>
+<div class="line"><span class="comment">// Correctly creates and does request to API.</span></div>
+<div class="ttc" id="anamespacevk_1_1method_html_a9036669c58907e5e2db60680aafb368d"><div class="ttname"><a href="namespacevk_1_1method.html#a9036669c58907e5e2db60680aafb368d">vk::method::user_constructor</a></div><div class="ttdeci">constructor&lt; policy::user_api &gt; user_constructor</div><div class="ttdef"><b>Definition:</b> constructor.hpp:66</div></div>
+</div><!-- fragment --><p ><br  />
+</p>
+<div class="fragment"><div class="line"><a class="code hl_typedef" href="namespacevk_1_1method.html#ac00ed30445fc8f02aede3bc59119eafc">vk::group_constructor</a>()</div>
+<div class="line">  .<a class="code hl_function" href="classvk_1_1method_1_1constructor.html#a71fbcb0cf93767a0c07de3af4adb601c">method</a>(<span class="stringliteral">&quot;utils.resolveScreenName&quot;</span>)</div>
+<div class="line">  .<a class="code hl_function" href="classvk_1_1method_1_1constructor.html#ad28fa444c4dc9c8887820692b64fa9ef">param</a>(<span class="stringliteral">&quot;screen_name&quot;</span>, <span class="stringliteral">&quot;durov&quot;</span>)</div>
+<div class="line">  .<a class="code hl_function" href="classvk_1_1method_1_1constructor.html#a9e8d220fd80c6a534a5df69722f01d93">perform_request</a>(); <span class="comment">// Passed above data destroys there.</span></div>
+<div class="line"><span class="comment">// Correctly creates and does request to API.</span></div>
+<div class="ttc" id="aclassvk_1_1method_1_1constructor_html_a71fbcb0cf93767a0c07de3af4adb601c"><div class="ttname"><a href="classvk_1_1method_1_1constructor.html#a71fbcb0cf93767a0c07de3af4adb601c">vk::method::constructor::method</a></div><div class="ttdeci">constructor &amp; method(std::string_view)</div><div class="ttdef"><b>Definition:</b> constructor.cpp:86</div></div>
+<div class="ttc" id="aclassvk_1_1method_1_1constructor_html_a9e8d220fd80c6a534a5df69722f01d93"><div class="ttname"><a href="classvk_1_1method_1_1constructor.html#a9e8d220fd80c6a534a5df69722f01d93">vk::method::constructor::perform_request</a></div><div class="ttdeci">std::string perform_request()</div><div class="ttdef"><b>Definition:</b> constructor.cpp:108</div></div>
+<div class="ttc" id="aclassvk_1_1method_1_1constructor_html_ad28fa444c4dc9c8887820692b64fa9ef"><div class="ttname"><a href="classvk_1_1method_1_1constructor.html#ad28fa444c4dc9c8887820692b64fa9ef">vk::method::constructor::param</a></div><div class="ttdeci">constructor &amp; param(std::string_view, std::string_view)</div><div class="ttdef"><b>Definition:</b> constructor.cpp:93</div></div>
+<div class="ttc" id="anamespacevk_1_1method_html_ac00ed30445fc8f02aede3bc59119eafc"><div class="ttname"><a href="namespacevk_1_1method.html#ac00ed30445fc8f02aede3bc59119eafc">vk::method::group_constructor</a></div><div class="ttdeci">constructor&lt; policy::group_api &gt; group_constructor</div><div class="ttdef"><b>Definition:</b> constructor.hpp:67</div></div>
+</div><!-- fragment --><p ><br  />
+</p>
+<div class="fragment"><div class="line"><a class="code hl_typedef" href="namespacevk_1_1method.html#a5a2b57fa2e58981fd9a011420522723f">vk::raw_constructor</a>;</div>
+<div class="line">  .method(<span class="stringliteral">&quot;https://lp.vk.com/wh111111111?&quot;</span>) <span class="comment">// For example, to illustrate long polling.</span></div>
+<div class="line">  .param(<span class="stringliteral">&quot;act&quot;</span>, <span class="stringliteral">&quot;a_check&quot;</span>)</div>
+<div class="line">  ...</div>
+<div class="line">  .perform_request(); <span class="comment">// Passed above data destroys there.</span></div>
+<div class="line"><span class="comment">// Correctly creates and does request to API.</span></div>
+<div class="ttc" id="anamespacevk_1_1method_html_a5a2b57fa2e58981fd9a011420522723f"><div class="ttname"><a href="namespacevk_1_1method.html#a5a2b57fa2e58981fd9a011420522723f">vk::method::raw_constructor</a></div><div class="ttdeci">constructor&lt; policy::do_not_use_api_link &gt; raw_constructor</div><div class="ttdef"><b>Definition:</b> constructor.hpp:68</div></div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md4"></a>
 CMake options</h1>
 <p ><b>-D CPP_VK_LIB_STATIC_BUILD</b></p><ul>
 <li>0 - build shared library (default)</li>
@@ -104,17 +142,17 @@ CMake options</h1>
 <li>0 - build benchmarks (default)</li>
 <li>1 - do not build benchmarks</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md3"></a>
+<h1><a class="anchor" id="autotoc_md5"></a>
 External variables</h1>
 <p ><b>bool cpp_vk_lib_curl_verbose</b></p><ul>
 <li>Enable or disable detailed cURL logging</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4"></a>
+<h1><a class="anchor" id="autotoc_md6"></a>
 Plans for the future</h1>
 <ul>
 <li>Implement user long poll next to group long poll</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md5"></a>
+<h1><a class="anchor" id="autotoc_md7"></a>
 Note</h1>
 <p >Please, check the <a href="https://github.com/epoll-reactor/cpp_vk_lib">README.md</a>. </p>
 </div></div><!-- PageDoc -->

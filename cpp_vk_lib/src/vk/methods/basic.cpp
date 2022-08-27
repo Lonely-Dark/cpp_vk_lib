@@ -7,7 +7,10 @@
 #include "spdlog/spdlog.h"
 
 template <typename... Args>
-static void perform_messages_method_log(std::string_view fmt, int64_t peer_id, std::string_view text, Args&&... args)
+static void perform_messages_method_log(std::string_view fmt,
+                                        int64_t          peer_id,
+                                        std::string_view text,
+                                        Args&&...        args)
 {
     if (spdlog::get_level() > spdlog::level::debug) {
         return;
@@ -20,7 +23,7 @@ static void perform_messages_method_log(std::string_view fmt, int64_t peer_id, s
 
 namespace vk::method {
 
-void messages::send(int64_t peer_id, std::string_view text, enum mentions mentions)
+std::string messages::send(int64_t peer_id, std::string_view text, enum mentions mentions)
 {
     perform_messages_method_log(
         "call messages::send: peer_id={}, text={}, mentions_flag={}",
@@ -33,9 +36,14 @@ void messages::send(int64_t peer_id, std::string_view text, enum mentions mentio
         .perform_request();
 
     error::ensure_api_request_succeeded(response);
+
+    return response;
 }
 
-void messages::send(int64_t peer_id, std::string_view text, const std::vector<attachment::attachment_ptr_t>& list, enum mentions mentions)
+std::string messages::send(int64_t                                          peer_id,
+                           std::string_view                                 text,
+                           const std::vector<attachment::attachment_ptr_t>& list,
+                           enum mentions                                    mentions)
 {
     perform_messages_method_log(
         "call messages::send: peer_id={}, text={}, attachments_count={}, mentions_flag={}",
@@ -49,9 +57,14 @@ void messages::send(int64_t peer_id, std::string_view text, const std::vector<at
         .perform_request();
 
     error::ensure_api_request_succeeded(response);
+
+    return response;
 }
 
-void messages::send(int64_t peer_id, std::string_view text, const attachment::attachment_ptr_t& attachment, enum mentions mentions)
+std::string messages::send(int64_t                             peer_id,
+                           std::string_view                    text,
+                           const attachment::attachment_ptr_t& attachment,
+                           enum mentions                       mentions)
 {
     perform_messages_method_log(
         "call messages::send: peer_id={}, text={}, attachment={}, mentions_flag={}",
@@ -65,9 +78,14 @@ void messages::send(int64_t peer_id, std::string_view text, const attachment::at
         .perform_request();
 
     error::ensure_api_request_succeeded(response);
+
+    return response;
 }
 
-void messages::send(int64_t peer_id, std::string_view text, std::string_view keyboard_layout, enum mentions mentions)
+std::string messages::send(int64_t          peer_id,
+                           std::string_view text,
+                           std::string_view keyboard_layout,
+                           enum mentions    mentions)
 {
     perform_messages_method_log(
         "call messages::send: peer_id={}, text={}, keyboard={}, mentions_flag={}",
@@ -81,6 +99,8 @@ void messages::send(int64_t peer_id, std::string_view text, std::string_view key
         .perform_request();
 
     error::ensure_api_request_succeeded(response);
+
+    return response;
 }
 
 int64_t groups::get_by_id()

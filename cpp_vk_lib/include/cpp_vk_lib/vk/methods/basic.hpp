@@ -6,10 +6,6 @@
 
 #include <vector>
 
-namespace simdjson::dom {
-class object;
-}// namespace simdjson::dom
-
 namespace vk::method::messages {
 
 /*!

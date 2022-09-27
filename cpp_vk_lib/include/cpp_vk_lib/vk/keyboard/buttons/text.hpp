@@ -11,21 +11,24 @@ namespace vk::keyboard::button {
 class text : public button::base
 {
 public:
-    text(color selected_color, std::string_view payload_data)
+    text(color selected_color, std::string_view text, std::string_view payload_data)
         : selected_color_(selected_color)
+        , text_(text)
         , payload_data_(payload_data) {}
 
     std::string serialize() const override
     {
         const char* color = keyboard::get_color(selected_color_);
         return fmt::format(
-            R"__({{"action":{{"type":"text","payload":"{{\"button\":\"1\"}}","label":"{}"}},"color":"{}"}})__",
+            R"__({{"action":{{"type":"text","payload":"{}","label":"{}"}},"color":"{}"}})__",
+            text_,
             payload_data_,
             color);
     }
 
 private:
     color selected_color_ = color::none;
+    std::string text_;
     std::string payload_data_;
 };
 

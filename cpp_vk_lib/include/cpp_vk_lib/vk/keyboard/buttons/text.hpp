@@ -11,10 +11,10 @@ namespace vk::keyboard::button {
 class text : public button::base
 {
 public:
-    text(color selected_color, std::string_view payload_data, std::string_view text)
+    text(color selected_color, std::string_view payload_data, std::string_view text_message)
         : selected_color_(selected_color)
         , payload_data_(payload_data)
-        , text_(text){}
+        , text_message_(text_message){}
 
     std::string serialize() const override
     {
@@ -29,7 +29,7 @@ public:
 private:
     color selected_color_ = color::none;
     std::string payload_data_;
-    std::string text_;
+    std::string text_message_;
 };
 
 }// namespace vk::keyboard::button

@@ -22,7 +22,7 @@ public:
         return fmt::format(
             R"__({{"action":{{"type":"text","payload":"{}","label":"{}"}},"color":"{}"}})__",
             payload_data_,
-            text_,
+            text_message_,
             color);
     }
 
